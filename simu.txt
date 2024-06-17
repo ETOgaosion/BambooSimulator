@@ -1,0 +1,1082 @@
+Namespace(fig_directory='res/simuitest', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', removal_probability=None, seed=None, spot_instance_trace='traces/p3-trace-16.csv', start_hour=None)
+[0.000] node1 simulate_spot_instance_add: 0
+[0.000] node3 simulate_spot_instance_add: 0
+[0.000] node7 simulate_spot_instance_add: 0
+[0.000] node15 simulate_spot_instance_add: 0
+[0.000] node14 simulate_spot_instance_add: 0
+[0.000] node6 simulate_spot_instance_add: 0
+[0.000] node13 simulate_spot_instance_add: 0
+[0.000] node12 simulate_spot_instance_add: 0
+[0.000] node2 simulate_spot_instance_add: 0
+[0.000] node5 simulate_spot_instance_add: 0
+[0.000] node11 simulate_spot_instance_add: 0
+[0.000] node10 simulate_spot_instance_add: 0
+[0.000] node4 simulate_spot_instance_add: 0
+[0.000] node9 simulate_spot_instance_add: 0
+[0.000] node8 simulate_spot_instance_add: 0
+[0.000] node16 simulate_spot_instance_add: 0
+[45.000] node15 simulate_spot_instance_ready: 45000
+[45.000] node15 starting global rendezvous
+[45.000] simulate_rendezvous_start: 45000
+[45.000] simulate_rendezvous_restart: 45000
+[45.000] node14 simulate_spot_instance_ready: 45000
+[45.000] node6 simulate_spot_instance_ready: 45000
+[45.000] node8 simulate_spot_instance_ready: 45000
+[45.000] node16 simulate_spot_instance_ready: 45000
+[45.000] node13 simulate_spot_instance_ready: 45000
+[45.000] node2 simulate_spot_instance_ready: 45000
+[45.000] node9 simulate_spot_instance_ready: 45000
+[45.000] node1 simulate_spot_instance_ready: 45000
+[45.000] node3 simulate_spot_instance_ready: 45000
+[45.000] node7 simulate_spot_instance_ready: 45000
+[45.000] node12 simulate_spot_instance_ready: 45000
+[45.000] node5 simulate_spot_instance_ready: 45000
+[45.000] node4 simulate_spot_instance_ready: 45000
+[45.000] node11 simulate_spot_instance_ready: 45000
+[45.000] node10 simulate_spot_instance_ready: 45000
+[55.000] simulate_preparation: 55000
+[55.000] simulate_preparation: 55000
+[55.000] simulate_assign_coordinates
+[55.000] 16 nodes completed rendezvous version 1, 8x2 configuration
+[202.000] 10000 iterations complete
+[349.000] 20000 iterations complete
+[496.000] 30000 iterations complete
+[643.000] 40000 iterations complete
+[790.000] 50000 iterations complete
+[937.000] 60000 iterations complete
+[1084.000] 70000 iterations complete
+[1231.000] 80000 iterations complete
+[1378.000] 90000 iterations complete
+[1525.000] 100000 iterations complete
+[1672.000] 110000 iterations complete
+[1819.000] 120000 iterations complete
+[1966.000] 130000 iterations complete
+[2040.000] node3 simulate_spot_instance_remove: 2040000
+[2040.000] node11 simulate_spot_instance_remove: 2040000
+[2040.028] reconfiguration after iteration 135035
+[2040.028] simulate_rendezvous_start: 2040028.499995495
+[2040.028] simulate_rendezvous_restart: 2040028.499995495
+[2125.028] simulate_reconfigure: 2125028.499995495
+[2125.028] simulate_preparation: 2125028.499995495
+[2125.028] simulate_assign_coordinates
+[2125.028] 14 nodes completed rendezvous version 2, 7x2 configuration
+[2235.748] 140000 iterations complete
+[2458.748] 150000 iterations complete
+[2580.000] node18 simulate_spot_instance_add: 2580000
+[2580.000] node17 simulate_spot_instance_add: 2580000
+[2625.000] node18 simulate_spot_instance_ready: 2625000
+[2625.000] node17 simulate_spot_instance_ready: 2625000
+[2625.017] reconfiguration after iteration 157456
+[2625.017] simulate_rendezvous_start: 2625016.799991319
+[2625.017] simulate_rendezvous_restart: 2625016.799991319
+[2677.874] simulate_reconfigure: 2677873.9428484617
+[2677.874] simulate_preparation: 2677873.9428484617
+[2677.874] simulate_assign_coordinates
+[2677.874] 16 nodes completed rendezvous version 3, 8x2 configuration
+[2715.271] 160000 iterations complete
+[2862.271] 170000 iterations complete
+[3009.271] 180000 iterations complete
+[3060.000] node1 simulate_spot_instance_remove: 3060000
+[3060.000] node18 simulate_spot_instance_remove: 3060000
+[3060.000] node2 simulate_spot_instance_remove: 3060000
+[3060.000] reconfiguration after iteration 183451
+[3060.000] simulate_rendezvous_start: 3060000.4428533036
+[3060.000] simulate_rendezvous_restart: 3060000.4428533036
+[3145.000] simulate_reconfigure: 3145000.4428533036
+[3145.000] simulate_preparation: 3145000.4428533036
+[3145.000] simulate_assign_coordinates
+[3145.000] 13 nodes completed rendezvous version 4, 6x2 configuration
+[3180.000] node13 simulate_spot_instance_remove: 3180000
+[3180.013] reconfiguration after iteration 185440
+[3180.013] simulate_rendezvous_start: 3180012.842853489
+[3180.013] simulate_rendezvous_restart: 3180012.842853489
+[3240.000] node15 simulate_spot_instance_remove: 3240000
+[3290.013] simulate_reconfigure: 3290012.842853489
+[3290.013] simulate_preparation: 3290012.842853489
+[3290.013] node15 terminated during redezvous, restarting
+[3290.013] simulate_rendezvous_restart: 3290012.842853489
+[3300.013] simulate_preparation: 3300012.842853489
+[3300.013] simulate_preparation: 3300012.842853489
+[3300.013] simulate_assign_coordinates
+[3300.013] 11 nodes completed rendezvous version 5, 5x2 configuration
+[3424.501] 190000 iterations complete
+[3540.000] node4 simulate_spot_instance_remove: 3540000
+[3540.000] node16 simulate_spot_instance_remove: 3540000
+[3540.014] reconfiguration after iteration 194231
+[3540.014] simulate_rendezvous_start: 3540014.1428518514
+[3540.014] simulate_rendezvous_restart: 3540014.1428518514
+[3610.014] simulate_reconfigure: 3610014.1428518514
+[3610.014] simulate_preparation: 3610014.1428518514
+[3610.014] simulate_assign_coordinates
+[3610.014] 9 nodes completed rendezvous version 6, 4x2 configuration
+[3660.000] node19 simulate_spot_instance_add: 3660000
+[3660.000] node20 simulate_spot_instance_add: 3660000
+[3660.000] node21 simulate_spot_instance_add: 3660000
+[3660.000] node22 simulate_spot_instance_add: 3660000
+[3660.000] node24 simulate_spot_instance_add: 3660000
+[3660.000] node23 simulate_spot_instance_add: 3660000
+[3705.000] node19 simulate_spot_instance_ready: 3705000
+[3705.000] node20 simulate_spot_instance_ready: 3705000
+[3705.000] node21 simulate_spot_instance_ready: 3705000
+[3705.000] node22 simulate_spot_instance_ready: 3705000
+[3705.000] node24 simulate_spot_instance_ready: 3705000
+[3705.000] node23 simulate_spot_instance_ready: 3705000
+[3705.018] reconfiguration after iteration 199205
+[3705.018] simulate_rendezvous_start: 3705017.5428523147
+[3705.018] simulate_rendezvous_restart: 3705017.5428523147
+[3790.018] simulate_reconfigure: 3790017.5428523147
+[3790.018] simulate_preparation: 3790017.5428523147
+[3790.018] simulate_assign_coordinates
+[3790.018] 15 nodes completed rendezvous version 7, 7x2 configuration
+[3807.746] 200000 iterations complete
+[3900.000] node25 simulate_spot_instance_add: 3900000
+[3945.000] node25 simulate_spot_instance_ready: 3945000
+[3945.003] reconfiguration after iteration 206155
+[3945.003] simulate_rendezvous_start: 3945002.54285102
+[3945.003] simulate_rendezvous_restart: 3945002.54285102
+[3997.860] simulate_reconfigure: 3997859.685708163
+[3997.860] simulate_preparation: 3997859.685708163
+[3997.860] simulate_assign_coordinates
+[3997.860] 16 nodes completed rendezvous version 8, 8x2 configuration
+[4054.381] 210000 iterations complete
+[4201.381] 220000 iterations complete
+[4348.381] 230000 iterations complete
+[4495.381] 240000 iterations complete
+[4620.000] node19 simulate_spot_instance_remove: 4620000
+[4620.015] reconfiguration after iteration 248478
+[4620.015] simulate_rendezvous_start: 4620014.785716046
+[4620.015] simulate_rendezvous_restart: 4620014.785716046
+[4705.015] simulate_reconfigure: 4705014.785716046
+[4705.015] simulate_preparation: 4705014.785716046
+[4705.015] simulate_assign_coordinates
+[4705.015] 15 nodes completed rendezvous version 9, 7x2 configuration
+[4738.955] 250000 iterations complete
+[4740.000] node10 simulate_spot_instance_remove: 4740000
+[4740.006] reconfiguration after iteration 250047
+[4740.006] simulate_rendezvous_start: 4740006.485715753
+[4740.006] simulate_rendezvous_restart: 4740006.485715753
+[4792.864] simulate_reconfigure: 4792863.628572896
+[4792.864] simulate_preparation: 4792863.628572896
+[4792.864] simulate_assign_coordinates
+[4792.864] 14 nodes completed rendezvous version 10, 7x2 configuration
+[4800.000] node26 simulate_spot_instance_add: 4800000
+[4845.000] node26 simulate_spot_instance_ready: 4845000
+[4860.000] node27 simulate_spot_instance_add: 4860000
+[4905.000] node27 simulate_spot_instance_ready: 4905000
+[4905.010] reconfiguration after iteration 255076
+[4905.010] simulate_rendezvous_start: 4905010.328571959
+[4905.010] simulate_rendezvous_restart: 4905010.328571959
+[4957.867] simulate_reconfigure: 4957867.471429102
+[4957.867] simulate_preparation: 4957867.471429102
+[4957.867] simulate_assign_coordinates
+[4957.867] 16 nodes completed rendezvous version 11, 8x2 configuration
+[5030.250] 260000 iterations complete
+[5100.000] node7 simulate_spot_instance_remove: 5100000
+[5100.000] node26 simulate_spot_instance_remove: 5100000
+[5100.003] reconfiguration after iteration 264745
+[5100.003] simulate_rendezvous_start: 5100002.771430903
+[5100.003] simulate_rendezvous_restart: 5100002.771430903
+[5185.003] simulate_reconfigure: 5185002.771430903
+[5185.003] simulate_preparation: 5185002.771430903
+[5185.003] simulate_assign_coordinates
+[5185.003] 14 nodes completed rendezvous version 12, 7x2 configuration
+[5302.189] 270000 iterations complete
+[5340.000] node24 simulate_spot_instance_remove: 5340000
+[5340.020] reconfiguration after iteration 271696
+[5340.020] simulate_rendezvous_start: 5340020.071429608
+[5340.020] simulate_rendezvous_restart: 5340020.071429608
+[5392.877] simulate_reconfigure: 5392877.214286751
+[5392.877] simulate_preparation: 5392877.214286751
+[5392.877] simulate_assign_coordinates
+[5392.877] 13 nodes completed rendezvous version 13, 6x2 configuration
+[5400.000] node28 simulate_spot_instance_add: 5400000
+[5445.000] node28 simulate_spot_instance_ready: 5445000
+[5445.008] reconfiguration after iteration 274658
+[5445.008] simulate_rendezvous_start: 5445008.414285648
+[5445.008] simulate_rendezvous_restart: 5445008.414285648
+[5555.008] simulate_reconfigure: 5555008.414285648
+[5555.008] simulate_preparation: 5555008.414285648
+[5555.008] simulate_assign_coordinates
+[5555.008] 14 nodes completed rendezvous version 14, 7x2 configuration
+[5674.135] 280000 iterations complete
+[5760.000] node29 simulate_spot_instance_add: 5760000
+[5805.000] node29 simulate_spot_instance_ready: 5805000
+[5820.000] node30 simulate_spot_instance_add: 5820000
+[5865.000] node30 simulate_spot_instance_ready: 5865000
+[5865.001] reconfiguration after iteration 288559
+[5865.001] simulate_rendezvous_start: 5865000.714283058
+[5865.001] simulate_rendezvous_restart: 5865000.714283058
+[5917.858] simulate_reconfigure: 5917857.857140201
+[5917.858] simulate_preparation: 5917857.857140201
+[5917.858] simulate_assign_coordinates
+[5917.858] 16 nodes completed rendezvous version 15, 8x2 configuration
+[5939.041] 290000 iterations complete
+[6086.041] 300000 iterations complete
+[6233.041] 310000 iterations complete
+[6300.000] node5 simulate_spot_instance_remove: 6300000
+[6300.027] reconfiguration after iteration 314556
+[6300.027] simulate_rendezvous_start: 6300026.757145043
+[6300.027] simulate_rendezvous_restart: 6300026.757145043
+[6385.027] simulate_reconfigure: 6385026.757145043
+[6385.027] simulate_preparation: 6385026.757145043
+[6385.027] simulate_assign_coordinates
+[6385.027] 15 nodes completed rendezvous version 16, 7x2 configuration
+[6506.428] 320000 iterations complete
+[6729.428] 330000 iterations complete
+[6952.428] 340000 iterations complete
+[7175.428] 350000 iterations complete
+[7260.000] node31 simulate_spot_instance_add: 7260000
+[7305.000] node31 simulate_spot_instance_ready: 7305000
+[7305.013] reconfiguration after iteration 355811
+[7305.013] simulate_rendezvous_start: 7305013.257137359
+[7305.013] simulate_rendezvous_restart: 7305013.257137359
+[7357.870] simulate_reconfigure: 7357870.399994502
+[7357.870] simulate_preparation: 7357870.399994502
+[7357.870] simulate_assign_coordinates
+[7357.870] 16 nodes completed rendezvous version 17, 8x2 configuration
+[7419.449] 360000 iterations complete
+[7566.449] 370000 iterations complete
+[7713.449] 380000 iterations complete
+[7860.449] 390000 iterations complete
+[8007.449] 400000 iterations complete
+[8154.449] 410000 iterations complete
+[8301.449] 420000 iterations complete
+[8448.449] 430000 iterations complete
+[8460.000] node30 simulate_spot_instance_remove: 8460000
+[8460.000] node29 simulate_spot_instance_remove: 8460000
+[8460.000] node12 simulate_spot_instance_remove: 8460000
+[8460.005] reconfiguration after iteration 430786
+[8460.005] simulate_rendezvous_start: 8460004.900003944
+[8460.005] simulate_rendezvous_restart: 8460004.900003944
+[8520.000] node25 simulate_spot_instance_remove: 8520000
+[8545.005] simulate_reconfigure: 8545004.900003944
+[8545.005] simulate_preparation: 8545004.900003944
+[8545.005] node25 terminated during redezvous, restarting
+[8545.005] simulate_rendezvous_restart: 8545004.900003944
+[8555.005] simulate_preparation: 8555004.900003944
+[8555.005] simulate_preparation: 8555004.900003944
+[8555.005] simulate_assign_coordinates
+[8555.005] 12 nodes completed rendezvous version 18, 6x2 configuration
+[8717.171] 440000 iterations complete
+[8893.171] 450000 iterations complete
+[9000.000] node35 simulate_spot_instance_add: 9000000
+[9000.000] node34 simulate_spot_instance_add: 9000000
+[9000.000] node33 simulate_spot_instance_add: 9000000
+[9000.000] node32 simulate_spot_instance_add: 9000000
+[9045.000] node35 simulate_spot_instance_ready: 9045000
+[9045.000] node34 simulate_spot_instance_ready: 9045000
+[9045.000] node33 simulate_spot_instance_ready: 9045000
+[9045.000] node32 simulate_spot_instance_ready: 9045000
+[9045.006] reconfiguration after iteration 458627
+[9045.006] simulate_rendezvous_start: 9045006.499993572
+[9045.006] simulate_rendezvous_restart: 9045006.499993572
+[9155.006] simulate_reconfigure: 9155006.499993572
+[9155.006] simulate_preparation: 9155006.499993572
+[9155.006] simulate_assign_coordinates
+[9155.006] 16 nodes completed rendezvous version 19, 8x2 configuration
+[9175.190] 460000 iterations complete
+[9322.190] 470000 iterations complete
+[9469.190] 480000 iterations complete
+[9616.190] 490000 iterations complete
+[9763.190] 500000 iterations complete
+[9910.190] 510000 iterations complete
+[10057.190] 520000 iterations complete
+[10204.190] 530000 iterations complete
+[10351.190] 540000 iterations complete
+[10498.190] 550000 iterations complete
+[10645.190] 560000 iterations complete
+[10680.000] node35 simulate_spot_instance_remove: 10680000
+[10680.000] node8 simulate_spot_instance_remove: 10680000
+[10680.027] reconfiguration after iteration 562369
+[10680.027] simulate_rendezvous_start: 10680026.899916278
+[10680.027] simulate_rendezvous_restart: 10680026.899916278
+[10765.027] simulate_reconfigure: 10765026.899916278
+[10765.027] simulate_preparation: 10765026.899916278
+[10765.027] simulate_assign_coordinates
+[10765.027] 14 nodes completed rendezvous version 20, 7x2 configuration
+[10920.000] node9 simulate_spot_instance_remove: 10920000
+[10920.023] reconfiguration after iteration 569319
+[10920.023] simulate_rendezvous_start: 10920022.899921456
+[10920.023] simulate_rendezvous_restart: 10920022.899921456
+[10972.880] simulate_reconfigure: 10972880.0427786
+[10972.880] simulate_preparation: 10972880.0427786
+[10972.880] simulate_assign_coordinates
+[10972.880] 13 nodes completed rendezvous version 21, 6x2 configuration
+[10984.866] 570000 iterations complete
+[11160.866] 580000 iterations complete
+[11336.866] 590000 iterations complete
+[11400.000] node38 simulate_spot_instance_add: 11400000
+[11400.000] node37 simulate_spot_instance_add: 11400000
+[11400.000] node36 simulate_spot_instance_add: 11400000
+[11445.000] node38 simulate_spot_instance_ready: 11445000
+[11445.000] node37 simulate_spot_instance_ready: 11445000
+[11445.000] node36 simulate_spot_instance_ready: 11445000
+[11445.000] reconfiguration after iteration 596144
+[11445.000] simulate_rendezvous_start: 11445000.042768607
+[11445.000] simulate_rendezvous_restart: 11445000.042768607
+[11555.000] simulate_reconfigure: 11555000.042768607
+[11555.000] simulate_preparation: 11555000.042768607
+[11555.000] simulate_assign_coordinates
+[11555.000] 16 nodes completed rendezvous version 22, 8x2 configuration
+[11611.683] 600000 iterations complete
+[11758.683] 610000 iterations complete
+[11905.683] 620000 iterations complete
+[12052.683] 630000 iterations complete
+[12199.683] 640000 iterations complete
+[12346.683] 650000 iterations complete
+[12493.683] 660000 iterations complete
+[12640.683] 670000 iterations complete
+[12787.683] 680000 iterations complete
+[12934.683] 690000 iterations complete
+[13081.683] 700000 iterations complete
+[13228.683] 710000 iterations complete
+[13375.683] 720000 iterations complete
+[13522.683] 730000 iterations complete
+[13669.683] 740000 iterations complete
+[13816.683] 750000 iterations complete
+[13963.683] 760000 iterations complete
+[14100.000] node6 simulate_spot_instance_remove: 14100000
+[14100.000] node14 simulate_spot_instance_remove: 14100000
+[14100.000] node14 simulate_fatal_failure: 14100000
+[14100.000] node14 caused a fatal failure, starting global rendezvous
+[14100.000] simulate_rendezvous_start: 14100000
+[14100.000] simulate_rendezvous_restart: 14100000
+[14110.000] simulate_preparation: 14110000
+[14110.000] simulate_preparation: 14110000
+[14110.000] simulate_assign_coordinates
+[14110.000] 14 nodes completed rendezvous version 23, 7x2 configuration
+[14118.519] 770000 iterations complete
+[14160.000] node38 simulate_spot_instance_remove: 14160000
+[14160.000] node22 simulate_spot_instance_remove: 14160000
+[14160.037] reconfiguration after iteration 771861
+[14160.037] simulate_rendezvous_start: 14160036.900001671
+[14160.037] simulate_rendezvous_restart: 14160036.900001671
+[14212.894] simulate_reconfigure: 14212894.042858815
+[14212.894] simulate_preparation: 14212894.042858815
+[14212.894] simulate_assign_coordinates
+[14212.894] 12 nodes completed rendezvous version 24, 6x2 configuration
+[14220.000] node20 simulate_spot_instance_remove: 14220000
+[14220.000] node31 simulate_spot_instance_remove: 14220000
+[14220.008] reconfiguration after iteration 772265
+[14220.008] simulate_rendezvous_start: 14220008.442858664
+[14220.008] simulate_rendezvous_restart: 14220008.442858664
+[14330.008] simulate_reconfigure: 14330008.442858664
+[14330.008] simulate_preparation: 14330008.442858664
+[14330.008] simulate_assign_coordinates
+[14330.008] 10 nodes completed rendezvous version 25, 5x2 configuration
+[14460.000] node41 simulate_spot_instance_add: 14460000
+[14460.000] node40 simulate_spot_instance_add: 14460000
+[14460.000] node39 simulate_spot_instance_add: 14460000
+[14505.000] node41 simulate_spot_instance_ready: 14505000
+[14505.000] node40 simulate_spot_instance_ready: 14505000
+[14505.000] node39 simulate_spot_instance_ready: 14505000
+[14505.001] reconfiguration after iteration 778675
+[14505.001] simulate_rendezvous_start: 14505001.44286344
+[14505.001] simulate_rendezvous_restart: 14505001.44286344
+[14575.001] simulate_reconfigure: 14575001.44286344
+[14575.001] simulate_preparation: 14575001.44286344
+[14575.001] simulate_assign_coordinates
+[14575.001] 13 nodes completed rendezvous version 26, 6x2 configuration
+[14598.321] 780000 iterations complete
+[14700.000] node23 simulate_spot_instance_remove: 14700000
+[14700.028] reconfiguration after iteration 785778
+[14700.028] simulate_rendezvous_start: 14700028.242860794
+[14700.028] simulate_rendezvous_restart: 14700028.242860794
+[14810.028] simulate_reconfigure: 14810028.242860794
+[14810.028] simulate_preparation: 14810028.242860794
+[14810.028] simulate_assign_coordinates
+[14810.028] 12 nodes completed rendezvous version 27, 6x2 configuration
+[14884.335] 790000 iterations complete
+[15060.335] 800000 iterations complete
+[15236.335] 810000 iterations complete
+[15360.000] node43 simulate_spot_instance_add: 15360000
+[15360.000] node42 simulate_spot_instance_add: 15360000
+[15405.000] node43 simulate_spot_instance_ready: 15405000
+[15405.000] node42 simulate_spot_instance_ready: 15405000
+[15405.014] reconfiguration after iteration 819584
+[15405.014] simulate_rendezvous_start: 15405013.8428482
+[15405.014] simulate_rendezvous_restart: 15405013.8428482
+[15515.014] simulate_reconfigure: 15515013.8428482
+[15515.014] simulate_preparation: 15515013.8428482
+[15515.014] simulate_assign_coordinates
+[15515.014] 14 nodes completed rendezvous version 28, 7x2 configuration
+[15524.291] 820000 iterations complete
+[15720.000] node44 simulate_spot_instance_add: 15720000
+[15747.291] 830000 iterations complete
+[15765.000] node44 simulate_spot_instance_ready: 15765000
+[15900.000] node40 simulate_spot_instance_remove: 15900000
+[15900.002] reconfiguration after iteration 836848
+[15900.002] simulate_rendezvous_start: 15900002.042861063
+[15900.002] simulate_rendezvous_restart: 15900002.042861063
+[15952.859] simulate_reconfigure: 15952859.185718207
+[15952.859] simulate_preparation: 15952859.185718207
+[15952.859] simulate_assign_coordinates
+[15952.859] 14 nodes completed rendezvous version 29, 7x2 configuration
+[16023.149] 840000 iterations complete
+[16140.000] node44 simulate_spot_instance_remove: 16140000
+[16140.000] node42 simulate_spot_instance_remove: 16140000
+[16140.000] node42 simulate_fatal_failure: 16140000
+[16140.000] node42 caused a fatal failure, starting global rendezvous
+[16140.000] simulate_rendezvous_start: 16140000
+[16140.000] simulate_rendezvous_restart: 16140000
+[16150.000] simulate_preparation: 16150000
+[16150.000] simulate_preparation: 16150000
+[16150.000] simulate_assign_coordinates
+[16150.000] 12 nodes completed rendezvous version 30, 6x2 configuration
+[16229.781] 850000 iterations complete
+[16405.781] 860000 iterations complete
+[16581.781] 870000 iterations complete
+[16620.000] node47 simulate_spot_instance_add: 16620000
+[16620.000] node46 simulate_spot_instance_add: 16620000
+[16620.000] node45 simulate_spot_instance_add: 16620000
+[16665.000] node47 simulate_spot_instance_ready: 16665000
+[16665.000] node46 simulate_spot_instance_ready: 16665000
+[16665.000] node45 simulate_spot_instance_ready: 16665000
+[16665.011] reconfiguration after iteration 874729
+[16665.011] simulate_rendezvous_start: 16665011.199989099
+[16665.011] simulate_rendezvous_restart: 16665011.199989099
+[16680.000] node48 simulate_spot_instance_add: 16680000
+[16725.000] node48 simulate_spot_instance_ready: 16725000
+[16775.011] simulate_reconfigure: 16775011.199989099
+[16775.011] simulate_preparation: 16775011.199989099
+[16775.011] simulate_assign_coordinates
+[16775.011] 16 nodes completed rendezvous version 31, 8x2 configuration
+[16852.495] 880000 iterations complete
+[16980.000] node36 simulate_spot_instance_remove: 16980000
+[16980.000] node47 simulate_spot_instance_remove: 16980000
+[16980.005] reconfiguration after iteration 888674
+[16980.005] simulate_rendezvous_start: 16980004.69997871
+[16980.005] simulate_rendezvous_restart: 16980004.69997871
+[17040.000] node49 simulate_spot_instance_add: 17040000
+[17065.005] simulate_reconfigure: 17065004.69997871
+[17065.005] simulate_preparation: 17065004.69997871
+[17065.005] simulate_assign_coordinates
+[17065.005] 14 nodes completed rendezvous version 32, 7x2 configuration
+[17085.000] node49 simulate_spot_instance_ready: 17085000
+[17094.574] 890000 iterations complete
+[17100.000] node43 simulate_spot_instance_remove: 17100000
+[17100.031] reconfiguration after iteration 890244
+[17100.031] simulate_rendezvous_start: 17100030.69997988
+[17100.031] simulate_rendezvous_restart: 17100030.69997988
+[17152.888] simulate_reconfigure: 17152887.84283702
+[17152.888] simulate_preparation: 17152887.84283702
+[17152.888] simulate_assign_coordinates
+[17152.888] 14 nodes completed rendezvous version 33, 7x2 configuration
+[17370.447] 900000 iterations complete
+[17593.447] 910000 iterations complete
+[17640.000] node51 simulate_spot_instance_add: 17640000
+[17640.000] node50 simulate_spot_instance_add: 17640000
+[17685.000] node51 simulate_spot_instance_ready: 17685000
+[17685.000] node50 simulate_spot_instance_ready: 17685000
+[17685.010] reconfiguration after iteration 914106
+[17685.010] simulate_rendezvous_start: 17685010.4428548
+[17685.010] simulate_rendezvous_restart: 17685010.4428548
+[17737.868] simulate_reconfigure: 17737867.58571194
+[17737.868] simulate_preparation: 17737867.58571194
+[17737.868] simulate_assign_coordinates
+[17737.868] 16 nodes completed rendezvous version 34, 8x2 configuration
+[17824.509] 920000 iterations complete
+[17940.000] node48 simulate_spot_instance_remove: 17940000
+[17940.014] reconfiguration after iteration 927857
+[17940.014] simulate_rendezvous_start: 17940014.285701696
+[17940.014] simulate_rendezvous_restart: 17940014.285701696
+[18000.000] node52 simulate_spot_instance_add: 18000000
+[18025.014] simulate_reconfigure: 18025014.285701696
+[18025.014] simulate_preparation: 18025014.285701696
+[18025.014] simulate_assign_coordinates
+[18025.014] 15 nodes completed rendezvous version 35, 7x2 configuration
+[18045.000] node52 simulate_spot_instance_ready: 18045000
+[18045.017] reconfiguration after iteration 928754
+[18045.017] simulate_rendezvous_start: 18045017.385702364
+[18045.017] simulate_rendezvous_restart: 18045017.385702364
+[18097.875] simulate_reconfigure: 18097874.528559506
+[18097.875] simulate_preparation: 18097874.528559506
+[18097.875] simulate_assign_coordinates
+[18097.875] 16 nodes completed rendezvous version 36, 8x2 configuration
+[18116.191] 930000 iterations complete
+[18263.191] 940000 iterations complete
+[18300.000] node50 simulate_spot_instance_remove: 18300000
+[18300.028] reconfiguration after iteration 942505
+[18300.028] simulate_rendezvous_start: 18300028.22854926
+[18300.028] simulate_rendezvous_restart: 18300028.22854926
+[18385.028] simulate_reconfigure: 18385028.22854926
+[18385.028] simulate_preparation: 18385028.22854926
+[18385.028] simulate_assign_coordinates
+[18385.028] 15 nodes completed rendezvous version 37, 7x2 configuration
+[18540.000] node53 simulate_spot_instance_add: 18540000
+[18552.167] 950000 iterations complete
+[18585.000] node53 simulate_spot_instance_ready: 18585000
+[18585.015] reconfiguration after iteration 951473
+[18585.015] simulate_rendezvous_start: 18585014.628555942
+[18585.015] simulate_rendezvous_restart: 18585014.628555942
+[18637.872] simulate_reconfigure: 18637871.771413084
+[18637.872] simulate_preparation: 18637871.771413084
+[18637.872] simulate_assign_coordinates
+[18637.872] 16 nodes completed rendezvous version 38, 8x2 configuration
+[18763.219] 960000 iterations complete
+[18910.219] 970000 iterations complete
+[19057.219] 980000 iterations complete
+[19204.219] 990000 iterations complete
+[19351.219] 1000000 iterations complete
+[19498.219] 1010000 iterations complete
+[19645.219] 1020000 iterations complete
+[19792.219] 1030000 iterations complete
+[19939.219] 1040000 iterations complete
+[20086.219] 1050000 iterations complete
+[20233.219] 1060000 iterations complete
+[20280.000] node39 simulate_spot_instance_remove: 20280000
+[20280.000] node52 simulate_spot_instance_remove: 20280000
+[20280.017] reconfiguration after iteration 1063183
+[20280.017] simulate_rendezvous_start: 20280016.771329854
+[20280.017] simulate_rendezvous_restart: 20280016.771329854
+[20365.017] simulate_reconfigure: 20365016.771329854
+[20365.017] simulate_preparation: 20365016.771329854
+[20365.017] simulate_assign_coordinates
+[20365.017] 14 nodes completed rendezvous version 39, 7x2 configuration
+[20400.000] node49 simulate_spot_instance_remove: 20400000
+[20400.000] node17 simulate_spot_instance_remove: 20400000
+[20400.010] reconfiguration after iteration 1064752
+[20400.010] simulate_rendezvous_start: 20400010.471331023
+[20400.010] simulate_rendezvous_restart: 20400010.471331023
+[20452.868] simulate_reconfigure: 20452867.614188164
+[20452.868] simulate_preparation: 20452867.614188164
+[20452.868] simulate_assign_coordinates
+[20452.868] 12 nodes completed rendezvous version 40, 6x2 configuration
+[20520.000] node28 simulate_spot_instance_remove: 20520000
+[20520.023] reconfiguration after iteration 1068567
+[20520.023] simulate_rendezvous_start: 20520022.61419385
+[20520.023] simulate_rendezvous_restart: 20520022.61419385
+[20630.023] simulate_reconfigure: 20630022.61419385
+[20630.023] simulate_preparation: 20630022.61419385
+[20630.023] simulate_assign_coordinates
+[20630.023] 11 nodes completed rendezvous version 41, 5x2 configuration
+[20669.144] 1070000 iterations complete
+[20760.000] node27 simulate_spot_instance_remove: 20760000
+[20760.050] reconfiguration after iteration 1073329
+[20760.050] simulate_rendezvous_start: 20760050.214197397
+[20760.050] simulate_rendezvous_restart: 20760050.214197397
+[20830.050] simulate_reconfigure: 20830050.214197397
+[20830.050] simulate_preparation: 20830050.214197397
+[20830.050] simulate_assign_coordinates
+[20830.050] 10 nodes completed rendezvous version 42, 5x2 configuration
+[20880.000] node51 simulate_spot_instance_remove: 20880000
+[20880.018] reconfiguration after iteration 1075159
+[20880.018] simulate_rendezvous_start: 20880018.21419876
+[20880.018] simulate_rendezvous_restart: 20880018.21419876
+[20950.018] simulate_reconfigure: 20950018.21419876
+[20950.018] simulate_preparation: 20950018.21419876
+[20950.018] simulate_assign_coordinates
+[20950.018] 9 nodes completed rendezvous version 43, 4x2 configuration
+[21042.481] 1080000 iterations complete
+[21060.000] node55 simulate_spot_instance_add: 21060000
+[21060.000] node54 simulate_spot_instance_add: 21060000
+[21105.000] node55 simulate_spot_instance_ready: 21105000
+[21105.000] node54 simulate_spot_instance_ready: 21105000
+[21105.015] reconfiguration after iteration 1083274
+[21105.015] simulate_rendezvous_start: 21105014.714210853
+[21105.015] simulate_rendezvous_restart: 21105014.714210853
+[21120.000] node56 simulate_spot_instance_add: 21120000
+[21165.000] node56 simulate_spot_instance_ready: 21165000
+[21190.015] simulate_reconfigure: 21190014.714210853
+[21190.015] simulate_preparation: 21190014.714210853
+[21190.015] simulate_assign_coordinates
+[21190.015] 12 nodes completed rendezvous version 44, 6x2 configuration
+[21240.000] node41 simulate_spot_instance_remove: 21240000
+[21240.000] node54 simulate_spot_instance_remove: 21240000
+[21240.032] reconfiguration after iteration 1086115
+[21240.032] simulate_rendezvous_start: 21240032.314215086
+[21240.032] simulate_rendezvous_restart: 21240032.314215086
+[21350.032] simulate_reconfigure: 21350032.314215086
+[21350.032] simulate_preparation: 21350032.314215086
+[21350.032] simulate_assign_coordinates
+[21350.032] 10 nodes completed rendezvous version 45, 5x2 configuration
+[21420.000] node57 simulate_spot_instance_add: 21420000
+[21456.093] 1090000 iterations complete
+[21465.000] node57 simulate_spot_instance_ready: 21465000
+[21729.093] 1100000 iterations complete
+[21780.000] node59 simulate_spot_instance_add: 21780000
+[21780.000] node58 simulate_spot_instance_add: 21780000
+[21825.000] node59 simulate_spot_instance_ready: 21825000
+[21825.000] node58 simulate_spot_instance_ready: 21825000
+[21825.025] reconfiguration after iteration 1103514
+[21825.025] simulate_rendezvous_start: 21825025.01422805
+[21825.025] simulate_rendezvous_restart: 21825025.01422805
+[21895.025] simulate_reconfigure: 21895025.01422805
+[21895.025] simulate_preparation: 21895025.01422805
+[21895.025] simulate_assign_coordinates
+[21895.025] 13 nodes completed rendezvous version 46, 6x2 configuration
+[21960.000] node61 simulate_spot_instance_add: 21960000
+[21960.000] node62 simulate_spot_instance_add: 21960000
+[21960.000] node60 simulate_spot_instance_add: 21960000
+[22005.000] node61 simulate_spot_instance_ready: 22005000
+[22005.000] node62 simulate_spot_instance_ready: 22005000
+[22005.000] node60 simulate_spot_instance_ready: 22005000
+[22005.007] reconfiguration after iteration 1109763
+[22005.007] simulate_rendezvous_start: 22005007.41423736
+[22005.007] simulate_rendezvous_restart: 22005007.41423736
+[22115.007] simulate_reconfigure: 22115007.41423736
+[22115.007] simulate_preparation: 22115007.41423736
+[22115.007] simulate_assign_coordinates
+[22115.007] 16 nodes completed rendezvous version 47, 8x2 configuration
+[22118.491] 1110000 iterations complete
+[22265.491] 1120000 iterations complete
+[22412.491] 1130000 iterations complete
+[22559.491] 1140000 iterations complete
+[22706.491] 1150000 iterations complete
+[22853.491] 1160000 iterations complete
+[22920.000] node46 simulate_spot_instance_remove: 22920000
+[22920.000] node32 simulate_spot_instance_remove: 22920000
+[22920.017] reconfiguration after iteration 1164525
+[22920.017] simulate_rendezvous_start: 22920016.81419656
+[22920.017] simulate_rendezvous_restart: 22920016.81419656
+[23005.017] simulate_reconfigure: 23005016.81419656
+[23005.017] simulate_preparation: 23005016.81419656
+[23005.017] simulate_assign_coordinates
+[23005.017] 14 nodes completed rendezvous version 48, 7x2 configuration
+[23127.109] 1170000 iterations complete
+[23350.109] 1180000 iterations complete
+[23573.109] 1190000 iterations complete
+[23700.000] node63 simulate_spot_instance_add: 23700000
+[23745.000] node63 simulate_spot_instance_ready: 23745000
+[23796.109] 1200000 iterations complete
+[23940.000] node64 simulate_spot_instance_add: 23940000
+[23985.000] node64 simulate_spot_instance_ready: 23985000
+[23985.013] reconfiguration after iteration 1208471
+[23985.013] simulate_rendezvous_start: 23985012.614229303
+[23985.013] simulate_rendezvous_restart: 23985012.614229303
+[24037.870] simulate_reconfigure: 24037869.757086445
+[24037.870] simulate_preparation: 24037869.757086445
+[24037.870] simulate_assign_coordinates
+[24037.870] 16 nodes completed rendezvous version 49, 8x2 configuration
+[24060.346] 1210000 iterations complete
+[24207.346] 1220000 iterations complete
+[24240.000] node56 simulate_spot_instance_remove: 24240000
+[24240.000] node60 simulate_spot_instance_remove: 24240000
+[24240.018] reconfiguration after iteration 1222222
+[24240.018] simulate_rendezvous_start: 24240018.4570762
+[24240.018] simulate_rendezvous_restart: 24240018.4570762
+[24325.018] simulate_reconfigure: 24325018.4570762
+[24325.018] simulate_preparation: 24325018.4570762
+[24325.018] simulate_assign_coordinates
+[24325.018] 14 nodes completed rendezvous version 50, 7x2 configuration
+[24360.000] node61 simulate_spot_instance_remove: 24360000
+[24360.014] reconfiguration after iteration 1223791
+[24360.014] simulate_rendezvous_start: 24360014.15707737
+[24360.014] simulate_rendezvous_restart: 24360014.15707737
+[24412.871] simulate_reconfigure: 24412871.29993451
+[24412.871] simulate_preparation: 24412871.29993451
+[24412.871] simulate_assign_coordinates
+[24412.871] 13 nodes completed rendezvous version 51, 6x2 configuration
+[24480.000] node59 simulate_spot_instance_remove: 24480000
+[24480.030] reconfiguration after iteration 1227606
+[24480.030] simulate_rendezvous_start: 24480030.299940195
+[24480.030] simulate_rendezvous_restart: 24480030.299940195
+[24590.030] simulate_reconfigure: 24590030.299940195
+[24590.030] simulate_preparation: 24590030.299940195
+[24590.030] simulate_assign_coordinates
+[24590.030] 12 nodes completed rendezvous version 52, 6x2 configuration
+[24632.165] 1230000 iterations complete
+[24808.165] 1240000 iterations complete
+[24960.000] node66 simulate_spot_instance_add: 24960000
+[24960.000] node65 simulate_spot_instance_add: 24960000
+[24960.000] node67 simulate_spot_instance_add: 24960000
+[24984.165] 1250000 iterations complete
+[25005.000] node66 simulate_spot_instance_ready: 25005000
+[25005.000] node65 simulate_spot_instance_ready: 25005000
+[25005.000] node67 simulate_spot_instance_ready: 25005000
+[25005.003] reconfiguration after iteration 1251184
+[25005.003] simulate_rendezvous_start: 25005003.09997533
+[25005.003] simulate_rendezvous_restart: 25005003.09997533
+[25115.003] simulate_reconfigure: 25115003.09997533
+[25115.003] simulate_preparation: 25115003.09997533
+[25115.003] simulate_assign_coordinates
+[25115.003] 15 nodes completed rendezvous version 53, 7x2 configuration
+[25200.000] node68 simulate_spot_instance_add: 25200000
+[25245.000] node68 simulate_spot_instance_ready: 25245000
+[25245.012] reconfiguration after iteration 1257014
+[25245.012] simulate_rendezvous_start: 25245012.099979673
+[25245.012] simulate_rendezvous_restart: 25245012.099979673
+[25297.869] simulate_reconfigure: 25297869.242836814
+[25297.869] simulate_preparation: 25297869.242836814
+[25297.869] simulate_assign_coordinates
+[25297.869] 16 nodes completed rendezvous version 54, 8x2 configuration
+[25341.763] 1260000 iterations complete
+[25440.000] node21 simulate_spot_instance_remove: 25440000
+[25440.007] reconfiguration after iteration 1266683
+[25440.007] simulate_rendezvous_start: 25440006.54282961
+[25440.007] simulate_rendezvous_restart: 25440006.54282961
+[25525.007] simulate_reconfigure: 25525006.54282961
+[25525.007] simulate_preparation: 25525006.54282961
+[25525.007] simulate_assign_coordinates
+[25525.007] 15 nodes completed rendezvous version 55, 7x2 configuration
+[25598.976] 1270000 iterations complete
+[25821.976] 1280000 iterations complete
+[25860.000] node69 simulate_spot_instance_add: 25860000
+[25905.000] node69 simulate_spot_instance_ready: 25905000
+[25905.021] reconfiguration after iteration 1283724
+[25905.021] simulate_rendezvous_start: 25905020.842842307
+[25905.021] simulate_rendezvous_restart: 25905020.842842307
+[25957.878] simulate_reconfigure: 25957877.98569945
+[25957.878] simulate_preparation: 25957877.98569945
+[25957.878] simulate_assign_coordinates
+[25957.878] 16 nodes completed rendezvous version 56, 8x2 configuration
+[26050.135] 1290000 iterations complete
+[26197.135] 1300000 iterations complete
+[26344.135] 1310000 iterations complete
+[26491.135] 1320000 iterations complete
+[26638.135] 1330000 iterations complete
+[26785.135] 1340000 iterations complete
+[26932.135] 1350000 iterations complete
+[26940.000] node55 simulate_spot_instance_remove: 26940000
+[26940.000] node45 simulate_spot_instance_remove: 26940000
+[26940.028] reconfiguration after iteration 1350536
+[26940.028] simulate_rendezvous_start: 26940028.38564967
+[26940.028] simulate_rendezvous_restart: 26940028.38564967
+[27025.028] simulate_reconfigure: 27025028.38564967
+[27025.028] simulate_preparation: 27025028.38564967
+[27025.028] simulate_assign_coordinates
+[27025.028] 14 nodes completed rendezvous version 57, 7x2 configuration
+[27060.000] node68 simulate_spot_instance_remove: 27060000
+[27060.034] reconfiguration after iteration 1352105
+[27060.034] simulate_rendezvous_start: 27060034.08565084
+[27060.034] simulate_rendezvous_restart: 27060034.08565084
+[27112.891] simulate_reconfigure: 27112891.22850798
+[27112.891] simulate_preparation: 27112891.22850798
+[27112.891] simulate_assign_coordinates
+[27112.891] 13 nodes completed rendezvous version 58, 6x2 configuration
+[27251.843] 1360000 iterations complete
+[27427.843] 1370000 iterations complete
+[27603.843] 1380000 iterations complete
+[27779.843] 1390000 iterations complete
+[27955.843] 1400000 iterations complete
+[28020.000] node53 simulate_spot_instance_remove: 28020000
+[28020.025] reconfiguration after iteration 1403646
+[28020.025] simulate_rendezvous_start: 28020024.828584783
+[28020.025] simulate_rendezvous_restart: 28020024.828584783
+[28130.025] simulate_reconfigure: 28130024.828584783
+[28130.025] simulate_preparation: 28130024.828584783
+[28130.025] simulate_assign_coordinates
+[28130.025] 12 nodes completed rendezvous version 59, 6x2 configuration
+[28140.000] node63 simulate_spot_instance_remove: 28140000
+[28140.000] node37 simulate_spot_instance_remove: 28140000
+[28140.008] reconfiguration after iteration 1404213
+[28140.008] simulate_rendezvous_start: 28140008.028585628
+[28140.008] simulate_rendezvous_restart: 28140008.028585628
+[28250.008] simulate_reconfigure: 28250008.028585628
+[28250.008] simulate_preparation: 28250008.028585628
+[28250.008] simulate_assign_coordinates
+[28250.008] 10 nodes completed rendezvous version 60, 5x2 configuration
+[28407.993] 1410000 iterations complete
+[28680.993] 1420000 iterations complete
+[28953.993] 1430000 iterations complete
+[29226.993] 1440000 iterations complete
+[29340.000] node71 simulate_spot_instance_add: 29340000
+[29340.000] node70 simulate_spot_instance_add: 29340000
+[29385.000] node71 simulate_spot_instance_ready: 29385000
+[29385.000] node70 simulate_spot_instance_ready: 29385000
+[29385.006] reconfiguration after iteration 1445788
+[29385.006] simulate_rendezvous_start: 29385005.528616603
+[29385.006] simulate_rendezvous_restart: 29385005.528616603
+[29455.006] simulate_reconfigure: 29455005.528616603
+[29455.006] simulate_preparation: 29455005.528616603
+[29455.006] simulate_assign_coordinates
+[29455.006] 12 nodes completed rendezvous version 61, 6x2 configuration
+[29460.000] node72 simulate_spot_instance_add: 29460000
+[29505.000] node72 simulate_spot_instance_ready: 29505000
+[29520.000] node73 simulate_spot_instance_add: 29520000
+[29529.137] 1450000 iterations complete
+[29565.000] node73 simulate_spot_instance_ready: 29565000
+[29565.006] reconfiguration after iteration 1452038
+[29565.006] simulate_rendezvous_start: 29565005.528625917
+[29565.006] simulate_rendezvous_restart: 29565005.528625917
+[29675.006] simulate_reconfigure: 29675005.528625917
+[29675.006] simulate_preparation: 29675005.528625917
+[29675.006] simulate_assign_coordinates
+[29675.006] 14 nodes completed rendezvous version 62, 7x2 configuration
+[29700.000] node74 simulate_spot_instance_add: 29700000
+[29745.000] node74 simulate_spot_instance_ready: 29745000
+[29760.000] node75 simulate_spot_instance_add: 29760000
+[29805.000] node75 simulate_spot_instance_ready: 29805000
+[29805.015] reconfiguration after iteration 1457868
+[29805.015] simulate_rendezvous_start: 29805014.52863026
+[29805.015] simulate_rendezvous_restart: 29805014.52863026
+[29857.872] simulate_reconfigure: 29857871.671487402
+[29857.872] simulate_preparation: 29857871.671487402
+[29857.872] simulate_assign_coordinates
+[29857.872] 16 nodes completed rendezvous version 63, 8x2 configuration
+[29889.212] 1460000 iterations complete
+[30000.000] node75 simulate_spot_instance_remove: 30000000
+[30000.000] node58 simulate_spot_instance_remove: 30000000
+[30000.011] reconfiguration after iteration 1467537
+[30000.011] simulate_rendezvous_start: 30000010.9714802
+[30000.011] simulate_rendezvous_restart: 30000010.9714802
+[30085.011] simulate_reconfigure: 30085010.9714802
+[30085.011] simulate_preparation: 30085010.9714802
+[30085.011] simulate_assign_coordinates
+[30085.011] 14 nodes completed rendezvous version 64, 7x2 configuration
+[30120.000] node70 simulate_spot_instance_remove: 30120000
+[30120.043] reconfiguration after iteration 1469107
+[30120.043] simulate_rendezvous_start: 30120042.971481368
+[30120.043] simulate_rendezvous_restart: 30120042.971481368
+[30172.900] simulate_reconfigure: 30172900.11433851
+[30172.900] simulate_preparation: 30172900.11433851
+[30172.900] simulate_assign_coordinates
+[30172.900] 13 nodes completed rendezvous version 65, 6x2 configuration
+[30188.617] 1470000 iterations complete
+[30240.000] node67 simulate_spot_instance_remove: 30240000
+[30240.017] reconfiguration after iteration 1472920
+[30240.017] simulate_rendezvous_start: 30240016.91434419
+[30240.017] simulate_rendezvous_restart: 30240016.91434419
+[30350.017] simulate_reconfigure: 30350016.91434419
+[30350.017] simulate_preparation: 30350016.91434419
+[30350.017] simulate_assign_coordinates
+[30350.017] 12 nodes completed rendezvous version 66, 6x2 configuration
+[30360.000] node73 simulate_spot_instance_remove: 30360000
+[30360.000] node74 simulate_spot_instance_remove: 30360000
+[30360.000] node74 simulate_fatal_failure: 30360000
+[30360.000] node74 caused a fatal failure, starting global rendezvous
+[30360.000] simulate_rendezvous_start: 30360000
+[30360.000] simulate_rendezvous_restart: 30360000
+[30370.000] simulate_preparation: 30370000
+[30370.000] simulate_preparation: 30370000
+[30370.000] simulate_assign_coordinates
+[30370.000] 10 nodes completed rendezvous version 67, 5x2 configuration
+[30540.024] 1480000 iterations complete
+[30660.000] node76 simulate_spot_instance_add: 30660000
+[30705.000] node76 simulate_spot_instance_ready: 30705000
+[30720.000] node77 simulate_spot_instance_add: 30720000
+[30765.000] node77 simulate_spot_instance_ready: 30765000
+[30765.004] reconfiguration after iteration 1488241
+[30765.004] simulate_rendezvous_start: 30765003.70001078
+[30765.004] simulate_rendezvous_restart: 30765003.70001078
+[30835.004] simulate_reconfigure: 30835003.70001078
+[30835.004] simulate_preparation: 30835003.70001078
+[30835.004] simulate_assign_coordinates
+[30835.004] 12 nodes completed rendezvous version 68, 6x2 configuration
+[30840.000] node33 simulate_spot_instance_remove: 30840000
+[30840.004] reconfiguration after iteration 1488525
+[30840.004] simulate_rendezvous_start: 30840004.100011203
+[30840.004] simulate_rendezvous_restart: 30840004.100011203
+[30900.000] node78 simulate_spot_instance_add: 30900000
+[30945.000] node78 simulate_spot_instance_ready: 30945000
+[30950.004] simulate_reconfigure: 30950004.100011203
+[30950.004] simulate_preparation: 30950004.100011203
+[30950.004] simulate_assign_coordinates
+[30950.004] 12 nodes completed rendezvous version 69, 6x2 configuration
+[30975.964] 1490000 iterations complete
+[31140.000] node79 simulate_spot_instance_add: 31140000
+[31151.964] 1500000 iterations complete
+[31185.000] node79 simulate_spot_instance_ready: 31185000
+[31260.000] node80 simulate_spot_instance_add: 31260000
+[31260.000] node81 simulate_spot_instance_add: 31260000
+[31260.000] node82 simulate_spot_instance_add: 31260000
+[31305.000] node80 simulate_spot_instance_ready: 31305000
+[31305.000] node81 simulate_spot_instance_ready: 31305000
+[31305.000] node82 simulate_spot_instance_ready: 31305000
+[31305.014] reconfiguration after iteration 1508696
+[31305.014] simulate_rendezvous_start: 31305013.70004126
+[31305.014] simulate_rendezvous_restart: 31305013.70004126
+[31415.014] simulate_reconfigure: 31415013.70004126
+[31415.014] simulate_preparation: 31415013.70004126
+[31415.014] simulate_assign_coordinates
+[31415.014] 16 nodes completed rendezvous version 70, 8x2 configuration
+[31434.183] 1510000 iterations complete
+[31581.183] 1520000 iterations complete
+[31620.000] node71 simulate_spot_instance_remove: 31620000
+[31620.000] node57 simulate_spot_instance_remove: 31620000
+[31620.000] node66 simulate_spot_instance_remove: 31620000
+[31620.010] reconfiguration after iteration 1522641
+[31620.010] simulate_rendezvous_start: 31620010.20003087
+[31620.010] simulate_rendezvous_restart: 31620010.20003087
+[31705.010] simulate_reconfigure: 31705010.20003087
+[31705.010] simulate_preparation: 31705010.20003087
+[31705.010] simulate_assign_coordinates
+[31705.010] 13 nodes completed rendezvous version 71, 6x2 configuration
+[31834.529] 1530000 iterations complete
+[32010.529] 1540000 iterations complete
+[32186.529] 1550000 iterations complete
+[32220.000] node84 simulate_spot_instance_add: 32220000
+[32220.000] node83 simulate_spot_instance_add: 32220000
+[32265.000] node84 simulate_spot_instance_ready: 32265000
+[32265.000] node83 simulate_spot_instance_ready: 32265000
+[32265.007] reconfiguration after iteration 1554459
+[32265.007] simulate_rendezvous_start: 32265007.000078283
+[32265.007] simulate_rendezvous_restart: 32265007.000078283
+[32375.007] simulate_reconfigure: 32375007.000078283
+[32375.007] simulate_preparation: 32375007.000078283
+[32375.007] simulate_assign_coordinates
+[32375.007] 15 nodes completed rendezvous version 72, 7x2 configuration
+[32498.571] 1560000 iterations complete
+[32580.000] node85 simulate_spot_instance_add: 32580000
+[32625.000] node85 simulate_spot_instance_ready: 32625000
+[32625.012] reconfiguration after iteration 1565670
+[32625.012] simulate_rendezvous_start: 32625012.300086636
+[32625.012] simulate_rendezvous_restart: 32625012.300086636
+[32677.869] simulate_reconfigure: 32677869.442943778
+[32677.869] simulate_preparation: 32677869.442943778
+[32677.869] simulate_assign_coordinates
+[32677.869] 16 nodes completed rendezvous version 73, 8x2 configuration
+[32700.000] node65 simulate_spot_instance_remove: 32700000
+[32700.000] node85 simulate_spot_instance_remove: 32700000
+[32700.015] reconfiguration after iteration 1567176
+[32700.015] simulate_rendezvous_start: 32700014.642942656
+[32700.015] simulate_rendezvous_restart: 32700014.642942656
+[32785.015] simulate_reconfigure: 32785014.642942656
+[32785.015] simulate_preparation: 32785014.642942656
+[32785.015] simulate_assign_coordinates
+[32785.015] 14 nodes completed rendezvous version 74, 7x2 configuration
+[32820.000] node62 simulate_spot_instance_remove: 32820000
+[32820.006] reconfiguration after iteration 1568745
+[32820.006] simulate_rendezvous_start: 32820006.342943825
+[32820.006] simulate_rendezvous_restart: 32820006.342943825
+[32872.863] simulate_reconfigure: 32872863.485800967
+[32872.863] simulate_preparation: 32872863.485800967
+[32872.863] simulate_assign_coordinates
+[32872.863] 13 nodes completed rendezvous version 75, 6x2 configuration
+[32894.951] 1570000 iterations complete
+[32940.000] node34 simulate_spot_instance_remove: 32940000
+[32940.014] reconfiguration after iteration 1572560
+[32940.014] simulate_rendezvous_start: 32940014.48580665
+[32940.014] simulate_rendezvous_restart: 32940014.48580665
+[33050.014] simulate_reconfigure: 33050014.48580665
+[33050.014] simulate_preparation: 33050014.48580665
+[33050.014] simulate_assign_coordinates
+[33050.014] 12 nodes completed rendezvous version 76, 6x2 configuration
+[33180.958] 1580000 iterations complete
+[33356.958] 1590000 iterations complete
+[33532.958] 1600000 iterations complete
+[33540.000] node86 simulate_spot_instance_add: 33540000
+[33585.000] node86 simulate_spot_instance_ready: 33585000
+[33708.958] 1610000 iterations complete
+[33720.000] node87 simulate_spot_instance_add: 33720000
+[33765.000] node87 simulate_spot_instance_ready: 33765000
+[33765.014] reconfiguration after iteration 1613185
+[33765.014] simulate_rendezvous_start: 33765014.48586719
+[33765.014] simulate_rendezvous_restart: 33765014.48586719
+[33780.000] node88 simulate_spot_instance_add: 33780000
+[33780.000] node89 simulate_spot_instance_add: 33780000
+[33825.000] node88 simulate_spot_instance_ready: 33825000
+[33825.000] node89 simulate_spot_instance_ready: 33825000
+[33875.014] simulate_reconfigure: 33875014.48586719
+[33875.014] simulate_preparation: 33875014.48586719
+[33875.014] simulate_assign_coordinates
+[33875.014] 16 nodes completed rendezvous version 77, 8x2 configuration
+[33975.195] 1620000 iterations complete
+[34122.195] 1630000 iterations complete
+[34269.195] 1640000 iterations complete
+[34416.195] 1650000 iterations complete
+[34563.195] 1660000 iterations complete
+[34710.195] 1670000 iterations complete
+[34857.195] 1680000 iterations complete
+[35004.195] 1690000 iterations complete
+[35100.000] node77 simulate_spot_instance_remove: 35100000
+[35100.019] reconfiguration after iteration 1696518
+[35100.019] simulate_rendezvous_start: 35100018.58611554
+[35100.019] simulate_rendezvous_restart: 35100018.58611554
+[35185.019] simulate_reconfigure: 35185018.58611554
+[35185.019] simulate_preparation: 35185018.58611554
+[35185.019] simulate_assign_coordinates
+[35185.019] 15 nodes completed rendezvous version 78, 7x2 configuration
+[35220.000] node86 simulate_spot_instance_remove: 35220000
+[35220.014] reconfiguration after iteration 1698087
+[35220.014] simulate_rendezvous_start: 35220014.28611086
+[35220.014] simulate_rendezvous_restart: 35220014.28611086
+[35272.871] simulate_reconfigure: 35272871.428968005
+[35272.871] simulate_preparation: 35272871.428968005
+[35272.871] simulate_assign_coordinates
+[35272.871] 14 nodes completed rendezvous version 79, 7x2 configuration
+[35315.531] 1700000 iterations complete
+[35460.000] node83 simulate_spot_instance_remove: 35460000
+[35460.026] reconfiguration after iteration 1706479
+[35460.026] simulate_rendezvous_start: 35460026.028942995
+[35460.026] simulate_rendezvous_restart: 35460026.028942995
+[35512.883] simulate_reconfigure: 35512883.17180014
+[35512.883] simulate_preparation: 35512883.17180014
+[35512.883] simulate_assign_coordinates
+[35512.883] 13 nodes completed rendezvous version 80, 6x2 configuration
+[35574.853] 1710000 iterations complete
+[35640.000] node90 simulate_spot_instance_add: 35640000
+[35685.000] node90 simulate_spot_instance_ready: 35685000
+[35685.011] reconfiguration after iteration 1716259
+[35685.011] simulate_rendezvous_start: 35685011.17181471
+[35685.011] simulate_rendezvous_restart: 35685011.17181471
+[35700.000] node91 simulate_spot_instance_add: 35700000
+[35745.000] node91 simulate_spot_instance_ready: 35745000
+[35795.011] simulate_reconfigure: 35795011.17181471
+[35795.011] simulate_preparation: 35795011.17181471
+[35795.011] simulate_assign_coordinates
+[35795.011] 15 nodes completed rendezvous version 81, 7x2 configuration
+[35878.435] 1720000 iterations complete
+[36101.435] 1730000 iterations complete
+[36324.435] 1740000 iterations complete
+[36420.000] node81 simulate_spot_instance_remove: 36420000
+[36420.000] node82 simulate_spot_instance_remove: 36420000
+[36420.026] reconfiguration after iteration 1744286
+[36420.026] simulate_rendezvous_start: 36420026.27173118
+[36420.026] simulate_rendezvous_restart: 36420026.27173118
+[36472.883] simulate_reconfigure: 36472883.414588325
+[36472.883] simulate_preparation: 36472883.414588325
+[36472.883] simulate_assign_coordinates
+[36472.883] 13 nodes completed rendezvous version 82, 6x2 configuration
+[36573.450] 1750000 iterations complete
+[36749.450] 1760000 iterations complete
+[36925.450] 1770000 iterations complete
+[37101.450] 1780000 iterations complete
+[37277.450] 1790000 iterations complete
+[37453.450] 1800000 iterations complete
+[37629.450] 1810000 iterations complete
+[37805.450] 1820000 iterations complete
+[37981.450] 1830000 iterations complete
+[38157.450] 1840000 iterations complete
+[38333.450] 1850000 iterations complete
+[38509.450] 1860000 iterations complete
+[38685.450] 1870000 iterations complete
+[38861.450] 1880000 iterations complete
+[39037.450] 1890000 iterations complete
+[39213.450] 1900000 iterations complete
+[39389.450] 1910000 iterations complete
+[39565.450] 1920000 iterations complete
+[39741.450] 1930000 iterations complete
+[39917.450] 1940000 iterations complete
+[39960.000] node87 simulate_spot_instance_remove: 39960000
+[39960.013] reconfiguration after iteration 1942418
+[39960.013] simulate_rendezvous_start: 39960012.614883564
+[39960.013] simulate_rendezvous_restart: 39960012.614883564
+[40070.013] simulate_reconfigure: 40070012.614883564
+[40070.013] simulate_preparation: 40070012.614883564
+[40070.013] simulate_assign_coordinates
+[40070.013] 12 nodes completed rendezvous version 83, 6x2 configuration
+[40203.456] 1950000 iterations complete
+[40379.456] 1960000 iterations complete
+[40555.456] 1970000 iterations complete
+[40731.456] 1980000 iterations complete
+[40800.000] node90 simulate_spot_instance_remove: 40800000
+[40800.015] reconfiguration after iteration 1983895
+[40800.015] simulate_rendezvous_start: 40800014.81494537
+[40800.015] simulate_rendezvous_restart: 40800014.81494537
+[40910.015] simulate_reconfigure: 40910014.81494537
+[40910.015] simulate_preparation: 40910014.81494537
+[40910.015] simulate_assign_coordinates
+[40910.015] 11 nodes completed rendezvous version 84, 5x2 configuration
+[40920.000] node88 simulate_spot_instance_remove: 40920000
+[40920.013] reconfiguration after iteration 1984261
+[40920.013] simulate_rendezvous_start: 40920012.61494428
+[40920.013] simulate_rendezvous_restart: 40920012.61494428
+[40990.013] simulate_reconfigure: 40990012.61494428
+[40990.013] simulate_preparation: 40990012.61494428
+[40990.013] simulate_assign_coordinates
+[40990.013] 10 nodes completed rendezvous version 85, 5x2 configuration
+[41146.687] 1990000 iterations complete
+[41419.687] 2000000 iterations complete
+[41692.687] 2010000 iterations complete
+[41965.687] 2020000 iterations complete
+[42238.687] 2030000 iterations complete
+[42511.687] 2040000 iterations complete
+[42784.687] 2050000 iterations complete
+[43057.687] 2060000 iterations complete
+1114.5578231292518 1114557.8231857421 687444.3881074119
+Model: GPT-3
+  Performance: D 1114.5578231292518 B 687444.3881074119
+  Cost: D 48.96 B 12.719779879704937
+  Value: D 22.764661420123605 B 52502.96315947413
+[43200.000] Ending after 11.999993031861951 hours
