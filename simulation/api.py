@@ -2,6 +2,7 @@ import argparse
 import logging
 
 from simulation.mysimulator import MySimulator
+from simulation.oob_simulator import OobSimulator
 
 logger = logging.getLogger('simulation')
 
@@ -18,6 +19,7 @@ def parse(args):
     parser.add_argument('--spot-instance-trace', type=str, default=None)
     parser.add_argument('--model', type=str, default='GPT-2')
     parser.add_argument('--fig-directory', type=str, default='res/simulator')
+    parser.add_argument('--system', type=str, default='bamboo')
     return parser.parse_args(args)
 
 def simulate(args):
@@ -61,17 +63,31 @@ def main(args):
     assert not (options.generate_graphs and options.generate_table)
 
     if not options.generate_table:
-        simulator = MySimulator(
-            seed=options.seed,
-            start_hour=options.start_hour,
-            generate_addition_probabilities=options.generate_addition_probabilities,
-            removal_probability=options.removal_probability,
-            generate_graphs=options.generate_graphs,
-            spot_instance_trace=options.spot_instance_trace,
-            model=options.model
-        )
-        # simulator.simulate()
-        simulator.simulate(duration=4_320_0000, fig_directory=options.fig_directory)
-        # simulator.simulate(duration=1_200_000)
+        if options.system == "bamboo":
+            print("run simulator: bamboo")
+            simulator = MySimulator(
+                seed=options.seed,
+                start_hour=options.start_hour,
+                generate_addition_probabilities=options.generate_addition_probabilities,
+                removal_probability=options.removal_probability,
+                generate_graphs=options.generate_graphs,
+                spot_instance_trace=options.spot_instance_trace,
+                model=options.model
+            )
+            simulator.simulate(duration=4_320_0000, fig_directory=options.fig_directory)
+        elif options.system == "oobleck":
+            print("run simulator: oobleck")
+            simulator = OobSimulator(
+                seed=options.seed,
+                start_hour=options.start_hour,
+                generate_addition_probabilities=options.generate_addition_probabilities,
+                removal_probability=options.removal_probability,
+                generate_graphs=options.generate_graphs,
+                spot_instance_trace=options.spot_instance_trace,
+                model=options.model
+            )
+            simulator.simulate(duration=4_320_0000, fig_directory=options.fig_directory)
+        else:
+            print(f"simulator {options.system} not implement")
     else:
         generate_table(options.model, spot_instance_trace=options.spot_instance_trace, duration=4_320_0000, fig_directory=options.fig_directory)
