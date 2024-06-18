@@ -47,7 +47,8 @@ class OobSimulator(OobSimulatorBase):
         self.on_demand_value = self.on_demand_performance / self.on_demand_cost
 
     def reconfigure_delta(self) -> int:
-
+        curr_active_instances = self.get_curr_active_instances()
+        self.last_active_instances = curr_active_instances
         return 10
         # reconfigure time (ms)
         reconfigure_map = {
