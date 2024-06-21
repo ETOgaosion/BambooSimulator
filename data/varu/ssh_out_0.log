@@ -1,0 +1,424 @@
+Parent process ID: 67580
+24 cutpoints
+Stages 2
+Predicted microbatch size for 2: 13
+comm size 6815744
+WARNING: no send time found, 2 partitions
+WARNING: no long send time found, 2 partitions, size 6815744, -1
+command:GPUS_PER_VM=1 /opt/conda/lib/python3.6/site-packages/varuna-0.0.1-py3.6.egg/tools/simulator/simulate-varuna 2 10 0 119870.02563476562 0
+simulate:End of simulation:  Mini-batch time (usec) = 2998385
+Min send: 10000000, max send 0
+Min long send: 332, max long send 21246
+Min fwd: 58920, max fwd 66730; min bwd 149281, max bwd 156022
+Min long fwd: 63675, max long fwd 71255; min long bwd 149413, max long bwd 157664
+Time taken by simulation: 375 microseconds
+
+batch_time:End of simulation:  Mini-batch time (usec) = 2998385, batch_time.split(" "): ['End', 'of', 'simulation:', '', 'Mini-batch', 'time', '(usec)', '=', '2998385']
+Stages 3
+Predicted microbatch size for 3: 22
+comm size 11534336
+WARNING: no send time found, 3 partitions
+WARNING: no long send time found, 3 partitions, size 11534336, -1
+command:GPUS_PER_VM=1 /opt/conda/lib/python3.6/site-packages/varuna-0.0.1-py3.6.egg/tools/simulator/simulate-varuna 3 10 0 81667.2134399414 0
+simulate:End of simulation:  Mini-batch time (usec) = 3306882
+Min send: 10000000, max send 0
+Min long send: 188, max long send 22466
+Min fwd: 61189, max fwd 75102; min bwd 141537, max bwd 153303
+Min long fwd: 59029, max long fwd 66108; min long bwd 143252, max long bwd 149138
+Time taken by simulation: 610 microseconds
+
+batch_time:End of simulation:  Mini-batch time (usec) = 3306882, batch_time.split(" "): ['End', 'of', 'simulation:', '', 'Mini-batch', 'time', '(usec)', '=', '3306882']
+Stages 4
+Predicted microbatch size for 4: 24
+comm size 12582912
+WARNING: no send time found, 4 partitions
+WARNING: no long send time found, 4 partitions, size 12582912, -1
+command:GPUS_PER_VM=1 /opt/conda/lib/python3.6/site-packages/varuna-0.0.1-py3.6.egg/tools/simulator/simulate-varuna 4 11 0 48323.43292236328 0
+simulate:End of simulation:  Mini-batch time (usec) = 3167884
+Min send: 10000000, max send 0
+Min long send: 82, max long send 24705
+Min fwd: 46920, max fwd 61257; min bwd 109238, max bwd 131009
+Min long fwd: 50158, max long fwd 55372; min long bwd 118477, max long bwd 125382
+Time taken by simulation: 640 microseconds
+
+batch_time:End of simulation:  Mini-batch time (usec) = 3167884, batch_time.split(" "): ['End', 'of', 'simulation:', '', 'Mini-batch', 'time', '(usec)', '=', '3167884']
+Stages 6
+Predicted microbatch size for 6: 24
+comm size 12582912
+WARNING: no send time found, 6 partitions
+WARNING: no long send time found, 6 partitions, size 12582912, -1
+command:GPUS_PER_VM=1 /opt/conda/lib/python3.6/site-packages/varuna-0.0.1-py3.6.egg/tools/simulator/simulate-varuna 6 22 0 28174.161911010742 0
+simulate:End of simulation:  Mini-batch time (usec) = 4284844
+Min send: 10000000, max send 0
+Min long send: 0, max long send 27162
+Min fwd: 28464, max fwd 44877; min bwd 70542, max bwd 89743
+Min long fwd: 27547, max long fwd 39499; min long bwd 77790, max long bwd 84278
+Time taken by simulation: 2011 microseconds
+
+batch_time:End of simulation:  Mini-batch time (usec) = 4284844, batch_time.split(" "): ['End', 'of', 'simulation:', '', 'Mini-batch', 'time', '(usec)', '=', '4284844']
+Stages 8
+Predicted microbatch size for 8: 24
+comm size 12582912
+WARNING: no send time found, 8 partitions
+WARNING: no long send time found, 8 partitions, size 12582912, -1
+command:GPUS_PER_VM=1 /opt/conda/lib/python3.6/site-packages/varuna-0.0.1-py3.6.egg/tools/simulator/simulate-varuna 8 22 0 24506.17218017578 0
+simulate:End of simulation:  Mini-batch time (usec) = 3732039
+Min send: 10000000, max send 0
+Min long send: 54, max long send 28221
+Min fwd: 19818, max fwd 37225; min bwd 50356, max bwd 76672
+Min long fwd: 22404, max long fwd 32284; min long bwd 53693, max long bwd 65159
+Time taken by simulation: 2968 microseconds
+
+batch_time:End of simulation:  Mini-batch time (usec) = 3732039, batch_time.split(" "): ['End', 'of', 'simulation:', '', 'Mini-batch', 'time', '(usec)', '=', '3732039']
+Stages 12
+Predicted microbatch size for 12: 24
+comm size 12582912
+WARNING: no send time found, 12 partitions
+WARNING: no long send time found, 12 partitions, size 12582912, -1
+command:GPUS_PER_VM=1 /opt/conda/lib/python3.6/site-packages/varuna-0.0.1-py3.6.egg/tools/simulator/simulate-varuna 12 43 0 0 0
+simulate:End of simulation:  Mini-batch time (usec) = 4763944
+Min send: 10000000, max send 0
+Min long send: 0, max long send 30004
+Min fwd: 10815, max fwd 29114; min bwd 30428, max bwd 52013
+Min long fwd: 10024, max long fwd 21323; min long bwd 37587, max long bwd 45885
+Time taken by simulation: 10271 microseconds
+
+batch_time:End of simulation:  Mini-batch time (usec) = 4763944, batch_time.split(" "): ['End', 'of', 'simulation:', '', 'Mini-batch', 'time', '(usec)', '=', '4763944']
+{2: 2.998385, 3: 3.306882, 4: 3.167884, 6: 4.284844, 8: 3.732039, 12: 4.763944}
+{2: 13, 3: 22, 4: 24, 6: 24, 8: 24, 12: 24}
+best config is: 2 13
+expected time is 2.998385
+8 per stage
+16 servers!
+Config:
+ranks: range(0, 1)
+train batch size: 1024
+partitions: 2
+chunk_size: 13
+data depth: 8
+stage to rank map: 0,2,4,6,8,10,12,14;1,3,5,7,9,11,13,15;
+World size is 16
+/opt/conda/bin/python3 -u pretrain_gpt2.py --rank=0 --chunk_size=13 --local_rank=0 --stage_to_rank_map=0,2,4,6,8,10,12,14;1,3,5,7,9,11,13,15; --batch-size=128 --num-layers 24 --hidden-size 1024 --num-attention-heads 16 --seq-length 512 --max-position-embeddings 512 --train-iters 18750 --lr-decay-iters 18750 --save /mnt/gpu-91/varuna/checkpoints/gpt3_350M --data-path /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document --vocab-file /mnt/gpu-91/dataset/gpt2-vocab.json --merge-file /mnt/gpu-91/dataset/gpt2-merges.txt --data-impl mmap --split 949,50,1 --distributed-backend gloo --lr 0.00015 --min-lr 1.0e-5 --lr-decay-style cosine --weight-decay 1e-2 --clip-grad 1.0 --warmup .01 --log-interval 1 --exit-interval 100 --save-interval 5 --eval-interval 1000 --use-cpu-initialization --eval-iters 5 --varuna --fp16
+using world size: 16 and model-parallel size: 1 
+using torch.float32 for parameters ...
+-------------------- arguments --------------------
+  adam_beta1 ...................... 0.9
+  adam_beta2 ...................... 0.999
+  adam_eps ........................ 1e-08
+  adlr_autoresume ................. False
+  adlr_autoresume_interval ........ 1000
+  apply_query_key_layer_scaling ... False
+  apply_residual_connection_post_layernorm  False
+  attention_dropout ............... 0.1
+  attention_softmax_in_fp32 ....... False
+  batch_size ...................... 128
+  bert_load ....................... None
+  bias_dropout_fusion ............. False
+  bias_gelu_fusion ................ False
+  block_data_path ................. None
+  checkpoint_activations .......... False
+  checkpoint_num_layers ........... 1
+  chunk_size ...................... 13
+  clip_grad ....................... 1.0
+  data_impl ....................... mmap
+  data_path ....................... /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document
+  DDP_impl ........................ local
+  distribute_checkpointed_activations  False
+  distributed_backend ............. gloo
+  dynamic_loss_scale .............. True
+  eod_mask_loss ................... False
+  eval_interval ................... 1000
+  eval_iters ...................... 5
+  exit_interval ................... 100
+  faiss_use_gpu ................... False
+  finetune ........................ False
+  fp16 ............................ True
+  fp16_lm_cross_entropy ........... False
+  fp32_allreduce .................. False
+  hidden_dropout .................. 0.1
+  hidden_size ..................... 1024
+  hysteresis ...................... 2
+  ict_head_size ................... None
+  ict_load ........................ None
+  indexer_batch_size .............. 128
+  indexer_log_interval ............ 1000
+  init_method_std ................. 0.02
+  layernorm_epsilon ............... 1e-05
+  lazy_mpu_init ................... None
+  load ............................ None
+  local_rank ...................... 0
+  log_interval .................... 1
+  loss_scale ...................... None
+  loss_scale_window ............... 1000
+  lr .............................. 0.00015
+  lr_decay_iters .................. 18750
+  lr_decay_style .................. cosine
+  make_vocab_size_divisible_by .... 128
+  mask_prob ....................... 0.15
+  max_position_embeddings ......... 512
+  merge_file ...................... /mnt/gpu-91/dataset/gpt2-merges.txt
+  min_lr .......................... 1e-05
+  min_scale ....................... 1
+  mmap_warmup ..................... False
+  model_parallel_size ............. 1
+  no_load_optim ................... False
+  no_load_rng ..................... False
+  no_save_optim ................... False
+  no_save_rng ..................... False
+  num_attention_heads ............. 16
+  num_layers ...................... 24
+  num_unique_layers ............... None
+  num_workers ..................... 2
+  onnx_safe ....................... None
+  openai_gelu ..................... False
+  override_lr_scheduler ........... False
+  param_sharing_style ............. grouped
+  params_dtype .................... torch.float32
+  profiling ....................... False
+  query_in_block_prob ............. 0.1
+  rank ............................ 0
+  report_topk_accuracies .......... []
+  reset_attention_mask ............ False
+  reset_position_ids .............. False
+  resume_step ..................... None
+  save ............................ /mnt/gpu-91/varuna/checkpoints/gpt3_350M
+  save_interval ................... 5
+  scaled_masked_softmax_fusion .... False
+  scaled_upper_triang_masked_softmax_fusion  False
+  seed ............................ 1234
+  seq_length ...................... 512
+  short_seq_prob .................. 0.1
+  split ........................... 949,50,1
+  stage_to_rank_map ............... 0,2,4,6,8,10,12,14;1,3,5,7,9,11,13,15;
+  tensorboard_dir ................. None
+  titles_data_path ................ None
+  tokenizer_type .................. GPT2BPETokenizer
+  train_iters ..................... 18750
+  use_checkpoint_lr_scheduler ..... False
+  use_cpu_initialization .......... True
+  use_one_sent_docs ............... False
+  varuna .......................... True
+  vocab_file ...................... /mnt/gpu-91/dataset/gpt2-vocab.json
+  warmup .......................... 0.01
+  weight_decay .................... 0.01
+  world_size ...................... 16
+---------------- end of arguments ----------------
+> building GPT2BPETokenizer tokenizer ...
+ > padded vocab (size: 50257) with 47 dummy tokens (new size: 50304)
+> initializing torch distributed ...
+> initializing model parallel with size 1
+> setting random seeds to 1234 ...
+> initializing model parallel cuda seeds on global rank 0, model parallel rank 0, and data parallel rank 0 with model parallel seed: 3952 and data parallel seed: 1234
+> building train, validation, and test datasets ...
+ > datasets target sizes (minimum size):
+    train:      19200000
+    validation: 97280
+    test:       5120
+> building train, validation, and test datasets for GPT2 ...
+ > building dataset index ...
+    reading sizes...
+    reading pointers...
+    reading document index...
+    creating numpy buffer of mmap...
+    creating memory view of numpy buffer...
+ > finished creating indexed dataset in 0.000979 seconds
+    number of documents: 243066
+ > dataset split:
+    train:
+     document indices in [0, 230670) total of 230670 documents
+    validation:
+     document indices in [230670, 242823) total of 12153 documents
+    test:
+     document indices in [242823, 243066) total of 243 documents
+ > loading doc-idx mapping from /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document_train_indexmap_19200000ns_512sl_1234s_doc_idx.npy
+ > loading sample-idx mapping from /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document_train_indexmap_19200000ns_512sl_1234s_sample_idx.npy
+ > loading shuffle-idx mapping from /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document_train_indexmap_19200000ns_512sl_1234s_shuffle_idx.npy
+    loaded indexed file in 0.007 seconds
+    total number of samples: 19216245
+    total number of epochs: 253
+ > loading doc-idx mapping from /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document_valid_indexmap_97280ns_512sl_1234s_doc_idx.npy
+ > loading sample-idx mapping from /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document_valid_indexmap_97280ns_512sl_1234s_sample_idx.npy
+ > loading shuffle-idx mapping from /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document_valid_indexmap_97280ns_512sl_1234s_shuffle_idx.npy
+    loaded indexed file in 0.018 seconds
+    total number of samples: 98202
+    total number of epochs: 39
+ > loading doc-idx mapping from /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document_test_indexmap_5120ns_512sl_1234s_doc_idx.npy
+ > loading sample-idx mapping from /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document_test_indexmap_5120ns_512sl_1234s_sample_idx.npy
+ > loading shuffle-idx mapping from /mnt/gpu-91/dataset/gpt-dataset-simplewiki/my-gpt2_text_document_test_indexmap_5120ns_512sl_1234s_shuffle_idx.npy
+    loaded indexed file in 0.004 seconds
+    total number of samples: 5161
+    total number of epochs: 99
+> finished creating GPT2 datasets ...
+model and optimizer
+building GPT2 model ...
+dry run time 0.7458221912384033
+SHARED WEIGHTS ARE
+[(0, 1)]
+this rank  0 is part of pipeline replica  0
+10 chunks
+ > number of parameters on model parallel rank 0: 203190272
+Selected optimization level O2:  FP16 training with FP32 batchnorm and FP32 master weights.
+
+Defaults for this optimization level are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+Processing user overrides (additional kwargs that are not None)...
+After processing overrides, optimization options are:
+enabled                : True
+opt_level              : O2
+cast_model_type        : torch.float16
+patch_torch_functions  : False
+keep_batchnorm_fp32    : True
+master_weights         : True
+loss_scale             : dynamic
+> learning rate decay style: cosine
+setting training data start iteration to 0
+setting validation data start iteration to 0
+done with setups ...
+time (ms) | model and optimizer: 6661.80 | train/valid/test data iterators: 647.73
+training ...
+Could not send progress update message
+ iteration        1/   18750 | elapsed time per iteration (ms): 6160.0 | learning rate: 8.000E-07 | lm loss: 1.099426E+01 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+after 1 iterations memory (MB) | allocated: 2716.38916015625 | max allocated: 9444.81494140625 | reserved: 10392.0 | max reserved: 10392.0
+time (ms) | optimizer: 28.98 | batch generator: 11.62
+Could not send progress update message
+ iteration        2/   18750 | elapsed time per iteration (ms): 4409.6 | learning rate: 1.600E-06 | lm loss: 1.099642E+01 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 18.58 | batch generator: 13.82
+Could not send progress update message
+ iteration        3/   18750 | elapsed time per iteration (ms): 4516.3 | learning rate: 2.400E-06 | lm loss: 1.092430E+01 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 18.96 | batch generator: 14.11
+Could not send progress update message
+ iteration        4/   18750 | elapsed time per iteration (ms): 4575.4 | learning rate: 3.200E-06 | lm loss: 1.060720E+01 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 17.82 | batch generator: 14.66
+Could not send progress update message
+Could not send progress update message
+ iteration        5/   18750 | elapsed time per iteration (ms): 4490.1 | learning rate: 4.000E-06 | lm loss: 1.032925E+01 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 19.63 | batch generator: 19.63
+
+global rank 0 is saving checkpoint at iteration       5 to /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000005/mp_rank_00/model_optim_rng.pt
+  successfully saved /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000005/mp_rank_00/model_optim_rng.pt
+Opt ckpt time 5.875053644180298
+save checkpoint: 30.003986597061157s
+ iteration        6/   18750 | elapsed time per iteration (ms): 34613.9 | learning rate: 4.800E-06 | lm loss: 1.005528E+01 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 25.41 | batch generator: 32.86
+ iteration        7/   18750 | elapsed time per iteration (ms): 4443.7 | learning rate: 5.600E-06 | lm loss: 9.855318E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 22.96 | batch generator: 10.54
+ iteration        8/   18750 | elapsed time per iteration (ms): 4457.8 | learning rate: 6.400E-06 | lm loss: 9.703369E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 23.86 | batch generator: 13.36
+ iteration        9/   18750 | elapsed time per iteration (ms): 4433.1 | learning rate: 7.200E-06 | lm loss: 9.601059E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 26.50 | batch generator: 14.81
+Could not send progress update message
+ iteration       10/   18750 | elapsed time per iteration (ms): 4469.9 | learning rate: 8.000E-06 | lm loss: 9.512439E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 15.34 | batch generator: 12.65
+
+global rank 0 is saving checkpoint at iteration      10 to /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000010/mp_rank_00/model_optim_rng.pt
+  successfully saved /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000010/mp_rank_00/model_optim_rng.pt
+Opt ckpt time 5.527899503707886
+save checkpoint: 60.0116229057312s
+ iteration       11/   18750 | elapsed time per iteration (ms): 64595.8 | learning rate: 8.800E-06 | lm loss: 9.439529E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 22.95 | batch generator: 21.53
+ iteration       12/   18750 | elapsed time per iteration (ms): 4545.5 | learning rate: 9.600E-06 | lm loss: 9.427593E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 24.76 | batch generator: 10.63
+ iteration       13/   18750 | elapsed time per iteration (ms): 4451.3 | learning rate: 1.040E-05 | lm loss: 9.335945E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.88 | batch generator: 11.56
+ iteration       14/   18750 | elapsed time per iteration (ms): 4447.2 | learning rate: 1.120E-05 | lm loss: 9.319343E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.89 | batch generator: 16.66
+Could not send progress update message
+ iteration       15/   18750 | elapsed time per iteration (ms): 4540.4 | learning rate: 1.200E-05 | lm loss: 9.304121E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 18.66 | batch generator: 28.66
+
+global rank 0 is saving checkpoint at iteration      15 to /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000015/mp_rank_00/model_optim_rng.pt
+  successfully saved /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000015/mp_rank_00/model_optim_rng.pt
+Opt ckpt time 5.377989053726196
+save checkpoint: 5.382754325866699s
+ iteration       16/   18750 | elapsed time per iteration (ms): 10033.3 | learning rate: 1.280E-05 | lm loss: 9.272411E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 15.07 | batch generator: 21.03
+ iteration       17/   18750 | elapsed time per iteration (ms): 4470.4 | learning rate: 1.360E-05 | lm loss: 9.241202E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.87 | batch generator: 15.57
+ iteration       18/   18750 | elapsed time per iteration (ms): 4431.2 | learning rate: 1.440E-05 | lm loss: 9.208026E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 29.98 | batch generator: 27.91
+ iteration       19/   18750 | elapsed time per iteration (ms): 4405.1 | learning rate: 1.520E-05 | lm loss: 9.201181E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 23.96 | batch generator: 10.50
+Could not send progress update message
+ iteration       20/   18750 | elapsed time per iteration (ms): 4412.4 | learning rate: 1.600E-05 | lm loss: 9.188032E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.96 | batch generator: 13.52
+
+global rank 0 is saving checkpoint at iteration      20 to /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000020/mp_rank_00/model_optim_rng.pt
+  successfully saved /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000020/mp_rank_00/model_optim_rng.pt
+Opt ckpt time 5.306722164154053
+save checkpoint: 30.031695127487183s
+ iteration       21/   18750 | elapsed time per iteration (ms): 34500.4 | learning rate: 1.680E-05 | lm loss: 9.161658E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.92 | batch generator: 37.16
+ iteration       22/   18750 | elapsed time per iteration (ms): 4435.8 | learning rate: 1.760E-05 | lm loss: 9.125501E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 14.84 | batch generator: 8.49
+ iteration       23/   18750 | elapsed time per iteration (ms): 4418.1 | learning rate: 1.840E-05 | lm loss: 9.132329E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 16.38 | batch generator: 15.98
+ iteration       24/   18750 | elapsed time per iteration (ms): 4384.0 | learning rate: 1.920E-05 | lm loss: 9.131752E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 17.75 | batch generator: 17.83
+Could not send progress update message
+ iteration       25/   18750 | elapsed time per iteration (ms): 4401.6 | learning rate: 2.000E-05 | lm loss: 9.066968E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 21.12 | batch generator: 23.19
+
+global rank 0 is saving checkpoint at iteration      25 to /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000025/mp_rank_00/model_optim_rng.pt
+  successfully saved /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000025/mp_rank_00/model_optim_rng.pt
+Opt ckpt time 5.32874321937561
+save checkpoint: 60.25532007217407s
+ iteration       26/   18750 | elapsed time per iteration (ms): 64820.6 | learning rate: 2.080E-05 | lm loss: 9.059698E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.97 | batch generator: 28.67
+ iteration       27/   18750 | elapsed time per iteration (ms): 4433.6 | learning rate: 2.160E-05 | lm loss: 9.022678E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 18.77 | batch generator: 12.17
+ iteration       28/   18750 | elapsed time per iteration (ms): 4464.1 | learning rate: 2.240E-05 | lm loss: 9.027230E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.86 | batch generator: 19.94
+ iteration       29/   18750 | elapsed time per iteration (ms): 4435.9 | learning rate: 2.320E-05 | lm loss: 8.983681E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.91 | batch generator: 29.42
+Could not send progress update message
+ iteration       30/   18750 | elapsed time per iteration (ms): 4439.7 | learning rate: 2.400E-05 | lm loss: 8.929810E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.88 | batch generator: 2.44
+
+global rank 0 is saving checkpoint at iteration      30 to /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000030/mp_rank_00/model_optim_rng.pt
+  successfully saved /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000030/mp_rank_00/model_optim_rng.pt
+Opt ckpt time 5.304607391357422
+save checkpoint: 30.03344488143921s
+ iteration       31/   18750 | elapsed time per iteration (ms): 34621.3 | learning rate: 2.480E-05 | lm loss: 8.895394E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.84 | batch generator: 28.75
+ iteration       32/   18750 | elapsed time per iteration (ms): 4455.4 | learning rate: 2.560E-05 | lm loss: 8.839097E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.86 | batch generator: 17.73
+ iteration       33/   18750 | elapsed time per iteration (ms): 4429.0 | learning rate: 2.640E-05 | lm loss: 8.809671E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 22.07 | batch generator: 4.24
+ iteration       34/   18750 | elapsed time per iteration (ms): 4404.8 | learning rate: 2.720E-05 | lm loss: 8.759745E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.89 | batch generator: 15.19
+Could not send progress update message
+ iteration       35/   18750 | elapsed time per iteration (ms): 4449.8 | learning rate: 2.800E-05 | lm loss: 8.732338E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 21.78 | batch generator: 12.96
+
+global rank 0 is saving checkpoint at iteration      35 to /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000035/mp_rank_00/model_optim_rng.pt
+  successfully saved /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000035/mp_rank_00/model_optim_rng.pt
+Opt ckpt time 5.342338562011719
+save checkpoint: 7.671257734298706s
+ iteration       36/   18750 | elapsed time per iteration (ms): 12231.1 | learning rate: 2.880E-05 | lm loss: 8.715971E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 18.06 | batch generator: 24.18
+ iteration       37/   18750 | elapsed time per iteration (ms): 4450.8 | learning rate: 2.960E-05 | lm loss: 8.659795E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 28.24 | batch generator: 21.56
+ iteration       38/   18750 | elapsed time per iteration (ms): 4417.2 | learning rate: 3.040E-05 | lm loss: 8.658751E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 17.40 | batch generator: 8.26
+ iteration       39/   18750 | elapsed time per iteration (ms): 4435.9 | learning rate: 3.120E-05 | lm loss: 8.593713E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 12.89 | batch generator: 13.98
+Could not send progress update message
+ iteration       40/   18750 | elapsed time per iteration (ms): 4458.6 | learning rate: 3.200E-05 | lm loss: 8.545208E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 15.57 | batch generator: 2.52
+
+global rank 0 is saving checkpoint at iteration      40 to /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000040/mp_rank_00/model_optim_rng.pt
+  successfully saved /mnt/gpu-91/varuna/checkpoints/gpt3_350M/iter_0000040/mp_rank_00/model_optim_rng.pt
+Opt ckpt time 5.2599036693573
+save checkpoint: 30.01108145713806s
+ iteration       41/   18750 | elapsed time per iteration (ms): 34565.9 | learning rate: 3.280E-05 | lm loss: 8.538121E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 17.49 | batch generator: 21.21
+ iteration       42/   18750 | elapsed time per iteration (ms): 4443.4 | learning rate: 3.360E-05 | lm loss: 8.495285E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 17.94 | batch generator: 21.30
+ iteration       43/   18750 | elapsed time per iteration (ms): 4386.7 | learning rate: 3.440E-05 | lm loss: 8.441254E+00 | loss scale: 131072.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | optimizer: 19.12 | batch generator: 22.62
