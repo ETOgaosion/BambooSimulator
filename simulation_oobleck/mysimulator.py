@@ -1,5 +1,5 @@
 
-from simulation.simulator import Simulator
+from simulation_oobleck.simulator import Simulator
 import math
 import csv
 import statistics
@@ -16,6 +16,7 @@ class MySimulator(Simulator):
         
         # prepare for first time launch
         self.preparation_delta = 10000
+        self.check_pt_steps = 10000
 
         # on demand instance config, no need to change
         def calculate_avg_nodes(file):
@@ -42,7 +43,7 @@ class MySimulator(Simulator):
             nodes_samples.append(current_nodes)
             return statistics.mean(nodes_samples)
     
-        self.on_demand_num_instances = (calculate_avg_nodes(spot_instance_trace) // 4) * 4
+        self.on_demand_num_instances = int(math.pow(2, math.ceil(math.log2(calculate_avg_nodes(spot_instance_trace)))))
         
         self.on_demand_cost = self.on_demand_num_instances * self.on_demand_cost_per_hour
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)
@@ -51,7 +52,7 @@ class MySimulator(Simulator):
     def reconfigure_delta(self):
         # reconfigure time (ms)
         # layer time model: (layers / 12) * 150s
-        return self.preparation_delta + 3389 * self.pipeline_parallel_size_target
+        return 32904.7
 
     def simulate_iteration_delta(self):
         # iteration time
@@ -59,10 +60,13 @@ class MySimulator(Simulator):
     
     def simulate_iteration_delta_calc(self, nodes_num):
         data = {
-            8: 99.7,
-            12: 78.5,
-            16: 54.37,
-            20: 40.19,
-            24: 29.08
+            8: 19.1,
+            10: 27.3,
+            12: 17.6,
+            14: 22.3,
+            16: 14.7
         }
-        return data[(nodes_num // 4) * 4]
+        if data.get(nodes_num) is not None:
+            return data[nodes_num]
+        else:
+            return data[int(math.pow(2, math.ceil(math.log2(nodes_num))))]
