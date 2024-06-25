@@ -12,7 +12,10 @@ class MySimulator(Simulator):
         # Amazon EC2 Tesla T4
         if model == 'GPT-3':
             # the number of nodes that can be added at a time, bamboo do lazy reconfigure, not reconfig every time
-            self.global_batch_size = 1024
+            if model_size == '350M':
+                self.global_batch_size = 1024
+            else:
+                self.global_batch_size = 2048
         
         # prepare for first time launch
         self.preparation_delta = 10000
@@ -43,7 +46,7 @@ class MySimulator(Simulator):
             nodes_samples.append(current_nodes)
             return statistics.mean(nodes_samples)
     
-        self.on_demand_num_instances = int(math.pow(2, math.ceil(math.log2(calculate_avg_nodes(spot_instance_trace)))))
+        self.on_demand_num_instances = math.ceil(calculate_avg_nodes(spot_instance_trace))
         
         self.on_demand_cost = self.on_demand_num_instances * self.on_demand_cost_per_hour
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)

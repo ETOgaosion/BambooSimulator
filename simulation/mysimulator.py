@@ -59,10 +59,10 @@ class MySimulator(Simulator):
     
     def simulate_iteration_delta_calc(self, nodes_num):
         data = {
-            8: 99.7,
-            12: 78.5,
-            16: 54.37,
-            20: 40.19,
-            24: 29.08
+            8: 99700,
+            12: 78500,
+            16: 54370,
+            20: 40190,
+            24: 29080
         }
         return data[(nodes_num // 4) * 4]

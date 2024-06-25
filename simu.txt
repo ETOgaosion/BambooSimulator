@@ -54,21 +54,16 @@ Namespace(fig_directory='res/simuitest-bamboo-g4dn', generate_addition_probabili
 [55.000] simulate_preparation: 55000
 [55.000] simulate_assign_coordinates
 [55.000] 24 nodes completed rendezvous version 1, 6x4 configuration
-[345.800] 10000 iterations complete
-[636.600] 20000 iterations complete
-[927.400] 30000 iterations complete
-[1218.200] 40000 iterations complete
-[1509.000] 50000 iterations complete
 [1560.000] node23 simulate_spot_instance_remove: 1560000
 [1560.000] node6 simulate_spot_instance_remove: 1560000
 [1560.000] node15 simulate_spot_instance_remove: 1560000
 reconfigure 21 3
-[1560.006] simulate_rendezvous_start: 1560006.3200006485
-[1560.006] simulate_rendezvous_restart: 1560006.3200006485
-[1583.576] simulate_reconfigure: 1583575.7166673152
-[1583.576] simulate_preparation: 1583575.7166673152
-[1583.576] simulate_assign_coordinates
-[1583.576] 21 nodes completed rendezvous version 2, 5x4 configuration
+[1567.160] simulate_rendezvous_start: 1567160
+[1567.160] simulate_rendezvous_restart: 1567160
+[1604.113] simulate_reconfigure: 1604112.6666666667
+[1604.113] simulate_preparation: 1604112.6666666667
+[1604.113] simulate_assign_coordinates
+[1604.113] 21 nodes completed rendezvous version 2, 5x4 configuration
 [1680.000] node1 simulate_spot_instance_remove: 1680000
 [1740.000] node25 simulate_spot_instance_add: 1740000
 [1785.000] node25 simulate_spot_instance_ready: 1785000
@@ -77,149 +72,130 @@ reconfigure 21 3
 [1845.000] node27 simulate_spot_instance_ready: 1845000
 [1845.000] node26 simulate_spot_instance_ready: 1845000
 reconfigure 23 1
-[1845.012] simulate_rendezvous_start: 1845011.6666669517
-[1845.012] simulate_rendezvous_restart: 1845011.6666669517
-[1868.581] simulate_reconfigure: 1868581.0633336185
-[1868.581] simulate_preparation: 1868581.0633336185
-[1868.581] simulate_assign_coordinates
-[1868.581] 23 nodes completed rendezvous version 3, 5x4 configuration
-[1938.632] 60000 iterations complete
-[2340.532] 70000 iterations complete
+[1845.253] simulate_rendezvous_start: 1845252.6666666667
+[1845.253] simulate_rendezvous_restart: 1845252.6666666667
+[1882.205] simulate_reconfigure: 1882205.3333333335
+[1882.205] simulate_preparation: 1882205.3333333335
+[1882.205] simulate_assign_coordinates
+[1882.205] 23 nodes completed rendezvous version 3, 5x4 configuration
 [2640.000] node26 simulate_spot_instance_remove: 2640000
-[2742.432] 80000 iterations complete
 [3000.000] node21 simulate_spot_instance_remove: 3000000
 [3000.000] node8 simulate_spot_instance_remove: 3000000
 [3000.000] node11 simulate_spot_instance_remove: 3000000
 [3000.000] node19 simulate_spot_instance_remove: 3000000
-[3144.332] 90000 iterations complete
-[3546.232] 100000 iterations complete
-[3948.132] 110000 iterations complete
 [3960.000] node4 simulate_spot_instance_remove: 3960000
 [4260.000] node5 simulate_spot_instance_remove: 4260000
 [4260.000] node16 simulate_spot_instance_remove: 4260000
 reconfigure 15 8
-[4260.007] simulate_rendezvous_start: 4260006.633331055
-[4260.007] simulate_rendezvous_restart: 4260006.633331055
-[4283.589] simulate_reconfigure: 4283588.799997722
-[4283.589] simulate_preparation: 4283588.799997722
-[4283.589] simulate_assign_coordinates
-[4283.589] 15 nodes completed rendezvous version 4, 3x4 configuration
-[4459.507] 120000 iterations complete
-[5244.507] 130000 iterations complete
-[6029.507] 140000 iterations complete
-[6814.507] 150000 iterations complete
+[4293.605] simulate_rendezvous_start: 4293605.333333334
+[4293.605] simulate_rendezvous_restart: 4293605.333333334
+[4343.328] simulate_reconfigure: 4343328.000000001
+[4343.328] simulate_preparation: 4343328.000000001
+[4343.328] simulate_assign_coordinates
+[4343.328] 15 nodes completed rendezvous version 4, 3x4 configuration
 [7140.000] node14 simulate_spot_instance_remove: 7140000
 [7200.000] node7 simulate_spot_instance_remove: 7200000
 [7200.000] node2 simulate_spot_instance_remove: 7200000
 [7380.000] node28 simulate_spot_instance_add: 7380000
 [7425.000] node28 simulate_spot_instance_ready: 7425000
-reconfigure 13 3
-[7425.002] simulate_rendezvous_start: 7425001.799997722
-[7425.002] simulate_rendezvous_restart: 7425001.799997722
 [7440.000] node29 simulate_spot_instance_add: 7440000
-[7448.584] simulate_reconfigure: 7448583.966664389
-[7448.584] simulate_preparation: 7448583.966664389
-[7448.584] simulate_assign_coordinates
-[7448.584] 13 nodes completed rendezvous version 5, 3x4 configuration
+reconfigure 13 3
+[7483.328] simulate_rendezvous_start: 7483328.000000001
+[7483.328] simulate_rendezvous_restart: 7483328.000000001
 [7485.000] node29 simulate_spot_instance_ready: 7485000
+[7533.051] simulate_reconfigure: 7533050.666666668
+[7533.051] simulate_preparation: 7533050.666666668
+[7533.051] simulate_assign_coordinates
+[7533.051] 14 nodes completed rendezvous version 5, 3x4 configuration
 [7560.000] node30 simulate_spot_instance_add: 7560000
 [7605.000] node30 simulate_spot_instance_ready: 7605000
 [7620.000] node31 simulate_spot_instance_add: 7620000
-[7623.168] 160000 iterations complete
 [7665.000] node31 simulate_spot_instance_ready: 7665000
-7665008.466664389 should reconfigure 12 4 4 3
-[7665.008] reconfiguration after iteration 160533
-[7665.008] simulate_rendezvous_start: 7665008.466664389
-[7665.008] simulate_rendezvous_restart: 7665008.466664389
-[7688.583] simulate_reconfigure: 7688582.589997722
-[7688.583] simulate_preparation: 7688582.589997722
-[7688.583] simulate_assign_coordinates
-[7688.583] 16 nodes completed rendezvous version 6, 4x4 configuration
-[8203.303] 170000 iterations complete
-[8747.003] 180000 iterations complete
+7690050.666666668 should reconfigure 12 4 4 3
+[7690.051] reconfiguration after iteration 156
+[7690.051] simulate_rendezvous_start: 7690050.666666668
+[7690.051] simulate_rendezvous_restart: 7690050.666666668
+[7731.730] simulate_reconfigure: 7731730.000000001
+[7731.730] simulate_preparation: 7731730.000000001
+[7731.730] simulate_assign_coordinates
+[7731.730] 16 nodes completed rendezvous version 6, 4x4 configuration
 [8880.000] node29 simulate_spot_instance_remove: 8880000
 reconfigure 15 1
-[8880.047] simulate_rendezvous_start: 8880046.769991754
-[8880.047] simulate_rendezvous_restart: 8880046.769991754
-[8903.629] simulate_reconfigure: 8903628.93665842
-[8903.629] simulate_preparation: 8903628.93665842
-[8903.629] simulate_assign_coordinates
-[8903.629] 15 nodes completed rendezvous version 7, 3x4 configuration
+[8927.870] simulate_rendezvous_start: 8927870.0
+[8927.870] simulate_rendezvous_restart: 8927870.0
+[8977.593] simulate_reconfigure: 8977592.666666666
+[8977.593] simulate_preparation: 8977592.666666666
+[8977.593] simulate_assign_coordinates
+[8977.593] 15 nodes completed rendezvous version 7, 3x4 configuration
 [9060.000] node32 simulate_spot_instance_add: 9060000
 [9105.000] node32 simulate_spot_instance_ready: 9105000
-9105059.93665842 should reconfigure 12 4 4 3
-[9105.060] reconfiguration after iteration 185012
-[9105.060] simulate_rendezvous_start: 9105059.93665842
-[9105.060] simulate_rendezvous_restart: 9105059.93665842
 [9120.000] node33 simulate_spot_instance_add: 9120000
-[9128.634] simulate_reconfigure: 9128634.059991753
-[9128.634] simulate_preparation: 9128634.059991753
-[9128.634] simulate_assign_coordinates
-[9128.634] 16 nodes completed rendezvous version 8, 4x4 configuration
+9134592.666666666 should reconfigure 12 4 4 3
+[9134.593] reconfiguration after iteration 179
+[9134.593] simulate_rendezvous_start: 9134592.666666666
+[9134.593] simulate_rendezvous_restart: 9134592.666666666
 [9165.000] node33 simulate_spot_instance_ready: 9165000
-[9399.832] 190000 iterations complete
+[9176.272] simulate_reconfigure: 9176272.0
+[9176.272] simulate_preparation: 9176272.0
+[9176.272] simulate_assign_coordinates
+[9176.272] 17 nodes completed rendezvous version 8, 4x4 configuration
 [9480.000] node33 simulate_spot_instance_remove: 9480000
 [9840.000] node28 simulate_spot_instance_remove: 9840000
 reconfigure 15 2
-[9840.011] simulate_rendezvous_start: 9840011.13998103
-[9840.011] simulate_rendezvous_restart: 9840011.13998103
-[9863.593] simulate_reconfigure: 9863593.306647696
-[9863.593] simulate_preparation: 9863593.306647696
-[9863.593] simulate_assign_coordinates
-[9863.593] 15 nodes completed rendezvous version 9, 3x4 configuration
+[9883.082] simulate_rendezvous_start: 9883082.0
+[9883.082] simulate_rendezvous_restart: 9883082.0
+[9932.805] simulate_reconfigure: 9932804.666666666
+[9932.805] simulate_preparation: 9932804.666666666
+[9932.805] simulate_assign_coordinates
+[9932.805] 15 nodes completed rendezvous version 9, 3x4 configuration
 [9960.000] node34 simulate_spot_instance_add: 9960000
 [10005.000] node34 simulate_spot_instance_ready: 10005000
-10005050.306647696 should reconfigure 12 4 4 3
-[10005.050] reconfiguration after iteration 199897
-[10005.050] simulate_rendezvous_start: 10005050.306647696
-[10005.050] simulate_rendezvous_restart: 10005050.306647696
-[10028.624] simulate_reconfigure: 10028624.429981029
-[10028.624] simulate_preparation: 10028624.429981029
-[10028.624] simulate_assign_coordinates
-[10028.624] 16 nodes completed rendezvous version 10, 4x4 configuration
-[10034.225] 200000 iterations complete
-[10577.925] 210000 iterations complete
-[11121.625] 220000 iterations complete
+10011304.666666666 should reconfigure 12 4 4 3
+[10011.305] reconfiguration after iteration 192
+[10011.305] simulate_rendezvous_start: 10011304.666666666
+[10011.305] simulate_rendezvous_restart: 10011304.666666666
+[10052.984] simulate_reconfigure: 10052984.0
+[10052.984] simulate_preparation: 10052984.0
+[10052.984] simulate_assign_coordinates
+[10052.984] 16 nodes completed rendezvous version 10, 4x4 configuration
 [11520.000] node9 simulate_spot_instance_remove: 11520000
 [11520.000] node31 simulate_spot_instance_remove: 11520000
 reconfigure 14 2
-[11520.048] simulate_rendezvous_start: 11520047.899958547
-[11520.048] simulate_rendezvous_restart: 11520047.899958547
-[11543.630] simulate_reconfigure: 11543630.066625213
-[11543.630] simulate_preparation: 11543630.066625213
-[11543.630] simulate_assign_coordinates
-[11543.630] 14 nodes completed rendezvous version 11, 3x4 configuration
+[11520.974] simulate_rendezvous_start: 11520974.0
+[11520.974] simulate_rendezvous_restart: 11520974.0
+[11570.697] simulate_reconfigure: 11570696.666666666
+[11570.697] simulate_preparation: 11570696.666666666
+[11570.697] simulate_assign_coordinates
+[11570.697] 14 nodes completed rendezvous version 11, 3x4 configuration
 [11640.000] node34 simulate_spot_instance_remove: 11640000
 [11640.000] node10 simulate_spot_instance_remove: 11640000
-[11753.461] 230000 iterations complete
 [11760.000] node20 simulate_spot_instance_remove: 11760000
 [11760.000] node25 simulate_spot_instance_remove: 11760000
 [11880.000] node27 simulate_spot_instance_remove: 11880000
 [12000.000] node30 simulate_spot_instance_remove: 12000000
-[12120.000] node35 simulate_spot_instance_add: 12120000
 [12120.000] node36 simulate_spot_instance_add: 12120000
-[12165.000] node35 simulate_spot_instance_ready: 12165000
+[12120.000] node35 simulate_spot_instance_add: 12120000
 [12165.000] node36 simulate_spot_instance_ready: 12165000
+[12165.000] node35 simulate_spot_instance_ready: 12165000
 reconfigure 10 6
-[12165.036] simulate_rendezvous_start: 12165036.066625213
-[12165.036] simulate_rendezvous_restart: 12165036.066625213
-[12188.625] simulate_reconfigure: 12188625.299958546
-[12188.625] simulate_preparation: 12188625.299958546
-[12188.625] simulate_assign_coordinates
-[12188.625] 10 nodes completed rendezvous version 12, 2x4 configuration
+[12198.697] simulate_rendezvous_start: 12198696.666666666
+[12198.697] simulate_rendezvous_restart: 12198696.666666666
+[12255.486] simulate_reconfigure: 12255486.0
+[12255.486] simulate_preparation: 12255486.0
+[12255.486] simulate_assign_coordinates
+[12255.486] 10 nodes completed rendezvous version 12, 2x4 configuration
 [12360.000] node37 simulate_spot_instance_add: 12360000
 [12405.000] node37 simulate_spot_instance_ready: 12405000
 [12600.000] node38 simulate_spot_instance_add: 12600000
 [12645.000] node38 simulate_spot_instance_ready: 12645000
-12645051.899955135 should reconfigure 8 4 3 2
-[12645.052] reconfiguration after iteration 239820
-[12645.052] simulate_rendezvous_start: 12645051.899955135
-[12645.052] simulate_rendezvous_restart: 12645051.899955135
-[12668.634] simulate_reconfigure: 12668634.0666218
-[12668.634] simulate_preparation: 12668634.0666218
-[12668.634] simulate_assign_coordinates
-[12668.634] 12 nodes completed rendezvous version 13, 3x4 configuration
-[12682.764] 240000 iterations complete
+12654286.0 should reconfigure 8 4 3 2
+[12654.286] reconfiguration after iteration 229
+[12654.286] simulate_rendezvous_start: 12654286.0
+[12654.286] simulate_rendezvous_restart: 12654286.0
+[12704.009] simulate_reconfigure: 12704008.666666666
+[12704.009] simulate_preparation: 12704008.666666666
+[12704.009] simulate_assign_coordinates
+[12704.009] 12 nodes completed rendezvous version 13, 3x4 configuration
 [12720.000] node39 simulate_spot_instance_add: 12720000
 [12765.000] node39 simulate_spot_instance_ready: 12765000
 [12840.000] node40 simulate_spot_instance_add: 12840000
@@ -228,43 +204,41 @@ reconfigure 10 6
 [12960.000] node41 simulate_spot_instance_add: 12960000
 [13005.000] node42 simulate_spot_instance_ready: 13005000
 [13005.000] node41 simulate_spot_instance_ready: 13005000
-13005006.5666218 should reconfigure 12 4 4 3
-[13005.007] reconfiguration after iteration 244105
-[13005.007] simulate_rendezvous_start: 13005006.5666218
-[13005.007] simulate_rendezvous_restart: 13005006.5666218
-[13028.581] simulate_reconfigure: 13028580.689955134
-[13028.581] simulate_preparation: 13028580.689955134
-[13028.581] simulate_assign_coordinates
-[13028.581] 16 nodes completed rendezvous version 14, 4x4 configuration
+13018008.666666666 should reconfigure 12 4 4 3
+[13018.009] reconfiguration after iteration 233
+[13018.009] simulate_rendezvous_start: 13018008.666666666
+[13018.009] simulate_rendezvous_restart: 13018008.666666666
+[13059.688] simulate_reconfigure: 13059688.0
+[13059.688] simulate_preparation: 13059688.0
+[13059.688] simulate_assign_coordinates
+[13059.688] 16 nodes completed rendezvous version 14, 4x4 configuration
 [13320.000] node41 simulate_spot_instance_remove: 13320000
 reconfigure 15 1
-[13320.004] simulate_rendezvous_start: 13320003.889950741
-[13320.004] simulate_rendezvous_restart: 13320003.889950741
-[13343.586] simulate_reconfigure: 13343586.056617407
-[13343.586] simulate_preparation: 13343586.056617407
-[13343.586] simulate_assign_coordinates
-[13343.586] 15 nodes completed rendezvous version 15, 3x4 configuration
-[13385.662] 250000 iterations complete
+[13331.538] simulate_rendezvous_start: 13331538.0
+[13331.538] simulate_rendezvous_restart: 13331538.0
+[13381.261] simulate_reconfigure: 13381260.666666666
+[13381.261] simulate_preparation: 13381260.666666666
+[13381.261] simulate_assign_coordinates
+[13381.261] 15 nodes completed rendezvous version 15, 3x4 configuration
 [13500.000] node43 simulate_spot_instance_add: 13500000
 [13545.000] node43 simulate_spot_instance_ready: 13545000
-13545017.056617407 should reconfigure 12 4 4 3
-[13545.017] reconfiguration after iteration 252030
-[13545.017] simulate_rendezvous_start: 13545017.056617407
-[13545.017] simulate_rendezvous_restart: 13545017.056617407
-[13568.591] simulate_reconfigure: 13568591.17995074
-[13568.591] simulate_preparation: 13568591.17995074
-[13568.591] simulate_assign_coordinates
-[13568.591] 16 nodes completed rendezvous version 16, 4x4 configuration
+13616760.666666666 should reconfigure 12 4 4 3
+[13616.761] reconfiguration after iteration 240
+[13616.761] simulate_rendezvous_start: 13616760.666666666
+[13616.761] simulate_rendezvous_restart: 13616760.666666666
+[13658.440] simulate_reconfigure: 13658440.0
+[13658.440] simulate_preparation: 13658440.0
+[13658.440] simulate_assign_coordinates
+[13658.440] 16 nodes completed rendezvous version 16, 4x4 configuration
 [13920.000] node39 simulate_spot_instance_remove: 13920000
 [13920.000] node43 simulate_spot_instance_remove: 13920000
 reconfigure 14 2
-[13920.039] simulate_rendezvous_start: 13920038.859945443
-[13920.039] simulate_rendezvous_restart: 13920038.859945443
-[13943.621] simulate_reconfigure: 13943621.026612109
-[13943.621] simulate_preparation: 13943621.026612109
-[13943.621] simulate_assign_coordinates
-[13943.621] 14 nodes completed rendezvous version 17, 3x4 configuration
-[14061.921] 260000 iterations complete
+[13930.290] simulate_rendezvous_start: 13930290.0
+[13930.290] simulate_rendezvous_restart: 13930290.0
+[13980.013] simulate_reconfigure: 13980012.666666666
+[13980.013] simulate_preparation: 13980012.666666666
+[13980.013] simulate_assign_coordinates
+[13980.013] 14 nodes completed rendezvous version 17, 3x4 configuration
 [14100.000] node44 simulate_spot_instance_add: 14100000
 [14100.000] node47 simulate_spot_instance_add: 14100000
 [14100.000] node46 simulate_spot_instance_add: 14100000
@@ -273,348 +247,1746 @@ reconfigure 14 2
 [14145.000] node47 simulate_spot_instance_ready: 14145000
 [14145.000] node46 simulate_spot_instance_ready: 14145000
 [14145.000] node45 simulate_spot_instance_ready: 14145000
-14145052.026612109 should reconfigure 12 6 4 3
-[14145.052] reconfiguration after iteration 261059
-[14145.052] simulate_rendezvous_start: 14145052.026612109
-[14145.052] simulate_rendezvous_restart: 14145052.026612109
-[14168.626] simulate_reconfigure: 14168626.149945442
-[14168.626] simulate_preparation: 14168626.149945442
-[14168.626] simulate_assign_coordinates
-[14168.626] 18 nodes completed rendezvous version 18, 4x4 configuration
+14215512.666666666 should reconfigure 12 6 4 3
+[14215.513] reconfiguration after iteration 247
+[14215.513] simulate_rendezvous_start: 14215512.666666666
+[14215.513] simulate_rendezvous_restart: 14215512.666666666
+[14257.192] simulate_reconfigure: 14257192.0
+[14257.192] simulate_preparation: 14257192.0
+[14257.192] simulate_assign_coordinates
+[14257.192] 18 nodes completed rendezvous version 18, 4x4 configuration
 [14340.000] node49 simulate_spot_instance_add: 14340000
 [14340.000] node48 simulate_spot_instance_add: 14340000
 [14385.000] node49 simulate_spot_instance_ready: 14385000
 [14385.000] node48 simulate_spot_instance_ready: 14385000
-14385018.74994218 should reconfigure 16 4 5 4
-[14385.019] reconfiguration after iteration 265039
-[14385.019] simulate_rendezvous_start: 14385018.74994218
-[14385.019] simulate_rendezvous_restart: 14385018.74994218
-[14408.588] simulate_reconfigure: 14408588.146608846
-[14408.588] simulate_preparation: 14408588.146608846
-[14408.588] simulate_assign_coordinates
-[14408.588] 20 nodes completed rendezvous version 19, 5x4 configuration
-[14607.971] 270000 iterations complete
+14420302.0 should reconfigure 16 4 5 4
+[14420.302] reconfiguration after iteration 250
+[14420.302] simulate_rendezvous_start: 14420302.0
+[14420.302] simulate_rendezvous_restart: 14420302.0
+[14457.255] simulate_reconfigure: 14457254.666666666
+[14457.255] simulate_preparation: 14457254.666666666
+[14457.255] simulate_assign_coordinates
+[14457.255] 20 nodes completed rendezvous version 19, 5x4 configuration
 [14760.000] node48 simulate_spot_instance_remove: 14760000
-[15009.871] 280000 iterations complete
 [15360.000] node50 simulate_spot_instance_add: 15360000
 [15405.000] node50 simulate_spot_instance_ready: 15405000
-[15411.771] 290000 iterations complete
-[15813.671] 300000 iterations complete
 [15840.000] node38 simulate_spot_instance_remove: 15840000
 [15840.000] node45 simulate_spot_instance_remove: 15840000
 [15840.000] node50 simulate_spot_instance_remove: 15840000
 [15900.000] node51 simulate_spot_instance_add: 15900000
 [15945.000] node51 simulate_spot_instance_ready: 15945000
-[16215.571] 310000 iterations complete
-[16617.471] 320000 iterations complete
-[17019.371] 330000 iterations complete
-[17421.271] 340000 iterations complete
 [17520.000] node18 simulate_spot_instance_remove: 17520000
-[17823.171] 350000 iterations complete
-[18225.071] 360000 iterations complete
 [18600.000] node32 simulate_spot_instance_remove: 18600000
 [18600.000] node47 simulate_spot_instance_remove: 18600000
 reconfigure 15 7
-[18600.003] simulate_rendezvous_start: 18600003.246638935
-[18600.003] simulate_rendezvous_restart: 18600003.246638935
-[18623.585] simulate_reconfigure: 18623585.413305603
-[18623.585] simulate_preparation: 18623585.413305603
-[18623.585] simulate_assign_coordinates
-[18623.585] 15 nodes completed rendezvous version 20, 3x4 configuration
-[18676.337] 370000 iterations complete
+[18637.015] simulate_rendezvous_start: 18637014.666666664
+[18637.015] simulate_rendezvous_restart: 18637014.666666664
+[18686.737] simulate_reconfigure: 18686737.333333332
+[18686.737] simulate_preparation: 18686737.333333332
+[18686.737] simulate_assign_coordinates
+[18686.737] 15 nodes completed rendezvous version 20, 3x4 configuration
 [18780.000] node52 simulate_spot_instance_add: 18780000
 [18825.000] node52 simulate_spot_instance_ready: 18825000
-18825016.413305603 should reconfigure 12 4 4 3
-[18825.016] reconfiguration after iteration 371894
-[18825.016] simulate_rendezvous_start: 18825016.413305603
-[18825.016] simulate_rendezvous_restart: 18825016.413305603
-[18848.591] simulate_reconfigure: 18848590.536638938
-[18848.591] simulate_preparation: 18848590.536638938
-[18848.591] simulate_assign_coordinates
-[18848.591] 16 nodes completed rendezvous version 21, 4x4 configuration
-[19289.314] 380000 iterations complete
+18843737.333333332 should reconfigure 12 4 4 3
+[18843.737] reconfiguration after iteration 355
+[18843.737] simulate_rendezvous_start: 18843737.333333332
+[18843.737] simulate_rendezvous_restart: 18843737.333333332
+[18885.417] simulate_reconfigure: 18885416.666666664
+[18885.417] simulate_preparation: 18885416.666666664
+[18885.417] simulate_assign_coordinates
+[18885.417] 16 nodes completed rendezvous version 21, 4x4 configuration
 [19440.000] node42 simulate_spot_instance_remove: 19440000
 [19440.000] node51 simulate_spot_instance_remove: 19440000
 reconfigure 14 2
-[19440.027] simulate_rendezvous_start: 19440027.396650285
-[19440.027] simulate_rendezvous_restart: 19440027.396650285
-[19463.610] simulate_reconfigure: 19463609.563316952
-[19463.610] simulate_preparation: 19463609.563316952
-[19463.610] simulate_assign_coordinates
-[19463.610] 14 nodes completed rendezvous version 22, 3x4 configuration
+[19483.487] simulate_rendezvous_start: 19483486.666666664
+[19483.487] simulate_rendezvous_restart: 19483486.666666664
+[19533.209] simulate_reconfigure: 19533209.333333332
+[19533.209] simulate_preparation: 19533209.333333332
+[19533.209] simulate_assign_coordinates
+[19533.209] 14 nodes completed rendezvous version 22, 3x4 configuration
 [19560.000] node35 simulate_spot_instance_remove: 19560000
 [19920.000] node53 simulate_spot_instance_add: 19920000
 [19965.000] node53 simulate_spot_instance_ready: 19965000
-[20031.086] 390000 iterations complete
 [20160.000] node54 simulate_spot_instance_add: 20160000
 [20205.000] node54 simulate_spot_instance_ready: 20205000
-reconfigure 15 1
-[20205.042] simulate_rendezvous_start: 20205042.063316952
-[20205.042] simulate_rendezvous_restart: 20205042.063316952
 [20220.000] node55 simulate_spot_instance_add: 20220000
 [20220.000] node57 simulate_spot_instance_add: 20220000
 [20220.000] node56 simulate_spot_instance_add: 20220000
-[20228.624] simulate_reconfigure: 20228624.22998362
-[20228.624] simulate_preparation: 20228624.22998362
-[20228.624] simulate_assign_coordinates
-[20228.624] 15 nodes completed rendezvous version 23, 3x4 configuration
+reconfigure 15 1
+[20239.709] simulate_rendezvous_start: 20239709.333333332
+[20239.709] simulate_rendezvous_restart: 20239709.333333332
 [20265.000] node55 simulate_spot_instance_ready: 20265000
 [20265.000] node57 simulate_spot_instance_ready: 20265000
 [20265.000] node56 simulate_spot_instance_ready: 20265000
-20265048.22998362 should reconfigure 12 6 4 3
-[20265.048] reconfiguration after iteration 392679
-[20265.048] simulate_rendezvous_start: 20265048.22998362
-[20265.048] simulate_rendezvous_restart: 20265048.22998362
-[20288.622] simulate_reconfigure: 20288622.353316955
-[20288.622] simulate_preparation: 20288622.353316955
-[20288.622] simulate_assign_coordinates
-[20288.622] 18 nodes completed rendezvous version 24, 4x4 configuration
-[20686.665] 400000 iterations complete
-[21230.365] 410000 iterations complete
+[20289.432] simulate_reconfigure: 20289432.0
+[20289.432] simulate_preparation: 20289432.0
+[20289.432] simulate_assign_coordinates
+[20289.432] 18 nodes completed rendezvous version 23, 4x4 configuration
 [21600.000] node46 simulate_spot_instance_remove: 21600000
 [21720.000] node58 simulate_spot_instance_add: 21720000
 [21765.000] node58 simulate_spot_instance_ready: 21765000
-[21774.065] 420000 iterations complete
 [21780.000] node59 simulate_spot_instance_add: 21780000
 [21825.000] node59 simulate_spot_instance_ready: 21825000
 [21840.000] node59 simulate_spot_instance_remove: 21840000
-[22317.765] 430000 iterations complete
 [22680.000] node56 simulate_spot_instance_remove: 22680000
 [22860.000] node60 simulate_spot_instance_add: 22860000
-[22861.465] 440000 iterations complete
 [22905.000] node60 simulate_spot_instance_ready: 22905000
-22905015.49336715 should reconfigure 15 5 5 4
-[22905.015] reconfiguration after iteration 440801
-[22905.015] simulate_rendezvous_start: 22905015.49336715
-[22905.015] simulate_rendezvous_restart: 22905015.49336715
-[22928.590] simulate_reconfigure: 22928589.616700485
-[22928.590] simulate_preparation: 22928589.616700485
-[22928.590] simulate_assign_coordinates
-[22928.590] 18 nodes completed rendezvous version 25, 4x4 configuration
-[23428.739] 450000 iterations complete
+22953562.0 should reconfigure 15 5 5 4
+[22953.562] reconfiguration after iteration 422
+[22953.562] simulate_rendezvous_start: 22953562.0
+[22953.562] simulate_rendezvous_restart: 22953562.0
+[22995.241] simulate_reconfigure: 22995241.333333332
+[22995.241] simulate_preparation: 22995241.333333332
+[22995.241] simulate_assign_coordinates
+[22995.241] 18 nodes completed rendezvous version 24, 4x4 configuration
 [23700.000] node58 simulate_spot_instance_remove: 23700000
-[23972.439] 460000 iterations complete
 [24000.000] node61 simulate_spot_instance_add: 24000000
 [24045.000] node61 simulate_spot_instance_ready: 24045000
 [24240.000] node62 simulate_spot_instance_add: 24240000
 [24285.000] node62 simulate_spot_instance_ready: 24285000
-24285012.37672651 should reconfigure 16 4 5 4
-[24285.012] reconfiguration after iteration 465749
-[24285.012] simulate_rendezvous_start: 24285012.37672651
-[24285.012] simulate_rendezvous_restart: 24285012.37672651
-[24308.587] simulate_reconfigure: 24308586.500059843
-[24308.587] simulate_preparation: 24308586.500059843
-[24308.587] simulate_assign_coordinates
-[24308.587] 19 nodes completed rendezvous version 26, 4x4 configuration
+24300121.333333332 should reconfigure 16 4 5 4
+[24300.121] reconfiguration after iteration 446
+[24300.121] simulate_rendezvous_start: 24300121.333333332
+[24300.121] simulate_rendezvous_restart: 24300121.333333332
+[24341.801] simulate_reconfigure: 24341800.666666664
+[24341.801] simulate_preparation: 24341800.666666664
+[24341.801] simulate_assign_coordinates
+[24341.801] 19 nodes completed rendezvous version 25, 4x4 configuration
 [24360.000] node63 simulate_spot_instance_add: 24360000
 [24405.000] node63 simulate_spot_instance_ready: 24405000
-24405038.880061693 should reconfigure 16 4 5 4
-[24405.039] reconfiguration after iteration 467523
-[24405.039] simulate_rendezvous_start: 24405038.880061693
-[24405.039] simulate_rendezvous_restart: 24405038.880061693
-[24428.608] simulate_reconfigure: 24428608.27672836
-[24428.608] simulate_preparation: 24428608.27672836
-[24428.608] simulate_assign_coordinates
-[24428.608] 20 nodes completed rendezvous version 27, 5x4 configuration
-[24528.159] 470000 iterations complete
+24450540.666666664 should reconfigure 16 4 5 4
+[24450.541] reconfiguration after iteration 448
+[24450.541] simulate_rendezvous_start: 24450540.666666664
+[24450.541] simulate_rendezvous_restart: 24450540.666666664
+[24487.493] simulate_reconfigure: 24487493.333333332
+[24487.493] simulate_preparation: 24487493.333333332
+[24487.493] simulate_assign_coordinates
+[24487.493] 20 nodes completed rendezvous version 26, 5x4 configuration
 [24600.000] node64 simulate_spot_instance_add: 24600000
 [24645.000] node64 simulate_spot_instance_ready: 24645000
 [24720.000] node65 simulate_spot_instance_add: 24720000
 [24765.000] node65 simulate_spot_instance_ready: 24765000
 [24780.000] node55 simulate_spot_instance_remove: 24780000
-[24930.059] 480000 iterations complete
 [25260.000] node66 simulate_spot_instance_add: 25260000
 [25305.000] node66 simulate_spot_instance_ready: 25305000
-[25331.959] 490000 iterations complete
 [25500.000] node67 simulate_spot_instance_add: 25500000
 [25545.000] node67 simulate_spot_instance_ready: 25545000
 reconfigure 23 1
-[25545.006] simulate_rendezvous_start: 25545006.096765615
-[25545.006] simulate_rendezvous_restart: 25545006.096765615
-[25568.575] simulate_reconfigure: 25568575.493432283
-[25568.575] simulate_preparation: 25568575.493432283
-[25568.575] simulate_assign_coordinates
-[25568.575] 23 nodes completed rendezvous version 28, 5x4 configuration
-[25757.468] 500000 iterations complete
-[26159.368] 510000 iterations complete
-[26561.268] 520000 iterations complete
-[26963.168] 530000 iterations complete
-[27365.068] 540000 iterations complete
+[25572.623] simulate_rendezvous_start: 25572623.333333332
+[25572.623] simulate_rendezvous_restart: 25572623.333333332
+[25609.576] simulate_reconfigure: 25609576.0
+[25609.576] simulate_preparation: 25609576.0
+[25609.576] simulate_assign_coordinates
+[25609.576] 23 nodes completed rendezvous version 27, 5x4 configuration
 [27600.000] node68 simulate_spot_instance_add: 27600000
 [27645.000] node68 simulate_spot_instance_ready: 27645000
-27645032.033501573 should reconfigure 20 4 6 5
-[27645.032] reconfiguration after iteration 546966
-[27645.032] simulate_rendezvous_start: 27645032.033501573
-[27645.032] simulate_rendezvous_restart: 27645032.033501573
-[27668.598] simulate_reconfigure: 27668597.726834904
-[27668.598] simulate_preparation: 27668597.726834904
-[27668.598] simulate_assign_coordinates
-[27668.598] 24 nodes completed rendezvous version 29, 6x4 configuration
-[27756.826] 550000 iterations complete
+27659266.0 should reconfigure 20 4 6 5
+[27659.266] reconfiguration after iteration 525
+[27659.266] simulate_rendezvous_start: 27659266.0
+[27659.266] simulate_rendezvous_restart: 27659266.0
+[27692.515] simulate_reconfigure: 27692515.333333332
+[27692.515] simulate_preparation: 27692515.333333332
+[27692.515] simulate_assign_coordinates
+[27692.515] 24 nodes completed rendezvous version 28, 6x4 configuration
 [27900.000] node61 simulate_spot_instance_remove: 27900000
 reconfigure 23 1
-[27900.016] simulate_rendezvous_start: 27900016.366820674
-[27900.016] simulate_rendezvous_restart: 27900016.366820674
-[27923.586] simulate_reconfigure: 27923585.763487343
-[27923.586] simulate_preparation: 27923585.763487343
-[27923.586] simulate_assign_coordinates
-[27923.586] 23 nodes completed rendezvous version 30, 5x4 configuration
-[28127.630] 560000 iterations complete
-[28529.530] 570000 iterations complete
-[28931.430] 580000 iterations complete
+[27925.155] simulate_rendezvous_start: 27925155.333333332
+[27925.155] simulate_rendezvous_restart: 27925155.333333332
+[27962.108] simulate_reconfigure: 27962108.0
+[27962.108] simulate_preparation: 27962108.0
+[27962.108] simulate_assign_coordinates
+[27962.108] 23 nodes completed rendezvous version 29, 5x4 configuration
 [29100.000] node66 simulate_spot_instance_remove: 29100000
 [29280.000] node69 simulate_spot_instance_add: 29280000
 [29325.000] node69 simulate_spot_instance_ready: 29325000
 reconfigure 23 1
-[29325.011] simulate_rendezvous_start: 29325011.063534107
-[29325.011] simulate_rendezvous_restart: 29325011.063534107
-[29348.580] simulate_reconfigure: 29348580.460200775
-[29348.580] simulate_preparation: 29348580.460200775
-[29348.580] simulate_assign_coordinates
-[29348.580] 23 nodes completed rendezvous version 31, 5x4 configuration
-[29356.940] 590000 iterations complete
-[29758.840] 600000 iterations complete
+[29328.568] simulate_rendezvous_start: 29328568.0
+[29328.568] simulate_rendezvous_restart: 29328568.0
+[29365.521] simulate_reconfigure: 29365520.666666668
+[29365.521] simulate_preparation: 29365520.666666668
+[29365.521] simulate_assign_coordinates
+[29365.521] 23 nodes completed rendezvous version 30, 5x4 configuration
 [29820.000] node65 simulate_spot_instance_remove: 29820000
 [29940.000] node70 simulate_spot_instance_add: 29940000
 [29985.000] node70 simulate_spot_instance_ready: 29985000
 reconfigure 23 1
-[29985.029] simulate_rendezvous_start: 29985029.300222013
-[29985.029] simulate_rendezvous_restart: 29985029.300222013
-[30008.599] simulate_reconfigure: 30008598.69688868
-[30008.599] simulate_preparation: 30008598.69688868
-[30008.599] simulate_assign_coordinates
-[30008.599] 23 nodes completed rendezvous version 32, 5x4 configuration
+[30008.561] simulate_rendezvous_start: 30008560.666666668
+[30008.561] simulate_rendezvous_restart: 30008560.666666668
+[30045.513] simulate_reconfigure: 30045513.333333336
+[30045.513] simulate_preparation: 30045513.333333336
+[30045.513] simulate_assign_coordinates
+[30045.513] 23 nodes completed rendezvous version 31, 5x4 configuration
 [30180.000] node64 simulate_spot_instance_remove: 30180000
 [30180.000] node62 simulate_spot_instance_remove: 30180000
-[30184.350] 610000 iterations complete
 [30300.000] node71 simulate_spot_instance_add: 30300000
 [30345.000] node71 simulate_spot_instance_ready: 30345000
 reconfigure 22 2
-[30345.029] simulate_rendezvous_start: 30345029.186899908
-[30345.029] simulate_rendezvous_restart: 30345029.186899908
-[30368.599] simulate_reconfigure: 30368598.583566576
-[30368.599] simulate_preparation: 30368598.583566576
-[30368.599] simulate_assign_coordinates
-[30368.599] 22 nodes completed rendezvous version 33, 5x4 configuration
-[30609.859] 620000 iterations complete
+[30367.033] simulate_rendezvous_start: 30367033.333333336
+[30367.033] simulate_rendezvous_restart: 30367033.333333336
+[30403.986] simulate_reconfigure: 30403986.000000004
+[30403.986] simulate_preparation: 30403986.000000004
+[30403.986] simulate_assign_coordinates
+[30403.986] 22 nodes completed rendezvous version 32, 5x4 configuration
 [30660.000] node67 simulate_spot_instance_remove: 30660000
-[31011.759] 630000 iterations complete
 [31320.000] node72 simulate_spot_instance_add: 31320000
 [31365.000] node72 simulate_spot_instance_ready: 31365000
-[31413.659] 640000 iterations complete
 [31560.000] node73 simulate_spot_instance_add: 31560000
 [31605.000] node73 simulate_spot_instance_ready: 31605000
 reconfigure 23 1
-[31605.004] simulate_rendezvous_start: 31605003.743607834
-[31605.004] simulate_rendezvous_restart: 31605003.743607834
-[31628.573] simulate_reconfigure: 31628573.140274502
-[31628.573] simulate_preparation: 31628573.140274502
-[31628.573] simulate_assign_coordinates
-[31628.573] 23 nodes completed rendezvous version 34, 5x4 configuration
-[31839.169] 650000 iterations complete
-[32241.069] 660000 iterations complete
-[32642.969] 670000 iterations complete
+[31609.686] simulate_rendezvous_start: 31609686.000000004
+[31609.686] simulate_rendezvous_restart: 31609686.000000004
+[31646.639] simulate_reconfigure: 31646638.66666667
+[31646.639] simulate_preparation: 31646638.66666667
+[31646.639] simulate_assign_coordinates
+[31646.639] 23 nodes completed rendezvous version 33, 5x4 configuration
 [32820.000] node73 simulate_spot_instance_remove: 32820000
 [32940.000] node54 simulate_spot_instance_remove: 32940000
-[33044.869] 680000 iterations complete
 [33180.000] node71 simulate_spot_instance_remove: 33180000
 [33420.000] node74 simulate_spot_instance_add: 33420000
-[33446.769] 690000 iterations complete
 [33465.000] node74 simulate_spot_instance_ready: 33465000
 reconfigure 21 3
-[33465.015] simulate_rendezvous_start: 33465015.000335783
-[33465.015] simulate_rendezvous_restart: 33465015.000335783
-[33488.584] simulate_reconfigure: 33488584.39700245
-[33488.584] simulate_preparation: 33488584.39700245
-[33488.584] simulate_assign_coordinates
-[33488.584] 21 nodes completed rendezvous version 35, 5x4 configuration
-[33872.278] 700000 iterations complete
+[33495.379] simulate_rendezvous_start: 33495378.66666667
+[33495.379] simulate_rendezvous_restart: 33495378.66666667
+[33532.331] simulate_reconfigure: 33532331.33333334
+[33532.331] simulate_preparation: 33532331.33333334
+[33532.331] simulate_assign_coordinates
+[33532.331] 21 nodes completed rendezvous version 34, 5x4 configuration
 [33900.000] node52 simulate_spot_instance_remove: 33900000
 [34140.000] node75 simulate_spot_instance_add: 34140000
 [34185.000] node75 simulate_spot_instance_ready: 34185000
 [34260.000] node76 simulate_spot_instance_add: 34260000
-[34274.178] 710000 iterations complete
 [34305.000] node76 simulate_spot_instance_ready: 34305000
-[34676.078] 720000 iterations complete
 [34980.000] node63 simulate_spot_instance_remove: 34980000
 [34980.000] node49 simulate_spot_instance_remove: 34980000
 [35040.000] node77 simulate_spot_instance_add: 35040000
-[35077.978] 730000 iterations complete
 [35085.000] node77 simulate_spot_instance_ready: 35085000
 reconfigure 21 3
-[35085.012] simulate_rendezvous_start: 35085011.57691385
-[35085.012] simulate_rendezvous_restart: 35085011.57691385
-[35108.581] simulate_reconfigure: 35108580.97358052
-[35108.581] simulate_preparation: 35108580.97358052
-[35108.581] simulate_assign_coordinates
-[35108.581] 21 nodes completed rendezvous version 36, 5x4 configuration
-[35503.488] 740000 iterations complete
-[35905.388] 750000 iterations complete
-[36307.288] 760000 iterations complete
+[35099.741] simulate_rendezvous_start: 35099741.33333334
+[35099.741] simulate_rendezvous_restart: 35099741.33333334
+[35136.694] simulate_reconfigure: 35136694.00000001
+[35136.694] simulate_preparation: 35136694.00000001
+[35136.694] simulate_assign_coordinates
+[35136.694] 21 nodes completed rendezvous version 35, 5x4 configuration
 [36420.000] node75 simulate_spot_instance_remove: 36420000
 [36600.000] node69 simulate_spot_instance_remove: 36600000
-[36709.188] 770000 iterations complete
 [36720.000] node78 simulate_spot_instance_add: 36720000
 [36765.000] node78 simulate_spot_instance_ready: 36765000
 [36960.000] node79 simulate_spot_instance_add: 36960000
 [37005.000] node79 simulate_spot_instance_ready: 37005000
-[37111.088] 780000 iterations complete
 [37260.000] node40 simulate_spot_instance_remove: 37260000
 [37260.000] node53 simulate_spot_instance_remove: 37260000
-[37512.988] 790000 iterations complete
 [37560.000] node44 simulate_spot_instance_remove: 37560000
-[37914.888] 800000 iterations complete
 [38280.000] node68 simulate_spot_instance_remove: 38280000
-[38316.788] 810000 iterations complete
 [38520.000] node70 simulate_spot_instance_remove: 38520000
 [38520.000] node78 simulate_spot_instance_remove: 38520000
 [38520.000] node77 simulate_spot_instance_remove: 38520000
 reconfigure 14 9
-[38520.029] simulate_rendezvous_start: 38520028.74337814
-[38520.029] simulate_rendezvous_restart: 38520028.74337814
-[38543.611] simulate_reconfigure: 38543610.910044804
-[38543.611] simulate_preparation: 38543610.910044804
-[38543.611] simulate_assign_coordinates
-[38543.611] 14 nodes completed rendezvous version 37, 3x4 configuration
-[38640.000] node36 simulate_spot_instance_remove: 38640000
+[38552.844] simulate_rendezvous_start: 38552844.00000001
+[38552.844] simulate_rendezvous_restart: 38552844.00000001
+[38602.567] simulate_reconfigure: 38602566.66666667
+[38602.567] simulate_preparation: 38602566.66666667
+[38602.567] simulate_assign_coordinates
+[38602.567] 14 nodes completed rendezvous version 36, 3x4 configuration
 [38640.000] node37 simulate_spot_instance_remove: 38640000
+[38640.000] node36 simulate_spot_instance_remove: 38640000
 [38760.000] node76 simulate_spot_instance_remove: 38760000
-[38931.715] 820000 iterations complete
-[39716.715] 830000 iterations complete
-[40501.715] 840000 iterations complete
-[41286.715] 850000 iterations complete
-[42071.715] 860000 iterations complete
-[42856.715] 870000 iterations complete
-Skipping 116514 0.5124920768519311 865.9701226213149
-Skipping 116515 0.5190614592593384 865.9701226213149
-Skipping 315552 2.062478694443812 517.6255835995298
-Skipping 315553 2.069072907406775 517.6255835995298
-Skipping 784430 5.6124898786991535 517.6255835995096
-Skipping 784431 5.619084091662117 517.6255835995096
-Skipping 881602 6.362504303713098 693.4001152280343
-Skipping 881603 6.369067774083469 693.4001152280343
-Skipping 931498 6.745836771312919 693.4001152280343
-Skipping 931499 6.75240024168329 693.4001152280343
-Skipping 990600 7.095823862990448 865.9701226211529
-Skipping 990601 7.102393245397857 865.9701226211529
-Skipping 1179584 8.145825242648362 865.9701226211529
-Skipping 1179585 8.152394625055772 865.9701226211529
-Skipping 1211254 8.329163641728337 865.9701226211529
-Skipping 1211255 8.335733024135745 865.9701226211529
-Skipping 1227994 8.429163610249974 865.9701226211529
-Skipping 1227995 8.435732992657382 865.9701226211529
-Skipping 1289520 8.779156542668842 865.9701226211529
-Skipping 1289521 8.785725925076251 865.9701226211529
-Skipping 1380906 9.295826336204383 865.9701226211529
-Skipping 1380907 9.302395718611793 865.9701226211529
-Skipping 1460348 9.745825385253848 865.9701226214257
-Skipping 1460349 9.752394767661254 865.9701226214257
+Skipping 2 0.023355555555555556 845.1169188445667
+Skipping 3 0.031433333333333334 845.1169188445667
+Skipping 4 0.031433333333333334 845.1169188445667
+Skipping 5 0.03951111111111111 845.1169188445667
+Skipping 6 0.03951111111111111 845.1169188445667
+Skipping 7 0.04758888888888889 845.1169188445667
+Skipping 8 0.04758888888888889 845.1169188445667
+Skipping 9 0.05566666666666667 845.1169188445667
+Skipping 10 0.05566666666666667 845.1169188445667
+Skipping 11 0.06374444444444445 845.1169188445667
+Skipping 12 0.06374444444444445 845.1169188445667
+Skipping 13 0.07182222222222222 845.1169188445667
+Skipping 14 0.07182222222222222 845.1169188445667
+Skipping 15 0.0799 845.1169188445667
+Skipping 16 0.0799 845.1169188445667
+Skipping 17 0.08797777777777778 845.1169188445667
+Skipping 18 0.08797777777777778 845.1169188445667
+Skipping 19 0.09605555555555556 845.1169188445667
+Skipping 20 0.09605555555555556 845.1169188445667
+Skipping 21 0.10413333333333333 845.1169188445667
+Skipping 22 0.10413333333333333 845.1169188445667
+Skipping 23 0.11221111111111111 845.1169188445667
+Skipping 24 0.11221111111111111 845.1169188445667
+Skipping 25 0.12028888888888889 845.1169188445667
+Skipping 26 0.12028888888888889 845.1169188445667
+Skipping 27 0.12836666666666666 845.1169188445667
+Skipping 28 0.12836666666666666 845.1169188445667
+Skipping 29 0.13644444444444445 845.1169188445667
+Skipping 30 0.13644444444444445 845.1169188445667
+Skipping 31 0.14452222222222222 845.1169188445667
+Skipping 32 0.14452222222222222 845.1169188445667
+Skipping 33 0.1526 845.1169188445667
+Skipping 34 0.1526 845.1169188445667
+Skipping 35 0.16067777777777778 845.1169188445667
+Skipping 36 0.16067777777777778 845.1169188445667
+Skipping 37 0.16875555555555555 845.1169188445667
+Skipping 38 0.16875555555555555 845.1169188445667
+Skipping 39 0.17683333333333334 845.1169188445667
+Skipping 40 0.17683333333333334 845.1169188445667
+Skipping 41 0.1849111111111111 845.1169188445667
+Skipping 42 0.1849111111111111 845.1169188445667
+Skipping 43 0.19298888888888888 845.1169188445667
+Skipping 44 0.19298888888888888 845.1169188445667
+Skipping 45 0.20106666666666667 845.1169188445667
+Skipping 46 0.20106666666666667 845.1169188445667
+Skipping 47 0.20914444444444444 845.1169188445667
+Skipping 48 0.20914444444444444 845.1169188445667
+Skipping 49 0.21722222222222223 845.1169188445667
+Skipping 50 0.21722222222222223 845.1169188445667
+Skipping 51 0.2253 845.1169188445667
+Skipping 52 0.2253 845.1169188445667
+Skipping 53 0.23337777777777777 845.1169188445667
+Skipping 54 0.23337777777777777 845.1169188445667
+Skipping 55 0.24145555555555556 845.1169188445667
+Skipping 56 0.24145555555555556 845.1169188445667
+Skipping 57 0.24953333333333333 845.1169188445667
+Skipping 58 0.24953333333333333 845.1169188445667
+Skipping 59 0.2576111111111111 845.1169188445667
+Skipping 60 0.2576111111111111 845.1169188445667
+Skipping 61 0.26568888888888886 845.1169188445667
+Skipping 62 0.26568888888888886 845.1169188445667
+Skipping 63 0.27376666666666666 845.1169188445667
+Skipping 64 0.27376666666666666 845.1169188445667
+Skipping 65 0.28184444444444445 845.1169188445667
+Skipping 66 0.28184444444444445 845.1169188445667
+Skipping 67 0.28992222222222225 845.1169188445667
+Skipping 68 0.28992222222222225 845.1169188445667
+Skipping 69 0.298 845.1169188445667
+Skipping 70 0.298 845.1169188445667
+Skipping 71 0.3060777777777778 845.1169188445667
+Skipping 72 0.3060777777777778 845.1169188445667
+Skipping 73 0.3141555555555556 845.1169188445667
+Skipping 74 0.3141555555555556 845.1169188445667
+Skipping 75 0.3222333333333333 845.1169188445667
+Skipping 76 0.3222333333333333 845.1169188445667
+Skipping 77 0.3303111111111111 845.1169188445667
+Skipping 78 0.3303111111111111 845.1169188445667
+Skipping 79 0.3383888888888889 845.1169188445667
+Skipping 80 0.3383888888888889 845.1169188445667
+Skipping 81 0.34646666666666665 845.1169188445667
+Skipping 82 0.34646666666666665 845.1169188445667
+Skipping 83 0.35454444444444444 845.1169188445667
+Skipping 84 0.35454444444444444 845.1169188445667
+Skipping 85 0.36262222222222223 845.1169188445667
+Skipping 86 0.36262222222222223 845.1169188445667
+Skipping 87 0.3707 845.1169188445667
+Skipping 88 0.3707 845.1169188445667
+Skipping 89 0.37877777777777777 845.1169188445667
+Skipping 90 0.37877777777777777 845.1169188445667
+Skipping 91 0.38685555555555556 845.1169188445667
+Skipping 92 0.38685555555555556 845.1169188445667
+Skipping 93 0.39493333333333336 845.1169188445667
+Skipping 94 0.39493333333333336 845.1169188445667
+Skipping 95 0.4030111111111111 845.1169188445667
+Skipping 96 0.4030111111111111 845.1169188445667
+Skipping 97 0.4110888888888889 845.1169188445667
+Skipping 98 0.4110888888888889 845.1169188445667
+Skipping 99 0.4191666666666667 845.1169188445667
+Skipping 106 0.46791462962962965 509.57949738740984
+Skipping 107 0.4790785185185185 509.57949738740984
+Skipping 108 0.4790785185185185 509.57949738740984
+Skipping 109 0.49024240740740743 509.57949738740984
+Skipping 112 0.5014062962962963 174.54644628662652
+Skipping 113 0.5339987037037037 174.54644628662652
+Skipping 116 0.5451625925925926 509.57949738740984
+Skipping 117 0.5563264814814816 509.57949738740984
+Skipping 118 0.5563264814814816 509.57949738740984
+Skipping 119 0.5674903703703704 509.57949738740984
+Skipping 120 0.5674903703703704 509.57949738740984
+Skipping 121 0.5786542592592593 509.57949738740984
+Skipping 122 0.5786542592592593 509.57949738740984
+Skipping 123 0.5898181481481481 509.57949738740984
+Skipping 124 0.5898181481481481 509.57949738740984
+Skipping 125 0.6009820370370371 509.57949738740984
+Skipping 126 0.6009820370370371 509.57949738740984
+Skipping 127 0.612145925925926 509.57949738740984
+Skipping 128 0.612145925925926 509.57949738740984
+Skipping 129 0.6233098148148148 509.57949738740984
+Skipping 130 0.6233098148148148 509.57949738740984
+Skipping 131 0.6344737037037037 509.57949738740984
+Skipping 132 0.6344737037037037 509.57949738740984
+Skipping 133 0.6456375925925927 509.57949738740984
+Skipping 134 0.6456375925925927 509.57949738740984
+Skipping 135 0.6568014814814815 509.57949738740984
+Skipping 136 0.6568014814814815 509.57949738740984
+Skipping 137 0.6679653703703704 509.57949738740984
+Skipping 138 0.6679653703703704 509.57949738740984
+Skipping 139 0.6791292592592593 509.57949738740984
+Skipping 140 0.6791292592592593 509.57949738740984
+Skipping 141 0.6902931481481482 509.57949738740984
+Skipping 142 0.6902931481481482 509.57949738740984
+Skipping 143 0.7014570370370371 509.57949738740984
+Skipping 144 0.7014570370370371 509.57949738740984
+Skipping 145 0.712620925925926 509.57949738740984
+Skipping 146 0.712620925925926 509.57949738740984
+Skipping 147 0.7237848148148148 509.57949738740984
+Skipping 148 0.7237848148148148 509.57949738740984
+Skipping 149 0.7349487037037038 509.57949738740984
+Skipping 150 0.7349487037037038 509.57949738740984
+Skipping 151 0.7461125925925927 509.57949738740984
+Skipping 152 0.7461125925925927 509.57949738740984
+Skipping 153 0.7572764814814815 509.57949738740984
+Skipping 154 0.7572764814814815 509.57949738740984
+Skipping 155 0.7684403703703704 509.57949738740984
+Skipping 156 0.7684403703703704 509.57949738740984
+Skipping 157 0.7796042592592594 509.57949738740984
+Skipping 158 0.7796042592592594 509.57949738740984
+Skipping 159 0.7907681481481482 509.57949738740984
+Skipping 160 0.7907681481481482 509.57949738740984
+Skipping 161 0.8019320370370371 509.57949738740984
+Skipping 162 0.8019320370370371 509.57949738740984
+Skipping 163 0.8130959259259259 509.57949738740984
+Skipping 164 0.8130959259259259 509.57949738740984
+Skipping 165 0.8242598148148148 509.57949738740984
+Skipping 166 0.8242598148148148 509.57949738740984
+Skipping 167 0.8354237037037038 509.57949738740984
+Skipping 168 0.8354237037037038 509.57949738740984
+Skipping 169 0.8465875925925926 509.57949738740984
+Skipping 170 0.8465875925925926 509.57949738740984
+Skipping 171 0.8577514814814815 509.57949738740984
+Skipping 172 0.8577514814814815 509.57949738740984
+Skipping 173 0.8689153703703704 509.57949738740984
+Skipping 174 0.8689153703703704 509.57949738740984
+Skipping 175 0.8800792592592593 509.57949738740984
+Skipping 176 0.8800792592592593 509.57949738740984
+Skipping 177 0.8912431481481482 509.57949738740984
+Skipping 178 0.8912431481481482 509.57949738740984
+Skipping 179 0.9024070370370371 509.57949738740984
+Skipping 180 0.9024070370370371 509.57949738740984
+Skipping 181 0.9135709259259259 509.57949738740984
+Skipping 182 0.9135709259259259 509.57949738740984
+Skipping 183 0.9247348148148149 509.57949738740984
+Skipping 184 0.9247348148148149 509.57949738740984
+Skipping 185 0.9358987037037038 509.57949738740984
+Skipping 186 0.9358987037037038 509.57949738740984
+Skipping 187 0.9470625925925926 509.57949738740984
+Skipping 188 0.9470625925925926 509.57949738740984
+Skipping 189 0.9582264814814815 509.57949738740984
+Skipping 190 0.9582264814814815 509.57949738740984
+Skipping 191 0.9693903703703705 509.57949738740984
+Skipping 192 0.9693903703703705 509.57949738740984
+Skipping 193 0.9805542592592593 509.57949738740984
+Skipping 194 0.9805542592592593 509.57949738740984
+Skipping 195 0.9917181481481482 509.57949738740984
+Skipping 196 0.9917181481481482 509.57949738740984
+Skipping 197 1.002882037037037 509.57949738740984
+Skipping 198 1.002882037037037 509.57949738740984
+Skipping 199 1.014045925925926 509.57949738740984
+Skipping 200 1.014045925925926 509.57949738740984
+Skipping 201 1.0252098148148148 509.57949738740984
+Skipping 202 1.0252098148148148 509.57949738740984
+Skipping 203 1.0363737037037037 509.57949738740984
+Skipping 204 1.0363737037037037 509.57949738740984
+Skipping 205 1.0475375925925927 509.57949738740984
+Skipping 206 1.0475375925925927 509.57949738740984
+Skipping 207 1.0587014814814815 509.57949738740984
+Skipping 208 1.0587014814814815 509.57949738740984
+Skipping 209 1.0698653703703704 509.57949738740984
+Skipping 210 1.0698653703703704 509.57949738740984
+Skipping 211 1.0810292592592594 509.57949738740984
+Skipping 212 1.0810292592592594 509.57949738740984
+Skipping 213 1.0921931481481482 509.57949738740984
+Skipping 214 1.0921931481481482 509.57949738740984
+Skipping 215 1.1033570370370371 509.57949738740984
+Skipping 216 1.1033570370370371 509.57949738740984
+Skipping 217 1.1145209259259259 509.57949738740984
+Skipping 218 1.1145209259259259 509.57949738740984
+Skipping 219 1.1256848148148149 509.57949738740984
+Skipping 220 1.1256848148148149 509.57949738740984
+Skipping 221 1.1368487037037038 509.57949738740984
+Skipping 222 1.1368487037037038 509.57949738740984
+Skipping 223 1.1480125925925926 509.57949738740984
+Skipping 226 1.1591764814814816 509.5794973874039
+Skipping 227 1.1703403703703705 509.5794973874039
+Skipping 234 1.2500911111111113 156.53503184713375
+Skipping 235 1.271896666666667 156.53503184713375
+Skipping 236 1.271896666666667 156.53503184713375
+Skipping 237 1.2937022222222225 156.53503184713375
+Skipping 238 1.2937022222222225 156.53503184713375
+Skipping 239 1.315507777777778 156.53503184713375
+Skipping 240 1.315507777777778 156.53503184713375
+Skipping 241 1.3373133333333336 156.53503184713375
+Skipping 242 1.3373133333333336 156.53503184713375
+Skipping 243 1.3591188888888892 156.53503184713375
+Skipping 244 1.3591188888888892 156.53503184713375
+Skipping 245 1.3809244444444446 156.53503184713375
+Skipping 246 1.3809244444444446 156.53503184713375
+Skipping 247 1.4027300000000003 156.53503184713375
+Skipping 248 1.4027300000000003 156.53503184713375
+Skipping 249 1.4245355555555559 156.53503184713375
+Skipping 250 1.4245355555555559 156.53503184713375
+Skipping 251 1.4463411111111113 156.53503184713375
+Skipping 252 1.4463411111111113 156.53503184713375
+Skipping 253 1.468146666666667 156.53503184713375
+Skipping 254 1.468146666666667 156.53503184713375
+Skipping 255 1.4899522222222226 156.53503184713375
+Skipping 256 1.4899522222222226 156.53503184713375
+Skipping 257 1.511757777777778 156.53503184713375
+Skipping 258 1.511757777777778 156.53503184713375
+Skipping 259 1.5335633333333336 156.53503184713375
+Skipping 260 1.5335633333333336 156.53503184713375
+Skipping 261 1.5553688888888892 156.53503184713375
+Skipping 262 1.5553688888888892 156.53503184713375
+Skipping 263 1.5771744444444447 156.53503184713375
+Skipping 264 1.5771744444444447 156.53503184713375
+Skipping 265 1.5989800000000003 156.53503184713375
+Skipping 266 1.5989800000000003 156.53503184713375
+Skipping 267 1.620785555555556 156.53503184713375
+Skipping 268 1.620785555555556 156.53503184713375
+Skipping 269 1.6425911111111113 156.53503184713375
+Skipping 270 1.6425911111111113 156.53503184713375
+Skipping 271 1.664396666666667 156.53503184713375
+Skipping 272 1.664396666666667 156.53503184713375
+Skipping 273 1.6862022222222224 156.53503184713375
+Skipping 274 1.6862022222222224 156.53503184713375
+Skipping 275 1.708007777777778 156.53503184713375
+Skipping 276 1.708007777777778 156.53503184713375
+Skipping 277 1.7298133333333336 156.53503184713375
+Skipping 278 1.7298133333333336 156.53503184713375
+Skipping 279 1.751618888888889 156.53503184713375
+Skipping 280 1.751618888888889 156.53503184713375
+Skipping 281 1.7734244444444447 156.53503184713375
+Skipping 282 1.7734244444444447 156.53503184713375
+Skipping 283 1.7952300000000003 156.53503184713375
+Skipping 284 1.7952300000000003 156.53503184713375
+Skipping 285 1.8170355555555557 156.53503184713375
+Skipping 286 1.8170355555555557 156.53503184713375
+Skipping 287 1.8388411111111114 156.53503184713375
+Skipping 288 1.8388411111111114 156.53503184713375
+Skipping 289 1.860646666666667 156.53503184713375
+Skipping 290 1.860646666666667 156.53503184713375
+Skipping 291 1.8824522222222224 156.53503184713375
+Skipping 292 1.8824522222222224 156.53503184713375
+Skipping 293 1.904257777777778 156.53503184713375
+Skipping 294 1.904257777777778 156.53503184713375
+Skipping 295 1.9260633333333337 156.53503184713375
+Skipping 296 1.9260633333333337 156.53503184713375
+Skipping 297 1.947868888888889 156.53503184713375
+Skipping 298 1.947868888888889 156.53503184713375
+Skipping 299 1.9696744444444447 156.53503184713375
+Skipping 300 1.9696744444444447 156.53503184713375
+Skipping 301 1.9914800000000004 156.53503184713375
+Skipping 302 1.9914800000000004 156.53503184713375
+Skipping 303 2.013285555555556 156.53503184713375
+Skipping 304 2.013285555555556 156.53503184713375
+Skipping 305 2.0350911111111114 156.53503184713375
+Skipping 308 2.056896666666667 59.44195766308475
+Skipping 309 2.11431962962963 59.44195766308475
+Skipping 316 2.177908333333334 301.34265219790325
+Skipping 317 2.1930111111111112 301.34265219790325
+Skipping 318 2.1930111111111112 301.34265219790325
+Skipping 319 2.208113888888889 301.34265219790325
+Skipping 320 2.208113888888889 301.34265219790325
+Skipping 321 2.223216666666667 301.34265219790325
+Skipping 322 2.223216666666667 301.34265219790325
+Skipping 323 2.2383194444444445 301.34265219790325
+Skipping 324 2.2383194444444445 301.34265219790325
+Skipping 325 2.2534222222222224 301.34265219790325
+Skipping 326 2.2534222222222224 301.34265219790325
+Skipping 327 2.2685250000000003 301.34265219790325
+Skipping 328 2.2685250000000003 301.34265219790325
+Skipping 329 2.2836277777777783 301.34265219790325
+Skipping 330 2.2836277777777783 301.34265219790325
+Skipping 331 2.2987305555555557 301.34265219790325
+Skipping 332 2.2987305555555557 301.34265219790325
+Skipping 333 2.3138333333333336 301.34265219790325
+Skipping 336 2.3289361111111115 301.3426521979084
+Skipping 337 2.344038888888889 301.3426521979084
+Skipping 340 2.3591416666666665 301.34265219790325
+Skipping 341 2.3742444444444444 301.34265219790325
+Skipping 342 2.3742444444444444 301.34265219790325
+Skipping 343 2.3893472222222223 301.34265219790325
+Skipping 344 2.3893472222222223 301.34265219790325
+Skipping 345 2.40445 301.34265219790325
+Skipping 346 2.40445 301.34265219790325
+Skipping 347 2.4195527777777777 301.34265219790325
+Skipping 348 2.4195527777777777 301.34265219790325
+Skipping 349 2.4346555555555556 301.34265219790325
+Skipping 350 2.4346555555555556 301.34265219790325
+Skipping 351 2.4497583333333335 301.34265219790325
+Skipping 362 2.57917 301.34265219790325
+Skipping 363 2.594272777777778 301.34265219790325
+Skipping 364 2.594272777777778 301.34265219790325
+Skipping 365 2.6093755555555553 301.34265219790325
+Skipping 366 2.6093755555555553 301.34265219790325
+Skipping 367 2.6244783333333332 301.34265219790325
+Skipping 368 2.6244783333333332 301.34265219790325
+Skipping 369 2.639581111111111 301.34265219790325
+Skipping 370 2.639581111111111 301.34265219790325
+Skipping 371 2.654683888888889 301.34265219790325
+Skipping 372 2.654683888888889 301.34265219790325
+Skipping 373 2.6697866666666665 301.34265219790325
+Skipping 374 2.6697866666666665 301.34265219790325
+Skipping 375 2.6848894444444444 301.34265219790325
+Skipping 376 2.6848894444444444 301.34265219790325
+Skipping 377 2.6999922222222223 301.34265219790325
+Skipping 378 2.6999922222222223 301.34265219790325
+Skipping 379 2.715095 301.34265219790325
+Skipping 388 2.8227011111111113 301.34265219790325
+Skipping 389 2.837803888888889 301.34265219790325
+Skipping 390 2.837803888888889 301.34265219790325
+Skipping 391 2.8529066666666667 301.34265219790325
+Skipping 392 2.8529066666666667 301.34265219790325
+Skipping 393 2.8680094444444446 301.34265219790325
+Skipping 394 2.8680094444444446 301.34265219790325
+Skipping 395 2.883112222222222 301.34265219790325
+Skipping 396 2.883112222222222 301.34265219790325
+Skipping 397 2.898215 301.34265219790325
+Skipping 398 2.898215 301.34265219790325
+Skipping 399 2.913317777777778 301.34265219790325
+Skipping 400 2.913317777777778 301.34265219790325
+Skipping 401 2.9284205555555554 301.34265219790325
+Skipping 402 2.9284205555555554 301.34265219790325
+Skipping 403 2.9435233333333333 301.34265219790325
+Skipping 404 2.9435233333333333 301.34265219790325
+Skipping 405 2.958626111111111 301.34265219790325
+Skipping 406 2.958626111111111 301.34265219790325
+Skipping 407 2.973728888888889 301.34265219790325
+Skipping 408 2.973728888888889 301.34265219790325
+Skipping 409 2.9888316666666666 301.34265219790325
+Skipping 410 2.9888316666666666 301.34265219790325
+Skipping 411 3.0039344444444445 301.34265219790325
+Skipping 412 3.0039344444444445 301.34265219790325
+Skipping 413 3.0190372222222224 301.34265219790325
+Skipping 414 3.0190372222222224 301.34265219790325
+Skipping 415 3.03414 301.34265219790325
+Skipping 416 3.03414 301.34265219790325
+Skipping 417 3.0492427777777777 301.34265219790325
+Skipping 418 3.0492427777777777 301.34265219790325
+Skipping 419 3.0643455555555557 301.34265219790325
+Skipping 420 3.0643455555555557 301.34265219790325
+Skipping 421 3.079448333333333 301.34265219790325
+Skipping 422 3.079448333333333 301.34265219790325
+Skipping 423 3.094551111111111 301.34265219790325
+Skipping 424 3.094551111111111 301.34265219790325
+Skipping 425 3.109653888888889 301.34265219790325
+Skipping 426 3.109653888888889 301.34265219790325
+Skipping 427 3.124756666666667 301.34265219790325
+Skipping 428 3.124756666666667 301.34265219790325
+Skipping 429 3.1398594444444443 301.34265219790325
+Skipping 430 3.1398594444444443 301.34265219790325
+Skipping 431 3.1549622222222222 301.34265219790325
+Skipping 432 3.1549622222222222 301.34265219790325
+Skipping 433 3.170065 301.34265219790325
+Skipping 440 3.2576935185185185 156.53503184713375
+Skipping 441 3.279499074074074 156.53503184713375
+Skipping 442 3.279499074074074 156.53503184713375
+Skipping 443 3.3013046296296293 156.53503184713375
+Skipping 444 3.3013046296296293 156.53503184713375
+Skipping 445 3.323110185185185 156.53503184713375
+Skipping 446 3.323110185185185 156.53503184713375
+Skipping 447 3.3449157407407406 156.53503184713375
+Skipping 454 3.4596905555555555 82.16649949849548
+Skipping 455 3.487385 82.16649949849548
+Skipping 462 3.5725024074074074 156.53503184713375
+Skipping 463 3.594307962962963 156.53503184713375
+Skipping 470 3.657896666666667 301.34265219790325
+Skipping 471 3.6729994444444443 301.34265219790325
+Skipping 484 3.8242166666666666 301.34265219790325
+Skipping 485 3.8393194444444445 301.34265219790325
+Skipping 504 4.038231851851852 509.57949738740984
+Skipping 505 4.04939574074074 509.57949738740984
+Skipping 506 4.04939574074074 509.57949738740984
+Skipping 507 4.06055962962963 509.57949738740984
+Skipping 508 4.06055962962963 509.57949738740984
+Skipping 509 4.071723518518518 509.57949738740984
+Skipping 510 4.071723518518518 509.57949738740984
+Skipping 511 4.082887407407407 509.57949738740984
+Skipping 512 4.082887407407407 509.57949738740984
+Skipping 513 4.094051296296296 509.57949738740984
+Skipping 514 4.094051296296296 509.57949738740984
+Skipping 515 4.105215185185185 509.57949738740984
+Skipping 516 4.105215185185185 509.57949738740984
+Skipping 517 4.116379074074074 509.57949738740984
+Skipping 518 4.116379074074074 509.57949738740984
+Skipping 519 4.127542962962963 509.57949738740984
+Skipping 520 4.127542962962963 509.57949738740984
+Skipping 521 4.138706851851851 509.57949738740984
+Skipping 522 4.138706851851851 509.57949738740984
+Skipping 523 4.149870740740741 509.57949738740984
+Skipping 524 4.149870740740741 509.57949738740984
+Skipping 525 4.161034629629629 509.57949738740984
+Skipping 526 4.161034629629629 509.57949738740984
+Skipping 527 4.172198518518519 509.57949738740984
+Skipping 528 4.172198518518519 509.57949738740984
+Skipping 529 4.183362407407407 509.57949738740984
+Skipping 530 4.183362407407407 509.57949738740984
+Skipping 531 4.194526296296296 509.57949738740984
+Skipping 532 4.194526296296296 509.57949738740984
+Skipping 533 4.205690185185185 509.57949738740984
+Skipping 534 4.205690185185185 509.57949738740984
+Skipping 535 4.216854074074074 509.57949738740984
+Skipping 536 4.216854074074074 509.57949738740984
+Skipping 537 4.228017962962963 509.57949738740984
+Skipping 538 4.228017962962963 509.57949738740984
+Skipping 539 4.239181851851852 509.57949738740984
+Skipping 540 4.239181851851852 509.57949738740984
+Skipping 541 4.250345740740741 509.57949738740984
+Skipping 542 4.250345740740741 509.57949738740984
+Skipping 543 4.2615096296296295 509.57949738740984
+Skipping 544 4.2615096296296295 509.57949738740984
+Skipping 545 4.272673518518518 509.57949738740984
+Skipping 546 4.272673518518518 509.57949738740984
+Skipping 547 4.2838374074074075 509.57949738740984
+Skipping 548 4.2838374074074075 509.57949738740984
+Skipping 549 4.295001296296296 509.57949738740984
+Skipping 550 4.295001296296296 509.57949738740984
+Skipping 551 4.306165185185185 509.57949738740984
+Skipping 552 4.306165185185185 509.57949738740984
+Skipping 553 4.317329074074074 509.57949738740984
+Skipping 554 4.317329074074074 509.57949738740984
+Skipping 555 4.3284929629629625 509.57949738740984
+Skipping 556 4.3284929629629625 509.57949738740984
+Skipping 557 4.339656851851852 509.57949738740984
+Skipping 558 4.339656851851852 509.57949738740984
+Skipping 559 4.35082074074074 509.57949738740984
+Skipping 560 4.35082074074074 509.57949738740984
+Skipping 561 4.36198462962963 509.57949738740984
+Skipping 562 4.36198462962963 509.57949738740984
+Skipping 563 4.373148518518518 509.57949738740984
+Skipping 564 4.373148518518518 509.57949738740984
+Skipping 565 4.384312407407407 509.57949738740984
+Skipping 566 4.384312407407407 509.57949738740984
+Skipping 567 4.395476296296296 509.57949738740984
+Skipping 568 4.395476296296296 509.57949738740984
+Skipping 569 4.406640185185185 509.57949738740984
+Skipping 570 4.406640185185185 509.57949738740984
+Skipping 571 4.417804074074074 509.57949738740984
+Skipping 572 4.417804074074074 509.57949738740984
+Skipping 573 4.428967962962963 509.57949738740984
+Skipping 574 4.428967962962963 509.57949738740984
+Skipping 575 4.440131851851851 509.57949738740984
+Skipping 576 4.440131851851851 509.57949738740984
+Skipping 577 4.451295740740741 509.57949738740984
+Skipping 578 4.451295740740741 509.57949738740984
+Skipping 579 4.462459629629629 509.57949738740984
+Skipping 580 4.462459629629629 509.57949738740984
+Skipping 581 4.473623518518519 509.57949738740984
+Skipping 582 4.473623518518519 509.57949738740984
+Skipping 583 4.484787407407407 509.57949738740984
+Skipping 584 4.484787407407407 509.57949738740984
+Skipping 585 4.495951296296296 509.57949738740984
+Skipping 586 4.495951296296296 509.57949738740984
+Skipping 587 4.507115185185185 509.57949738740984
+Skipping 588 4.507115185185185 509.57949738740984
+Skipping 589 4.518279074074074 509.57949738740984
+Skipping 590 4.518279074074074 509.57949738740984
+Skipping 591 4.529442962962963 509.57949738740984
+Skipping 592 4.529442962962963 509.57949738740984
+Skipping 593 4.540606851851852 509.57949738740984
+Skipping 594 4.540606851851852 509.57949738740984
+Skipping 595 4.55177074074074 509.57949738740984
+Skipping 596 4.55177074074074 509.57949738740984
+Skipping 597 4.56293462962963 509.57949738740984
+Skipping 598 4.56293462962963 509.57949738740984
+Skipping 599 4.574098518518518 509.57949738740984
+Skipping 600 4.574098518518518 509.57949738740984
+Skipping 601 4.5852624074074075 509.57949738740984
+Skipping 602 4.5852624074074075 509.57949738740984
+Skipping 603 4.596426296296296 509.57949738740984
+Skipping 604 4.596426296296296 509.57949738740984
+Skipping 605 4.607590185185185 509.57949738740984
+Skipping 606 4.607590185185185 509.57949738740984
+Skipping 607 4.618754074074074 509.57949738740984
+Skipping 608 4.618754074074074 509.57949738740984
+Skipping 609 4.6299179629629625 509.57949738740984
+Skipping 610 4.6299179629629625 509.57949738740984
+Skipping 611 4.641081851851852 509.57949738740984
+Skipping 614 4.6522457407407405 509.57949738743343
+Skipping 615 4.663409629629629 509.57949738743343
+Skipping 618 4.6745735185185175 509.57949738740984
+Skipping 619 4.685737407407407 509.57949738740984
+Skipping 620 4.685737407407407 509.57949738740984
+Skipping 621 4.6969012962962955 509.57949738740984
+Skipping 622 4.6969012962962955 509.57949738740984
+Skipping 623 4.708065185185185 509.57949738740984
+Skipping 624 4.708065185185185 509.57949738740984
+Skipping 625 4.719229074074073 509.57949738740984
+Skipping 626 4.719229074074073 509.57949738740984
+Skipping 627 4.730392962962962 509.57949738740984
+Skipping 628 4.730392962962962 509.57949738740984
+Skipping 629 4.741556851851851 509.57949738740984
+Skipping 630 4.741556851851851 509.57949738740984
+Skipping 631 4.75272074074074 509.57949738740984
+Skipping 632 4.75272074074074 509.57949738740984
+Skipping 633 4.763884629629629 509.57949738740984
+Skipping 634 4.763884629629629 509.57949738740984
+Skipping 635 4.775048518518518 509.57949738740984
+Skipping 636 4.775048518518518 509.57949738740984
+Skipping 637 4.786212407407406 509.57949738740984
+Skipping 638 4.786212407407406 509.57949738740984
+Skipping 639 4.797376296296296 509.57949738740984
+Skipping 640 4.797376296296296 509.57949738740984
+Skipping 641 4.808540185185184 509.57949738740984
+Skipping 642 4.808540185185184 509.57949738740984
+Skipping 643 4.819704074074074 509.57949738740984
+Skipping 644 4.819704074074074 509.57949738740984
+Skipping 645 4.830867962962962 509.57949738740984
+Skipping 646 4.830867962962962 509.57949738740984
+Skipping 647 4.842031851851851 509.57949738740984
+Skipping 648 4.842031851851851 509.57949738740984
+Skipping 649 4.85319574074074 509.57949738740984
+Skipping 650 4.85319574074074 509.57949738740984
+Skipping 651 4.864359629629629 509.57949738740984
+Skipping 652 4.864359629629629 509.57949738740984
+Skipping 653 4.875523518518518 509.57949738740984
+Skipping 654 4.875523518518518 509.57949738740984
+Skipping 655 4.886687407407407 509.57949738740984
+Skipping 656 4.886687407407407 509.57949738740984
+Skipping 657 4.897851296296295 509.57949738740984
+Skipping 658 4.897851296296295 509.57949738740984
+Skipping 659 4.909015185185185 509.57949738740984
+Skipping 660 4.909015185185185 509.57949738740984
+Skipping 661 4.920179074074073 509.57949738740984
+Skipping 662 4.920179074074073 509.57949738740984
+Skipping 663 4.931342962962963 509.57949738740984
+Skipping 664 4.931342962962963 509.57949738740984
+Skipping 665 4.942506851851851 509.57949738740984
+Skipping 666 4.942506851851851 509.57949738740984
+Skipping 667 4.95367074074074 509.57949738740984
+Skipping 668 4.95367074074074 509.57949738740984
+Skipping 669 4.964834629629629 509.57949738740984
+Skipping 670 4.964834629629629 509.57949738740984
+Skipping 671 4.975998518518518 509.57949738740984
+Skipping 672 4.975998518518518 509.57949738740984
+Skipping 673 4.987162407407407 509.57949738740984
+Skipping 674 4.987162407407407 509.57949738740984
+Skipping 675 4.9983262962962955 509.57949738740984
+Skipping 676 4.9983262962962955 509.57949738740984
+Skipping 677 5.009490185185184 509.57949738740984
+Skipping 678 5.009490185185184 509.57949738740984
+Skipping 679 5.0206540740740735 509.57949738740984
+Skipping 680 5.0206540740740735 509.57949738740984
+Skipping 681 5.031817962962962 509.57949738740984
+Skipping 682 5.031817962962962 509.57949738740984
+Skipping 683 5.042981851851851 509.57949738740984
+Skipping 684 5.042981851851851 509.57949738740984
+Skipping 685 5.05414574074074 509.57949738740984
+Skipping 686 5.05414574074074 509.57949738740984
+Skipping 687 5.0653096296296285 509.57949738740984
+Skipping 688 5.0653096296296285 509.57949738740984
+Skipping 689 5.076473518518518 509.57949738740984
+Skipping 690 5.076473518518518 509.57949738740984
+Skipping 691 5.087637407407406 509.57949738740984
+Skipping 692 5.087637407407406 509.57949738740984
+Skipping 693 5.098801296296296 509.57949738740984
+Skipping 694 5.098801296296296 509.57949738740984
+Skipping 695 5.109965185185184 509.57949738740984
+Skipping 696 5.109965185185184 509.57949738740984
+Skipping 697 5.121129074074074 509.57949738740984
+Skipping 698 5.121129074074074 509.57949738740984
+Skipping 699 5.132292962962962 509.57949738740984
+Skipping 700 5.132292962962962 509.57949738740984
+Skipping 701 5.143456851851851 509.57949738740984
+Skipping 702 5.143456851851851 509.57949738740984
+Skipping 703 5.15462074074074 509.57949738740984
+Skipping 714 5.276154629629629 301.34265219790325
+Skipping 715 5.291257407407406 301.34265219790325
+Skipping 716 5.291257407407406 301.34265219790325
+Skipping 717 5.306360185185184 301.34265219790325
+Skipping 718 5.306360185185184 301.34265219790325
+Skipping 719 5.321462962962962 301.34265219790325
+Skipping 720 5.321462962962962 301.34265219790325
+Skipping 721 5.33656574074074 301.34265219790325
+Skipping 722 5.33656574074074 301.34265219790325
+Skipping 723 5.351668518518518 301.34265219790325
+Skipping 724 5.351668518518518 301.34265219790325
+Skipping 725 5.366771296296296 301.34265219790325
+Skipping 726 5.366771296296296 301.34265219790325
+Skipping 727 5.381874074074074 301.34265219790325
+Skipping 734 5.469502592592592 156.53503184713375
+Skipping 735 5.491308148148148 156.53503184713375
+Skipping 736 5.491308148148148 156.53503184713375
+Skipping 737 5.513113703703703 156.53503184713375
+Skipping 738 5.513113703703703 156.53503184713375
+Skipping 739 5.534919259259259 156.53503184713375
+Skipping 740 5.534919259259259 156.53503184713375
+Skipping 741 5.556724814814815 156.53503184713375
+Skipping 742 5.556724814814815 156.53503184713375
+Skipping 743 5.57853037037037 156.53503184713375
+Skipping 750 5.666158888888889 301.34265219790325
+Skipping 751 5.681261666666667 301.34265219790325
+Skipping 752 5.681261666666667 301.34265219790325
+Skipping 753 5.696364444444445 301.34265219790325
+Skipping 754 5.696364444444445 301.34265219790325
+Skipping 755 5.711467222222222 301.34265219790325
+Skipping 756 5.711467222222222 301.34265219790325
+Skipping 757 5.72657 301.34265219790325
+Skipping 758 5.72657 301.34265219790325
+Skipping 759 5.741672777777778 301.34265219790325
+Skipping 760 5.741672777777778 301.34265219790325
+Skipping 761 5.7567755555555555 301.34265219790325
+Skipping 762 5.7567755555555555 301.34265219790325
+Skipping 763 5.771878333333333 301.34265219790325
+Skipping 764 5.771878333333333 301.34265219790325
+Skipping 765 5.786981111111111 301.34265219790325
+Skipping 766 5.786981111111111 301.34265219790325
+Skipping 767 5.802083888888889 301.34265219790325
+Skipping 768 5.802083888888889 301.34265219790325
+Skipping 769 5.817186666666666 301.34265219790325
+Skipping 770 5.817186666666666 301.34265219790325
+Skipping 771 5.832289444444444 301.34265219790325
+Skipping 772 5.832289444444444 301.34265219790325
+Skipping 773 5.847392222222222 301.34265219790325
+Skipping 774 5.847392222222222 301.34265219790325
+Skipping 775 5.862495 301.34265219790325
+Skipping 776 5.862495 301.34265219790325
+Skipping 777 5.877597777777778 301.34265219790325
+Skipping 778 5.877597777777778 301.34265219790325
+Skipping 779 5.892700555555556 301.34265219790325
+Skipping 780 5.892700555555556 301.34265219790325
+Skipping 781 5.907803333333334 301.34265219790325
+Skipping 782 5.907803333333334 301.34265219790325
+Skipping 783 5.922906111111111 301.34265219790325
+Skipping 784 5.922906111111111 301.34265219790325
+Skipping 785 5.938008888888889 301.34265219790325
+Skipping 786 5.938008888888889 301.34265219790325
+Skipping 787 5.953111666666667 301.34265219790325
+Skipping 788 5.953111666666667 301.34265219790325
+Skipping 789 5.9682144444444445 301.34265219790325
+Skipping 790 5.9682144444444445 301.34265219790325
+Skipping 791 5.983317222222222 301.34265219790325
+Skipping 792 5.983317222222222 301.34265219790325
+Skipping 793 5.99842 301.34265219790325
+Skipping 794 5.99842 301.34265219790325
+Skipping 795 6.013522777777778 301.34265219790325
+Skipping 796 6.013522777777778 301.34265219790325
+Skipping 797 6.028625555555555 301.34265219790325
+Skipping 798 6.028625555555555 301.34265219790325
+Skipping 799 6.043728333333333 301.34265219790325
+Skipping 800 6.043728333333333 301.34265219790325
+Skipping 801 6.058831111111111 301.34265219790325
+Skipping 802 6.058831111111111 301.34265219790325
+Skipping 803 6.073933888888889 301.34265219790325
+Skipping 804 6.073933888888889 301.34265219790325
+Skipping 805 6.089036666666667 301.34265219790325
+Skipping 806 6.089036666666667 301.34265219790325
+Skipping 807 6.104139444444445 301.34265219790325
+Skipping 808 6.104139444444445 301.34265219790325
+Skipping 809 6.119242222222222 301.34265219790325
+Skipping 810 6.119242222222222 301.34265219790325
+Skipping 811 6.134345 301.34265219790325
+Skipping 812 6.134345 301.34265219790325
+Skipping 813 6.149447777777778 301.34265219790325
+Skipping 814 6.149447777777778 301.34265219790325
+Skipping 815 6.1645505555555555 301.34265219790325
+Skipping 816 6.1645505555555555 301.34265219790325
+Skipping 817 6.179653333333333 301.34265219790325
+Skipping 818 6.179653333333333 301.34265219790325
+Skipping 819 6.194756111111111 301.34265219790325
+Skipping 820 6.194756111111111 301.34265219790325
+Skipping 821 6.209858888888889 301.34265219790325
+Skipping 822 6.209858888888889 301.34265219790325
+Skipping 823 6.224961666666666 301.34265219790325
+Skipping 824 6.224961666666666 301.34265219790325
+Skipping 825 6.240064444444444 301.34265219790325
+Skipping 826 6.240064444444444 301.34265219790325
+Skipping 827 6.255167222222222 301.34265219790325
+Skipping 828 6.255167222222222 301.34265219790325
+Skipping 829 6.27027 301.34265219790325
+Skipping 830 6.27027 301.34265219790325
+Skipping 831 6.285372777777778 301.34265219790325
+Skipping 832 6.285372777777778 301.34265219790325
+Skipping 833 6.300475555555556 301.34265219790325
+Skipping 834 6.300475555555556 301.34265219790325
+Skipping 835 6.315578333333334 301.34265219790325
+Skipping 836 6.315578333333334 301.34265219790325
+Skipping 837 6.330681111111111 301.34265219790325
+Skipping 838 6.330681111111111 301.34265219790325
+Skipping 839 6.345783888888889 301.34265219790325
+Skipping 840 6.345783888888889 301.34265219790325
+Skipping 841 6.360886666666667 301.34265219790325
+Skipping 844 6.3759894444444445 170.57900800977498
+Skipping 845 6.402669814814814 170.57900800977498
+Skipping 848 6.417772592592592 301.34265219790325
+Skipping 849 6.43287537037037 301.34265219790325
+Skipping 850 6.43287537037037 301.34265219790325
+Skipping 851 6.447978148148148 301.34265219790325
+Skipping 852 6.447978148148148 301.34265219790325
+Skipping 853 6.463080925925926 301.34265219790325
+Skipping 854 6.463080925925926 301.34265219790325
+Skipping 855 6.478183703703704 301.34265219790325
+Skipping 856 6.478183703703704 301.34265219790325
+Skipping 857 6.493286481481481 301.34265219790325
+Skipping 858 6.493286481481481 301.34265219790325
+Skipping 859 6.508389259259259 301.34265219790325
+Skipping 860 6.508389259259259 301.34265219790325
+Skipping 861 6.523492037037037 301.34265219790325
+Skipping 862 6.523492037037037 301.34265219790325
+Skipping 863 6.5385948148148145 301.34265219790325
+Skipping 864 6.5385948148148145 301.34265219790325
+Skipping 865 6.553697592592592 301.34265219790325
+Skipping 866 6.553697592592592 301.34265219790325
+Skipping 867 6.56880037037037 301.34265219790325
+Skipping 868 6.56880037037037 301.34265219790325
+Skipping 869 6.583903148148147 301.34265219790325
+Skipping 870 6.583903148148147 301.34265219790325
+Skipping 871 6.599005925925925 301.34265219790325
+Skipping 872 6.599005925925925 301.34265219790325
+Skipping 873 6.614108703703703 301.34265219790325
+Skipping 874 6.614108703703703 301.34265219790325
+Skipping 875 6.629211481481481 301.34265219790325
+Skipping 876 6.629211481481481 301.34265219790325
+Skipping 877 6.644314259259259 301.34265219790325
+Skipping 878 6.644314259259259 301.34265219790325
+Skipping 879 6.659417037037037 301.34265219790325
+Skipping 880 6.659417037037037 301.34265219790325
+Skipping 881 6.674519814814815 301.34265219790325
+Skipping 882 6.674519814814815 301.34265219790325
+Skipping 883 6.689622592592592 301.34265219790325
+Skipping 884 6.689622592592592 301.34265219790325
+Skipping 885 6.70472537037037 301.34265219790325
+Skipping 886 6.70472537037037 301.34265219790325
+Skipping 887 6.719828148148148 301.34265219790325
+Skipping 888 6.719828148148148 301.34265219790325
+Skipping 889 6.734930925925926 301.34265219790325
+Skipping 892 6.7500337037037035 170.57900800977498
+Skipping 893 6.776714074074073 170.57900800977498
+Skipping 900 6.824409259259259 509.57949738740984
+Skipping 901 6.835573148148148 509.57949738740984
+Skipping 902 6.835573148148148 509.57949738740984
+Skipping 903 6.846737037037037 509.57949738740984
+Skipping 904 6.846737037037037 509.57949738740984
+Skipping 905 6.857900925925925 509.57949738740984
+Skipping 906 6.857900925925925 509.57949738740984
+Skipping 907 6.869064814814815 509.57949738740984
+Skipping 908 6.869064814814815 509.57949738740984
+Skipping 909 6.880228703703703 509.57949738740984
+Skipping 910 6.880228703703703 509.57949738740984
+Skipping 911 6.8913925925925925 509.57949738740984
+Skipping 912 6.8913925925925925 509.57949738740984
+Skipping 913 6.902556481481481 509.57949738740984
+Skipping 914 6.902556481481481 509.57949738740984
+Skipping 915 6.9137203703703705 509.57949738740984
+Skipping 916 6.9137203703703705 509.57949738740984
+Skipping 917 6.924884259259259 509.57949738740984
+Skipping 918 6.924884259259259 509.57949738740984
+Skipping 919 6.9360481481481475 509.57949738740984
+Skipping 920 6.9360481481481475 509.57949738740984
+Skipping 921 6.947212037037037 509.57949738740984
+Skipping 922 6.947212037037037 509.57949738740984
+Skipping 923 6.9583759259259255 509.57949738740984
+Skipping 924 6.9583759259259255 509.57949738740984
+Skipping 925 6.969539814814815 509.57949738740984
+Skipping 926 6.969539814814815 509.57949738740984
+Skipping 927 6.980703703703703 509.57949738740984
+Skipping 928 6.980703703703703 509.57949738740984
+Skipping 929 6.991867592592592 509.57949738740984
+Skipping 930 6.991867592592592 509.57949738740984
+Skipping 931 7.003031481481481 509.57949738740984
+Skipping 932 7.003031481481481 509.57949738740984
+Skipping 933 7.01419537037037 509.57949738740984
+Skipping 934 7.01419537037037 509.57949738740984
+Skipping 935 7.025359259259259 509.57949738740984
+Skipping 936 7.025359259259259 509.57949738740984
+Skipping 937 7.036523148148148 509.57949738740984
+Skipping 938 7.036523148148148 509.57949738740984
+Skipping 939 7.047687037037036 509.57949738740984
+Skipping 940 7.047687037037036 509.57949738740984
+Skipping 941 7.058850925925926 509.57949738740984
+Skipping 942 7.058850925925926 509.57949738740984
+Skipping 943 7.070014814814814 509.57949738740984
+Skipping 944 7.070014814814814 509.57949738740984
+Skipping 945 7.081178703703704 509.57949738740984
+Skipping 948 7.092342592592592 174.54644628662479
+Skipping 949 7.124935 174.54644628662479
+Skipping 952 7.136098888888889 509.57949738740984
+Skipping 953 7.147262777777778 509.57949738740984
+Skipping 954 7.147262777777778 509.57949738740984
+Skipping 955 7.158426666666666 509.57949738740984
+Skipping 956 7.158426666666666 509.57949738740984
+Skipping 957 7.169590555555556 509.57949738740984
+Skipping 958 7.169590555555556 509.57949738740984
+Skipping 959 7.180754444444444 509.57949738740984
+Skipping 960 7.180754444444444 509.57949738740984
+Skipping 961 7.191918333333334 509.57949738740984
+Skipping 962 7.191918333333334 509.57949738740984
+Skipping 963 7.203082222222222 509.57949738740984
+Skipping 964 7.203082222222222 509.57949738740984
+Skipping 965 7.214246111111111 509.57949738740984
+Skipping 966 7.214246111111111 509.57949738740984
+Skipping 967 7.22541 509.57949738740984
+Skipping 968 7.22541 509.57949738740984
+Skipping 969 7.236573888888889 509.57949738740984
+Skipping 970 7.236573888888889 509.57949738740984
+Skipping 971 7.247737777777778 509.57949738740984
+Skipping 972 7.247737777777778 509.57949738740984
+Skipping 973 7.258901666666667 509.57949738740984
+Skipping 974 7.258901666666667 509.57949738740984
+Skipping 975 7.270065555555555 509.57949738740984
+Skipping 976 7.270065555555555 509.57949738740984
+Skipping 977 7.2812294444444445 509.57949738740984
+Skipping 978 7.2812294444444445 509.57949738740984
+Skipping 979 7.292393333333333 509.57949738740984
+Skipping 980 7.292393333333333 509.57949738740984
+Skipping 981 7.3035572222222225 509.57949738740984
+Skipping 982 7.3035572222222225 509.57949738740984
+Skipping 983 7.314721111111111 509.57949738740984
+Skipping 984 7.314721111111111 509.57949738740984
+Skipping 985 7.325885 509.57949738740984
+Skipping 986 7.325885 509.57949738740984
+Skipping 987 7.337048888888889 509.57949738740984
+Skipping 988 7.337048888888889 509.57949738740984
+Skipping 989 7.3482127777777775 509.57949738740984
+Skipping 990 7.3482127777777775 509.57949738740984
+Skipping 991 7.359376666666667 509.57949738740984
+Skipping 992 7.359376666666667 509.57949738740984
+Skipping 993 7.370540555555555 509.57949738740984
+Skipping 994 7.370540555555555 509.57949738740984
+Skipping 995 7.381704444444445 509.57949738740984
+Skipping 996 7.381704444444445 509.57949738740984
+Skipping 997 7.392868333333333 509.57949738740984
+Skipping 998 7.392868333333333 509.57949738740984
+Skipping 999 7.404032222222222 509.57949738740984
+Skipping 1000 7.404032222222222 509.57949738740984
+Skipping 1001 7.415196111111111 509.57949738740984
+Skipping 1002 7.415196111111111 509.57949738740984
+Skipping 1003 7.42636 509.57949738740984
+Skipping 1004 7.42636 509.57949738740984
+Skipping 1005 7.437523888888889 509.57949738740984
+Skipping 1006 7.437523888888889 509.57949738740984
+Skipping 1007 7.448687777777778 509.57949738740984
+Skipping 1008 7.448687777777778 509.57949738740984
+Skipping 1009 7.459851666666666 509.57949738740984
+Skipping 1010 7.459851666666666 509.57949738740984
+Skipping 1011 7.471015555555556 509.57949738740984
+Skipping 1012 7.471015555555556 509.57949738740984
+Skipping 1013 7.482179444444444 509.57949738740984
+Skipping 1014 7.482179444444444 509.57949738740984
+Skipping 1015 7.493343333333334 509.57949738740984
+Skipping 1016 7.493343333333334 509.57949738740984
+Skipping 1017 7.504507222222222 509.57949738740984
+Skipping 1018 7.504507222222222 509.57949738740984
+Skipping 1019 7.515671111111111 509.57949738740984
+Skipping 1020 7.515671111111111 509.57949738740984
+Skipping 1021 7.526835 509.57949738740984
+Skipping 1022 7.526835 509.57949738740984
+Skipping 1023 7.537998888888889 509.57949738740984
+Skipping 1024 7.537998888888889 509.57949738740984
+Skipping 1025 7.549162777777778 509.57949738740984
+Skipping 1026 7.549162777777778 509.57949738740984
+Skipping 1027 7.560326666666667 509.57949738740984
+Skipping 1028 7.560326666666667 509.57949738740984
+Skipping 1029 7.571490555555555 509.57949738740984
+Skipping 1030 7.571490555555555 509.57949738740984
+Skipping 1031 7.582654444444445 509.57949738740984
+Skipping 1032 7.582654444444445 509.57949738740984
+Skipping 1033 7.593818333333333 509.57949738740984
+Skipping 1034 7.593818333333333 509.57949738740984
+Skipping 1035 7.6049822222222225 509.57949738740984
+Skipping 1036 7.6049822222222225 509.57949738740984
+Skipping 1037 7.616146111111111 509.57949738740984
+Skipping 1038 7.616146111111111 509.57949738740984
+Skipping 1039 7.62731 509.57949738740984
+Skipping 1040 7.62731 509.57949738740984
+Skipping 1041 7.638473888888889 509.57949738740984
+Skipping 1042 7.638473888888889 509.57949738740984
+Skipping 1043 7.6496377777777775 509.57949738740984
+Skipping 1044 7.6496377777777775 509.57949738740984
+Skipping 1045 7.660801666666667 509.57949738740984
+Skipping 1046 7.660801666666667 509.57949738740984
+Skipping 1047 7.6719655555555555 509.57949738740984
+Skipping 1054 7.708520925925925 845.1169188445667
+Skipping 1055 7.716598703703704 845.1169188445667
+Skipping 1056 7.716598703703704 845.1169188445667
+Skipping 1057 7.724676481481481 845.1169188445667
+Skipping 1058 7.724676481481481 845.1169188445667
+Skipping 1059 7.732754259259259 845.1169188445667
+Skipping 1060 7.732754259259259 845.1169188445667
+Skipping 1061 7.740832037037037 845.1169188445667
+Skipping 1068 7.78958 509.57949738740984
+Skipping 1069 7.8007438888888885 509.57949738740984
+Skipping 1070 7.8007438888888885 509.57949738740984
+Skipping 1071 7.811907777777778 509.57949738740984
+Skipping 1072 7.811907777777778 509.57949738740984
+Skipping 1073 7.823071666666666 509.57949738740984
+Skipping 1074 7.823071666666666 509.57949738740984
+Skipping 1075 7.834235555555556 509.57949738740984
+Skipping 1076 7.834235555555556 509.57949738740984
+Skipping 1077 7.845399444444444 509.57949738740984
+Skipping 1078 7.845399444444444 509.57949738740984
+Skipping 1079 7.856563333333333 509.57949738740984
+Skipping 1080 7.856563333333333 509.57949738740984
+Skipping 1081 7.867727222222222 509.57949738740984
+Skipping 1082 7.867727222222222 509.57949738740984
+Skipping 1083 7.878891111111111 509.57949738740984
+Skipping 1084 7.878891111111111 509.57949738740984
+Skipping 1085 7.890055 509.57949738740984
+Skipping 1086 7.890055 509.57949738740984
+Skipping 1087 7.901218888888889 509.57949738740984
+Skipping 1088 7.901218888888889 509.57949738740984
+Skipping 1089 7.912382777777778 509.57949738740984
+Skipping 1090 7.912382777777778 509.57949738740984
+Skipping 1091 7.923546666666667 509.57949738740984
+Skipping 1092 7.923546666666667 509.57949738740984
+Skipping 1093 7.934710555555555 509.57949738740984
+Skipping 1094 7.934710555555555 509.57949738740984
+Skipping 1095 7.945874444444445 509.57949738740984
+Skipping 1096 7.945874444444445 509.57949738740984
+Skipping 1097 7.957038333333333 509.57949738740984
+Skipping 1098 7.957038333333333 509.57949738740984
+Skipping 1099 7.968202222222223 509.57949738740984
+Skipping 1100 7.968202222222223 509.57949738740984
+Skipping 1101 7.979366111111111 509.57949738740984
+Skipping 1102 7.979366111111111 509.57949738740984
+Skipping 1103 7.99053 509.57949738740984
+Skipping 1104 7.99053 509.57949738740984
+Skipping 1105 8.001693888888889 509.57949738740984
+Skipping 1106 8.001693888888889 509.57949738740984
+Skipping 1107 8.012857777777779 509.57949738740984
+Skipping 1108 8.012857777777779 509.57949738740984
+Skipping 1109 8.024021666666666 509.57949738740984
+Skipping 1110 8.024021666666666 509.57949738740984
+Skipping 1111 8.035185555555556 509.57949738740984
+Skipping 1112 8.035185555555556 509.57949738740984
+Skipping 1113 8.046349444444445 509.57949738740984
+Skipping 1114 8.046349444444445 509.57949738740984
+Skipping 1115 8.057513333333333 509.57949738740984
+Skipping 1116 8.057513333333333 509.57949738740984
+Skipping 1117 8.068677222222222 509.57949738740984
+Skipping 1118 8.068677222222222 509.57949738740984
+Skipping 1119 8.079841111111111 509.57949738740984
+Skipping 1120 8.079841111111111 509.57949738740984
+Skipping 1121 8.091005 509.57949738740984
+Skipping 1122 8.091005 509.57949738740984
+Skipping 1123 8.102168888888889 509.57949738740984
+Skipping 1124 8.102168888888889 509.57949738740984
+Skipping 1125 8.113332777777778 509.57949738740984
+Skipping 1126 8.113332777777778 509.57949738740984
+Skipping 1127 8.124496666666667 509.57949738740984
+Skipping 1130 8.135660555555555 174.54644628662479
+Skipping 1131 8.168252962962963 174.54644628662479
+Skipping 1134 8.179416851851853 509.57949738740984
+Skipping 1135 8.19058074074074 509.57949738740984
+Skipping 1136 8.19058074074074 509.57949738740984
+Skipping 1137 8.20174462962963 509.57949738740984
+Skipping 1138 8.20174462962963 509.57949738740984
+Skipping 1139 8.21290851851852 509.57949738740984
+Skipping 1140 8.21290851851852 509.57949738740984
+Skipping 1141 8.224072407407407 509.57949738740984
+Skipping 1142 8.224072407407407 509.57949738740984
+Skipping 1143 8.235236296296296 509.57949738740984
+Skipping 1144 8.235236296296296 509.57949738740984
+Skipping 1145 8.246400185185186 509.57949738740984
+Skipping 1146 8.246400185185186 509.57949738740984
+Skipping 1147 8.257564074074075 509.57949738740984
+Skipping 1148 8.257564074074075 509.57949738740984
+Skipping 1149 8.268727962962963 509.57949738740984
+Skipping 1150 8.268727962962963 509.57949738740984
+Skipping 1151 8.279891851851852 509.57949738740984
+Skipping 1152 8.279891851851852 509.57949738740984
+Skipping 1153 8.291055740740742 509.57949738740984
+Skipping 1154 8.291055740740742 509.57949738740984
+Skipping 1155 8.30221962962963 509.57949738740984
+Skipping 1156 8.30221962962963 509.57949738740984
+Skipping 1157 8.313383518518519 509.57949738740984
+Skipping 1160 8.324547407407408 174.54644628662479
+Skipping 1161 8.357139814814815 174.54644628662479
+Skipping 1164 8.368303703703704 509.57949738740984
+Skipping 1165 8.379467592592594 509.57949738740984
+Skipping 1166 8.379467592592594 509.57949738740984
+Skipping 1167 8.390631481481481 509.57949738740984
+Skipping 1168 8.390631481481481 509.57949738740984
+Skipping 1169 8.40179537037037 509.57949738740984
+Skipping 1170 8.40179537037037 509.57949738740984
+Skipping 1171 8.41295925925926 509.57949738740984
+Skipping 1174 8.42412314814815 174.54644628662479
+Skipping 1175 8.456715555555556 174.54644628662479
+Skipping 1178 8.467879444444446 509.57949738740984
+Skipping 1179 8.479043333333335 509.57949738740984
+Skipping 1180 8.479043333333335 509.57949738740984
+Skipping 1181 8.490207222222223 509.57949738740984
+Skipping 1182 8.490207222222223 509.57949738740984
+Skipping 1183 8.501371111111112 509.57949738740984
+Skipping 1184 8.501371111111112 509.57949738740984
+Skipping 1185 8.512535000000002 509.57949738740984
+Skipping 1186 8.512535000000002 509.57949738740984
+Skipping 1187 8.52369888888889 509.57949738740984
+Skipping 1188 8.52369888888889 509.57949738740984
+Skipping 1189 8.534862777777779 509.57949738740984
+Skipping 1190 8.534862777777779 509.57949738740984
+Skipping 1191 8.546026666666668 509.57949738740984
+Skipping 1192 8.546026666666668 509.57949738740984
+Skipping 1193 8.557190555555557 509.57949738740984
+Skipping 1194 8.557190555555557 509.57949738740984
+Skipping 1195 8.568354444444445 509.57949738740984
+Skipping 1196 8.568354444444445 509.57949738740984
+Skipping 1197 8.579518333333334 509.57949738740984
+Skipping 1198 8.579518333333334 509.57949738740984
+Skipping 1199 8.590682222222224 509.57949738740984
+Skipping 1200 8.590682222222224 509.57949738740984
+Skipping 1201 8.601846111111112 509.57949738740984
+Skipping 1202 8.601846111111112 509.57949738740984
+Skipping 1203 8.613010000000001 509.57949738740984
+Skipping 1204 8.613010000000001 509.57949738740984
+Skipping 1205 8.62417388888889 509.57949738740984
+Skipping 1206 8.62417388888889 509.57949738740984
+Skipping 1207 8.635337777777778 509.57949738740984
+Skipping 1208 8.635337777777778 509.57949738740984
+Skipping 1209 8.646501666666667 509.57949738740984
+Skipping 1210 8.646501666666667 509.57949738740984
+Skipping 1211 8.657665555555557 509.57949738740984
+Skipping 1212 8.657665555555557 509.57949738740984
+Skipping 1213 8.668829444444446 509.57949738740984
+Skipping 1214 8.668829444444446 509.57949738740984
+Skipping 1215 8.679993333333334 509.57949738740984
+Skipping 1216 8.679993333333334 509.57949738740984
+Skipping 1217 8.691157222222223 509.57949738740984
+Skipping 1218 8.691157222222223 509.57949738740984
+Skipping 1219 8.702321111111113 509.57949738740984
+Skipping 1220 8.702321111111113 509.57949738740984
+Skipping 1221 8.713485 509.57949738740984
+Skipping 1222 8.713485 509.57949738740984
+Skipping 1223 8.72464888888889 509.57949738740984
+Skipping 1224 8.72464888888889 509.57949738740984
+Skipping 1225 8.73581277777778 509.57949738740984
+Skipping 1226 8.73581277777778 509.57949738740984
+Skipping 1227 8.746976666666667 509.57949738740984
+Skipping 1228 8.746976666666667 509.57949738740984
+Skipping 1229 8.758140555555556 509.57949738740984
+Skipping 1232 8.769304444444446 174.54644628662479
+Skipping 1233 8.801896851851854 174.54644628662479
+Skipping 1236 8.813060740740742 509.57949738740984
+Skipping 1237 8.824224629629631 509.57949738740984
+Skipping 1238 8.824224629629631 509.57949738740984
+Skipping 1239 8.83538851851852 509.57949738740984
+Skipping 1240 8.83538851851852 509.57949738740984
+Skipping 1241 8.846552407407408 509.57949738740984
+Skipping 1242 8.846552407407408 509.57949738740984
+Skipping 1243 8.857716296296298 509.57949738740984
+Skipping 1244 8.857716296296298 509.57949738740984
+Skipping 1245 8.868880185185187 509.57949738740984
+Skipping 1246 8.868880185185187 509.57949738740984
+Skipping 1247 8.880044074074075 509.57949738740984
+Skipping 1248 8.880044074074075 509.57949738740984
+Skipping 1249 8.891207962962964 509.57949738740984
+Skipping 1250 8.891207962962964 509.57949738740984
+Skipping 1251 8.902371851851854 509.57949738740984
+Skipping 1252 8.902371851851854 509.57949738740984
+Skipping 1253 8.913535740740743 509.57949738740984
+Skipping 1254 8.913535740740743 509.57949738740984
+Skipping 1255 8.92469962962963 509.57949738740984
+Skipping 1256 8.92469962962963 509.57949738740984
+Skipping 1257 8.93586351851852 509.57949738740984
+Skipping 1258 8.93586351851852 509.57949738740984
+Skipping 1259 8.94702740740741 509.57949738740984
+Skipping 1260 8.94702740740741 509.57949738740984
+Skipping 1261 8.958191296296297 509.57949738740984
+Skipping 1262 8.958191296296297 509.57949738740984
+Skipping 1263 8.969355185185186 509.57949738740984
+Skipping 1264 8.969355185185186 509.57949738740984
+Skipping 1265 8.980519074074076 509.57949738740984
+Skipping 1266 8.980519074074076 509.57949738740984
+Skipping 1267 8.991682962962964 509.57949738740984
+Skipping 1268 8.991682962962964 509.57949738740984
+Skipping 1269 9.002846851851853 509.57949738740984
+Skipping 1270 9.002846851851853 509.57949738740984
+Skipping 1271 9.014010740740742 509.57949738740984
+Skipping 1272 9.014010740740742 509.57949738740984
+Skipping 1273 9.025174629629632 509.57949738740984
+Skipping 1274 9.025174629629632 509.57949738740984
+Skipping 1275 9.03633851851852 509.57949738740984
+Skipping 1276 9.03633851851852 509.57949738740984
+Skipping 1277 9.047502407407409 509.57949738740984
+Skipping 1278 9.047502407407409 509.57949738740984
+Skipping 1279 9.058666296296298 509.57949738740984
+Skipping 1280 9.058666296296298 509.57949738740984
+Skipping 1281 9.069830185185186 509.57949738740984
+Skipping 1282 9.069830185185186 509.57949738740984
+Skipping 1283 9.080994074074075 509.57949738740984
+Skipping 1284 9.080994074074075 509.57949738740984
+Skipping 1285 9.092157962962965 509.57949738740984
+Skipping 1286 9.092157962962965 509.57949738740984
+Skipping 1287 9.103321851851852 509.57949738740984
+Skipping 1288 9.103321851851852 509.57949738740984
+Skipping 1289 9.114485740740742 509.57949738740984
+Skipping 1290 9.114485740740742 509.57949738740984
+Skipping 1291 9.125649629629631 509.57949738740984
+Skipping 1292 9.125649629629631 509.57949738740984
+Skipping 1293 9.13681351851852 509.57949738740984
+Skipping 1294 9.13681351851852 509.57949738740984
+Skipping 1295 9.147977407407408 509.57949738740984
+Skipping 1296 9.147977407407408 509.57949738740984
+Skipping 1297 9.159141296296298 509.57949738740984
+Skipping 1298 9.159141296296298 509.57949738740984
+Skipping 1299 9.170305185185187 509.57949738740984
+Skipping 1300 9.170305185185187 509.57949738740984
+Skipping 1301 9.181469074074075 509.57949738740984
+Skipping 1302 9.181469074074075 509.57949738740984
+Skipping 1303 9.192632962962964 509.57949738740984
+Skipping 1304 9.192632962962964 509.57949738740984
+Skipping 1305 9.203796851851854 509.57949738740984
+Skipping 1306 9.203796851851854 509.57949738740984
+Skipping 1307 9.214960740740743 509.57949738740984
+Skipping 1308 9.214960740740743 509.57949738740984
+Skipping 1309 9.22612462962963 509.57949738740984
+Skipping 1310 9.22612462962963 509.57949738740984
+Skipping 1311 9.23728851851852 509.57949738740984
+Skipping 1312 9.23728851851852 509.57949738740984
+Skipping 1313 9.24845240740741 509.57949738740984
+Skipping 1314 9.24845240740741 509.57949738740984
+Skipping 1315 9.259616296296297 509.57949738740984
+Skipping 1316 9.259616296296297 509.57949738740984
+Skipping 1317 9.270780185185187 509.57949738740984
+Skipping 1318 9.270780185185187 509.57949738740984
+Skipping 1319 9.281944074074076 509.57949738740984
+Skipping 1322 9.293107962962964 174.54644628661924
+Skipping 1323 9.325700370370374 174.54644628661924
+Skipping 1326 9.336864259259261 509.57949738740984
+Skipping 1327 9.34802814814815 509.57949738740984
+Skipping 1328 9.34802814814815 509.57949738740984
+Skipping 1329 9.35919203703704 509.57949738740984
+Skipping 1330 9.35919203703704 509.57949738740984
+Skipping 1331 9.370355925925928 509.57949738740984
+Skipping 1332 9.370355925925928 509.57949738740984
+Skipping 1333 9.381519814814817 509.57949738740984
+Skipping 1334 9.381519814814817 509.57949738740984
+Skipping 1335 9.392683703703707 509.57949738740984
+Skipping 1336 9.392683703703707 509.57949738740984
+Skipping 1337 9.403847592592596 509.57949738740984
+Skipping 1338 9.403847592592596 509.57949738740984
+Skipping 1339 9.415011481481484 509.57949738740984
+Skipping 1340 9.415011481481484 509.57949738740984
+Skipping 1341 9.426175370370373 509.57949738740984
+Skipping 1342 9.426175370370373 509.57949738740984
+Skipping 1343 9.437339259259263 509.57949738740984
+Skipping 1344 9.437339259259263 509.57949738740984
+Skipping 1345 9.44850314814815 509.57949738740984
+Skipping 1346 9.44850314814815 509.57949738740984
+Skipping 1347 9.45966703703704 509.57949738740984
+Skipping 1348 9.45966703703704 509.57949738740984
+Skipping 1349 9.47083092592593 509.57949738740984
+Skipping 1350 9.47083092592593 509.57949738740984
+Skipping 1351 9.481994814814817 509.57949738740984
+Skipping 1352 9.481994814814817 509.57949738740984
+Skipping 1353 9.493158703703706 509.57949738740984
+Skipping 1354 9.493158703703706 509.57949738740984
+Skipping 1355 9.504322592592596 509.57949738740984
+Skipping 1356 9.504322592592596 509.57949738740984
+Skipping 1357 9.515486481481485 509.57949738740984
+Skipping 1358 9.515486481481485 509.57949738740984
+Skipping 1359 9.526650370370373 509.57949738740984
+Skipping 1360 9.526650370370373 509.57949738740984
+Skipping 1361 9.537814259259262 509.57949738740984
+Skipping 1362 9.537814259259262 509.57949738740984
+Skipping 1363 9.548978148148151 509.57949738740984
+Skipping 1364 9.548978148148151 509.57949738740984
+Skipping 1365 9.56014203703704 509.57949738740984
+Skipping 1366 9.56014203703704 509.57949738740984
+Skipping 1367 9.571305925925929 509.57949738740984
+Skipping 1368 9.571305925925929 509.57949738740984
+Skipping 1369 9.582469814814818 509.57949738740984
+Skipping 1370 9.582469814814818 509.57949738740984
+Skipping 1371 9.593633703703706 509.57949738740984
+Skipping 1372 9.593633703703706 509.57949738740984
+Skipping 1373 9.604797592592595 509.57949738740984
+Skipping 1374 9.604797592592595 509.57949738740984
+Skipping 1375 9.615961481481484 509.57949738740984
+Skipping 1376 9.615961481481484 509.57949738740984
+Skipping 1377 9.627125370370374 509.57949738740984
+Skipping 1378 9.627125370370374 509.57949738740984
+Skipping 1379 9.638289259259261 509.57949738740984
+Skipping 1380 9.638289259259261 509.57949738740984
+Skipping 1381 9.649453148148151 509.57949738740984
+Skipping 1382 9.649453148148151 509.57949738740984
+Skipping 1383 9.66061703703704 509.57949738740984
+Skipping 1384 9.66061703703704 509.57949738740984
+Skipping 1385 9.671780925925928 509.57949738740984
+Skipping 1386 9.671780925925928 509.57949738740984
+Skipping 1387 9.682944814814817 509.57949738740984
+Skipping 1388 9.682944814814817 509.57949738740984
+Skipping 1389 9.694108703703707 509.57949738740984
+Skipping 1390 9.694108703703707 509.57949738740984
+Skipping 1391 9.705272592592596 509.57949738740984
+Skipping 1392 9.705272592592596 509.57949738740984
+Skipping 1393 9.716436481481484 509.57949738740984
+Skipping 1394 9.716436481481484 509.57949738740984
+Skipping 1395 9.727600370370373 509.57949738740984
+Skipping 1398 9.738764259259263 174.54644628663033
+Skipping 1399 9.77135666666667 174.54644628663033
+Skipping 1402 9.782520555555557 509.57949738740984
+Skipping 1403 9.793684444444446 509.57949738740984
+Skipping 1404 9.793684444444446 509.57949738740984
+Skipping 1405 9.804848333333336 509.57949738740984
+Skipping 1406 9.804848333333336 509.57949738740984
+Skipping 1407 9.816012222222223 509.57949738740984
+Skipping 1408 9.816012222222223 509.57949738740984
+Skipping 1409 9.827176111111113 509.57949738740984
+Skipping 1410 9.827176111111113 509.57949738740984
+Skipping 1411 9.838340000000002 509.57949738740984
+Skipping 1412 9.838340000000002 509.57949738740984
+Skipping 1413 9.849503888888892 509.57949738740984
+Skipping 1414 9.849503888888892 509.57949738740984
+Skipping 1415 9.86066777777778 509.57949738740984
+Skipping 1416 9.86066777777778 509.57949738740984
+Skipping 1417 9.871831666666669 509.57949738740984
+Skipping 1418 9.871831666666669 509.57949738740984
+Skipping 1419 9.882995555555558 509.57949738740984
+Skipping 1420 9.882995555555558 509.57949738740984
+Skipping 1421 9.894159444444446 509.57949738740984
+Skipping 1422 9.894159444444446 509.57949738740984
+Skipping 1423 9.905323333333335 509.57949738740984
+Skipping 1424 9.905323333333335 509.57949738740984
+Skipping 1425 9.916487222222225 509.57949738740984
+Skipping 1426 9.916487222222225 509.57949738740984
+Skipping 1427 9.927651111111112 509.57949738740984
+Skipping 1428 9.927651111111112 509.57949738740984
+Skipping 1429 9.938815000000002 509.57949738740984
+Skipping 1430 9.938815000000002 509.57949738740984
+Skipping 1431 9.949978888888891 509.57949738740984
+Skipping 1432 9.949978888888891 509.57949738740984
+Skipping 1433 9.96114277777778 509.57949738740984
+Skipping 1434 9.96114277777778 509.57949738740984
+Skipping 1435 9.972306666666668 509.57949738740984
+Skipping 1436 9.972306666666668 509.57949738740984
+Skipping 1437 9.983470555555558 509.57949738740984
+Skipping 1438 9.983470555555558 509.57949738740984
+Skipping 1439 9.994634444444447 509.57949738740984
+Skipping 1440 9.994634444444447 509.57949738740984
+Skipping 1441 10.005798333333335 509.57949738740984
+Skipping 1442 10.005798333333335 509.57949738740984
+Skipping 1443 10.016962222222224 509.57949738740984
+Skipping 1444 10.016962222222224 509.57949738740984
+Skipping 1445 10.028126111111114 509.57949738740984
+Skipping 1446 10.028126111111114 509.57949738740984
+Skipping 1447 10.039290000000003 509.57949738740984
+Skipping 1448 10.039290000000003 509.57949738740984
+Skipping 1449 10.05045388888889 509.57949738740984
+Skipping 1450 10.05045388888889 509.57949738740984
+Skipping 1451 10.06161777777778 509.57949738740984
+Skipping 1452 10.06161777777778 509.57949738740984
+Skipping 1453 10.07278166666667 509.57949738740984
+Skipping 1454 10.07278166666667 509.57949738740984
+Skipping 1455 10.083945555555557 509.57949738740984
+Skipping 1456 10.083945555555557 509.57949738740984
+Skipping 1457 10.095109444444446 509.57949738740984
+Skipping 1458 10.095109444444446 509.57949738740984
+Skipping 1459 10.106273333333336 509.57949738740984
+Skipping 1460 10.106273333333336 509.57949738740984
+Skipping 1461 10.117437222222224 509.57949738740984
+Skipping 1462 10.117437222222224 509.57949738740984
+Skipping 1463 10.128601111111113 509.57949738740984
+Skipping 1464 10.128601111111113 509.57949738740984
+Skipping 1465 10.139765000000002 509.57949738740984
+Skipping 1466 10.139765000000002 509.57949738740984
+Skipping 1467 10.150928888888892 509.57949738740984
+Skipping 1468 10.150928888888892 509.57949738740984
+Skipping 1469 10.16209277777778 509.57949738740984
+Skipping 1470 10.16209277777778 509.57949738740984
+Skipping 1471 10.173256666666669 509.57949738740984
+Skipping 1472 10.173256666666669 509.57949738740984
+Skipping 1473 10.184420555555558 509.57949738740984
+Skipping 1474 10.184420555555558 509.57949738740984
+Skipping 1475 10.195584444444446 509.57949738740984
+Skipping 1476 10.195584444444446 509.57949738740984
+Skipping 1477 10.206748333333335 509.57949738740984
+Skipping 1478 10.206748333333335 509.57949738740984
+Skipping 1479 10.217912222222225 509.57949738740984
+Skipping 1480 10.217912222222225 509.57949738740984
+Skipping 1481 10.229076111111112 509.57949738740984
+Skipping 1482 10.229076111111112 509.57949738740984
+Skipping 1483 10.240240000000002 509.57949738740984
+Skipping 1484 10.240240000000002 509.57949738740984
+Skipping 1485 10.251403888888891 509.57949738740984
+Skipping 1486 10.251403888888891 509.57949738740984
+Skipping 1487 10.26256777777778 509.57949738740984
+Skipping 1488 10.26256777777778 509.57949738740984
+Skipping 1489 10.273731666666668 509.57949738740984
+Skipping 1490 10.273731666666668 509.57949738740984
+Skipping 1491 10.284895555555558 509.57949738740984
+Skipping 1492 10.284895555555558 509.57949738740984
+Skipping 1493 10.296059444444447 509.57949738740984
+Skipping 1494 10.296059444444447 509.57949738740984
+Skipping 1495 10.307223333333335 509.57949738740984
+Skipping 1496 10.307223333333335 509.57949738740984
+Skipping 1497 10.318387222222224 509.57949738740984
+Skipping 1498 10.318387222222224 509.57949738740984
+Skipping 1499 10.329551111111114 509.57949738740984
+Skipping 1500 10.329551111111114 509.57949738740984
+Skipping 1501 10.340715000000001 509.57949738740984
+Skipping 1502 10.340715000000001 509.57949738740984
+Skipping 1503 10.35187888888889 509.57949738740984
+Skipping 1504 10.35187888888889 509.57949738740984
+Skipping 1505 10.36304277777778 509.57949738740984
+Skipping 1506 10.36304277777778 509.57949738740984
+Skipping 1507 10.37420666666667 509.57949738740984
+Skipping 1508 10.37420666666667 509.57949738740984
+Skipping 1509 10.385370555555557 509.57949738740984
+Skipping 1510 10.385370555555557 509.57949738740984
+Skipping 1511 10.396534444444447 509.57949738740984
+Skipping 1512 10.396534444444447 509.57949738740984
+Skipping 1513 10.407698333333336 509.57949738740984
+Skipping 1514 10.407698333333336 509.57949738740984
+Skipping 1515 10.418862222222224 509.57949738740984
+Skipping 1516 10.418862222222224 509.57949738740984
+Skipping 1517 10.430026111111113 509.57949738740984
+Skipping 1518 10.430026111111113 509.57949738740984
+Skipping 1519 10.441190000000002 509.57949738740984
+Skipping 1520 10.441190000000002 509.57949738740984
+Skipping 1521 10.452353888888892 509.57949738740984
+Skipping 1522 10.452353888888892 509.57949738740984
+Skipping 1523 10.46351777777778 509.57949738740984
+Skipping 1524 10.46351777777778 509.57949738740984
+Skipping 1525 10.474681666666669 509.57949738740984
+Skipping 1526 10.474681666666669 509.57949738740984
+Skipping 1527 10.485845555555558 509.57949738740984
+Skipping 1528 10.485845555555558 509.57949738740984
+Skipping 1529 10.497009444444446 509.57949738740984
+Skipping 1530 10.497009444444446 509.57949738740984
+Skipping 1531 10.508173333333335 509.57949738740984
+Skipping 1532 10.508173333333335 509.57949738740984
+Skipping 1533 10.519337222222225 509.57949738740984
+Skipping 1534 10.519337222222225 509.57949738740984
+Skipping 1535 10.530501111111112 509.57949738740984
+Skipping 1536 10.530501111111112 509.57949738740984
+Skipping 1537 10.541665000000002 509.57949738740984
+Skipping 1538 10.541665000000002 509.57949738740984
+Skipping 1539 10.552828888888891 509.57949738740984
+Skipping 1540 10.552828888888891 509.57949738740984
+Skipping 1541 10.56399277777778 509.57949738740984
+Skipping 1542 10.56399277777778 509.57949738740984
+Skipping 1543 10.575156666666668 509.57949738740984
+Skipping 1544 10.575156666666668 509.57949738740984
+Skipping 1545 10.586320555555558 509.57949738740984
+Skipping 1546 10.586320555555558 509.57949738740984
+Skipping 1547 10.597484444444447 509.57949738740984
+Skipping 1548 10.597484444444447 509.57949738740984
+Skipping 1549 10.608648333333335 509.57949738740984
+Skipping 1550 10.608648333333335 509.57949738740984
+Skipping 1551 10.619812222222224 509.57949738740984
+Skipping 1552 10.619812222222224 509.57949738740984
+Skipping 1553 10.630976111111114 509.57949738740984
+Skipping 1554 10.630976111111114 509.57949738740984
+Skipping 1555 10.642140000000001 509.57949738740984
+Skipping 1556 10.642140000000001 509.57949738740984
+Skipping 1557 10.65330388888889 509.57949738740984
+Skipping 1558 10.65330388888889 509.57949738740984
+Skipping 1559 10.66446777777778 509.57949738740984
+Skipping 1560 10.66446777777778 509.57949738740984
+Skipping 1561 10.67563166666667 509.57949738740984
+Skipping 1562 10.67563166666667 509.57949738740984
+Skipping 1563 10.686795555555557 509.57949738740984
+Skipping 1570 10.766546296296298 156.53503184713375
+Skipping 1571 10.788351851851854 156.53503184713375
+Skipping 1572 10.788351851851854 156.53503184713375
+Skipping 1573 10.81015740740741 156.53503184713375
+Skipping 1574 10.81015740740741 156.53503184713375
+Skipping 1575 10.831962962962963 156.53503184713375
+Skipping 1576 10.831962962962963 156.53503184713375
+Skipping 1577 10.85376851851852 156.53503184713375
+Skipping 1578 10.85376851851852 156.53503184713375
+Skipping 1579 10.875574074074075 156.53503184713375
+Skipping 1580 10.875574074074075 156.53503184713375
+Skipping 1581 10.897379629629631 156.53503184713375
+Skipping 1582 10.897379629629631 156.53503184713375
+Skipping 1583 10.919185185185187 156.53503184713375
+Skipping 1584 10.919185185185187 156.53503184713375
+Skipping 1585 10.940990740740743 156.53503184713375
+Skipping 1586 10.940990740740743 156.53503184713375
+Skipping 1587 10.962796296296297 156.53503184713375
+Skipping 1588 10.962796296296297 156.53503184713375
+Skipping 1589 10.984601851851853 156.53503184713375
+Skipping 1590 10.984601851851853 156.53503184713375
+Skipping 1591 11.006407407407409 156.53503184713375
+Skipping 1592 11.006407407407409 156.53503184713375
+Skipping 1593 11.028212962962964 156.53503184713375
+Skipping 1594 11.028212962962964 156.53503184713375
+Skipping 1595 11.05001851851852 156.53503184713375
+Skipping 1596 11.05001851851852 156.53503184713375
+Skipping 1597 11.071824074074076 156.53503184713375
+Skipping 1598 11.071824074074076 156.53503184713375
+Skipping 1599 11.09362962962963 156.53503184713375
+Skipping 1600 11.09362962962963 156.53503184713375
+Skipping 1601 11.115435185185186 156.53503184713375
+Skipping 1602 11.115435185185186 156.53503184713375
+Skipping 1603 11.137240740740742 156.53503184713375
+Skipping 1604 11.137240740740742 156.53503184713375
+Skipping 1605 11.159046296296298 156.53503184713375
+Skipping 1606 11.159046296296298 156.53503184713375
+Skipping 1607 11.180851851851854 156.53503184713375
+Skipping 1608 11.180851851851854 156.53503184713375
+Skipping 1609 11.20265740740741 156.53503184713375
+Skipping 1610 11.20265740740741 156.53503184713375
+Skipping 1611 11.224462962962964 156.53503184713375
+Skipping 1612 11.224462962962964 156.53503184713375
+Skipping 1613 11.24626851851852 156.53503184713375
+Skipping 1614 11.24626851851852 156.53503184713375
+Skipping 1615 11.268074074074075 156.53503184713375
+Skipping 1616 11.268074074074075 156.53503184713375
+Skipping 1617 11.289879629629631 156.53503184713375
+Skipping 1618 11.289879629629631 156.53503184713375
+Skipping 1619 11.311685185185187 156.53503184713375
+Skipping 1620 11.311685185185187 156.53503184713375
+Skipping 1621 11.333490740740743 156.53503184713375
+Skipping 1622 11.333490740740743 156.53503184713375
+Skipping 1623 11.355296296296297 156.53503184713375
+Skipping 1624 11.355296296296297 156.53503184713375
+Skipping 1625 11.377101851851853 156.53503184713375
+Skipping 1626 11.377101851851853 156.53503184713375
+Skipping 1627 11.398907407407409 156.53503184713375
+Skipping 1628 11.398907407407409 156.53503184713375
+Skipping 1629 11.420712962962964 156.53503184713375
+Skipping 1630 11.420712962962964 156.53503184713375
+Skipping 1631 11.44251851851852 156.53503184713375
+Skipping 1632 11.44251851851852 156.53503184713375
+Skipping 1633 11.464324074074076 156.53503184713375
+Skipping 1634 11.464324074074076 156.53503184713375
+Skipping 1635 11.48612962962963 156.53503184713375
+Skipping 1636 11.48612962962963 156.53503184713375
+Skipping 1637 11.507935185185186 156.53503184713375
+Skipping 1638 11.507935185185186 156.53503184713375
+Skipping 1639 11.529740740740742 156.53503184713375
+Skipping 1640 11.529740740740742 156.53503184713375
+Skipping 1641 11.551546296296298 156.53503184713375
+Skipping 1642 11.551546296296298 156.53503184713375
+Skipping 1643 11.573351851851854 156.53503184713375
+Skipping 1644 11.573351851851854 156.53503184713375
+Skipping 1645 11.59515740740741 156.53503184713375
+Skipping 1646 11.59515740740741 156.53503184713375
+Skipping 1647 11.616962962962964 156.53503184713375
+Skipping 1648 11.616962962962964 156.53503184713375
+Skipping 1649 11.63876851851852 156.53503184713375
+Skipping 1650 11.63876851851852 156.53503184713375
+Skipping 1651 11.660574074074075 156.53503184713375
+Skipping 1652 11.660574074074075 156.53503184713375
+Skipping 1653 11.682379629629631 156.53503184713375
+Skipping 1654 11.682379629629631 156.53503184713375
+Skipping 1655 11.704185185185187 156.53503184713375
+Skipping 1656 11.704185185185187 156.53503184713375
+Skipping 1657 11.725990740740743 156.53503184713375
+Skipping 1658 11.725990740740743 156.53503184713375
+Skipping 1659 11.747796296296297 156.53503184713375
+Skipping 1660 11.747796296296297 156.53503184713375
+Skipping 1661 11.769601851851853 156.53503184713375
+Skipping 1662 11.769601851851853 156.53503184713375
+Skipping 1663 11.791407407407409 156.53503184713375
+Skipping 1664 11.791407407407409 156.53503184713375
+Skipping 1665 11.813212962962965 156.53503184713375
+Skipping 1666 11.813212962962965 156.53503184713375
+Skipping 1667 11.83501851851852 156.53503184713375
+Skipping 1668 11.83501851851852 156.53503184713375
+Skipping 1669 11.856824074074076 156.53503184713375
+Skipping 1670 11.856824074074076 156.53503184713375
+Skipping 1671 11.87862962962963 156.53503184713375
+Skipping 1672 11.87862962962963 156.53503184713375
+Skipping 1673 11.900435185185186 156.53503184713375
+Skipping 1674 11.900435185185186 156.53503184713375
+Skipping 1675 11.922240740740742 156.53503184713375
+Skipping 1676 11.922240740740742 156.53503184713375
+Skipping 1677 11.944046296296298 156.53503184713375
+Skipping 1678 11.944046296296298 156.53503184713375
 {}
-301.34265219790325 845116.9188965333 377973.3569802326
+0.30134265219790324 845.1169188445667 364.73877760308073
 g4dn_350M
 Model: GPT-3
-  Performance: D 301.34265219790325 B 377973.3569802326
-  Cost: D 48.96 B 16.34334789513387
-  Value: D 6.154874432146716 B 22081.839916003013
-[43200.000] Ending after 11.999998725012446 hours
-Result(removal_probability=None, preemption_mean=0.15422885572139303, preemption_median=0.15422885572139303, preemption_stdev=0.19772151800790655, lifetime_mean=2.7280590717299575, lifetime_median=1.4166666666666667, lifetime_stdev=3.2300908319721566, num_preemptions=68, num_fatal_failures=0, num_iterations_complete=874373, average_instances=17.95972296168557, average_performance=377973.3569802326, average_cost=16.34334789513387, average_value=22081.839916003013)
+  Performance: D 0.30134265219790324 B 364.73877760308073
+  Cost: D 48.96 B 16.349868089632317
+  Value: D 0.006154874432146716 B 21.276914949748885
+[43200.000] Ending after 11.98765740740741 hours
+Result(removal_probability=None, preemption_mean=0.15422885572139303, preemption_median=0.15422885572139303, preemption_stdev=0.19772151800790655, lifetime_mean=2.7280590717299575, lifetime_median=1.4166666666666667, lifetime_stdev=3.2300908319721566, num_preemptions=68, num_fatal_failures=0, num_iterations_complete=841, average_instances=17.966888010584963, average_performance=364.73877760308073, average_cost=16.349868089632317, average_value=21.276914949748885)
