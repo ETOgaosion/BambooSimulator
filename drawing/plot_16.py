@@ -10,12 +10,12 @@ isinstances_ys = {}
 performances_xs = {}
 performances_ys = {}
 
-systems = ['bamboo', 'varu', 'oobleck', 'nore']
+systems = ['checkpoint', 'oobleck-16', 'adaptdnn']
 traces = ['g4dn', 'p3']
-model_sizes = ['350M', '1.3B', '2.7B', '6.7B', '13B']
-color = {'bamboo': 'cyan', 'varu': 'green', 'oobleck': 'blue', 'nore': 'red'}
-namemap = {'bamboo': 'Bamboo', 'varu': 'Varu', 'oobleck': 'Oobleck', 'nore': 'Nore'}
-linewidth = {'bamboo': 2, 'varu': 1, 'oobleck-16': 1, 'nore': 3}
+model_sizes = ['350M', '1.3B', '2.7B']
+color = {'checkpoint': 'turquoise', 'oobleck-16': 'darkviolet', 'adaptdnn': 'coral'}
+namemap = {'checkpoint': 'Checkpoint', 'oobleck-16': 'Oobleck', 'adaptdnn': 'Adaptdnn'}
+linewidth = {'checkpoint': 1, 'oobleck-16': 1, 'adaptdnn': 1}
 
 @dataclasses.dataclass
 class Result:
@@ -51,7 +51,8 @@ def get_data():
                 performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_{trace}_{model_size}.pkl', 'rb'))
 
 def plot_instances(axes, trace):
-    axes.plot(isinstances_xs[trace], isinstances_ys[trace], linewidth=0.5, color='black')
+    axes.plot(isinstances_xs[trace], isinstances_ys[trace], linewidth=0.5, color='blue')
+    axes.set_ylim(0, 17)
     axes.set_title('Spot Instances Number Over Time')
     axes.set_ylabel('Instances Number')
 
@@ -71,7 +72,7 @@ def plot_performance_together(axes, trace, model_size, with_label, with_x_label)
 def plot_performance():
     get_data()
 
-    fig, axs = plt.subplots(len(model_sizes) + 1, len(traces), figsize=(15, 3 * len(model_size)))
+    fig, axs = plt.subplots(len(model_sizes) + 1, len(traces), figsize=(15, 10))
     
     plot_instances(axs[0, 0], traces[0])
     plot_instances(axs[0, 1], traces[1])
@@ -83,7 +84,7 @@ def plot_performance():
     fig.subplots_adjust(bottom=0.1, hspace=0.4, wspace=0.2)
     fig.legend(loc="lower center", bbox_to_anchor=(0., 0.005, 1., .102), ncol=4, fancybox=True, shadow=True)
 
-    plt.savefig('res/performances.png', bbox_inches='tight')
+    plt.savefig('res/performances_16.png', bbox_inches='tight')
 
     plt.close()
 
@@ -101,15 +102,15 @@ def plot_total_throughputs():
     for trace_i, trace in enumerate(traces):
         for system_i, system in enumerate(systems):
             if trace_i == 0:
-                axs[trace_i].bar(system, total_throughputs[trace][system_i], color=color[system], label=namemap[system])
+                axs[trace_i].bar(system, total_throughputs[trace][system_i], width=0.5, color=color[system], label=namemap[system])
             else:
-                axs[trace_i].bar(system, total_throughputs[trace][system_i], color=color[system])
+                axs[trace_i].bar(system, total_throughputs[trace][system_i], width=0.5, color=color[system])
             axs[trace_i].bar_label(axs[trace_i].containers[0], label_type='edge')
         axs[trace_i].set_title(f'Average Throughput in GPT-3 (trace: {trace})')
         axs[trace_i].set_ylabel('Throughput (samples/s)')
     fig.subplots_adjust(bottom=0.15)
     fig.legend(loc="lower center", bbox_to_anchor=(0., 0.005, 1., .102), ncol=4, fancybox=True, shadow=True)
-    plt.savefig('res/total_throughputs.png', bbox_inches='tight')
+    plt.savefig('res/total_throughputs_16.png', bbox_inches='tight')
     plt.close()
 
 get_data()

@@ -1,18 +1,17 @@
 
-from simulation.simulator import Simulator
+from simulation_bamboo.simulator import Simulator
 import math
 import csv
 import statistics
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', spot_instance_trace='traces/p3-trace-16.csv', generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
-        super().__init__(seed, start_hour, model, model_size, spot_instance_trace, generate_addition_probabilities, removal_probability, generate_graphs)
+                 model='GPT-3', model_size='350M', pipeline_parallel_size=4, skip_filter=50,
+                 spot_instance_trace='traces/p3-trace.csv', generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
+        super().__init__(seed, start_hour, model, model_size, pipeline_parallel_size, skip_filter, spot_instance_trace, generate_addition_probabilities, removal_probability, generate_graphs)
     
         # Amazon EC2 Tesla T4
-        if model == 'GPT-3':
-            # the number of nodes that can be added at a time, bamboo do lazy reconfigure, not reconfig every time
-            self.global_batch_size = 1024
+        self.global_batch_size = 1024
         
         # prepare for first time launch
         self.preparation_delta = 10000
@@ -42,16 +41,32 @@ class MySimulator(Simulator):
             nodes_samples.append(current_nodes)
             return statistics.mean(nodes_samples)
     
-        self.on_demand_num_instances = (calculate_avg_nodes(spot_instance_trace) // 4) * 4
+        self.on_demand_num_instances = (int(calculate_avg_nodes(spot_instance_trace)) // self.pipeline_parallel_size) * self.pipeline_parallel_size
         
         self.on_demand_cost = self.on_demand_num_instances * self.on_demand_cost_per_hour
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)
         self.on_demand_value = self.on_demand_performance / self.on_demand_cost
 
-    def reconfigure_delta(self):
+    def reconfigure_delta(self, prev_pipeline_num, new_pipeline_num):
         # reconfigure time (ms)
         # layer time model: (layers / 12) * 150s
-        return self.preparation_delta + 3389 * self.pipeline_parallel_size_target
+        data = {
+            '350M': {
+                1: {2: 32904},
+                2: {3: 32904},
+                3: {4: 32904, 5: 32904},
+                4: {5: 32904},
+                5: {6: 32904, 7: 32904},
+                6: {7: 32904, 8: 32904},
+                7: {8: 32904},
+            },
+        }
+        if prev_pipeline_num > new_pipeline_num:
+            prev_pipeline_num, new_pipeline_num = new_pipeline_num, prev_pipeline_num
+        assert prev_pipeline_num != new_pipeline_num, f"Pipeline number should not be the same, {prev_pipeline_num} == {new_pipeline_num}"
+        assert data[self.model_size].get(prev_pipeline_num) is not None, f"Pipeline number {prev_pipeline_num} is not in the data"
+        assert data[self.model_size][prev_pipeline_num].get(new_pipeline_num) is not None, f'Pipeline number {new_pipeline_num} is not in the data {prev_pipeline_num}'
+        return data[self.model_size][prev_pipeline_num][new_pipeline_num] + self.iteration_delta / 2
 
     def simulate_iteration_delta(self):
         # iteration time
@@ -59,10 +74,12 @@ class MySimulator(Simulator):
     
     def simulate_iteration_delta_calc(self, nodes_num):
         data = {
-            8: 99700,
-            12: 78500,
-            16: 54370,
-            20: 40190,
-            24: 29080
+            8: 111111,
+            12: 99999,
+            16: 88888,
+            20: 77777,
+            24: 66666,
+            28: 55555,
+            32: 44444
         }
-        return data[(nodes_num // 4) * 4]
+        return data[(nodes_num // self.pipeline_parallel_size) * self.pipeline_parallel_size]

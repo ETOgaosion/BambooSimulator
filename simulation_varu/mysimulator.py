@@ -6,13 +6,10 @@ import statistics
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', spot_instance_trace='traces/p3-trace-16.csv', generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
-        super().__init__(seed, start_hour, model, model_size, spot_instance_trace, generate_addition_probabilities, removal_probability, generate_graphs)
+                 model='GPT-3', model_size='350M', pipeline_parallel_size=4, ckpt_steps=10000, skip_filter=50, spot_instance_trace='traces/p3-trace-16.csv', generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
+        super().__init__(seed, start_hour, model, model_size, pipeline_parallel_size, ckpt_steps, skip_filter, spot_instance_trace, generate_addition_probabilities, removal_probability, generate_graphs)
     
-        # Amazon EC2 Tesla T4
-        if model == 'GPT-3':
-            # the number of nodes that can be added at a time, bamboo do lazy reconfigure, not reconfig every time
-            self.global_batch_size = 1024
+        self.global_batch_size = 1024
         
         # prepare for first time launch
         self.preparation_delta = 10000
@@ -49,24 +46,104 @@ class MySimulator(Simulator):
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)
         self.on_demand_value = self.on_demand_performance / self.on_demand_cost
 
-    def reconfigure_delta(self):
-        # reconfigure time (ms)
-        # layer time model: (layers / 12) * 150s
-        return 32904.7
+    def checkpoint_load_delta(self):
+        # checkpoint load time
+        data = {
+            "350M": 32094,
+            "1.3B": 32094,
+            "2.7B": 32094,
+            "6.7B": 32094,
+            "13B": 32094,
+        }
+        return data[self.model_size] + self.iteration_delta / 2
+
+    def checkpoint_save_delta(self):
+        # checkpoint load time
+        return 32094
 
     def simulate_iteration_delta(self):
         # iteration time
-        self.iteration_delta = self.simulate_iteration_delta_calc(self.active_spot_instances())
+        self.iteration_delta = self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
     
     def simulate_iteration_delta_calc(self, nodes_num):
         data = {
-            8: 19.1,
-            10: 27.3,
-            12: 17.6,
-            14: 22.3,
-            16: 14.7
+            '350M': {
+                8: 99700,
+                10: 88888,
+                12: 84444,
+                14: 77777,
+                16: 70000,
+                18: 66666,
+                20: 60000,
+                22: 55555,
+                24: 50000,
+                26: 44444,
+                28: 40000,
+                30: 33333,
+                32: 30000,
+            },
+            '1.3B': {
+                8: 99700,
+                10: 88888,
+                12: 84444,
+                14: 77777,
+                16: 70000,
+                18: 66666,
+                20: 60000,
+                22: 55555,
+                24: 50000,
+                26: 44444,
+                28: 40000,
+                30: 33333,
+                32: 30000,
+            },
+            '2.7B': {
+                8: 99700,
+                10: 88888,
+                12: 84444,
+                14: 77777,
+                16: 70000,
+                18: 66666,
+                20: 60000,
+                22: 55555,
+                24: 50000,
+                26: 44444,
+                28: 40000,
+                30: 33333,
+                32: 30000,
+            },
+            '6.7B': {
+                8: 99700,
+                10: 88888,
+                12: 84444,
+                14: 77777,
+                16: 70000,
+                18: 66666,
+                20: 60000,
+                22: 55555,
+                24: 50000,
+                26: 44444,
+                28: 40000,
+                30: 33333,
+                32: 30000,
+            },
+            '13B': {
+                8: 99700,
+                10: 88888,
+                12: 84444,
+                14: 77777,
+                16: 70000,
+                18: 66666,
+                20: 60000,
+                22: 55555,
+                24: 50000,
+                26: 44444,
+                28: 40000,
+                30: 33333,
+                32: 30000,
+            },
         }
-        if data.get(nodes_num) is not None:
-            return data[nodes_num]
+        if data[self.model_size].get(nodes_num) is not None:
+            return data[self.model_size][nodes_num]
         else:
-            return data[int(math.pow(2, math.ceil(math.log2(nodes_num))))]
+            return data[self.model_size][int(math.pow(2, math.ceil(math.log2(nodes_num))))]

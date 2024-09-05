@@ -5,14 +5,15 @@ import enum
 import heapq
 import logging
 import math
+import pickle
 import random
 import statistics
 import typing
 import matplotlib.pyplot as plt
-import pickle
 from pathlib import Path
 
-from simulation.utils import *
+from simulation_bamboo.utils import *
+from common.trace import get_start_nodes_num
 
 logger = logging.getLogger(__name__)
 
@@ -93,13 +94,14 @@ class Simulator:
     def __init__(self,
                  seed=None,
                  start_hour=None,
-                 model='GPT-3',
+                 model='GPT-2',
                  model_size='350M',
                  spot_instance_trace=None,
                  generate_addition_probabilities=False,
                  removal_probability=None,
                  generate_graphs=False):
         if spot_instance_trace is not None:
+            self.start_nodes_num = get_start_nodes_num(spot_instance_trace)
             self.spot_instance_trace_file = spot_instance_trace
             self.spot_instance_trace = open(spot_instance_trace, 'r')
         else:
@@ -116,9 +118,8 @@ class Simulator:
             self.r = random.Random()
         self.generate_addition_probabilities = generate_addition_probabilities
         self.removal_probability = removal_probability
-        self.start_nodes_num = 8
-        self.pipeline_parallel_size_target = 4
-        self.prev_pipeline = self.start_nodes_num // self.pipeline_parallel_size_target
+        
+        self.last_spot_instance_num = self.start_nodes_num
 
         self.hour = datetime.timedelta(hours=1)
         self.second = datetime.timedelta(seconds=1)
@@ -199,15 +200,11 @@ class Simulator:
         self.rendezvous = []
         self.num_workers_waiting = 0
         self.data_parallel_size = 0
-        self.pipeline_parallel_size = 0
+        self.pipeline_parallel_size = 1
 
         self.num_iterations_complete = 0
         self.num_fatal_failures = 0
         self.num_spot_instance_removals = 0
-
-        # self.fallback_slowdown = 1.5
-        self.fallback_event = None
-        self.fallback_handled = False
 
         self.spot_instance_removal_times = []
         self.spot_instance_lifetimes = []
@@ -224,8 +221,6 @@ class Simulator:
         self.spot_instance_cost_per_hour = 0.91
 
         self.model = model
-        
-        self.output_delta = {}
 
     def generate_probabilities(self):
         probability = {}
@@ -235,7 +230,11 @@ class Simulator:
 
     # implement by child
     
-    def reconfigure_delta(self):
+    def reconfigure_delta(self, last_nodes_num, new_nodes_num):
+        return 0
+    
+    # implement by child
+    def fallback_slowdown(self):
         return 0
 
     # implement by child
@@ -325,7 +324,7 @@ class Simulator:
     
     def create_reconfigure_event(self, delta):
         return self.create_event(
-            delta + self.reconfigure_delta(),
+            delta + self.reconfigure_delta(self.last_spot_instance_num, self.active_spot_instances()),
             EventKind.RECONFIGURE,
             {}
         )
@@ -444,6 +443,15 @@ class Simulator:
             name,
         )
 
+    def simulate_fatal_failure(self, delta, name, data):
+        self.info(delta, f'{data["name"]} simulate_fatal_failure: {delta}')
+        self.info(
+            delta,
+            f'{name} caused a fatal failure, starting global rendezvous'
+        )
+        self.num_fatal_failures += 1
+        self.simulate_rendezvous_start(delta, True)
+
     def simulate_spot_instance_remove(self, delta, data):
         self.info(delta, f'{data["name"]} simulate_spot_instance_remove: {delta}')
         name = data['name']
@@ -454,39 +462,14 @@ class Simulator:
         self.spot_instance_removal_times.append(delta)
         del self.spot_instances[name]
 
-        if instance.is_running():
-            # This is a fatal failure
-            coordinates = instance.active_coordinates[0]
-            # Find which node has my redundant coordinates
-            search = (coordinates[0], coordinates[1] - 1)
-            if search[1] == -1:
-                search = (search[0], self.pipeline_parallel_size - 1)
-            for n, i in self.spot_instances.items():
-                found = False
-                for c in i.active_coordinates:
-                    if c == search:
-                        # This node recovered previously, so it doesn't have
-                        # the redundant coordinates
-                        i.active_coordinates.append(coordinates)
-                        found = True
-                        break
-                if found:
-                    break
-        
-        # Re-simulate the iteration delta now that we lost a node
-        if self.status == SystemStatus.RUNNING:
-            self.fallback_event.append((self.num_iterations_complete, delta))
-            self.fallback_handled = False
-
     def simulate_rendezvous_start(self, delta, isGlobal):
-        self.info(delta, f'simulate_rendezvous_start: {delta}')
+        self.info(delta, f'simulate_rendezvous_start: {delta} {isGlobal}')
         self.status = SystemStatus.RENDEZVOUS
         self.simulate_rendezvous_restart(delta)
         if isGlobal:
             self.create_preparation_event(delta)
         else:
-            self.simulate_iteration_delta()
-            self.create_reconfigure_event(delta + (1/3) * self.iteration_delta)
+            self.create_reconfigure_event(delta)
 
     def simulate_rendezvous_restart(self, delta):
         self.info(delta, f'simulate_rendezvous_restart: {delta}')
@@ -497,7 +480,7 @@ class Simulator:
                 self.rendezvous.append(name)
 
     def simulate_preparation_common(self, delta):
-        self.info(delta, f'simulate_preparation: {delta}')
+        self.info(delta, f'simulate_preparation: {delta} {self.rendezvous}')
         for i, name in enumerate(self.rendezvous):
             if name not in self.spot_instances:
                 self.info(
@@ -510,10 +493,8 @@ class Simulator:
             instance = self.spot_instances[name]
             instance.global_id = i
         self.simulate_assign_coordinates(delta)
-        self.fallback_event = []
-        self.fallback_handled = False
         self.rendezvous_version += 1
-        self.info(
+        print(
             delta,
             f'{len(self.rendezvous)} nodes completed rendezvous version '
             f'{self.rendezvous_version}, '
@@ -522,7 +503,7 @@ class Simulator:
         self.rendezvous = []
         if self.data_parallel_size != 0:
             self.status = SystemStatus.RUNNING
-            self.prev_pipeline = self.active_spot_instances() // self.pipeline_parallel_size_target
+            self.last_spot_instance_num = self.data_parallel_size * self.pipeline_parallel_size
             self.simulate_iteration_delta()
             self.create_training_iteration_execute_event(delta,
                                                      self.rendezvous_version)
@@ -558,16 +539,17 @@ class Simulator:
         self.simulate_preparation_common(delta)
 
     def simulate_reconfigure(self, delta):
-        self.info(delta, f'simulate_reconfigure: {delta}')
-        self.simulate_preparation_common(delta)
+        if len(self.rendezvous) > 0:
+            self.info(delta, f'simulate_reconfigure: {delta}')
+            self.simulate_preparation_common(delta)
 
     def simulate_assign_coordinates(self, delta):
-        self.info(delta, f'simulate_assign_coordinates')
-        if len(self.rendezvous) < self.pipeline_parallel_size_target:
+        self.info(delta, f'simulate_assign_coordinates {self.rendezvous}')
+        if len(self.rendezvous) < self.pipeline_parallel_size:
             data_parallel_size = 0
             pipeline_parallel_size = 0
         else:
-            pipeline_parallel_size = self.pipeline_parallel_size_target
+            pipeline_parallel_size = self.pipeline_parallel_size
             data_parallel_size = len(self.rendezvous) // pipeline_parallel_size
         num_workers_waiting = 0
 
@@ -602,46 +584,23 @@ class Simulator:
             if not instance.is_running():
                 continue
             elif len(instance.active_coordinates) > 1:
-                # assert len(instance.active_coordinates) == 2
+                assert len(instance.active_coordinates) == 2
                 num_workers_overloaded += 1
         return num_workers_overloaded
 
-    def simulate_should_reconfigure(self, delta):
-        num_workers_overloaded = self.get_num_workers_overloaded()
-        num_workers_waiting = self.num_workers_waiting
-
-        # If we can easily re-balance, do it
-
-        num_original_workers = self.data_parallel_size * self.pipeline_parallel_size
-        num_active_workers = num_original_workers - num_workers_overloaded
-
-        # If we're above a 5% chance of failure, re-configure/re-balance
-        # I cannot remove an overloaded node, or the node that now has no
-        # redundancy
-        # if num_workers_overloaded > 0 and (2 * num_workers_overloaded / num_active_workers) > 0.05:
-        #     return True
-
-        # If we can add another pipeline, do it
-        potential_data_parallel_size = (num_active_workers + num_workers_waiting) // self.pipeline_parallel_size_target
-        if potential_data_parallel_size > self.data_parallel_size:
-            print(delta, 'should reconfigure', num_active_workers, num_workers_waiting, potential_data_parallel_size, self.data_parallel_size)
+    def simulate_should_reconfigure(self):
+        if self.last_spot_instance_num != self.active_spot_instances():
             return True
-    
+
         return False
 
     def simulate_training_iteration_execute(self, delta, data):
+        # print(f'simulate training iteration execution')
         rendezvous_version = data['rendezvous_version']
         if rendezvous_version != self.rendezvous_version:
             return
 
         # Handle fallback events
-        if len(self.fallback_event) > 0:
-            cur_nodes = self.active_spot_instances()
-            if cur_nodes + len(self.fallback_event) >= (cur_nodes // 8 + 1) * 8:
-                print(f'reconfigure {cur_nodes} {len(self.fallback_event)}')
-                self.simulate_rendezvous_start(delta, False)
-                self.fallback_event = []
-                return
 
         self.num_iterations_complete += 1
 
@@ -656,11 +615,9 @@ class Simulator:
 
         previous_delta_hours = self.previous_iteration_execute_delta / self.milliseconds_per_hour
         delta_hours = delta / self.milliseconds_per_hour
-        
-        self.performance_xs.append(previous_delta_hours)
-        self.performance_ys.append(samples_per_second)
-        self.performance_xs.append(delta_hours)
-        self.performance_ys.append(samples_per_second)
+        if len(self.performance_xs) == 0 or delta_hours - self.performance_xs[-1] > 0.025:
+            self.performance_xs.append(delta_hours)
+            self.performance_ys.append(samples_per_second)
 
         
         current_cost_per_hour = self.cost_ys[-1]
@@ -694,8 +651,6 @@ class Simulator:
 
         average_cost_per_hour = total_cost / iteration_duration_hours
         
-        self.value_xs.append(previous_delta_hours)
-        self.value_ys.append(samples_per_second / average_cost_per_hour)
         self.value_xs.append(delta_hours)
         self.value_ys.append(samples_per_second / average_cost_per_hour)
 
@@ -709,7 +664,7 @@ class Simulator:
 
         if self.num_iterations_complete % 10000 == 0:
             self.info(delta, f'{self.num_iterations_complete} iterations complete')
-        if self.simulate_should_reconfigure(delta):
+        if self.simulate_should_reconfigure():
             self.info(
                 delta,
                 f'reconfiguration after iteration {self.num_iterations_complete}'
@@ -730,7 +685,6 @@ class Simulator:
                 previous_x = x
                 previous_y = y
             else:
-                assert previous_y == y
                 total += (x - previous_x) * y
                 previous_x = None
                 previous_y = None
@@ -895,19 +849,6 @@ class Simulator:
             
     
             Path(fig_directory).mkdir(parents=True, exist_ok=True)
-            
-            log_performances = {}
-            new_performance_xs, new_performance_ys = [], []
-            for idx, performance in enumerate(self.performance_ys):
-                if performance < 50000 and (idx < len(self.performance_ys) - 3 and self.performance_ys[idx - 2] == self.performance_ys[idx + 2]):
-                    print('Skipping', idx, self.performance_xs[idx], self.performance_ys[idx])
-                else:
-                    new_performance_xs.append(self.performance_xs[idx])
-                    new_performance_ys.append(self.performance_ys[idx])
-            self.performance_xs = new_performance_xs
-            self.performance_ys = new_performance_ys
-            
-            print(log_performances)
 
             # Instances graph
             graph(
@@ -936,14 +877,6 @@ class Simulator:
                 on_demand=self.on_demand_performance,
                 out=f'{fig_directory}/performance{pdf_suffix}',
             )
-            
-            suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
-            print(suffix)
-            pickle.dump(result, open(f'data/bamboo/result_{suffix}.pkl', 'wb'))
-            pickle.dump(instances_xs, open(f'data/bamboo/instances_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(instances_ys, open(f'data/bamboo/instances_ys_{suffix}.pkl', 'wb'))
-            pickle.dump(self.performance_xs, open(f'data/bamboo/performance_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(self.performance_ys, open(f'data/bamboo/performance_ys_{suffix}.pkl', 'wb'))
 
             print('Model:', self.model)
             print('  Performance:', 'D', self.on_demand_performance, 'B', result.average_performance)
@@ -1018,6 +951,17 @@ class Simulator:
                 result.average_performance,
                 on_demand=self.on_demand_performance
             )
+            
+            
+            suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
+            print(suffix)
+            data_dir = 'data/oobleck-16/'
+            Path(data_dir).mkdir(parents=True, exist_ok=True)
+            pickle.dump(result, open(f'{data_dir}/result_{suffix}.pkl', 'wb'))
+            pickle.dump(instances_xs, open(f'{data_dir}/instances_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(instances_ys, open(f'{data_dir}/instances_ys_{suffix}.pkl', 'wb'))
+            pickle.dump(self.performance_xs, open(f'{data_dir}/performance_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(self.performance_ys, open(f'{data_dir}/performance_ys_{suffix}.pkl', 'wb'))
             
             # Cost graph
             graph_together(

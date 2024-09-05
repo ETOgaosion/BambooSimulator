@@ -25,7 +25,6 @@ class EventKind(enum.IntEnum):
     PREPARATION = 5
     RECONFIGURE = 6
     TRAINING_STEP_COMPLETE = 7
-    CHECKPOINT = 8
 
 @dataclasses.dataclass(order=True)
 class Event:
@@ -97,9 +96,6 @@ class Simulator:
                  start_hour=None,
                  model='GPT-2',
                  model_size='350M',
-                 pipeline_parallel_size=4,
-                 ckpt_steps=10000,
-                 skip_filter=50,
                  spot_instance_trace=None,
                  generate_addition_probabilities=False,
                  removal_probability=None,
@@ -113,8 +109,6 @@ class Simulator:
         self.generate_graphs = generate_graphs
         
         self.model_size = model_size
-        
-        self.skip_filter = skip_filter
 
         self.seed = seed
         if self.seed is not None:
@@ -124,8 +118,8 @@ class Simulator:
             self.r = random.Random()
         self.generate_addition_probabilities = generate_addition_probabilities
         self.removal_probability = removal_probability
-        self.pipeline_parallel_size = pipeline_parallel_size
-        self.last_spot_instance_num = 0
+        
+        self.last_spot_instance_num = self.start_nodes_num
 
         self.hour = datetime.timedelta(hours=1)
         self.second = datetime.timedelta(seconds=1)
@@ -206,11 +200,11 @@ class Simulator:
         self.rendezvous = []
         self.num_workers_waiting = 0
         self.data_parallel_size = 0
+        self.pipeline_parallel_size = 1
 
         self.num_iterations_complete = 0
         self.num_fatal_failures = 0
         self.num_spot_instance_removals = 0
-        self.ckpt_steps = ckpt_steps
 
         self.spot_instance_removal_times = []
         self.spot_instance_lifetimes = []
@@ -233,16 +227,15 @@ class Simulator:
         for hour in range(24):
             probability[hour] = self.r.random()
         return probability
-    
-    def checkpoint_save_delta(self):
-        return 0
-    
-    def checkpoint_load_delta(self):
-        return 0
 
     # implement by child
-    def reconfigure_delta(self):
-        return self.checkpoint_load_delta()
+    
+    def reconfigure_delta(self, last_nodes_num, new_nodes_num):
+        return 0
+    
+    # implement by child
+    def fallback_slowdown(self):
+        return 0
 
     # implement by child
     def simulate_iteration_delta(self):
@@ -331,7 +324,7 @@ class Simulator:
     
     def create_reconfigure_event(self, delta):
         return self.create_event(
-            delta + self.reconfigure_delta(),
+            delta + self.reconfigure_delta(self.last_spot_instance_num, self.active_spot_instances()),
             EventKind.RECONFIGURE,
             {}
         )
@@ -343,18 +336,12 @@ class Simulator:
             {'rendezvous_version': rendezvous_version}
         )
 
-    def create_training_iteration_exeute_event_absolute(self, delta, rendezvous_version):
+    def create_training_iteration_execute_event_absolute(self, delta,
+                                                     rendezvous_version):
         return self.create_event(
             delta,
             EventKind.TRAINING_STEP_COMPLETE,
             {'rendezvous_version': rendezvous_version}
-        )
-    
-    def create_checkpoint_event(self, delta):
-        return self.create_event(
-            delta + self.checkpoint_save_delta(),
-            EventKind.CHECKPOINT,
-            {}
         )
 
     def generate_spot_instance_initial_events(self, start):
@@ -434,12 +421,23 @@ class Simulator:
                     continue
                 heapq.heappush(removed_instances, (delta, name))
 
+    # def append_value(self, delta):
+    #     if len(self.performance_ys) == 0 or len(self.cost_ys) == 0:
+    #         return
+    #     if self.cost_ys[-1] == 0.0:
+    #         self.value_xs.append(delta / self.milliseconds_per_hour)
+    #         self.value_ys.append(0)
+    #         return
+
+    #     self.value_xs.append(delta / self.milliseconds_per_hour)
+    #     self.value_ys.append(
+    #         self.performance_ys[-1] / self.cost_ys[-1]
+    #     )
+
     def simulate_spot_instance_add(self, delta, data):
         self.info(delta, f'{data["name"]} simulate_spot_instance_add: {delta}')
         name = data['name']
         self.spot_instances[name] = SpotInstance(name, delta)
-        if delta == 0:
-            self.last_spot_instance_num += 1
         self.create_spot_instance_ready_event(
             delta + self.spot_instance_creation_time,
             name,
@@ -464,16 +462,13 @@ class Simulator:
         self.spot_instance_removal_times.append(delta)
         del self.spot_instances[name]
 
-        self.simulate_rendezvous_start(delta, False)
-
     def simulate_rendezvous_start(self, delta, isGlobal):
-        self.info(delta, f'simulate_rendezvous_start: {delta}')
+        self.info(delta, f'simulate_rendezvous_start: {delta} {isGlobal}')
         self.status = SystemStatus.RENDEZVOUS
         self.simulate_rendezvous_restart(delta)
         if isGlobal:
             self.create_preparation_event(delta)
         else:
-            self.last_spot_instance_num = self.active_spot_instances()
             self.create_reconfigure_event(delta)
 
     def simulate_rendezvous_restart(self, delta):
@@ -508,6 +503,7 @@ class Simulator:
         self.rendezvous = []
         if self.data_parallel_size != 0:
             self.status = SystemStatus.RUNNING
+            self.last_spot_instance_num = self.data_parallel_size * self.pipeline_parallel_size
             self.simulate_iteration_delta()
             self.create_training_iteration_execute_event(delta,
                                                      self.rendezvous_version)
@@ -593,20 +589,10 @@ class Simulator:
         return num_workers_overloaded
 
     def simulate_should_reconfigure(self):
-        if self.last_spot_instance_num > self.active_spot_instances():
-            return True
-        
-        if self.last_spot_instance_num < self.active_spot_instances() and self.active_spot_instances() - self.last_spot_instance_num >= self.pipeline_parallel_size:
+        if self.last_spot_instance_num != self.active_spot_instances():
             return True
 
         return False
-    
-    def simulate_should_ckpt(self):
-        return self.num_iterations_complete % self.ckpt_steps == 0
-    
-    def simulate_checkpoint(self, delta):
-        self.info(delta, f'simulate_checkpoint: {delta}')
-        self.create_training_iteration_execute_event(delta, self.rendezvous_version)
 
     def simulate_training_iteration_execute(self, delta, data):
         # print(f'simulate training iteration execution')
@@ -685,17 +671,10 @@ class Simulator:
             )
             self.simulate_rendezvous_start(delta, False)
         else:
-            if self.simulate_should_ckpt():
-                self.info(
-                    delta,
-                    f'checkpoint after iteration {self.num_iterations_complete}'
-                )
-                self.create_checkpoint_event(delta)
-            else:
-                self.create_training_iteration_execute_event(
-                    delta,
-                    self.rendezvous_version
-                )
+            self.create_training_iteration_execute_event(
+                delta,
+                self.rendezvous_version
+            )
 
     def calculate_average(self, xs, ys, duration):
         previous_x = None
@@ -785,8 +764,6 @@ class Simulator:
                 self.simulate_reconfigure(delta)
             elif kind == EventKind.TRAINING_STEP_COMPLETE:
                 self.simulate_training_iteration_execute(delta, data)
-            elif kind == EventKind.CHECKPOINT:
-                self.simulate_checkpoint(delta)
             else:
                 raise ValueError(f'Unknown kind: {kind}')
 
@@ -872,17 +849,6 @@ class Simulator:
             
     
             Path(fig_directory).mkdir(parents=True, exist_ok=True)
-            
-            new_performance_xs, new_performance_ys = [], []
-            for idx, performance in enumerate(self.performance_ys):
-                if performance < self.skip_filter:
-                    print('Skipping', idx, self.performance_xs[idx], self.performance_ys[idx])
-                    pass
-                else:
-                    new_performance_xs.append(self.performance_xs[idx])
-                    new_performance_ys.append(self.performance_ys[idx])
-            self.performance_xs = new_performance_xs
-            self.performance_ys = new_performance_ys
 
             # Instances graph
             graph(
@@ -911,16 +877,6 @@ class Simulator:
                 on_demand=self.on_demand_performance,
                 out=f'{fig_directory}/performance{pdf_suffix}',
             )
-            
-            suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
-            print(suffix)
-            data_dir = 'data/varu/'
-            Path(data_dir).mkdir(parents=True, exist_ok=True)
-            pickle.dump(result, open(f'{data_dir}/result_{suffix}.pkl', 'wb'))
-            pickle.dump(instances_xs, open(f'{data_dir}/instances_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(instances_ys, open(f'{data_dir}/instances_ys_{suffix}.pkl', 'wb'))
-            pickle.dump(self.performance_xs, open(f'{data_dir}/performance_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(self.performance_ys, open(f'{data_dir}/performance_ys_{suffix}.pkl', 'wb'))
 
             print('Model:', self.model)
             print('  Performance:', 'D', self.on_demand_performance, 'B', result.average_performance)
@@ -995,6 +951,17 @@ class Simulator:
                 result.average_performance,
                 on_demand=self.on_demand_performance
             )
+            
+            
+            suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
+            print(suffix)
+            data_dir = 'data/adaptdnn/'
+            Path(data_dir).mkdir(parents=True, exist_ok=True)
+            pickle.dump(result, open(f'{data_dir}/result_{suffix}.pkl', 'wb'))
+            pickle.dump(instances_xs, open(f'{data_dir}/instances_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(instances_ys, open(f'{data_dir}/instances_ys_{suffix}.pkl', 'wb'))
+            pickle.dump(self.performance_xs, open(f'{data_dir}/performance_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(self.performance_ys, open(f'{data_dir}/performance_ys_{suffix}.pkl', 'wb'))
             
             # Cost graph
             graph_together(

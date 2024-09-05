@@ -1,4 +1,7 @@
 import matplotlib.pyplot as plt
+import threading
+
+graph_mutex = threading.Lock()
 
 def graph_together(axis, xlabel, xs, xmax, ylabel, ys, ymax, average,
           on_demand=None):
@@ -26,6 +29,8 @@ def graph_together(axis, xlabel, xs, xmax, ylabel, ys, ymax, average,
 
 def graph(xlabel, xs, xmax, ylabel, ys, ymax, average,
           on_demand=None, out=None, show=False, clf=True):
+    
+    graph_mutex.acquire()
 
     # sizes: xx-small, x-small, small, medium, large, x-large, xx-large
     params = {
@@ -74,3 +79,5 @@ def graph(xlabel, xs, xmax, ylabel, ys, ymax, average,
 
     if show:
         plt.show()
+    
+    graph_mutex.release()

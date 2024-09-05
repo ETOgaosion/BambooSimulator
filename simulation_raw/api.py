@@ -17,7 +17,7 @@ def parse(args):
     parser.add_argument('--generate-graphs', action='store_true')
     parser.add_argument('--generate-table', action='store_true')
     parser.add_argument('--spot-instance-trace', type=argparse.FileType('r'), default=None)
-    parser.add_argument('--model', type=str, default='GPT-2')
+    parser.add_argument('--model', type=str, default='GPT-3')
     return parser.parse_args(args)
 
 def graph(xlabel, xs, xmax, ylabel, ys, ymax, average,

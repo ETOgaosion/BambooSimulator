@@ -16,7 +16,7 @@ def parse(args):
     parser.add_argument('--generate-graphs', action='store_true')
     parser.add_argument('--generate-table', action='store_true')
     parser.add_argument('--spot-instance-trace', type=str, default=None)
-    parser.add_argument('--model', type=str, default='GPT-2')
+    parser.add_argument('--model', type=str, default='GPT-3')
     parser.add_argument('--model-size', type=str, default='350M')
     parser.add_argument('--fig-directory', type=str, default='res/simulator')
     return parser.parse_args(args)
@@ -73,6 +73,7 @@ def main(args):
             model_size=options.model_size
         )
         # simulator.simulate()
+        options.fig_directory = 'res/simutest-nore-' + options.spot_instance_trace.split('/')[-1].split('-')[0] + '-' + options.model_size
         simulator.simulate(duration=4_320_0000, fig_directory=options.fig_directory)
         # simulator.simulate(duration=1_200_000)
     else:

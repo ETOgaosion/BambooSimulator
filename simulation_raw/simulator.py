@@ -800,8 +800,9 @@ class Simulator:
         delta_hours = delta / self.milliseconds_per_hour
         self.performance_xs.append(previous_delta_hours)
         self.performance_ys.append(samples_per_second)
-        self.performance_xs.append(delta_hours)
-        self.performance_ys.append(samples_per_second)
+        if len(self.performance_xs) == 0 or delta_hours - self.performance_xs[-1] > 0.025:
+            self.performance_xs.append(delta_hours)
+            self.performance_ys.append(samples_per_second)
 
         
         current_cost_per_hour = self.cost_ys[-1]
@@ -871,7 +872,6 @@ class Simulator:
                 previous_x = x
                 previous_y = y
             else:
-                assert previous_y == y
                 total += (x - previous_x) * y
                 previous_x = None
                 previous_y = None
