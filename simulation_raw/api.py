@@ -153,6 +153,7 @@ def main(args):
     if not options.generate_table:
         simulator = Simulator(
             seed=options.seed,
+            performance_log_interval=options.performace_log_interval,
             start_hour=options.start_hour,
             generate_addition_probabilities=options.generate_addition_probabilities,
             removal_probability=options.removal_probability,

@@ -57,8 +57,6 @@ class Result:
     num_iterations_complete: int
     average_instances: float
     average_performance: float
-    average_cost: float
-    average_value: float
 
 class SpotInstance:
     def __init__(self, name, start):
@@ -101,6 +99,7 @@ class Simulator:
                  ckpt_steps=10000,
                  skip_filter=50,
                  spot_instance_trace=None,
+                 performance_log_interval=5,
                  generate_addition_probabilities=False,
                  removal_probability=None,
                  generate_graphs=False):
@@ -227,6 +226,8 @@ class Simulator:
         self.spot_instance_cost_per_hour = 0.91
 
         self.model = model
+        
+        self.performance_log_interval = performance_log_interval
 
     def generate_probabilities(self):
         probability = {}
@@ -617,56 +618,33 @@ class Simulator:
         # Handle fallback events
 
         self.num_iterations_complete += 1
-
+        
+        self.times.append(delta / self.milliseconds_per_hour)
         # Calculate performance
         iteration_duration = delta - self.previous_iteration_execute_delta # milliseconds
         #print('Step duration:', iteration_duration)
         iteration_duration_seconds = iteration_duration / self.milliseconds_per_second
         iteration_duration_hours = iteration_duration / self.milliseconds_per_hour
         #print('Step duration (s):', iteration_duration_seconds)
-        samples_per_second = (self.global_batch_size * self.data_parallel_size * self.pipeline_parallel_size) / iteration_duration_seconds
+        samples_per_second = (self.global_batch_size) / iteration_duration_seconds
 
 
         previous_delta_hours = self.previous_iteration_execute_delta / self.milliseconds_per_hour
         delta_hours = delta / self.milliseconds_per_hour
-        if len(self.performance_xs) == 0 or delta_hours - self.performance_xs[-1] > 0.025:
+        
+        self.all_performance_xs.append(delta_hours)
+        self.all_performance_ys.append(samples_per_second)
+
+        if self.num_iterations_complete % self.performance_log_interval == 0:
             self.performance_xs.append(delta_hours)
             self.performance_ys.append(samples_per_second)
+            
+            self.history_performance_xs.append(delta_hours)
+            self.history_performance_ys.append((self.global_batch_size * self.num_iterations_complete) / (delta / self.milliseconds_per_second))
+            
+            self.previous_iteration_execute_delta = delta
 
         
-        current_cost_per_hour = self.cost_ys[-1]
-        current_cost_delta = delta_hours
-        total_cost = 0.0
-        #print('Previous delta hours:', previous_delta_hours)
-        #print('Delta hours:', delta_hours)
-        #print('Duration (s):', iteration_duration_hours)
-        #print(self.cost_xs, self.cost_ys)
-        #print('Finding the cost...', current_cost_per_hour)
-        i = -1
-        while True:
-            x1 = self.cost_xs[i]
-            y1 = self.cost_ys[i]
-            try:
-                x2 = self.cost_xs[i-1]
-                y2 = self.cost_ys[i-1]
-            except IndexError:
-                total_cost += current_cost_per_hour * (current_cost_delta - previous_delta_hours)
-                break
-            assert x1 == x2
-
-            if x1 > previous_delta_hours:
-                total_cost += current_cost_per_hour * (current_cost_delta - x1)
-                current_cost_per_hour = y2
-                current_cost_delta = x1
-            else:
-                total_cost += current_cost_per_hour * (current_cost_delta - previous_delta_hours)
-                break
-            i -= 2
-
-        average_cost_per_hour = total_cost / iteration_duration_hours
-        
-        self.value_xs.append(delta_hours)
-        self.value_ys.append(samples_per_second / average_cost_per_hour)
 
             #print('x1 y1 x2 y2', x1,y1,x2,y2)
             #if x1 < previous_delta_hours:
@@ -674,7 +652,6 @@ class Simulator:
 
         #assert False
 
-        self.previous_iteration_execute_delta = delta
 
         if self.num_iterations_complete % 10000 == 0:
             self.info(delta, f'{self.num_iterations_complete} iterations complete')
@@ -751,12 +728,13 @@ class Simulator:
 
         instances_xs = []
         instances_ys = []
+        self.times = []
         self.performance_xs = []
         self.performance_ys = []
-        self.cost_xs = []
-        self.cost_ys = []
-        self.value_xs = []
-        self.value_ys = []
+        self.all_performance_xs = []
+        self.all_performance_ys = []
+        self.history_performance_xs = []
+        self.history_performance_ys = []
         
         logger.info(f'len(self.events): {len(self.events)}')
 
@@ -805,10 +783,6 @@ class Simulator:
                 num_instances = len(self.spot_instances)
                 instances_xs.append(0)
                 instances_ys.append(num_instances)
-                self.cost_xs.append(0)
-                self.cost_ys.append(
-                    num_instances * self.spot_instance_cost_per_hour
-                )
             elif len(instances_xs) > 0:
                 previous_num_instances = instances_ys[-1]
                 num_instances = len(self.spot_instances)
@@ -816,21 +790,15 @@ class Simulator:
                     delta_hours = delta / self.milliseconds_per_hour
                     instances_xs.append(delta_hours)
                     instances_ys.append(previous_num_instances)
-                    self.cost_xs.append(delta_hours)
-                    self.cost_ys.append(previous_num_instances * self.spot_instance_cost_per_hour)
                     instances_xs.append(delta_hours)
                     instances_ys.append(num_instances)
-                    self.cost_xs.append(delta_hours)
-                    self.cost_ys.append(num_instances * self.spot_instance_cost_per_hour)
 
         duration_hours_whole = math.ceil(delta / self.milliseconds_per_hour)
 
-        duration_hours = self.performance_xs[-1]
+        duration_hours = self.times[-1]
         num_instances = len(self.spot_instances)
         instances_xs.append(duration_hours)
         instances_ys.append(num_instances)
-        self.cost_xs.append(duration_hours)
-        self.cost_ys.append(num_instances * self.spot_instance_cost_per_hour)
 
         # Complete the remaining
         for name, instance in self.spot_instances.items():
@@ -861,9 +829,7 @@ class Simulator:
             num_fatal_failures = self.num_fatal_failures,
             num_iterations_complete = self.num_iterations_complete,
             average_instances = self.calculate_average(instances_xs, instances_ys, duration_hours),
-            average_performance = self.calculate_average(self.performance_xs, self.performance_ys, performance_value_duration_hours),
-            average_cost = self.calculate_average(self.cost_xs, self.cost_ys, duration_hours),
-            average_value = self.calculate_average(self.value_xs, self.value_ys, performance_value_duration_hours),
+            average_performance = self.calculate_average(self.all_performance_xs, self.all_performance_ys, performance_value_duration_hours),
         )
 
         if self.generate_graphs:
@@ -911,6 +877,19 @@ class Simulator:
                 on_demand=self.on_demand_performance,
                 out=f'{fig_directory}/performance{pdf_suffix}',
             )
+
+            # History performance graph
+            graph(
+                'Time (hours)',
+                self.history_performance_xs,
+                duration_hours_whole,
+                'Performance (samples per second)',
+                self.history_performance_ys,
+                max(self.on_demand_performance, max(self.history_performance_ys)),
+                result.average_performance,
+                on_demand=self.on_demand_performance,
+                out=f'{fig_directory}/history_performance{pdf_suffix}',
+            )
             
             suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
             print(suffix)
@@ -921,39 +900,25 @@ class Simulator:
             pickle.dump(instances_ys, open(f'{data_dir}/instances_ys_{suffix}.pkl', 'wb'))
             pickle.dump(self.performance_xs, open(f'{data_dir}/performance_xs_{suffix}.pkl', 'wb'))
             pickle.dump(self.performance_ys, open(f'{data_dir}/performance_ys_{suffix}.pkl', 'wb'))
+            
+            
+            graph_together(
+                axs[1],
+                'Time (hours)',
+                self.history_performance_xs,
+                duration_hours_whole,
+                'Performance (samples per second)',
+                self.history_performance_ys,
+                max(self.on_demand_performance, max(self.history_performance_ys)),
+                result.average_performance,
+                on_demand=self.on_demand_performance
+            )
+            
+            pickle.dump(self.history_performance_xs, open(f'{data_dir}/history_performance_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(self.history_performance_ys, open(f'{data_dir}/history_performance_ys_{suffix}.pkl', 'wb'))
 
             print('Model:', self.model)
             print('  Performance:', 'D', self.on_demand_performance, 'B', result.average_performance)
-
-            # Cost graph
-            graph(
-                'Time (hours)',
-                self.cost_xs,
-                duration_hours_whole,
-                'Cost ($ per hour)',
-                self.cost_ys,
-                max(self.on_demand_cost, max(self.cost_ys)),
-                result.average_cost,
-                on_demand=self.on_demand_cost,
-                out=f'{fig_directory}/cost{pdf_suffix}',
-            )
-
-            print('  Cost:', 'D', self.on_demand_cost, 'B', result.average_cost)
-
-            # Value graph
-            graph(
-                'Time (hours)',
-                self.value_xs,
-                duration_hours_whole,
-                'Value (performance per cost)',
-                self.value_ys,
-                max(self.on_demand_value, max(self.value_ys)),
-                result.average_value,
-                on_demand=self.on_demand_value,
-                out=f'{fig_directory}/value{pdf_suffix}',
-            )
-
-            print('  Value:', 'D', self.on_demand_value, 'B', result.average_value)
             
             # ======================== Plot on single graph ========================
             plt.clf()
@@ -994,32 +959,6 @@ class Simulator:
                 max(self.on_demand_performance, max(self.performance_ys)),
                 result.average_performance,
                 on_demand=self.on_demand_performance
-            )
-            
-            # Cost graph
-            graph_together(
-                axs[2],
-                'Time (hours)',
-                self.cost_xs,
-                duration_hours_whole,
-                'Cost ($ per hour)',
-                self.cost_ys,
-                max(self.on_demand_cost, max(self.cost_ys)),
-                result.average_cost,
-                on_demand=self.on_demand_cost
-            )
-
-            # Value graph
-            graph_together(
-                axs[3],
-                'Time (hours)',
-                self.value_xs,
-                duration_hours_whole,
-                'Value (performance per cost)',
-                self.value_ys,
-                max(self.on_demand_value, max(self.value_ys)),
-                result.average_value,
-                on_demand=self.on_demand_value
             )
             
             plt.savefig(

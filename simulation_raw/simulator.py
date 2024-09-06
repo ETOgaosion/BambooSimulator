@@ -50,8 +50,6 @@ class Result:
     num_steps_complete: int
     average_instances: float
     average_performance: float
-    average_cost: float
-    average_value: float
 
 class SpotInstance:
     def __init__(self, name, start):
@@ -90,6 +88,7 @@ class Simulator:
                  start_hour=None,
                  model='BERT',
                  spot_instance_trace=None,
+                 performance_log_interval=5,
                  generate_addition_probabilities=False,
                  removal_probability=None,
                  generate_graphs=False):
@@ -284,6 +283,8 @@ class Simulator:
         else:
             raise NotImplementedError
         self.model = model
+        
+        self.performance_log_interval = performance_log_interval
 
     def generate_probabilities(self):
         probability = {}
@@ -800,9 +801,13 @@ class Simulator:
         delta_hours = delta / self.milliseconds_per_hour
         self.performance_xs.append(previous_delta_hours)
         self.performance_ys.append(samples_per_second)
-        if len(self.performance_xs) == 0 or delta_hours - self.performance_xs[-1] > 0.025:
-            self.performance_xs.append(delta_hours)
-            self.performance_ys.append(samples_per_second)
+        self.performance_xs.append(delta_hours)
+        self.performance_ys.append(samples_per_second)
+        
+        self.history_performance_xs.append(delta_hours)
+        self.history_performance_ys.append((self.global_batch_size * self.num_iterations_complete) / (delta / self.milliseconds_per_second))
+        
+        self.previous_iteration_execute_delta = delta
 
         
         current_cost_per_hour = self.cost_ys[-1]
@@ -847,7 +852,6 @@ class Simulator:
 
         #assert False
 
-        self.previous_iteration_execute_delta = delta
 
         if self.num_steps_complete % 100 == 0:
             self.info(delta, f'{self.num_steps_complete} steps complete')
@@ -915,12 +919,13 @@ class Simulator:
 
         instances_xs = []
         instances_ys = []
+        self.times = []
         self.performance_xs = []
         self.performance_ys = []
-        self.cost_xs = []
-        self.cost_ys = []
-        self.value_xs = []
-        self.value_ys = []
+        self.all_performance_xs = []
+        self.all_performance_ys = []
+        self.history_performance_xs = []
+        self.history_performance_ys = []
 
         while len(self.events) > 0:
             event = heapq.heappop(self.events)
@@ -965,10 +970,6 @@ class Simulator:
                 num_instances = len(self.spot_instances)
                 instances_xs.append(0)
                 instances_ys.append(num_instances)
-                self.cost_xs.append(0)
-                self.cost_ys.append(
-                    num_instances * self.spot_instance_cost_per_hour
-                )
             elif len(instances_xs) > 0:
                 previous_num_instances = instances_ys[-1]
                 num_instances = len(self.spot_instances)
@@ -976,21 +977,15 @@ class Simulator:
                     delta_hours = delta / self.milliseconds_per_hour
                     instances_xs.append(delta_hours)
                     instances_ys.append(previous_num_instances)
-                    self.cost_xs.append(delta_hours)
-                    self.cost_ys.append(previous_num_instances * self.spot_instance_cost_per_hour)
                     instances_xs.append(delta_hours)
                     instances_ys.append(num_instances)
-                    self.cost_xs.append(delta_hours)
-                    self.cost_ys.append(num_instances * self.spot_instance_cost_per_hour)
 
         duration_hours_whole = math.ceil(delta / self.milliseconds_per_hour)
 
-        duration_hours = self.performance_xs[-1]
+        duration_hours = self.times[-1]
         num_instances = len(self.spot_instances)
         instances_xs.append(duration_hours)
         instances_ys.append(num_instances)
-        self.cost_xs.append(duration_hours)
-        self.cost_ys.append(num_instances * self.spot_instance_cost_per_hour)
 
         # Complete the remaining
         for name, instance in self.spot_instances.items():
@@ -1021,9 +1016,7 @@ class Simulator:
             num_fatal_failures = self.num_fatal_failures,
             num_steps_complete = self.num_steps_complete,
             average_instances = self.calculate_average(instances_xs, instances_ys, duration_hours),
-            average_performance = self.calculate_average(self.performance_xs, self.performance_ys, performance_value_duration_hours),
-            average_cost = self.calculate_average(self.cost_xs, self.cost_ys, duration_hours),
-            average_value = self.calculate_average(self.value_xs, self.value_ys, performance_value_duration_hours),
+            average_performance = self.calculate_average(self.all_performance_xs, self.all_performance_ys, performance_value_duration_hours),
         )
 
         if self.generate_graphs:

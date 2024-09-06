@@ -31,8 +31,6 @@ class Result:
     num_iterations_complete: int
     average_instances: float
     average_performance: float
-    average_cost: float
-    average_value: float
 
 def get_data():
     global isinstances_xs, isinstances_ys, performances_xs, performances_ys

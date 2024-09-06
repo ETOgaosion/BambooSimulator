@@ -21,6 +21,7 @@ def parse(args):
     parser.add_argument('--model-size', type=str, default='350M')
     parser.add_argument('--pipeline-parallel-size', type=int, default=4)
     parser.add_argument('--fig-directory', type=str, default='res/simulator')
+    parser.add_argument('--performace-log-interval', type=int, default=5)
     return parser.parse_args(args)
 
 def simulate(args):
@@ -66,6 +67,7 @@ def main(args):
     if not options.generate_table:
         simulator = MySimulator(
             seed=options.seed,
+            performance_log_interval=options.performace_log_interval,
             start_hour=options.start_hour,
             generate_addition_probabilities=options.generate_addition_probabilities,
             removal_probability=options.removal_probability,
