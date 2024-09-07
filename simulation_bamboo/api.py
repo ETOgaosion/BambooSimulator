@@ -37,7 +37,7 @@ def simulate(args):
     result = simulator.simulate(duration=duration, fig_directory=fig_directory)
     return result
 
-def generate_table(model='GPT-2', spot_instance_trace='trace/p3-trace.csv', duration=4_320_000, fig_directory='res/simulator'):
+def generate_table(model='GPT-3', spot_instance_trace='trace/p3-trace.csv', duration=4_320_000, fig_directory='res/simulator'):
     logging.getLogger('project_pactum.simulation.simulator').setLevel(logging.INFO)
 
 

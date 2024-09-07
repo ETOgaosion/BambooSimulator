@@ -8,7 +8,7 @@ class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
                  model='GPT-3', model_size='350M', pipeline_parallel_size=4, skip_filter=50,
                  spot_instance_trace='traces/p3-trace.csv', generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
-        super().__init__(seed, start_hour, model, model_size, pipeline_parallel_size, skip_filter, spot_instance_trace, performance_log_interval, generate_addition_probabilities, removal_probability, generate_graphs)
+        super().__init__(seed, start_hour, model, model_size, pipeline_parallel_size, skip_filter, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
     
         # Amazon EC2 Tesla T4
         self.global_batch_size = 1024

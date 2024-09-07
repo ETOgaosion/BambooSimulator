@@ -92,10 +92,11 @@ class Simulator:
     def __init__(self,
                  seed=None,
                  start_hour=None,
-                 model='GPT-2',
+                 model='GPT-3',
                  model_size='350M',
                  spot_instance_trace=None,
                  performance_log_interval=5,
+                 runnable_instances=None,
                  generate_addition_probabilities=False,
                  removal_probability=None,
                  generate_graphs=False):
@@ -125,7 +126,10 @@ class Simulator:
         self.millisecond = datetime.timedelta(milliseconds=1)
         self.milliseconds_per_second = self.second / self.millisecond
         self.milliseconds_per_hour = self.hour / self.millisecond
+        
+        self.wait_delta = 1000
 
+        self.runnable_instances = runnable_instances
         self.spot_instance_name_format = 'node{id}'
         self.spot_instance_next_id = 1
         if not generate_addition_probabilities:
@@ -482,6 +486,10 @@ class Simulator:
 
     def simulate_preparation_common(self, delta):
         self.info(delta, f'simulate_preparation: {delta} {self.rendezvous}')
+        if self.runnable_instances is not None and self.runnable_instances.get(self.model_size) is not None:
+            if self.active_spot_instances() < self.runnable_instances[self.model_size]:
+                self.create_preparation_event(delta + self.wait_delta)
+                return
         for i, name in enumerate(self.rendezvous):
             if name not in self.spot_instances:
                 self.info(
@@ -621,7 +629,7 @@ class Simulator:
 
         if self.num_iterations_complete % self.performance_log_interval == 0:
             self.performance_xs.append(delta_hours)
-            self.performance_ys.append(samples_per_second)
+            self.performance_ys.append(samples_per_second * self.performance_log_interval)
             
             self.history_performance_xs.append(delta_hours)
             self.history_performance_ys.append((self.global_batch_size * self.num_iterations_complete) / (delta / self.milliseconds_per_second))
@@ -788,7 +796,7 @@ class Simulator:
             )
             previous_removal_time = removal_time
 
-        performance_value_duration_hours = (duration_hours - (self.start_delta / self.milliseconds_per_hour))
+        performance_value_duration_seconds = (duration_hours * self.milliseconds_per_hour - self.start_delta) / self.milliseconds_per_second
 
         result = Result(
             removal_probability = self.removal_probability,
@@ -802,7 +810,7 @@ class Simulator:
             num_fatal_failures = self.num_fatal_failures,
             num_iterations_complete = self.num_iterations_complete,
             average_instances = self.calculate_average(instances_xs, instances_ys, duration_hours),
-            average_performance = self.calculate_average(self.all_performance_xs, self.all_performance_ys, performance_value_duration_hours),
+            average_performance = self.global_batch_size * self.num_iterations_complete / performance_value_duration_seconds,
         )
 
         if self.generate_graphs:

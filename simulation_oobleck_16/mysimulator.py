@@ -6,8 +6,9 @@ import statistics
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=5, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
-        super().__init__(seed, start_hour, model, model_size, spot_instance_trace, performance_log_interval, generate_addition_probabilities, removal_probability, generate_graphs)
+                 model='GPT-3', model_size='350M', spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=10,
+                 runnable_instances={'2.7B': 10}, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
+        super().__init__(seed, start_hour, model, model_size, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
     
         self.global_batch_size = 1024
         
