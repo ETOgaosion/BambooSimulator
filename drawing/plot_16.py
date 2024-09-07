@@ -61,15 +61,6 @@ def get_data():
                 performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_{trace}_{model_size}.pkl', 'rb'))
                 performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_{trace}_{model_size}.pkl', 'rb'))
 
-def plot_instances(axes, trace, trace_i):
-    axes.plot(isinstances_xs[trace], isinstances_ys[trace], linewidth=1, color='blue')
-    axes.set_ylim(0, 17)
-    axes.set_title(f'弹性实例数量变化 (trace-{trace_i + 1})', fontproperties=font_bold)
-    axes.set_ylabel('实例数量', fontproperties=font)
-    axes.set_xlabel('时间 (h)', fontproperties=font)
-    axes.yaxis.get_major_locator().set_params(integer=True)
-    axes.tick_params(labelsize=label_size)
-
 def handle_performances():
     for system in systems:
         for trace in traces:
@@ -90,9 +81,21 @@ def handle_performances():
                 performances_xs[key] = new_performace_x
                 performances_ys[key] = new_performace_y
 
+def plot_instances(axes, trace, trace_i):
+    axes.plot(isinstances_xs[trace], isinstances_ys[trace], linewidth=1, color='blue')
+    axes.set_ylim(0, 17)
+    axes.set_title(f'弹性实例数量变化 (trace-{trace_i + 1})', fontproperties=font_bold)
+    axes.set_yticks(range(0, max(isinstances_ys[trace]) + 1, (max(isinstances_ys[trace]) + 1) // 4))
+    axes.set_ylabel('实例数量', fontproperties=font)
+    axes.set_xlabel('时间 (h)', fontproperties=font)
+    axes.tick_params(labelsize=label_size)
+
 def plot_performance_together(axes, trace, trace_i, model_size, with_label, with_x_label, with_title):
+    max_y = 0
     for system in systems:
         key = system + '-' + trace + '-' + model_size
+        if max_y < max(performances_ys[key]):
+            max_y = int(max(performances_ys[key]))
         if key not in performances_xs:
             continue
         if with_label:
@@ -104,6 +107,7 @@ def plot_performance_together(axes, trace, trace_i, model_size, with_label, with
         axes.set_ylabel(f'吞吐量 (samples/s)', fontproperties=font)
         if with_title:
             axes.set_title(f'GPT-3 {model_size} 训练吞吐量变化 (trace-{trace_i + 1})', fontproperties=font_bold)
+    axes.set_yticks(range(0, max_y + 1, (max_y + 1) // 4))
     axes.set_ylim(0, axes.get_ylim()[1])
     axes.tick_params(labelsize=label_size)
 
@@ -226,6 +230,7 @@ performace_log_interval_map = {
 }
 # execute_all(performace_log_interval_map)
 get_data()
+plot_performance(f'res/performances_16.png')
 plot_performance(f'res/performances_16.pdf')
 # plot_performance_vertical(f'res/performances_vertical_16.png')
     
