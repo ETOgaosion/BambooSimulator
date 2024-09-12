@@ -1,2 +1,2 @@
-Namespace(fig_directory='res/simuitest', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='350M', pipeline_parallel_size=4, removal_probability=None, seed=None, spot_instance_trace='traces/p3-trace.csv', start_hour=None)
+Namespace(fig_directory='res/simuitest', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=4, removal_probability=None, seed=None, spot_instance_trace='traces/p3-trace.csv', start_hour=None)
 4

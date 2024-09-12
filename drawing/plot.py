@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
 import pickle
 import os
+from pathlib import Path
 import dataclasses
 import pprint
 
@@ -13,9 +15,12 @@ performances_ys = {}
 systems = ['bamboo', 'varu', 'oobleck', 'nore']
 traces = ['g4dn', 'p3']
 model_sizes = ['350M', '1.3B', '2.7B', '6.7B', '13B']
-color = {'bamboo': 'cyan', 'varu': 'green', 'oobleck': 'blue', 'nore': 'red'}
+colormap = {'bamboo': 'cyan', 'varu': 'green', 'oobleck': 'blue', 'nore': 'red'}
 namemap = {'bamboo': 'Bamboo', 'varu': 'Varu', 'oobleck': 'Oobleck', 'nore': 'Nore'}
-linewidth = {'bamboo': 2, 'varu': 1, 'oobleck-16': 1, 'nore': 3}
+linewidth = {'bamboo': 1, 'varu': 1, 'oobleck-16': 1, 'nore': 1.5}
+label_size = 12
+font_bold = FontProperties(size=14, weight= 'bold')
+font = FontProperties(size=label_size)
 
 @dataclasses.dataclass
 class Result:
@@ -48,68 +53,96 @@ def get_data():
                 performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_{trace}_{model_size}.pkl', 'rb'))
                 performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_{trace}_{model_size}.pkl', 'rb'))
 
-def plot_instances(axes, trace):
+def plot_instances(axes, trace, trace_i):
     axes.plot(isinstances_xs[trace], isinstances_ys[trace], linewidth=0.5, color='black')
-    axes.set_title('Spot Instances Number Over Time')
-    axes.set_ylabel('Instances Number')
+    axes.set_ylim(0, 24)
+    axes.set_title(f'Spot Instances Number Over Time (trace-{trace_i + 1})', fontproperties=font_bold)
+    axes.set_yticks(range(0, max(isinstances_ys[trace]) + 1, (max(isinstances_ys[trace]) + 1) // 4))
+    axes.set_ylabel('Instances Number', fontproperties=font)
+    axes.set_xlabel('Time (h)', fontproperties=font)
+    axes.tick_params(labelsize=label_size)
 
-def plot_performance_together(axes, trace, model_size, with_label, with_x_label):
+def plot_performance_together(axes, trace, trace_i, model_size, with_label, with_x_label, with_title):
+    max_y = 0
     for system in systems:
         key = system + '-' + trace + '-' + model_size
+        if max_y < max(performances_ys[key]):
+            max_y = int(max(performances_ys[key]))
         if key not in performances_xs:
             continue
         if with_label:
-            axes.plot(performances_xs[key], performances_ys[key], color=color[system], linewidth=linewidth[system], label=namemap[system])
+            axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system], label=namemap[system])
         else:
-            axes.plot(performances_xs[key], performances_ys[key], color=color[system], linewidth=linewidth[system])
+            axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system])
         if with_x_label:
-            axes.set_xlabel('Time (hours)')
-        axes.set_ylabel(f'Thrpt (Samples/s)')
+            axes.set_xlabel('Time (hours)', fontproperties=font)
+        axes.set_ylabel(f'Thrpt (Samples/s)', fontproperties=font)
+        if with_title:
+            axes.set_title(f'GPT-3 {model_size} Throuphput Changes (trace-{trace_i + 1})', fontproperties=font_bold)
+    axes.set_yticks(range(0, max_y + 1, (max_y + 1) // 4))
+    axes.set_ylim(0, axes.get_ylim()[1])
+    axes.tick_params(labelsize=label_size)
 
-def plot_performance():
-    get_data()
-
-    fig, axs = plt.subplots(len(model_sizes) + 1, len(traces), figsize=(15, 3 * len(model_size)))
+def plot_performance(file):
+    fig, axs = plt.subplots(len(model_sizes) + 1, len(traces), figsize=((len(model_sizes) + 1) * 3, len(traces) * 3.5), dpi=1000)
     
-    plot_instances(axs[0, 0], traces[0])
-    plot_instances(axs[0, 1], traces[1])
+    plot_instances(axs[0, 0], traces[0], 0)
+    plot_instances(axs[0, 1], traces[1], 1)
     
     for model_size_i, model_size in enumerate(model_sizes):
         for trace_i, trace in enumerate(traces):
-            plot_performance_together(axs[model_size_i + 1, trace_i], trace, model_size, with_label=(model_size_i == 0 and trace_i == 0), with_x_label=(model_size_i == len(model_sizes) - 1))
+            plot_performance_together(axs[model_size_i + 1, trace_i], trace, trace_i, model_size, with_label=(model_size_i == 0 and trace_i == 0), with_x_label=True, with_title=True)
     
-    fig.subplots_adjust(bottom=0.1, hspace=0.4, wspace=0.2)
-    fig.legend(loc="lower center", bbox_to_anchor=(0., 0.005, 1., .102), ncol=4, fancybox=True, shadow=True)
+    fig.tight_layout(rect = [0, 0.04, 1, 1])
+    fig.legend(loc='lower center', ncol=3, handlelength=1.1, handletextpad=0.001, columnspacing=0.2, handleheight=0, borderaxespad=0.001, prop={'size': label_size}, labelspacing=0.2,frameon=False)
 
-    plt.savefig('res/performances.png', bbox_inches='tight')
+    plt.savefig(file, bbox_inches='tight')
 
     plt.close()
 
-def plot_total_throughputs():
-    total_throughputs = {}
-    for system in systems:
-        for trace in traces:
-            if total_throughputs.get(trace) is None:
-                total_throughputs[trace] = []
-            key = system + '-' + trace + '-' + '350M'
-            assert key in results
-            total_throughputs[trace].append(results[key].average_performance)
-    pprint.pp(total_throughputs)
-    fig, axs = plt.subplots(1, 2, figsize=(10, 5), dpi=1000)
-    for trace_i, trace in enumerate(traces):
-        for system_i, system in enumerate(systems):
-            if trace_i == 0:
-                axs[trace_i].bar(system, total_throughputs[trace][system_i], color=color[system], label=namemap[system])
-            else:
-                axs[trace_i].bar(system, total_throughputs[trace][system_i], color=color[system])
-            axs[trace_i].bar_label(axs[trace_i].containers[0], label_type='edge')
-        axs[trace_i].set_title(f'Average Throughput in GPT-3 (trace: {trace})')
-        axs[trace_i].set_ylabel('Throughput (samples/s)')
-    fig.subplots_adjust(bottom=0.15)
+def plot_total_throughputs(file):
+    global total_throughputs
+    fig, axs = plt.subplots(len(model_sizes), 1, figsize=(2 * len(model_sizes), 5 * len(traces)), dpi=1000)
+    for model_size_i, model_size in enumerate(model_sizes):
+        for trace_i, trace in enumerate(traces):
+            tt_key = trace + '-' + model_size
+            for system_i, system in enumerate(systems):
+                if trace_i == 0 and model_size_i == 0:
+                    axs[model_size_i].bar(namemap[system] + '\n' + trace, total_throughputs[tt_key][system_i], width=0.3, color=colormap[system], label=namemap[system])
+                else:
+                    axs[model_size_i].bar(namemap[system] + '\n' + trace, total_throughputs[tt_key][system_i], width=0.3, color=colormap[system])
+                axs[model_size_i].bar_label(axs[model_size_i].containers[trace_i * len(systems) + system_i], label_type='edge', fontsize=8)
+        axs[model_size_i].set_ylim(0, max(total_throughputs[tt_key]) * 1.2)
+        axs[model_size_i].vlines((len(traces) * len(systems) - 1) / 2, axs[model_size_i].get_ylim()[0], axs[model_size_i].get_ylim()[1], linestyles='dashed')
+        axs[model_size_i].set_ylabel('Throughput (samples/s)')
+        axs[model_size_i].set_xlabel('GPT-3 ' + model_size)
+    axs[0].set_title(f'Average Throughput in GPT-3 (left trace: g4dn, right: p3))')
+    fig.subplots_adjust(bottom=0.1, hspace=0.4)
     fig.legend(loc="lower center", bbox_to_anchor=(0., 0.005, 1., .102), ncol=4, fancybox=True, shadow=True)
-    plt.savefig('res/total_throughputs.png', bbox_inches='tight')
+    plt.savefig(file, bbox_inches='tight')
     plt.close()
 
+performace_log_interval_map = {
+    '350M': {
+        'g4dn': 18,
+        'p3': 21,
+    },
+    '1.3B': {
+        'g4dn': 5,
+        'p3': 8,
+    },
+    '2.7B': {
+        'g4dn': 2,
+        'p3': 5,
+    },
+}
+# execute_all(performace_log_interval_map)
 get_data()
-plot_performance()
-plot_total_throughputs()
+plot_performance(f'res/performances.png')
+plot_performance(f'res/performances.pdf')
+    
+# calculate_total_throughputs()
+# plot_total_throughputs(f'res/total_throughputs.png')
+
+# handle_performances()
+# plot_performance('res/performances_modified.png')

@@ -6,9 +6,9 @@ import statistics
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', pipeline_parallel_size=4, skip_filter=50,
-                 spot_instance_trace='traces/p3-trace.csv', generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
-        super().__init__(seed, start_hour, model, model_size, pipeline_parallel_size, skip_filter, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
+                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=4, spot_instance_trace='traces/p3-trace.csv', 
+                 performance_log_interval=5, runnable_instances={'350M': 8}, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
+        super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, pipeline_parallel_size, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
     
         # Amazon EC2 Tesla T4
         self.global_batch_size = 1024
@@ -40,8 +40,11 @@ class MySimulator(Simulator):
                     seconds_norepeat.append(seconds[i])
             nodes_samples.append(current_nodes)
             return statistics.mean(nodes_samples)
-    
-        self.on_demand_num_instances = (int(calculate_avg_nodes(spot_instance_trace)) // self.pipeline_parallel_size) * self.pipeline_parallel_size
+
+        if spot_instance_trace is None:
+            self.on_demand_num_instances = spot_instance_desired_capacity
+        else:
+            self.on_demand_num_instances = (int(calculate_avg_nodes(spot_instance_trace)) // self.pipeline_parallel_size) * self.pipeline_parallel_size
         
         self.on_demand_cost = self.on_demand_num_instances * self.on_demand_cost_per_hour
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)

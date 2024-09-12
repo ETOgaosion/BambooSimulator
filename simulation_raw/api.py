@@ -159,6 +159,7 @@ def main(args):
             removal_probability=options.removal_probability,
             generate_graphs=options.generate_graphs,
             spot_instance_trace=options.spot_instance_trace,
+            spot_instance_desired_capacity=options.spot_instance_desired_capacity,
             model=options.model,
         )
         # simulator.simulate()

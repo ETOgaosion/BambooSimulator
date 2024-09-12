@@ -112,8 +112,6 @@ def plot_performance_together(axes, trace, trace_i, model_size, with_label, with
     axes.tick_params(labelsize=label_size)
 
 def plot_performance(file):
-    get_data()
-
     fig, axs = plt.subplots(len(model_sizes) + 1, len(traces), figsize=((len(model_sizes) + 1) * 3, len(traces) * 3.5), dpi=1000)
     
     plot_instances(axs[0, 0], traces[0], 0)
@@ -131,8 +129,6 @@ def plot_performance(file):
     plt.close()
 
 def plot_performance_vertical(file):
-    get_data()
-
     fig, axs = plt.subplots(len(traces), len(model_sizes) + 1, figsize=(len(traces) * 5, (len(model_sizes) + 1) * 3), dpi=1000)
     
     plot_instances(axs[0, 0], traces[0])

@@ -102,6 +102,7 @@ class Simulator:
             logger.info(f'Using seed: {self.seed}')
         else:
             self.r = random.Random()
+        self.spot_instance_desired_capacity = spot_instance_desired_capacity
         self.generate_addition_probabilities = generate_addition_probabilities
         self.removal_probability = removal_probability
 
@@ -483,11 +484,9 @@ class Simulator:
 
     def generate_spot_instance_initial_events(self, start):
         # Generate the initial instances
-        spot_instance_initial_probability = self.spot_instance_addition_probability[start.hour]
         delta = 0
         for i in range(self.spot_instance_desired_capacity):
-            if spot_instance_initial_probability > self.r.random():
-                event = self.create_spot_instance_add_event(delta)
+            event = self.create_spot_instance_add_event(delta)
         self.create_spot_instance_generate_event(delta)
 
     # def generate_spot_instance_events(self, start, duration): # TODO

@@ -18,8 +18,9 @@ def parse(args):
     parser.add_argument('--spot-instance-trace', type=str, default=None)
     parser.add_argument('--model', type=str, default='GPT-3')
     parser.add_argument('--model-size', type=str, default='350M')
+    parser.add_argument('--spot-instance-desired-capacity', type=int, default=24)
     parser.add_argument('--fig-directory', type=str, default='res/simulator')
-    parser.add_argument('--performace-log-interval', type=int, default=5)
+    parser.add_argument('--performace-log-interval', type=int, default=1)
     return parser.parse_args(args)
 
 def simulate(args):
@@ -71,11 +72,15 @@ def main(args):
             removal_probability=options.removal_probability,
             generate_graphs=options.generate_graphs,
             spot_instance_trace=options.spot_instance_trace,
+            spot_instance_desired_capacity=options.spot_instance_desired_capacity,
             model=options.model,
             model_size=options.model_size
         )
         # simulator.simulate()
-        options.fig_directory = 'res/simutest-checkpoint-' + options.spot_instance_trace.split('/')[-1].split('-')[0] + '-' + options.model_size
+        if options.spot_instance_trace is None:
+            options.fig_directory = 'res/simutest-checkpoint-prob-' + options.model_size + '-' + str(options.removal_probability)
+        else:
+            options.fig_directory = 'res/simutest-checkpoint-' + options.spot_instance_trace.split('/')[-1].split('-')[0] + '-' + options.model_size
         simulator.simulate(duration=4_320_0000, fig_directory=options.fig_directory)
         # simulator.simulate(duration=1_200_000)
     else:

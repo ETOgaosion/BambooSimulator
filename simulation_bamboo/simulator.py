@@ -94,8 +94,8 @@ class Simulator:
                  start_hour=None,
                  model='GPT-3',
                  model_size='350M',
+                 spot_instance_desired_capacity=24,
                  pipeline_parallel_size=4,
-                 skip_filter=50,
                  spot_instance_trace=None,
                  performance_log_interval=5,
                  runnable_instances=None,
@@ -107,12 +107,11 @@ class Simulator:
             self.spot_instance_trace_file = spot_instance_trace
             self.spot_instance_trace = open(spot_instance_trace, 'r')
         else:
+            self.start_nodes_num = spot_instance_desired_capacity
             self.spot_instance_trace = None
         self.generate_graphs = generate_graphs
         
         self.model_size = model_size
-        
-        self.skip_filter = skip_filter
 
         self.seed = seed
         if self.seed is not None:
@@ -120,6 +119,7 @@ class Simulator:
             logger.info(f'Using seed: {self.seed}')
         else:
             self.r = random.Random()
+        self.spot_instance_desired_capacity = spot_instance_desired_capacity
         self.generate_addition_probabilities = generate_addition_probabilities
         self.removal_probability = removal_probability
         self.pipeline_parallel_size = pipeline_parallel_size
@@ -232,6 +232,8 @@ class Simulator:
         self.spot_instance_cost_per_hour = 0.91
 
         self.model = model
+        
+        self.performance_log_interval = performance_log_interval
         
         self.output_delta = {}
 
@@ -355,16 +357,14 @@ class Simulator:
 
     def generate_spot_instance_initial_events(self, start):
         # Generate the initial instances
-        spot_instance_initial_probability = self.spot_instance_addition_probability[start.hour]
         delta = 0
         for i in range(self.spot_instance_desired_capacity):
-            if spot_instance_initial_probability > self.r.random():
-                event = self.create_spot_instance_add_event(delta)
+            event = self.create_spot_instance_add_event(delta)
         self.create_spot_instance_generate_event(delta)
 
     # def generate_spot_instance_events(self, start, duration): # TODO
     def generate_spot_instance_events(self, start, delta):
-        # self.info(delta, f'generate_spot_instance_events {delta}')
+        self.info(delta, f'generate_spot_instance_events {delta}')
         current_delta = delta * self.millisecond
         self.create_spot_instance_generate_event(current_delta + self.hour)
 
@@ -504,6 +504,10 @@ class Simulator:
 
     def simulate_preparation_common(self, delta):
         # self.info(delta, f'simulate_preparation: {delta}')
+        if self.runnable_instances is not None and self.runnable_instances.get(self.model_size) is not None:
+            if self.active_spot_instances() < self.runnable_instances[self.model_size]:
+                self.create_preparation_event(delta + self.wait_delta)
+                return
         for i, name in enumerate(self.rendezvous):
             if name not in self.spot_instances:
                 self.info(
@@ -642,7 +646,6 @@ class Simulator:
         #print('Step duration (s):', iteration_duration_seconds)
         samples_per_second = (self.global_batch_size) / iteration_duration_seconds
 
-
         previous_delta_hours = self.previous_iteration_execute_delta / self.milliseconds_per_hour
         delta_hours = delta / self.milliseconds_per_hour
         
@@ -657,8 +660,6 @@ class Simulator:
             self.history_performance_ys.append((self.global_batch_size * self.num_iterations_complete) / (delta / self.milliseconds_per_second))
             
             self.previous_iteration_execute_delta = delta
-
-        
 
             #print('x1 y1 x2 y2', x1,y1,x2,y2)
             #if x1 < previous_delta_hours:
@@ -841,21 +842,10 @@ class Simulator:
         if self.generate_graphs:
             #pdf_suffix = f'-seed-{self.seed}-start-hour-{self.start_hour}-generate-addition-probabilities-{self.generate_addition_probabilities}-removal-probability-{self.removal_probability}.pdf'
             pdf_suffix = f'-{self.model}.pdf'
-            
     
             Path(fig_directory).mkdir(parents=True, exist_ok=True)
             
-            new_performance_xs, new_performance_ys = [], []
-            for idx, performance in enumerate(self.performance_ys):
-                if performance < self.skip_filter and (idx < len(self.performance_ys) - 3 and self.performance_ys[idx - 2] == self.performance_ys[idx + 2]):
-                    # print('Skipping', idx, self.performance_xs[idx], self.performance_ys[idx])
-                    pass
-                else:
-                    new_performance_xs.append(self.performance_xs[idx])
-                    new_performance_ys.append(self.performance_ys[idx])
-            self.performance_xs = new_performance_xs
-            self.performance_ys = new_performance_ys
-            
+            print(f'fig_directory: {fig_directory}')
 
             # Instances graph
             graph(
@@ -897,32 +887,6 @@ class Simulator:
                 on_demand=self.on_demand_performance,
                 out=f'{fig_directory}/history_performance{pdf_suffix}',
             )
-            
-            suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
-            print(suffix)
-            data_dir = 'data/bamboo/'
-            Path(data_dir).mkdir(parents=True, exist_ok=True)
-            pickle.dump(result, open(f'{data_dir}/result_{suffix}.pkl', 'wb'))
-            pickle.dump(instances_xs, open(f'{data_dir}/instances_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(instances_ys, open(f'{data_dir}/instances_ys_{suffix}.pkl', 'wb'))
-            pickle.dump(self.performance_xs, open(f'{data_dir}/performance_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(self.performance_ys, open(f'{data_dir}/performance_ys_{suffix}.pkl', 'wb'))
-            
-            
-            graph_together(
-                axs[1],
-                'Time (hours)',
-                self.history_performance_xs,
-                duration_hours_whole,
-                'Performance (samples per second)',
-                self.history_performance_ys,
-                max(self.on_demand_performance, max(self.history_performance_ys)),
-                result.average_performance,
-                on_demand=self.on_demand_performance
-            )
-            
-            pickle.dump(self.history_performance_xs, open(f'{data_dir}/history_performance_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(self.history_performance_ys, open(f'{data_dir}/history_performance_ys_{suffix}.pkl', 'wb'))
 
             print('Model:', self.model)
             print('  Performance:', 'D', self.on_demand_performance, 'B', result.average_performance)
@@ -939,7 +903,7 @@ class Simulator:
             }
             plt.rcParams.update(params)
             
-            fig, axs = plt.subplots(4)
+            fig, axs = plt.subplots(2)
             fig.suptitle('Result Comparison')
             plt.tight_layout(pad=1, w_pad=1, h_pad=2)
             
@@ -967,6 +931,35 @@ class Simulator:
                 result.average_performance,
                 on_demand=self.on_demand_performance
             )
+            
+            if self.spot_instance_trace is not None:
+                suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
+            else:
+                suffix = f'prob_{self.removal_probability}_model_{self.model_size}'
+            print(suffix)
+            data_dir = 'data/bamboo/'
+            Path(data_dir).mkdir(parents=True, exist_ok=True)
+            pickle.dump(result, open(f'{data_dir}/result_{suffix}.pkl', 'wb'))
+            pickle.dump(instances_xs, open(f'{data_dir}/instances_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(instances_ys, open(f'{data_dir}/instances_ys_{suffix}.pkl', 'wb'))
+            pickle.dump(self.performance_xs, open(f'{data_dir}/performance_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(self.performance_ys, open(f'{data_dir}/performance_ys_{suffix}.pkl', 'wb'))
+            
+            
+            graph_together(
+                axs[1],
+                'Time (hours)',
+                self.history_performance_xs,
+                duration_hours_whole,
+                'Performance (samples per second)',
+                self.history_performance_ys,
+                max(self.on_demand_performance, max(self.history_performance_ys)),
+                result.average_performance,
+                on_demand=self.on_demand_performance
+            )
+            
+            pickle.dump(self.history_performance_xs, open(f'{data_dir}/history_performance_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(self.history_performance_ys, open(f'{data_dir}/history_performance_ys_{suffix}.pkl', 'wb'))
             
             plt.savefig(
                 f'{fig_directory}/total{pdf_suffix}',

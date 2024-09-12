@@ -94,6 +94,7 @@ class Simulator:
                  start_hour=None,
                  model='GPT-3',
                  model_size='350M',
+                 spot_instance_desired_capacity=24,
                  spot_instance_trace=None,
                  performance_log_interval=5,
                  runnable_instances=None,
@@ -105,6 +106,8 @@ class Simulator:
             self.spot_instance_trace_file = spot_instance_trace
             self.spot_instance_trace = open(spot_instance_trace, 'r')
         else:
+            self.start_nodes_num = self.spot_instance_desired_capacity
+            self.start_nodes_num = spot_instance_desired_capacity
             self.spot_instance_trace = None
         self.generate_graphs = generate_graphs
         
@@ -116,6 +119,7 @@ class Simulator:
             logger.info(f'Using seed: {self.seed}')
         else:
             self.r = random.Random()
+        self.spot_instance_desired_capacity = spot_instance_desired_capacity
         self.generate_addition_probabilities = generate_addition_probabilities
         self.removal_probability = removal_probability
         
@@ -351,11 +355,9 @@ class Simulator:
 
     def generate_spot_instance_initial_events(self, start):
         # Generate the initial instances
-        spot_instance_initial_probability = self.spot_instance_addition_probability[start.hour]
         delta = 0
         for i in range(self.spot_instance_desired_capacity):
-            if spot_instance_initial_probability > self.r.random():
-                event = self.create_spot_instance_add_event(delta)
+            event = self.create_spot_instance_add_event(delta)
         self.create_spot_instance_generate_event(delta)
 
     # def generate_spot_instance_events(self, start, duration): # TODO
@@ -622,7 +624,6 @@ class Simulator:
         #print('Step duration (s):', iteration_duration_seconds)
         samples_per_second = (self.global_batch_size) / iteration_duration_seconds
 
-
         previous_delta_hours = self.previous_iteration_execute_delta / self.milliseconds_per_hour
         delta_hours = delta / self.milliseconds_per_hour
         
@@ -637,8 +638,6 @@ class Simulator:
             self.history_performance_ys.append((self.global_batch_size * self.num_iterations_complete) / (delta / self.milliseconds_per_second))
             
             self.previous_iteration_execute_delta = delta
-
-        
 
             #print('x1 y1 x2 y2', x1,y1,x2,y2)
             #if x1 < previous_delta_hours:
@@ -880,7 +879,7 @@ class Simulator:
             }
             plt.rcParams.update(params)
             
-            fig, axs = plt.subplots(4)
+            fig, axs = plt.subplots(2)
             fig.suptitle('Result Comparison')
             plt.tight_layout(pad=1, w_pad=1, h_pad=2)
             
@@ -910,8 +909,10 @@ class Simulator:
             )
             
             
-            suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
-            print(suffix)
+            if self.spot_instance_trace is not None:
+                suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
+            else:
+                suffix = f'prob_{self.removal_probability}_model_{self.model_size}'
             data_dir = 'data/nore/'
             Path(data_dir).mkdir(parents=True, exist_ok=True)
             pickle.dump(result, open(f'{data_dir}/result_{suffix}.pkl', 'wb'))
