@@ -151,7 +151,7 @@ def calculate_stats_nodes(file):
     plot_nodes_samples(seconds_norepeat, nodes_samples, file.split('/')[-1].split('-')[0])
     return max(nodes_samples), min(nodes_samples), statistics.mean(nodes_samples)
 
-# print(calculate_stats_nodes('traces/g4dn-trace.csv'))
+print(calculate_stats_nodes('traces/g4dn-trace-8-24.csv'))
 print(calculate_stats_nodes('traces/p3-trace-8-24.csv'))
 
     

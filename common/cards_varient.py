@@ -77,7 +77,6 @@ def get_csv_list(sort_by_time, add_header=False):
         cards_varient_total_csv_list = sorted(cards_varient_total_csv_list, key=lambda x: x[0])
     if add_header:
         cards_varient_total_csv_list.insert(0, ['start_nodes_num', 'action', 'varience', 'end_nodes', 'time'])
-    pprint.pp(cards_varient_total_csv_list)
 
 def to_csv(file):
     with open(file, 'w', newline='') as csvfile:
@@ -107,19 +106,31 @@ def get_group_by_cards(reverse=False):
         cards_varient_total_group_by_card[in_dict] = dict(sorted(cards_varient_total_group_by_card[in_dict].items()))
     cards_varient_total_group_by_card = dict(sorted(cards_varient_total_group_by_card.items()))
 
-cards_parser('traces/p3-trace-16.csv')
+cards_parser('traces/p3-trace.csv')
 cards_varient()
 # get_csv_list(True)
 # to_csv('res/trace/p3-card-varient-sort-by-time.csv')
 get_csv_list(False)
 # to_csv('res/trace/p3-card-varient.csv')
 
-cards_parser('traces/g4dn-trace-16.csv')
+cards_parser('traces/g4dn-trace.csv')
+cards_varient()
+# get_csv_list(True)
+# to_csv('res/trace/all-card-varient-sort-by-time.csv')
+get_csv_list(False)
+
+cards_parser('traces/p3-trace-8-24.csv')
+cards_varient()
+# get_csv_list(True)
+# to_csv('res/trace/all-card-varient-sort-by-time.csv')
+get_csv_list(False)
+
+cards_parser('traces/g4dn-trace-8-24.csv')
 cards_varient()
 # get_csv_list(True)
 # to_csv('res/trace/all-card-varient-sort-by-time.csv')
 get_csv_list(False, True)
-to_csv('res/trace/all-card-varient-16.csv')
+to_csv('res/trace/all-card-varient.csv')
 
 get_group_by_cards(True)
 pprint.pp(cards_varient_total_group_by_card)

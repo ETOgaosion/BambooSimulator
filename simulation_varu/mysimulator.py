@@ -45,21 +45,64 @@ class MySimulator(Simulator):
         self.on_demand_cost = self.on_demand_num_instances * self.on_demand_cost_per_hour
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)
         self.on_demand_value = self.on_demand_performance / self.on_demand_cost
+        
+    def checkpoint_delta(self):
+        data = {
+            '350M': {
+                8: 0.5,
+                10: 0.5,
+                12: 0.5,
+                14: 0.5,
+                16: 0.5,
+                18: 0.5,
+                20: 0.5,
+                22: 0.5,
+                24: 0.5,
+                26: 0.5,
+                28: 0.5,
+                30: 0.5,
+                32: 0.5,
+            },
+            '1.3B': {
+                8: 0.5,
+                10: 0.5,
+                12: 0.5,
+                14: 0.5,
+                16: 0.5,
+                18: 0.5,
+                20: 0.5,
+                22: 0.5,
+                24: 0.5,
+                26: 0.5,
+                28: 0.5,
+                30: 0.5,
+                32: 0.5,
+            },
+            '2.7B': {
+                8: 0.5,
+                10: 0.5,
+                12: 0.5,
+                14: 0.5,
+                16: 0.5,
+                18: 0.5,
+                20: 0.5,
+                22: 0.5,
+                24: 0.5,
+                26: 0.5,
+                28: 0.5,
+                30: 0.5,
+                32: 0.5,
+            },
+        }
+        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size]
 
     def checkpoint_load_delta(self):
         # checkpoint load time
-        data = {
-            "350M": 32094,
-            "1.3B": 32094,
-            "2.7B": 32094,
-            "6.7B": 32094,
-            "13B": 32094,
-        }
-        return data[self.model_size] + self.iteration_delta / 2
+        return self.checkpoint_delta()
 
     def checkpoint_save_delta(self):
         # checkpoint load time
-        return 32094
+        return self.checkpoint_delta()
 
     def simulate_iteration_delta(self):
         # iteration time

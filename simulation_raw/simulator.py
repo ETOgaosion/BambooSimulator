@@ -987,8 +987,6 @@ class Simulator:
 
         duration_hours = self.times[-1]
         num_instances = len(self.spot_instances)
-        instances_xs.append(duration_hours)
-        instances_ys.append(num_instances)
 
         # Complete the remaining
         for name, instance in self.spot_instances.items():
@@ -1034,7 +1032,7 @@ class Simulator:
                 duration_hours_whole,
                 '# Instances',
                 instances_ys,
-                max(self.on_demand_num_instances, max(instances_ys)),
+                max(self.on_demand_num_instances, max(instances_ys) * 1.05),
                 result.average_instances,
                 on_demand=self.on_demand_num_instances,
                 out=f'res/simulator_raw/instances{pdf_suffix}',
@@ -1048,7 +1046,7 @@ class Simulator:
                 duration_hours_whole,
                 'Performance (samples per second)',
                 self.performance_ys,
-                max(self.on_demand_performance, max(self.performance_ys)),
+                max(self.on_demand_performance, max(self.performance_ys) * 1.05),
                 result.average_performance,
                 on_demand=self.on_demand_performance,
                 out=f'res/simulator_raw/performance{pdf_suffix}',

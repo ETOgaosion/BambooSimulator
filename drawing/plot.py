@@ -6,15 +6,19 @@ from pathlib import Path
 import dataclasses
 import pprint
 
+from execute.execute_all import execute_all, execute_all_prob
+
 results = {}
 isinstances_xs = {}
 isinstances_ys = {}
 performances_xs = {}
 performances_ys = {}
+total_throughputs = {}
 
 systems = ['bamboo', 'varu', 'oobleck', 'nore']
 traces = ['g4dn', 'p3']
-model_sizes = ['350M', '1.3B', '2.7B', '6.7B', '13B']
+probabilities = [0.2]
+model_sizes = ['350M', '1.3B', '2.7B']
 colormap = {'bamboo': 'cyan', 'varu': 'green', 'oobleck': 'blue', 'nore': 'red'}
 namemap = {'bamboo': 'Bamboo', 'varu': 'Varu', 'oobleck': 'Oobleck', 'nore': 'Nore'}
 linewidth = {'bamboo': 1, 'varu': 1, 'oobleck-16': 1, 'nore': 1.5}
@@ -37,21 +41,31 @@ class Result:
     average_instances: float
     average_performance: float
 
-def get_data():
+def get_data(use_trace=True):
     global isinstances_xs, isinstances_ys, performances_xs, performances_ys
     for system in systems:
-        for trace in traces:
-            for model_size in model_sizes:
-                if not os.path.exists(f'data/{system}/result_{trace}_{model_size}.pkl'):
-                    print(f'data/{system}/result_{trace}_{model_size}.pkl does not exist')
-                    continue
-                key = system + '-' + trace + '-' + model_size
-                results[key] = pickle.load(open(f'data/{system}/result_{trace}_{model_size}.pkl', 'rb'))
-                if isinstances_xs.get(trace) is None:
-                    isinstances_xs[trace] = pickle.load(open(f'data/{system}/instances_xs_{trace}_{model_size}.pkl', 'rb'))
-                    isinstances_ys[trace] = pickle.load(open(f'data/{system}/instances_ys_{trace}_{model_size}.pkl', 'rb'))
-                performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_{trace}_{model_size}.pkl', 'rb'))
-                performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_{trace}_{model_size}.pkl', 'rb'))
+        for model_size in model_sizes:
+            if use_trace:
+                for trace in traces:
+                    if not os.path.exists(f'data/{system}/result_{trace}_{model_size}.pkl'):
+                        print(f'data/{system}/result_{trace}_{model_size}.pkl does not exist')
+                        continue
+                    key = system + '-' + trace + '-' + model_size
+                    results[key] = pickle.load(open(f'data/{system}/result_{trace}_{model_size}.pkl', 'rb'))
+                    if isinstances_xs.get(trace) is None:
+                        isinstances_xs[trace] = pickle.load(open(f'data/{system}/instances_xs_{trace}_{model_size}.pkl', 'rb'))
+                        isinstances_ys[trace] = pickle.load(open(f'data/{system}/instances_ys_{trace}_{model_size}.pkl', 'rb'))
+                    performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_{trace}_{model_size}.pkl', 'rb'))
+                    performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_{trace}_{model_size}.pkl', 'rb'))
+            else:
+                for prob in probabilities:
+                    if not os.path.exists(f'data/{system}/result_prob_{prob}_{model_size}.pkl'):
+                        print(f'data/{system}/result_prob_{prob}_{model_size}.pkl')
+                        continue
+                    key = system + '-' + str(prob) + '-' + model_size
+                    results[key] = pickle.load(open(f'data/{system}/result_prob_{prob}_{model_size}.pkl', 'rb'))
+                    performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_prob_{prob}_{model_size}.pkl', 'rb'))
+                    performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_prob_{prob}_{model_size}.pkl', 'rb'))
 
 def plot_instances(axes, trace, trace_i):
     axes.plot(isinstances_xs[trace], isinstances_ys[trace], linewidth=0.5, color='black')
@@ -83,7 +97,7 @@ def plot_performance_together(axes, trace, trace_i, model_size, with_label, with
     axes.set_ylim(0, axes.get_ylim()[1])
     axes.tick_params(labelsize=label_size)
 
-def plot_performance(file):
+def plot_performance(files):
     fig, axs = plt.subplots(len(model_sizes) + 1, len(traces), figsize=((len(model_sizes) + 1) * 3, len(traces) * 3.5), dpi=1000)
     
     plot_instances(axs[0, 0], traces[0], 0)
@@ -96,11 +110,25 @@ def plot_performance(file):
     fig.tight_layout(rect = [0, 0.04, 1, 1])
     fig.legend(loc='lower center', ncol=3, handlelength=1.1, handletextpad=0.001, columnspacing=0.2, handleheight=0, borderaxespad=0.001, prop={'size': label_size}, labelspacing=0.2,frameon=False)
 
-    plt.savefig(file, bbox_inches='tight')
+    for file in files:
+        plt.savefig(file, bbox_inches='tight')
 
     plt.close()
+    
+def calculate_total_throughputs():
+    global total_throughputs
+    for trace in traces:
+        for model_size in model_sizes:
+            tt_key = trace + '-' + model_size
+            for system in systems:
+                if total_throughputs.get(tt_key) is None:
+                    total_throughputs[tt_key] = []
+                key = system + '-' + trace + '-' + model_size
+                assert key in results
+                total_throughputs[tt_key].append(results[key].average_performance)
+    pprint.pp(total_throughputs)
 
-def plot_total_throughputs(file):
+def plot_total_throughputs(files):
     global total_throughputs
     fig, axs = plt.subplots(len(model_sizes), 1, figsize=(2 * len(model_sizes), 5 * len(traces)), dpi=1000)
     for model_size_i, model_size in enumerate(model_sizes):
@@ -119,8 +147,15 @@ def plot_total_throughputs(file):
     axs[0].set_title(f'Average Throughput in GPT-3 (left trace: g4dn, right: p3))')
     fig.subplots_adjust(bottom=0.1, hspace=0.4)
     fig.legend(loc="lower center", bbox_to_anchor=(0., 0.005, 1., .102), ncol=4, fancybox=True, shadow=True)
-    plt.savefig(file, bbox_inches='tight')
+    for file in files:
+        plt.savefig(file, bbox_inches='tight')
     plt.close()
+
+performance_log_interval_map_prob = {
+    '350M': {0.1: 1, 0.2: 1, 0.4: 1},
+    '1.3B': {0.1: 1, 0.2: 1},
+    '2.7B': {0.1: 1, 0.2: 1}
+}
 
 performace_log_interval_map = {
     '350M': {
@@ -136,13 +171,13 @@ performace_log_interval_map = {
         'p3': 5,
     },
 }
+execute_all_prob(probabilities, 24, performance_log_interval_map_prob)
 # execute_all(performace_log_interval_map)
 get_data()
-plot_performance(f'res/performances.png')
-plot_performance(f'res/performances.pdf')
+plot_performance([f'res/performances_prob.png', f'res/performances_prob.pdf'])
     
-# calculate_total_throughputs()
-# plot_total_throughputs(f'res/total_throughputs.png')
+calculate_total_throughputs()
+plot_total_throughputs([f'res/total_throughputs_prob.png'])
 
 # handle_performances()
 # plot_performance('res/performances_modified.png')

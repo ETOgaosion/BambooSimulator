@@ -382,6 +382,7 @@ class Simulator:
                                                               current_delta)
             if delta is None:
                 continue
+            print('removal', delta)
             removed_instances.append((delta, name))
         heapq.heapify(removed_instances)
 
@@ -393,6 +394,7 @@ class Simulator:
             delta = self.generate_spot_instance_addition_delta(current_time, current_delta)
             if delta is None:
                 continue
+            print('addition', delta)
             possible_added_deltas.append(delta)
         heapq.heapify(possible_added_deltas)
 
@@ -804,8 +806,6 @@ class Simulator:
 
         duration_hours = self.times[-1]
         num_instances = len(self.spot_instances)
-        instances_xs.append(duration_hours)
-        instances_ys.append(num_instances)
 
         # Complete the remaining
         for name, instance in self.spot_instances.items():
@@ -854,7 +854,7 @@ class Simulator:
                 duration_hours_whole,
                 '# Instances',
                 instances_ys,
-                max(self.on_demand_num_instances, max(instances_ys)),
+                max(self.on_demand_num_instances, max(instances_ys) * 1.05),
                 result.average_instances,
                 on_demand=self.on_demand_num_instances,
                 out=f'{fig_directory}/instances{pdf_suffix}',
@@ -869,7 +869,7 @@ class Simulator:
                 duration_hours_whole,
                 'Performance (samples per second)',
                 self.performance_ys,
-                max(self.on_demand_performance, max(self.performance_ys)),
+                max(self.on_demand_performance, max(self.performance_ys) * 1.05),
                 result.average_performance,
                 on_demand=self.on_demand_performance,
                 out=f'{fig_directory}/performance{pdf_suffix}',
@@ -882,7 +882,7 @@ class Simulator:
                 duration_hours_whole,
                 'Performance (samples per second)',
                 self.history_performance_ys,
-                max(self.on_demand_performance, max(self.history_performance_ys)),
+                max(self.on_demand_performance, max(self.history_performance_ys) * 1.05),
                 result.average_performance,
                 on_demand=self.on_demand_performance,
                 out=f'{fig_directory}/history_performance{pdf_suffix}',
@@ -914,7 +914,7 @@ class Simulator:
                 duration_hours_whole,
                 '# Instances',
                 instances_ys,
-                max(self.on_demand_num_instances, max(instances_ys)),
+                max(self.on_demand_num_instances, max(instances_ys) * 1.05),
                 result.average_instances,
                 on_demand=self.on_demand_num_instances
             )
@@ -927,7 +927,7 @@ class Simulator:
                 duration_hours_whole,
                 'Performance (samples per second)',
                 self.performance_ys,
-                max(self.on_demand_performance, max(self.performance_ys)),
+                max(self.on_demand_performance, max(self.performance_ys) * 1.05),
                 result.average_performance,
                 on_demand=self.on_demand_performance
             )
@@ -953,7 +953,7 @@ class Simulator:
                 duration_hours_whole,
                 'Performance (samples per second)',
                 self.history_performance_ys,
-                max(self.on_demand_performance, max(self.history_performance_ys)),
+                max(self.on_demand_performance, max(self.history_performance_ys) * 1.05),
                 result.average_performance,
                 on_demand=self.on_demand_performance
             )

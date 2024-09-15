@@ -40,7 +40,10 @@ class MySimulator(Simulator):
             nodes_samples.append(current_nodes)
             return statistics.mean(nodes_samples)
     
-        self.on_demand_num_instances = math.ceil(calculate_avg_nodes(spot_instance_trace))
+        if spot_instance_trace is None:
+            self.on_demand_num_instances = spot_instance_desired_capacity
+        else:
+            self.on_demand_num_instances = (int(calculate_avg_nodes(spot_instance_trace)) // self.pipeline_parallel_size) * self.pipeline_parallel_size
         
         self.on_demand_cost = self.on_demand_num_instances * self.on_demand_cost_per_hour
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)
