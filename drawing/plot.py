@@ -18,13 +18,18 @@ total_throughputs = {}
 systems = ['bamboo', 'varu', 'oobleck', 'nore']
 traces = ['g4dn', 'p3']
 probabilities = [0.2]
-model_sizes = ['350M', '1.3B', '2.7B']
+frequencies = ['6h', '1h', '10m']
+model_sizes = ['350M', '1.3B', '2.7B', '6.7B']
 colormap = {'bamboo': 'cyan', 'varu': 'green', 'oobleck': 'blue', 'nore': 'red'}
 namemap = {'bamboo': 'Bamboo', 'varu': 'Varu', 'oobleck': 'Oobleck', 'nore': 'Nore'}
 linewidth = {'bamboo': 1, 'varu': 1, 'oobleck-16': 1, 'nore': 1.5}
 label_size = 12
 font_bold = FontProperties(size=14, weight= 'bold')
 font = FontProperties(size=label_size)
+
+USE_TRACE = 0
+USE_FREQUENCY = 1
+USE_PROB = 2
 
 @dataclasses.dataclass
 class Result:
@@ -41,11 +46,11 @@ class Result:
     average_instances: float
     average_performance: float
 
-def get_data(use_trace=True):
+def get_data(use_which=USE_TRACE):
     global isinstances_xs, isinstances_ys, performances_xs, performances_ys
     for system in systems:
         for model_size in model_sizes:
-            if use_trace:
+            if use_which == USE_TRACE:
                 for trace in traces:
                     if not os.path.exists(f'data/{system}/result_{trace}_{model_size}.pkl'):
                         print(f'data/{system}/result_{trace}_{model_size}.pkl does not exist')
@@ -57,6 +62,18 @@ def get_data(use_trace=True):
                         isinstances_ys[trace] = pickle.load(open(f'data/{system}/instances_ys_{trace}_{model_size}.pkl', 'rb'))
                     performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_{trace}_{model_size}.pkl', 'rb'))
                     performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_{trace}_{model_size}.pkl', 'rb'))
+            elif use_which == USE_FREQUENCY:
+                for freq in frequencies:
+                    if not os.path.exists(f'data/{system}/result_{freq}_{model_size}.pkl'):
+                        print(f'data/{system}/result_{freq}_{model_size}.pkl does not exist')
+                        continue
+                    key = system + '-' + freq + '-' + model_size
+                    results[key] = pickle.load(open(f'data/{system}/result_{freq}_{model_size}.pkl', 'rb'))
+                    if isinstances_xs.get(freq) is None:
+                        isinstances_xs[freq] = pickle.load(open(f'data/{system}/instances_xs_{freq}_{model_size}.pkl', 'rb'))
+                        isinstances_ys[freq] = pickle.load(open(f'data/{system}/instances_ys_{freq}_{model_size}.pkl', 'rb'))
+                    performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_{freq}_{model_size}.pkl', 'rb'))
+                    performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_{freq}_{model_size}.pkl', 'rb'))
             else:
                 for prob in probabilities:
                     if not os.path.exists(f'data/{system}/result_prob_{prob}_{model_size}.pkl'):
@@ -67,11 +84,16 @@ def get_data(use_trace=True):
                     performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_prob_{prob}_{model_size}.pkl', 'rb'))
                     performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_prob_{prob}_{model_size}.pkl', 'rb'))
 
-def plot_instances(axes, trace, trace_i):
-    axes.plot(isinstances_xs[trace], isinstances_ys[trace], linewidth=0.5, color='black')
+def plot_instances(axes, key, key_i, use_which=USE_TRACE):
+    axes.plot(isinstances_xs[key], isinstances_ys[key], linewidth=0.5, color='black')
     axes.set_ylim(0, 24)
-    axes.set_title(f'Spot Instances Number Over Time (trace-{trace_i + 1})', fontproperties=font_bold)
-    axes.set_yticks(range(0, max(isinstances_ys[trace]) + 1, (max(isinstances_ys[trace]) + 1) // 4))
+    if use_which == USE_TRACE:
+        axes.set_title(f'Spot Instances Number Over Time (trace-{key_i + 1})', fontproperties=font_bold)
+    elif use_which == USE_FREQUENCY:
+        axes.set_title(f'Spot Instances Number Over Time (frequency-{key})', fontproperties=font_bold)
+    else:
+        axes.set_title(f'Spot Instances Number Over Time (prob-{key})', fontproperties=font_bold)
+    axes.set_yticks(range(0, max(isinstances_ys[key]) + 1, (max(isinstances_ys[key]) + 1) // 4))
     axes.set_ylabel('Instances Number', fontproperties=font)
     axes.set_xlabel('Time (h)', fontproperties=font)
     axes.tick_params(labelsize=label_size)
@@ -97,7 +119,7 @@ def plot_performance_together(axes, trace, trace_i, model_size, with_label, with
     axes.set_ylim(0, axes.get_ylim()[1])
     axes.tick_params(labelsize=label_size)
 
-def plot_performance(files):
+def plot_performance_trace(files):
     fig, axs = plt.subplots(len(model_sizes) + 1, len(traces), figsize=((len(model_sizes) + 1) * 3, len(traces) * 3.5), dpi=1000)
     
     plot_instances(axs[0, 0], traces[0], 0)
@@ -114,6 +136,13 @@ def plot_performance(files):
         plt.savefig(file, bbox_inches='tight')
 
     plt.close()
+
+def get_performance_freq(files):
+    for freq_i, freq in enumerate(frequencies):
+        for model_size_i, model_size in enumerate(model_sizes):
+            for system_i, system in enumerate(systems):
+                key = system + '-' + freq + '-' + model_size
+                print(key, results[key])
     
 def calculate_total_throughputs():
     global total_throughputs

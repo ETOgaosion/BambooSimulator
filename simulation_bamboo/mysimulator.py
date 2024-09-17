@@ -6,7 +6,7 @@ import statistics
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=4, spot_instance_trace='traces/p3-trace.csv', 
+                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=2, spot_instance_trace='traces/p3-trace.csv', 
                  performance_log_interval=5, runnable_instances={'350M': 8}, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
         super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, pipeline_parallel_size, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
     
@@ -53,23 +53,15 @@ class MySimulator(Simulator):
     def reconfigure_delta(self, prev_pipeline_num, new_pipeline_num):
         # reconfigure time (ms)
         # layer time model: (layers / 12) * 150s
+        # data: model_size: pipeline size: reconfigure time
+        if prev_pipeline_num > new_pipeline_num:
+            return self.iteration_delta / 2
         data = {
             '350M': {
-                1: {2: 32904},
-                2: {3: 32904},
-                3: {4: 32904, 5: 32904},
-                4: {5: 32904},
-                5: {6: 32904, 7: 32904},
-                6: {7: 32904, 8: 32904},
-                7: {8: 32904},
+                2: 570.28
             },
         }
-        if prev_pipeline_num > new_pipeline_num:
-            prev_pipeline_num, new_pipeline_num = new_pipeline_num, prev_pipeline_num
-        assert prev_pipeline_num != new_pipeline_num, f"Pipeline number should not be the same, {prev_pipeline_num} == {new_pipeline_num}"
-        assert data[self.model_size].get(prev_pipeline_num) is not None, f"Pipeline number {prev_pipeline_num} is not in the data"
-        assert data[self.model_size][prev_pipeline_num].get(new_pipeline_num) is not None, f'Pipeline number {new_pipeline_num} is not in the data {prev_pipeline_num}'
-        return data[self.model_size][prev_pipeline_num][new_pipeline_num] + self.iteration_delta / 2
+        return data[self.model_size][self.pipeline_parallel_size] + self.iteration_delta / 2
 
     def simulate_iteration_delta(self):
         # iteration time
@@ -77,12 +69,18 @@ class MySimulator(Simulator):
     
     def simulate_iteration_delta_calc(self, nodes_num):
         data = {
-            8: 111111,
-            12: 99999,
-            16: 88888,
-            20: 77777,
+            8: 69515.708,
+            10: 50229.078,
+            12: 37633.883,
+            14: 49504.413,
+            16: 29771.795,
+            18: 29567.57,
+            20: 23009.683,
+            22: 42596.255,
             24: 66666,
+            26: 55555,
             28: 55555,
+            30: 44444,
             32: 44444
         }
-        return data[(nodes_num // self.pipeline_parallel_size) * self.pipeline_parallel_size]
+        return data[self.data_parallel_size * self.pipeline_parallel_size]
