@@ -23,6 +23,7 @@ def parse(args):
     parser.add_argument('--pipeline-parallel-size', type=int, default=4)
     parser.add_argument('--fig-directory', type=str, default='res/simulator')
     parser.add_argument('--performace-log-interval', type=int, default=1)
+    parser.add_argument('--duration', type=int, default=43200)
     return parser.parse_args(args)
 
 def simulate(args):
@@ -85,7 +86,7 @@ def main(args):
             options.fig_directory = 'res/simutest-varu-prob-' + options.model_size + '-' + str(options.removal_probability)
         else:
             options.fig_directory = 'res/simutest-varu-' + options.spot_instance_trace.split('/')[-1].split('-')[0] + '-' + options.model_size
-        simulator.simulate(duration=4_320_0000, fig_directory=options.fig_directory)
+        simulator.simulate(duration=options.duration * 1000, fig_directory=options.fig_directory)
         # simulator.simulate(duration=1_200_000)
     else:
         generate_table(options.model, spot_instance_trace=options.spot_instance_trace, duration=4_320_0000, fig_directory=options.fig_directory)

@@ -130,14 +130,14 @@ class MySimulator(Simulator):
         }
 
         assert last_instances_num != new_instances_num, f'last_instances_num: {last_instances_num}, new_instances_num: {new_instances_num} should be different'
-        if last_instances_num > new_instances_num:
+        if last_instances_num < new_instances_num:
             last_instances_num, new_instances_num = new_instances_num, last_instances_num
         assert reconfigure_map[self.model_size].get(last_instances_num) is not None, f'last_instances_num: {last_instances_num} is not supported'
         if not self.generate_addition_probabilities:
             assert reconfigure_map[self.model_size][last_instances_num].get(new_instances_num) is not None, f'last_instances_num: {last_instances_num}, new_instances_num: {new_instances_num} is not supported'
             reconfigure_time = reconfigure_map[self.model_size][last_instances_num][new_instances_num]
         else:
-            for _, v in reconfigure_map[self.model_size][last_instances_num]:
+            for _, v in enumerate(reconfigure_map[self.model_size][last_instances_num]):
                 reconfigure_time = v
                 break
         return reconfigure_time

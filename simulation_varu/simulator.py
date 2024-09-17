@@ -98,7 +98,6 @@ class Simulator:
                  spot_instance_desired_capacity=24,
                  pipeline_parallel_size=4,
                  ckpt_steps=10000,
-                 skip_filter=50,
                  spot_instance_trace=None,
                  performance_log_interval=5,
                  runnable_instances=None,
@@ -115,8 +114,6 @@ class Simulator:
         self.generate_graphs = generate_graphs
         
         self.model_size = model_size
-        
-        self.skip_filter = skip_filter
 
         self.seed = seed
         if self.seed is not None:
@@ -883,34 +880,6 @@ class Simulator:
                 on_demand=self.on_demand_performance,
                 out=f'{fig_directory}/history_performance{pdf_suffix}',
             )
-            
-            if self.spot_instance_trace is not None:
-                suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
-            else:
-                suffix = f'prob_{self.removal_probability}_model_{self.model_size}'
-            data_dir = 'data/varu/'
-            Path(data_dir).mkdir(parents=True, exist_ok=True)
-            pickle.dump(result, open(f'{data_dir}/result_{suffix}.pkl', 'wb'))
-            pickle.dump(instances_xs, open(f'{data_dir}/instances_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(instances_ys, open(f'{data_dir}/instances_ys_{suffix}.pkl', 'wb'))
-            pickle.dump(self.performance_xs, open(f'{data_dir}/performance_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(self.performance_ys, open(f'{data_dir}/performance_ys_{suffix}.pkl', 'wb'))
-            
-            
-            graph_together(
-                axs[1],
-                'Time (hours)',
-                self.history_performance_xs,
-                duration_hours_whole,
-                'Performance (samples per second)',
-                self.history_performance_ys,
-                max(self.on_demand_performance, max(self.history_performance_ys) * 1.05),
-                result.average_performance,
-                on_demand=self.on_demand_performance
-            )
-            
-            pickle.dump(self.history_performance_xs, open(f'{data_dir}/history_performance_xs_{suffix}.pkl', 'wb'))
-            pickle.dump(self.history_performance_ys, open(f'{data_dir}/history_performance_ys_{suffix}.pkl', 'wb'))
 
             print('Model:', self.model)
             print('  Performance:', 'D', self.on_demand_performance, 'B', result.average_performance)
@@ -927,7 +896,7 @@ class Simulator:
             }
             plt.rcParams.update(params)
             
-            fig, axs = plt.subplots(2)
+            fig, axs = plt.subplots(3)
             fig.suptitle('Result Comparison')
             plt.tight_layout(pad=1, w_pad=1, h_pad=2)
             
@@ -955,6 +924,34 @@ class Simulator:
                 result.average_performance,
                 on_demand=self.on_demand_performance
             )
+            
+            if self.spot_instance_trace is not None:
+                suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size
+            else:
+                suffix = f'prob_{self.removal_probability}_model_{self.model_size}'
+            data_dir = 'data/varu/'
+            Path(data_dir).mkdir(parents=True, exist_ok=True)
+            pickle.dump(result, open(f'{data_dir}/result_{suffix}.pkl', 'wb'))
+            pickle.dump(instances_xs, open(f'{data_dir}/instances_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(instances_ys, open(f'{data_dir}/instances_ys_{suffix}.pkl', 'wb'))
+            pickle.dump(self.performance_xs, open(f'{data_dir}/performance_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(self.performance_ys, open(f'{data_dir}/performance_ys_{suffix}.pkl', 'wb'))
+            
+            
+            graph_together(
+                axs[2],
+                'Time (hours)',
+                self.history_performance_xs,
+                duration_hours_whole,
+                'Performance (samples per second)',
+                self.history_performance_ys,
+                max(self.on_demand_performance, max(self.history_performance_ys) * 1.05),
+                result.average_performance,
+                on_demand=self.on_demand_performance
+            )
+            
+            pickle.dump(self.history_performance_xs, open(f'{data_dir}/history_performance_xs_{suffix}.pkl', 'wb'))
+            pickle.dump(self.history_performance_ys, open(f'{data_dir}/history_performance_ys_{suffix}.pkl', 'wb'))
             
             plt.savefig(
                 f'{fig_directory}/total{pdf_suffix}',

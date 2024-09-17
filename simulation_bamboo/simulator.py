@@ -138,7 +138,7 @@ class Simulator:
         self.spot_instance_next_id = 1
         if not generate_addition_probabilities:
             self.spot_instance_addition_probability = {
-                0: 0.05,
+                0: 0.025,
                 1: 0.05,
                 2: 0.05,
                 3: 0.50,
@@ -903,7 +903,7 @@ class Simulator:
             }
             plt.rcParams.update(params)
             
-            fig, axs = plt.subplots(2)
+            fig, axs = plt.subplots(3)
             fig.suptitle('Result Comparison')
             plt.tight_layout(pad=1, w_pad=1, h_pad=2)
             
@@ -947,7 +947,7 @@ class Simulator:
             
             
             graph_together(
-                axs[1],
+                axs[2],
                 'Time (hours)',
                 self.history_performance_xs,
                 duration_hours_whole,
