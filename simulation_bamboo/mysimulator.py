@@ -61,7 +61,9 @@ class MySimulator(Simulator):
                 2: 570.28
             },
         }
-        return data[self.model_size][self.pipeline_parallel_size] + self.iteration_delta / 2
+        fall_back_delta = self.simulate_iteration_delta_calc(new_pipeline_num) / 2
+        self.delta_fallback += fall_back_delta
+        return data[self.model_size][self.pipeline_parallel_size] + fall_back_delta
 
     def simulate_iteration_delta(self):
         # iteration time

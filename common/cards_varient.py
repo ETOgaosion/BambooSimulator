@@ -119,6 +119,18 @@ cards_varient()
 # to_csv('res/trace/all-card-varient-sort-by-time.csv')
 get_csv_list(False)
 
+cards_parser('traces/p3-trace-8-20.csv')
+cards_varient()
+# get_csv_list(True)
+# to_csv('res/trace/all-card-varient-sort-by-time.csv')
+get_csv_list(False)
+
+cards_parser('traces/g4dn-trace-8-20.csv')
+cards_varient()
+# get_csv_list(True)
+# to_csv('res/trace/all-card-varient-sort-by-time.csv')
+get_csv_list(False)
+
 cards_parser('traces/p3-trace-8-24.csv')
 cards_varient()
 # get_csv_list(True)

@@ -6,7 +6,7 @@ from pathlib import Path
 import dataclasses
 import pprint
 
-from execute.execute_all import execute_all, execute_all_prob
+from execute.execute_all_20 import execute_all, execute_all_prob
 
 results = {}
 isinstances_xs = {}
@@ -15,14 +15,15 @@ performances_xs = {}
 performances_ys = {}
 total_throughputs = {}
 
-systems = ['bamboo', 'varu', 'oobleck', 'livepipe']
+systems = ['varu', 'oobleck', 'livepipe-red1', 'livepipe-red2']
+dirs = {'varu': 'varu-20', 'oobleck': 'oobleck-20', 'livepipe-red1': 'livepipe-red1-20', 'livepipe-red2': 'livepipe-red2-20'}
 traces = ['g4dn', 'p3']
 probabilities = [0.2]
 frequencies = ['6h', '1h', '10m']
-model_sizes = ['350M', '1.3B', '2.7B', '6.7B']
-colormap = {'bamboo': 'cyan', 'varu': 'green', 'oobleck': 'blue', 'livepipe': 'red'}
-namemap = {'bamboo': 'Bamboo', 'varu': 'Varu', 'oobleck': 'Oobleck', 'livepipe': 'LivePipe'}
-linewidth = {'bamboo': 1, 'varu': 1, 'oobleck-16': 1, 'livepipe': 1.5}
+model_sizes = ['350M', '1.3B', '2.7B']
+colormap = {'varu': 'green', 'oobleck': 'blue', 'livepipe-red1': 'red', 'livepipe-red2': 'purple'}
+namemap = {'varu': 'Varu', 'oobleck': 'Oobleck', 'livepipe-red1': 'LivePipe Red1', 'livepipe-red2': 'LivePipe Red2'}
+linewidth = {'varu': 1, 'oobleck': 1, 'livepipe-red1': 1.5, 'livepipe-red2': 1.5}
 label_size = 12
 font_bold = FontProperties(size=14, weight= 'bold')
 font = FontProperties(size=label_size)
@@ -57,40 +58,41 @@ class Result:
 def get_data(use_which=USE_TRACE):
     global isinstances_xs, isinstances_ys, performances_xs, performances_ys
     for system in systems:
+        sys_dir = dirs[system]
         for model_size in model_sizes:
             if use_which == USE_TRACE:
                 for trace in traces:
-                    if not os.path.exists(f'data/{system}/result_{trace}_{model_size}.pkl'):
-                        print(f'data/{system}/result_{trace}_{model_size}.pkl does not exist')
+                    if not os.path.exists(f'data/{sys_dir}/result_{trace}_{model_size}.pkl'):
+                        print(f'data/{sys_dir}/result_{trace}_{model_size}.pkl does not exist')
                         continue
                     key = system + '-' + trace + '-' + model_size
-                    results[key] = pickle.load(open(f'data/{system}/result_{trace}_{model_size}.pkl', 'rb'))
+                    results[key] = pickle.load(open(f'data/{sys_dir}/result_{trace}_{model_size}.pkl', 'rb'))
                     if isinstances_xs.get(trace) is None:
-                        isinstances_xs[trace] = pickle.load(open(f'data/{system}/instances_xs_{trace}_{model_size}.pkl', 'rb'))
-                        isinstances_ys[trace] = pickle.load(open(f'data/{system}/instances_ys_{trace}_{model_size}.pkl', 'rb'))
-                    performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_{trace}_{model_size}.pkl', 'rb'))
-                    performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_{trace}_{model_size}.pkl', 'rb'))
+                        isinstances_xs[trace] = pickle.load(open(f'data/{sys_dir}/instances_xs_{trace}_{model_size}.pkl', 'rb'))
+                        isinstances_ys[trace] = pickle.load(open(f'data/{sys_dir}/instances_ys_{trace}_{model_size}.pkl', 'rb'))
+                    performances_xs[key] = pickle.load(open(f'data/{sys_dir}/performance_xs_{trace}_{model_size}.pkl', 'rb'))
+                    performances_ys[key] = pickle.load(open(f'data/{sys_dir}/performance_ys_{trace}_{model_size}.pkl', 'rb'))
             elif use_which == USE_FREQUENCY:
                 for freq in frequencies:
-                    if not os.path.exists(f'data/{system}/result_{freq}_{model_size}.pkl'):
-                        print(f'data/{system}/result_{freq}_{model_size}.pkl does not exist')
+                    if not os.path.exists(f'data/{sys_dir}/result_{freq}_{model_size}.pkl'):
+                        print(f'data/{sys_dir}/result_{freq}_{model_size}.pkl does not exist')
                         continue
                     key = system + '-' + freq + '-' + model_size
-                    results[key] = pickle.load(open(f'data/{system}/result_{freq}_{model_size}.pkl', 'rb'))
+                    results[key] = pickle.load(open(f'data/{sys_dir}/result_{freq}_{model_size}.pkl', 'rb'))
                     if isinstances_xs.get(freq) is None:
-                        isinstances_xs[freq] = pickle.load(open(f'data/{system}/instances_xs_{freq}_{model_size}.pkl', 'rb'))
-                        isinstances_ys[freq] = pickle.load(open(f'data/{system}/instances_ys_{freq}_{model_size}.pkl', 'rb'))
-                    performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_{freq}_{model_size}.pkl', 'rb'))
-                    performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_{freq}_{model_size}.pkl', 'rb'))
+                        isinstances_xs[freq] = pickle.load(open(f'data/{sys_dir}/instances_xs_{freq}_{model_size}.pkl', 'rb'))
+                        isinstances_ys[freq] = pickle.load(open(f'data/{sys_dir}/instances_ys_{freq}_{model_size}.pkl', 'rb'))
+                    performances_xs[key] = pickle.load(open(f'data/{sys_dir}/performance_xs_{freq}_{model_size}.pkl', 'rb'))
+                    performances_ys[key] = pickle.load(open(f'data/{sys_dir}/performance_ys_{freq}_{model_size}.pkl', 'rb'))
             else:
                 for prob in probabilities:
-                    if not os.path.exists(f'data/{system}/result_prob_{prob}_{model_size}.pkl'):
-                        print(f'data/{system}/result_prob_{prob}_{model_size}.pkl')
+                    if not os.path.exists(f'data/{sys_dir}/result_prob_{prob}_{model_size}.pkl'):
+                        print(f'data/{sys_dir}/result_prob_{prob}_{model_size}.pkl')
                         continue
                     key = system + '-' + str(prob) + '-' + model_size
-                    results[key] = pickle.load(open(f'data/{system}/result_prob_{prob}_{model_size}.pkl', 'rb'))
-                    performances_xs[key] = pickle.load(open(f'data/{system}/performance_xs_prob_{prob}_{model_size}.pkl', 'rb'))
-                    performances_ys[key] = pickle.load(open(f'data/{system}/performance_ys_prob_{prob}_{model_size}.pkl', 'rb'))
+                    results[key] = pickle.load(open(f'data/{sys_dir}/result_prob_{prob}_{model_size}.pkl', 'rb'))
+                    performances_xs[key] = pickle.load(open(f'data/{sys_dir}/performance_xs_prob_{prob}_{model_size}.pkl', 'rb'))
+                    performances_ys[key] = pickle.load(open(f'data/{sys_dir}/performance_ys_prob_{prob}_{model_size}.pkl', 'rb'))
 
 def plot_instances(axes, key, key_i, use_which=USE_TRACE):
     axes.plot(isinstances_xs[key], isinstances_ys[key], linewidth=0.5, color='black')
@@ -208,13 +210,13 @@ performace_log_interval_map = {
         'p3': 5,
     },
 }
-execute_all_prob(probabilities, 24, performance_log_interval_map_prob)
-# execute_all(performace_log_interval_map)
+# execute_all_prob(probabilities, 24, performance_log_interval_map_prob)
+execute_all(performance_log_interval_map=performace_log_interval_map)
 get_data()
-plot_performance_trace([f'res/performances_prob.png', f'res/performances_prob.pdf'])
+plot_performance_trace([f'res/performances_prob_20.png', f'res/performances_prob_20.pdf'])
     
 calculate_total_throughputs()
-plot_total_throughputs([f'res/total_throughputs_prob.png'])
+plot_total_throughputs([f'res/total_throughputs_prob_20.png'])
 
 # handle_performances()
 # plot_performance('res/performances_modified.png')

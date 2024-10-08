@@ -6,7 +6,7 @@ import statistics
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=4, ckpt_steps=100, spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=5, runnable_instances=None, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
+                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=4, ckpt_steps=100, spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=1, runnable_instances=None, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
         super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, pipeline_parallel_size, ckpt_steps, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
     
         self.global_batch_size = 1024
@@ -47,17 +47,19 @@ class MySimulator(Simulator):
         self.on_demand_cost = self.on_demand_num_instances * self.on_demand_cost_per_hour
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)
         self.on_demand_value = self.on_demand_performance / self.on_demand_cost
-        
-    def checkpoint_delta(self):
+
+    def checkpoint_load_delta(self):
+        # checkpoint load time
         data = {
             '350M': {
-                8: 4296.147108,
-                10: 9277.608871,
-                12: 3121.950388,
-                14: 14656.55994,
-                16: 30005.0838,
-                18: 17675.45199,
-                20: 2982.938766,
+                8: 42475.43168,
+                10: 33975.31867,
+                12: 77950.89817,
+                14: 35362.89454,
+                16: 115614.7542,
+                18: 80279.53172,
+                20: 152853.5693,
+                
                 22: 28579.37741,
                 24: 30014.53805,
                 26: 1,
@@ -66,13 +68,14 @@ class MySimulator(Simulator):
                 32: 1,
             },
             '1.3B': {
-                8: 30004.92954,
-                10: 32925.54379,
-                12: 30006.79803,
-                14: 56444.9091,
-                16: 30004.97913,
-                18: 57500.74387,
-                20: 30005.11837,
+                8: 139524.0681,
+                10: 132032.9852,
+                12: 282174.2513,
+                14: 156121.9044,
+                16: 418040.9725,
+                18: 311971.0498,
+                20: 553184.2401,
+                
                 22: 115967.1862,
                 24: 30006.22892,
                 26: 1,
@@ -81,13 +84,14 @@ class MySimulator(Simulator):
                 32: 1,
             },
             '2.7B': {
-                8: 149084.1184,
-                10: 105098.3019,
-                12: 114498.944,
-                14: 150447,
-                16: 109499.6846,
-                18: 142304.4288,
-                20: 77322.00456,
+                8: 120466.6085,
+                10: 302239.511,
+                12: 325951.894,
+                14: 323475.5192,
+                16: 405715.4648,
+                18: 587177.3295,
+                20: 799947.7508,
+                
                 22: 200233.2916,
                 24: 114042.3822,
                 26: 1,
@@ -96,17 +100,64 @@ class MySimulator(Simulator):
                 32: 1,
             },
         }
-        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size]
-
-    def checkpoint_load_delta(self):
-        # checkpoint load time
-        fallback_delta = (self.num_iterations_complete % self.check_pt_steps + 1 / 2) * self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
-        self.delta_fallback += fallback_delta
-        return self.checkpoint_delta() + fallback_delta
+        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 15
 
     def checkpoint_save_delta(self):
         # checkpoint load time
-        return self.checkpoint_delta()
+        data = {
+            '350M': {
+                8: 4603.884697,
+                10: 9091.940403,
+                12: 3110.169411,
+                14: 12759.67813,
+                16: 30012.20202,
+                18: 17680.86052,
+                20: 3026.195765,
+                
+                22: 28579.37741,
+                24: 30014.53805,
+                26: 1,
+                28: 1,
+                30: 1,
+                32: 1,
+            },
+            '1.3B': {
+                8: 30004.38666,
+                10: 32123.32082,
+                12: 10173.39659,
+                14: 58078.09949,
+                16: 30006.00767,
+                18: 61008.61573,
+                20: 30024.8394,
+                
+                22: 115967.1862,
+                24: 30006.22892,
+                26: 1,
+                28: 1,
+                30: 1,
+                32: 1,
+            },
+            '2.7B': {
+                8: 174420.1455,
+                10: 77729.68721,
+                12: 113812.7,
+                14: 131950.9952,
+                16: 174069.0582,
+                18: 112645.9255,
+                20: 77429.51131,
+                
+                22: 200233.2916,
+                24: 114042.3822,
+                26: 1,
+                28: 1,
+                30: 1,
+                32: 1,
+            },
+        }
+        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 15
+
+    def fallback_delta(self):
+        return (self.num_iterations_complete % self.ckpt_steps + 1 / 2) * self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
 
     def simulate_iteration_delta(self):
         # iteration time
@@ -122,6 +173,7 @@ class MySimulator(Simulator):
                 16: 15269.1,
                 18: 15421.1,
                 20: 12574.5,
+                
                 22: 17573.8,
                 24: 10325.2,
                 26: 44444,
@@ -137,6 +189,7 @@ class MySimulator(Simulator):
                 16: 40158.2,
                 18: 40333.5,
                 20: 32901.5,
+                
                 22: 37698.7,
                 24: 27164.4,
                 26: 44444,
@@ -152,6 +205,7 @@ class MySimulator(Simulator):
                 16: 70696.4,
                 18: 60015.1,
                 20: 61319.8,
+                
                 22: 52594.6,
                 24: 50000,
                 26: 44444,

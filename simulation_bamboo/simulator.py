@@ -44,6 +44,7 @@ class NodeStatus(enum.Enum):
 
 @dataclasses.dataclass
 class Result:
+    system_name: str
     removal_probability: float
     preemption_mean: float
     preemption_median: float
@@ -56,6 +57,13 @@ class Result:
     num_iterations_complete: int
     average_instances: float
     average_performance: float
+    total_delta: int
+    delta_effective_time: int
+    delta_checkpointing: int
+    delta_redundant_computation: int
+    delta_reconfig: int
+    delta_fallback: int
+    delta_idle_waste: int
 
 class SpotInstance:
     def __init__(self, name, start):
@@ -235,6 +243,14 @@ class Simulator:
         
         self.performance_log_interval = performance_log_interval
         
+        self.total_delta = 0
+        self.delta_effective_time = 0
+        self.delta_checkpointing = 0
+        self.delta_redundant_computation = 0
+        self.delta_reconfig = 0
+        self.delta_fallback = 0
+        self.delta_idle_waste = 0
+        
         self.output_delta = {}
 
     def generate_probabilities(self):
@@ -334,8 +350,10 @@ class Simulator:
         )
     
     def create_reconfigure_event(self, delta):
+        reconfig_delta = self.reconfigure_delta(self.prev_pipeline_num, self.active_spot_instances() // self.pipeline_parallel_size)
+        self.delta_reconfig += reconfig_delta
         return self.create_event(
-            delta + self.reconfigure_delta(self.prev_pipeline_num, self.active_spot_instances() // self.pipeline_parallel_size),
+            delta + reconfig_delta,
             EventKind.RECONFIGURE,
             {}
         )
@@ -684,6 +702,7 @@ class Simulator:
                 delta,
                 self.rendezvous_version
             )
+            self.delta_effective_time += self.iteration_delta
 
     def calculate_average(self, xs, ys, duration):
         previous_x = None
@@ -711,7 +730,7 @@ class Simulator:
         total += (duration - previous_x) * previous_y
         return total / duration
         
-    def simulate(self, duration=None, fig_directory="res/simulator"):
+    def simulate(self, duration=None, system_name="bamboo", fig_directory="res/simulator"):
         start = datetime.datetime.now(datetime.timezone.utc)
         start = start.replace(minute=0, second=0, microsecond=0)
         if self.start_hour is not None:
@@ -749,8 +768,20 @@ class Simulator:
         
         logger.info(f'len(self.events): {len(self.events)}')
 
+        last_event = None
+
         while len(self.events) > 0:
             event = heapq.heappop(self.events)
+            if last_event is not None:
+                if event.delta == last_event.delta and event.kind == last_event.kind:
+                    same = True
+                    for k, v in event.data.items():
+                        if event.data[k] != last_event.data[k]:
+                            same = False
+                            break
+                    if same:
+                        continue
+            last_event = event
 
             kind = event.kind
             delta = event.delta
@@ -802,6 +833,11 @@ class Simulator:
                     instances_xs.append(delta_hours)
                     instances_ys.append(num_instances)
 
+        self.total_delta = delta
+        self.delta_reconfig = self.delta_reconfig - self.delta_fallback
+        self.delta_redundant_computation = self.delta_effective_time * 0.8
+        self.delta_effective_time = self.delta_effective_time * 0.2
+        self.delta_idle_waste = self.total_delta - self.delta_checkpointing - self.delta_effective_time - self.delta_fallback - self.delta_reconfig - self.delta_redundant_computation
         duration_hours_whole = math.ceil(delta / self.milliseconds_per_hour)
 
         duration_hours = self.times[-1]
@@ -825,6 +861,7 @@ class Simulator:
         performance_value_duration_seconds = (duration_hours * self.milliseconds_per_hour - self.start_delta) / self.milliseconds_per_second
 
         result = Result(
+            system_name=system_name,
             removal_probability = self.removal_probability,
             preemption_mean = statistics.mean(spot_instance_between_removal_times) / self.milliseconds_per_hour if len(spot_instance_between_removal_times) > 0 else 0,
             preemption_median = statistics.mean(spot_instance_between_removal_times) / self.milliseconds_per_hour if len(spot_instance_between_removal_times) > 0 else 0,
@@ -837,6 +874,13 @@ class Simulator:
             num_iterations_complete = self.num_iterations_complete,
             average_instances = self.calculate_average(instances_xs, instances_ys, duration_hours),
             average_performance = self.global_batch_size * self.num_iterations_complete / performance_value_duration_seconds,
+            total_delta = self.total_delta,
+            delta_effective_time = self.delta_effective_time,
+            delta_checkpointing = self.delta_checkpointing,
+            delta_redundant_computation = self.delta_redundant_computation,
+            delta_reconfig = self.delta_reconfig,
+            delta_fallback = self.delta_fallback,
+            delta_idle_waste= self.delta_idle_waste
         )
 
         if self.generate_graphs:

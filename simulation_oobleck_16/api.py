@@ -82,7 +82,8 @@ def main(args):
             options.fig_directory = 'res/simutest-oobleck-16-prob-' + options.model_size + '-' + str(options.removal_probability)
         else:
             options.fig_directory = 'res/simutest-oobleck-16-' + options.spot_instance_trace.split('/')[-1].split('-')[0] + '-' + options.model_size
-        simulator.simulate(duration=options.duration * 1000, fig_directory=options.fig_directory)
+        options.data_dir = 'data/oobleck-16'
+        simulator.simulate(duration=options.duration * 1000, data_dir=options.data_dir, fig_directory=options.fig_directory)
         # simulator.simulate(duration=1_200_000)
     else:
         generate_table(options.model, spot_instance_trace=options.spot_instance_trace, duration=4_320_0000, fig_directory=options.fig_directory)

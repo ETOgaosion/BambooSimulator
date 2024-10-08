@@ -32,6 +32,7 @@ font = FontProperties(fname=f'{str(Path.home())}/Library/Fonts/Arial-Unicode-Reg
 
 @dataclasses.dataclass
 class Result:
+    system_name: str
     removal_probability: float
     preemption_mean: float
     preemption_median: float
@@ -44,6 +45,13 @@ class Result:
     num_iterations_complete: int
     average_instances: float
     average_performance: float
+    total_delta: int
+    delta_effective_time: int
+    delta_checkpointing: int
+    delta_redundant_computation: int
+    delta_reconfig: int
+    delta_fallback: int
+    delta_idle_waste: int
 
 def get_data():
     global isinstances_xs, isinstances_ys, performances_xs, performances_ys

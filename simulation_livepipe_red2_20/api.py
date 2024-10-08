@@ -1,7 +1,7 @@
 import argparse
 import logging
 
-from simulation_varu.mysimulator import MySimulator
+from simulation_livepipe_red2_20.mysimulator import MySimulator
 
 logger = logging.getLogger('simulation')
 
@@ -16,11 +16,9 @@ def parse(args):
     parser.add_argument('--generate-graphs', action='store_true')
     parser.add_argument('--generate-table', action='store_true')
     parser.add_argument('--spot-instance-trace', type=str, default=None)
-    parser.add_argument('--ckpt-steps', type=int, default=100)
     parser.add_argument('--model', type=str, default='GPT-3')
     parser.add_argument('--model-size', type=str, default='350M')
     parser.add_argument('--spot-instance-desired-capacity', type=int, default=24)
-    parser.add_argument('--pipeline-parallel-size', type=int, default=4)
     parser.add_argument('--fig-directory', type=str, default='res/simulator')
     parser.add_argument('--performace-log-interval', type=int, default=1)
     parser.add_argument('--duration', type=int, default=43200)
@@ -76,17 +74,17 @@ def main(args):
             generate_graphs=options.generate_graphs,
             spot_instance_trace=options.spot_instance_trace,
             spot_instance_desired_capacity=options.spot_instance_desired_capacity,
-            ckpt_steps=options.ckpt_steps,
             model=options.model,
-            model_size=options.model_size,
-            pipeline_parallel_size=options.pipeline_parallel_size,
+            model_size=options.model_size
         )
         # simulator.simulate()
         if options.spot_instance_trace is None:
-            options.fig_directory = 'res/simutest-varu-prob-' + options.model_size + '-' + str(options.removal_probability)
+            options.fig_directory = 'res/simutest-livepipe-red2-20-prob-' + options.model_size + '-' + str(options.removal_probability)
         else:
-            options.fig_directory = 'res/simutest-varu-' + options.spot_instance_trace.split('/')[-1].split('-')[0] + '-' + options.model_size
-        simulator.simulate(duration=options.duration * 1000, fig_directory=options.fig_directory)
+            options.fig_directory = 'res/simutest-livepipe-red2-20-' + options.spot_instance_trace.split('/')[-1].split('-')[0] + '-' + options.model_size
+        options.system_name = 'livepipe-red2-20'
+        options.data_dir = 'data/livepipe-red2-20'
+        simulator.simulate(duration=options.duration * 1000, system_name=options.system_name, data_dir=options.data_dir, fig_directory=options.fig_directory)
         # simulator.simulate(duration=1_200_000)
     else:
         generate_table(options.model, spot_instance_trace=options.spot_instance_trace, duration=4_320_0000, fig_directory=options.fig_directory)

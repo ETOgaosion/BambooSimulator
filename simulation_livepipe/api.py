@@ -1,7 +1,7 @@
 import argparse
 import logging
 
-from simulation_nore.mysimulator import MySimulator
+from simulation_livepipe.mysimulator import MySimulator
 
 logger = logging.getLogger('simulation')
 
@@ -79,9 +79,9 @@ def main(args):
         )
         # simulator.simulate()
         if options.spot_instance_trace is None:
-            options.fig_directory = 'res/simutest-nore-prob-' + options.model_size + '-' + str(options.removal_probability)
+            options.fig_directory = 'res/simutest-livepipe-prob-' + options.model_size + '-' + str(options.removal_probability)
         else:
-            options.fig_directory = 'res/simutest-nore-' + options.spot_instance_trace.split('/')[-1].split('-')[0] + '-' + options.model_size
+            options.fig_directory = 'res/simutest-livepipe-' + options.spot_instance_trace.split('/')[-1].split('-')[0] + '-' + options.model_size
         simulator.simulate(duration=options.duration * 1000, fig_directory=options.fig_directory)
         # simulator.simulate(duration=1_200_000)
     else:
