@@ -54,14 +54,16 @@ class MySimulator(Simulator):
         # reconfigure time (ms)
         # layer time model: (layers / 12) * 150s
         # data: model_size: pipeline size: reconfigure time
+        fall_back_delta = self.simulate_iteration_delta_calc(new_pipeline_num * self.pipeline_parallel_size) / 3
         if prev_pipeline_num > new_pipeline_num:
-            return self.iteration_delta / 2
+            self.delta_fallback += fall_back_delta
+            return fall_back_delta
         data = {
             '350M': {
-                2: 570.28
+                2: 417.42
             },
         }
-        fall_back_delta = self.simulate_iteration_delta_calc(new_pipeline_num) / 2
+        fall_back_delta = self.simulate_iteration_delta_calc(new_pipeline_num * self.pipeline_parallel_size) / 3
         self.delta_fallback += fall_back_delta
         return data[self.model_size][self.pipeline_parallel_size] + fall_back_delta
 

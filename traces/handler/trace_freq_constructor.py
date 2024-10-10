@@ -15,11 +15,20 @@ def write_trace(trace, file):
         for line in trace:
             spamwriter.writerow(line)
 
-# trace = generate_trace(24, 6 * 3600)
-# write_trace(trace, 'traces/6h-trace-24.csv')
+# trace = generate_trace(20, 6 * 3600)
+# write_trace(trace, 'traces/6h-trace-20.csv')
 
-# trace = generate_trace(24, 1 * 3600)
-# write_trace(trace, 'traces/1h-trace-24.csv')
+# trace = generate_trace(20, 1 * 3600)
+# write_trace(trace, 'traces/1h-trace-20.csv')
 
-# trace = generate_trace(24, 10 * 60)
-# write_trace(trace, 'traces/10m-trace-24.csv')
+# trace = generate_trace(20, 10 * 60)
+# write_trace(trace, 'traces/10m-trace-20.csv')
+
+# trace = generate_trace(20, 5 * 60)
+# write_trace(trace, 'traces/5m-trace-20.csv')
+
+trace = generate_trace(20, 2 * 60)
+write_trace(trace, 'traces/2m-trace-20.csv')
+
+# trace = generate_trace(20, 1 * 60)
+# write_trace(trace, 'traces/1m-trace-20.csv')

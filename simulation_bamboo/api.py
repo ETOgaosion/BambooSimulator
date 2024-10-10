@@ -19,7 +19,7 @@ def parse(args):
     parser.add_argument('--model', type=str, default='GPT-3')
     parser.add_argument('--model-size', type=str, default='350M')
     parser.add_argument('--spot-instance-desired-capacity', type=int, default=24)
-    parser.add_argument('--pipeline-parallel-size', type=int, default=4)
+    parser.add_argument('--pipeline-parallel-size', type=int, default=2)
     parser.add_argument('--fig-directory', type=str, default='res/simulator')
     parser.add_argument('--performace-log-interval', type=int, default=1)
     parser.add_argument('--duration', type=int, default=43200)

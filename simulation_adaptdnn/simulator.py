@@ -804,6 +804,9 @@ class Simulator:
                     instances_ys.append(previous_num_instances)
                     instances_xs.append(delta_hours)
                     instances_ys.append(num_instances)
+        
+        instances_xs.append(duration / self.milliseconds_per_hour)
+        instances_ys.append(instances_ys[-1])
 
         self.total_delta = delta
         self.delta_reconfig = self.delta_reconfig - self.delta_fallback
@@ -979,6 +982,8 @@ class Simulator:
                 bbox_inches='tight',
                 pad_inches=0.25
             )
+            
+            plt.close()
 
         # print('Preemptions')
         # print('  - Mean:', result.preemption_mean, 'hours')

@@ -6,7 +6,7 @@ import statistics
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=4, ckpt_steps=100, spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=1, runnable_instances=None, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
+                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=2, ckpt_steps=100, spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=1, runnable_instances=None, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
         super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, pipeline_parallel_size, ckpt_steps, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
     
         self.global_batch_size = 1024
@@ -100,7 +100,7 @@ class MySimulator(Simulator):
                 32: 1,
             },
         }
-        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 15
+        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 10
 
     def checkpoint_save_delta(self):
         # checkpoint load time
@@ -154,7 +154,7 @@ class MySimulator(Simulator):
                 32: 1,
             },
         }
-        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 15
+        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 10
 
     def fallback_delta(self):
         return (self.num_iterations_complete % self.ckpt_steps + 1 / 2) * self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)

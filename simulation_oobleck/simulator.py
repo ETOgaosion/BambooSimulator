@@ -623,7 +623,7 @@ class Simulator:
         return False
 
     def simulate_training_iteration_execute(self, delta, data):
-        # print(f'simulate training iteration execution')
+        print(f'simulate training iteration execution')
         rendezvous_version = data['rendezvous_version']
         if rendezvous_version != self.rendezvous_version:
             return
@@ -816,6 +816,9 @@ class Simulator:
                     instances_ys.append(previous_num_instances)
                     instances_xs.append(delta_hours)
                     instances_ys.append(num_instances)
+        
+        instances_xs.append(duration / self.milliseconds_per_hour)
+        instances_ys.append(instances_ys[-1])
 
         self.total_delta = delta
         self.delta_reconfig = self.delta_reconfig - self.delta_fallback
@@ -990,6 +993,8 @@ class Simulator:
                 bbox_inches='tight',
                 pad_inches=0.25
             )
+            
+            plt.close()
 
         # print('Preemptions')
         # print('  - Mean:', result.preemption_mean, 'hours')

@@ -103,7 +103,7 @@ class Simulator:
                  model='GPT-3',
                  model_size='350M',
                  spot_instance_desired_capacity=24,
-                 pipeline_parallel_size=4,
+                 pipeline_parallel_size=2,
                  spot_instance_trace=None,
                  performance_log_interval=5,
                  runnable_instances=None,
@@ -648,12 +648,7 @@ class Simulator:
 
         # Handle fallback events
         if len(self.fallback_event) > 0:
-            cur_nodes = self.active_spot_instances()
-            if cur_nodes + len(self.fallback_event) >= (cur_nodes // self.pipeline_parallel_size + 1) * self.pipeline_parallel_size:
-                print(f'reconfigure {cur_nodes} {len(self.fallback_event)}')
-                self.simulate_rendezvous_start(delta)
-                self.fallback_event = []
-                return
+            self.create_reconfigure_event(delta)
 
         self.num_iterations_complete += 1
         
@@ -696,7 +691,7 @@ class Simulator:
             #     delta,
             #     f'reconfiguration after iteration {self.num_iterations_complete}'
             # )
-            self.create_reconfigure_event(delta + (1/2) * self.iteration_delta)
+            self.create_reconfigure_event(delta)
         else:
             self.create_training_iteration_execute_event(
                 delta,
@@ -730,7 +725,7 @@ class Simulator:
         total += (duration - previous_x) * previous_y
         return total / duration
         
-    def simulate(self, duration=None, system_name="bamboo", fig_directory="res/simulator"):
+    def simulate(self, duration=None, system_name="bamboo", data_dir='data/bamboo', fig_directory="res/simulator"):
         start = datetime.datetime.now(datetime.timezone.utc)
         start = start.replace(minute=0, second=0, microsecond=0)
         if self.start_hour is not None:
@@ -832,6 +827,9 @@ class Simulator:
                     instances_ys.append(previous_num_instances)
                     instances_xs.append(delta_hours)
                     instances_ys.append(num_instances)
+        
+        instances_xs.append(duration / self.milliseconds_per_hour)
+        instances_ys.append(instances_ys[-1])
 
         self.total_delta = delta
         self.delta_reconfig = self.delta_reconfig - self.delta_fallback
@@ -981,7 +979,6 @@ class Simulator:
             else:
                 suffix = f'prob_{self.removal_probability}_model_{self.model_size}'
             print(suffix)
-            data_dir = 'data/bamboo/'
             Path(data_dir).mkdir(parents=True, exist_ok=True)
             pickle.dump(result, open(f'{data_dir}/result_{suffix}.pkl', 'wb'))
             pickle.dump(instances_xs, open(f'{data_dir}/instances_xs_{suffix}.pkl', 'wb'))
@@ -1010,6 +1007,8 @@ class Simulator:
                 bbox_inches='tight',
                 pad_inches=0.25
             )
+            
+            plt.close()
 
         # print('Preemptions')
         # print('  - Mean:', result.preemption_mean, 'hours')

@@ -105,7 +105,7 @@ class Simulator:
                  model='GPT-3',
                  model_size='350M',
                  spot_instance_desired_capacity=24,
-                 pipeline_parallel_size=4,
+                 pipeline_parallel_size=2,
                  ckpt_steps=100,
                  spot_instance_trace=None,
                  performance_log_interval=1,
@@ -864,6 +864,9 @@ class Simulator:
                     instances_ys.append(previous_num_instances)
                     instances_xs.append(delta_hours)
                     instances_ys.append(num_instances)
+        
+        instances_xs.append(duration / self.milliseconds_per_hour)
+        instances_ys.append(instances_ys[-1])
 
         self.total_delta = delta
         self.delta_idle_waste = self.total_delta - self.delta_checkpointing - self.delta_effective_time - self.delta_fallback - self.delta_reconfig - self.delta_redundant_computation
@@ -1036,6 +1039,8 @@ class Simulator:
                 bbox_inches='tight',
                 pad_inches=0.25
             )
+            
+            plt.close()
 
         # print('Preemptions')
         # print('  - Mean:', result.preemption_mean, 'hours')
