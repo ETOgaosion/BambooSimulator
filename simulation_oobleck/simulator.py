@@ -485,6 +485,8 @@ class Simulator:
         self.spot_instance_lifetimes.append(delta - instance.start)
         self.spot_instance_removal_times.append(delta)
         del self.spot_instances[name]
+        
+        self.simulate_rendezvous_start(delta, False)
 
     def simulate_rendezvous_start(self, delta, isGlobal):
         self.info(delta, f'simulate_rendezvous_start: {delta} {isGlobal}')
@@ -623,7 +625,6 @@ class Simulator:
         return False
 
     def simulate_training_iteration_execute(self, delta, data):
-        print(f'simulate training iteration execution')
         rendezvous_version = data['rendezvous_version']
         if rendezvous_version != self.rendezvous_version:
             return
@@ -632,9 +633,8 @@ class Simulator:
         if self.simulate_should_reconfigure():
             self.info(
                 delta,
-                f'execute error reconfiguration after iteration {self.num_iterations_complete}'
+                f'execute error reconfiguration during iteration {self.num_iterations_complete}'
             )
-            self.simulate_rendezvous_start(delta, False)
             return
 
         self.num_iterations_complete += 1
@@ -671,6 +671,7 @@ class Simulator:
             #    break
 
         #assert False
+        self.info(delta, f'simulate training iteration execution finish')
 
 
         if self.num_iterations_complete % 10000 == 0:

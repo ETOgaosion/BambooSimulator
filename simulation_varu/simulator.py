@@ -516,7 +516,7 @@ class Simulator:
         self.spot_instance_lifetimes.append(delta - instance.start)
         self.spot_instance_removal_times.append(delta)
         del self.spot_instances[name]
-
+        
         self.simulate_rendezvous_start(delta, False)
 
     def simulate_rendezvous_start(self, delta, isGlobal):
@@ -526,7 +526,6 @@ class Simulator:
         if isGlobal:
             self.create_preparation_event(delta)
         else:
-            self.last_spot_instance_num = self.active_spot_instances()
             self.create_reconfigure_event(delta)
 
     def simulate_rendezvous_restart(self, delta):
@@ -565,6 +564,7 @@ class Simulator:
         self.rendezvous = []
         if self.data_parallel_size != 0:
             self.status = SystemStatus.RUNNING
+            self.last_spot_instance_num = self.data_parallel_size * self.pipeline_parallel_size
             self.simulate_iteration_delta()
             self.create_training_iteration_execute_event(delta,
                                                      self.rendezvous_version)
@@ -671,12 +671,17 @@ class Simulator:
         self.create_training_iteration_execute_event(delta, self.rendezvous_version)
 
     def simulate_training_iteration_execute(self, delta, data):
-        # print(f'simulate training iteration execution')
         rendezvous_version = data['rendezvous_version']
         if rendezvous_version != self.rendezvous_version:
             return
 
         # Handle fallback events
+        if self.simulate_should_reconfigure():
+            self.info(
+                delta,
+                f'reconfiguration during iteration {self.num_iterations_complete}'
+            )
+            return
 
         self.num_iterations_complete += 1
         
@@ -709,6 +714,7 @@ class Simulator:
             #    break
 
         #assert False
+        self.info(delta, f'simulate training iteration execution finish')
 
 
         if self.num_iterations_complete % 10000 == 0:

@@ -1,97 +1,256 @@
-Namespace(duration=216000, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='350M', performace_log_interval=1, pipeline_parallel_size=2, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/6h-trace-20.csv', start_hour=None)
+start execute oobleck with args: ['--generate-graphs', '--spot-instance-trace', 'traces/2m-trace-20.csv', '--performace-log-interval', '1', '--spot-instance-desired-capacity', '20', '--duration', '1200', '--model-size', '2.7B']
+Namespace(duration=1200, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='2.7B', performace_log_interval=1, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/2m-trace-20.csv', start_hour=None)
+[0.000] node1 simulate_spot_instance_add: 0
+[0.000] node3 simulate_spot_instance_add: 0
+[0.000] node7 simulate_spot_instance_add: 0
+[0.000] node15 simulate_spot_instance_add: 0
+[0.000] node14 simulate_spot_instance_add: 0
+[0.000] node6 simulate_spot_instance_add: 0
+[0.000] node13 simulate_spot_instance_add: 0
+[0.000] node12 simulate_spot_instance_add: 0
+[0.000] node2 simulate_spot_instance_add: 0
+[0.000] node5 simulate_spot_instance_add: 0
+[0.000] node11 simulate_spot_instance_add: 0
+[0.000] node10 simulate_spot_instance_add: 0
+[0.000] node20 simulate_spot_instance_add: 0
+[0.000] node4 simulate_spot_instance_add: 0
+[0.000] node9 simulate_spot_instance_add: 0
+[0.000] node19 simulate_spot_instance_add: 0
+[0.000] node18 simulate_spot_instance_add: 0
+[0.000] node8 simulate_spot_instance_add: 0
+[0.000] node17 simulate_spot_instance_add: 0
+[0.000] node16 simulate_spot_instance_add: 0
+[45.000] node1 simulate_spot_instance_ready: 45000
 [45.000] node1 starting global rendezvous
-nodes: 20, num_workers_wait: 0, total_workers: 20
-21616892.988999777 should reconfigure 19 2 10 10
-nodes: 18, num_workers_wait: 1, total_workers: 19
-nodes: 18, num_workers_wait: 0, total_workers: 18
-64805054.429 should reconfigure 17 2 9 9
-nodes: 16, num_workers_wait: 1, total_workers: 17
-nodes: 16, num_workers_wait: 0, total_workers: 16
-108022370.9376726 should reconfigure 15 2 8 8
-nodes: 14, num_workers_wait: 1, total_workers: 15
-nodes: 14, num_workers_wait: 0, total_workers: 14
-151237004.4500036 should reconfigure 13 2 7 7
-nodes: 12, num_workers_wait: 1, total_workers: 13
-nodes: 12, num_workers_wait: 0, total_workers: 12
-194406137.62401503 should reconfigure 11 2 6 6
-nodes: 10, num_workers_wait: 1, total_workers: 11
-fig_directory: res/simutest-bamboo-6h-350M
-0.3636476999549321 44.63579717703695 32.53985203959749
+[45.000] simulate_rendezvous_start: 45000 True
+[45.000] simulate_rendezvous_restart: 45000
+[45.000] node3 simulate_spot_instance_ready: 45000
+[45.000] node6 simulate_spot_instance_ready: 45000
+[45.000] node17 simulate_spot_instance_ready: 45000
+[45.000] node16 simulate_spot_instance_ready: 45000
+[45.000] node7 simulate_spot_instance_ready: 45000
+[45.000] node14 simulate_spot_instance_ready: 45000
+[45.000] node15 simulate_spot_instance_ready: 45000
+[45.000] node13 simulate_spot_instance_ready: 45000
+[45.000] node5 simulate_spot_instance_ready: 45000
+[45.000] node8 simulate_spot_instance_ready: 45000
+[45.000] node12 simulate_spot_instance_ready: 45000
+[45.000] node2 simulate_spot_instance_ready: 45000
+[45.000] node11 simulate_spot_instance_ready: 45000
+[45.000] node20 simulate_spot_instance_ready: 45000
+[45.000] node18 simulate_spot_instance_ready: 45000
+[45.000] node10 simulate_spot_instance_ready: 45000
+[45.000] node4 simulate_spot_instance_ready: 45000
+[45.000] node9 simulate_spot_instance_ready: 45000
+[45.000] node19 simulate_spot_instance_ready: 45000
+[55.000] simulate_preparation: 55000
+[55.000] simulate_preparation: 55000 ['node1', 'node3', 'node6', 'node17', 'node16', 'node7', 'node14', 'node15', 'node13', 'node5', 'node8', 'node12', 'node2', 'node11', 'node20', 'node18', 'node10', 'node4', 'node9', 'node19']
+[55.000] simulate_assign_coordinates ['node1', 'node3', 'node6', 'node17', 'node16', 'node7', 'node14', 'node15', 'node13', 'node5', 'node8', 'node12', 'node2', 'node11', 'node20', 'node18', 'node10', 'node4', 'node9', 'node19']
+55000 20 nodes completed rendezvous version 1, 20x1 configuration
+[108.750] simulate training iteration execution finish
+[120.000] node1 simulate_spot_instance_remove: 120000
+[120.000] simulate_rendezvous_start: 120000 False
+[120.000] simulate_rendezvous_restart: 120000
+[150.325] simulate_reconfigure: 150325.0
+[150.325] simulate_preparation: 150325.0 ['node3', 'node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node2', 'node5', 'node11', 'node10', 'node20', 'node4', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[150.325] simulate_assign_coordinates ['node3', 'node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node2', 'node5', 'node11', 'node10', 'node20', 'node4', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+150325.0 19 nodes completed rendezvous version 2, 19x1 configuration
+[209.315] simulate training iteration execution finish
+[240.000] node2 simulate_spot_instance_remove: 240000
+[240.000] simulate_rendezvous_start: 240000 False
+[240.000] simulate_rendezvous_restart: 240000
+[268.305] execute error reconfiguration during iteration 2
+[272.050] simulate_reconfigure: 272050.0
+[272.050] simulate_preparation: 272050.0 ['node3', 'node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node4', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[272.050] simulate_assign_coordinates ['node3', 'node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node4', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+272050.0 18 nodes completed rendezvous version 3, 18x1 configuration
+[334.150] simulate training iteration execution finish
+[360.000] node3 simulate_spot_instance_remove: 360000
+[360.000] simulate_rendezvous_start: 360000 False
+[360.000] simulate_rendezvous_restart: 360000
+[393.940] simulate_reconfigure: 393940.0
+[393.940] simulate_preparation: 393940.0 ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node4', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[393.940] simulate_assign_coordinates ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node4', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+393940.0 17 nodes completed rendezvous version 4, 17x1 configuration
+[460.660] simulate training iteration execution finish
+[480.000] node4 simulate_spot_instance_remove: 480000
+[480.000] simulate_rendezvous_start: 480000 False
+[480.000] simulate_rendezvous_restart: 480000
+[514.683] simulate_reconfigure: 514683.0
+[514.683] simulate_preparation: 514683.0 ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[514.683] simulate_assign_coordinates ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+514683.0 16 nodes completed rendezvous version 5, 16x1 configuration
+[582.373] simulate training iteration execution finish
+[600.000] node5 simulate_spot_instance_remove: 600000
+[600.000] simulate_rendezvous_start: 600000 False
+[600.000] simulate_rendezvous_restart: 600000
+[642.200] simulate_reconfigure: 642200.0
+[642.200] simulate_preparation: 642200.0 ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[642.200] simulate_assign_coordinates ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+642200.0 15 nodes completed rendezvous version 6, 15x1 configuration
+[720.000] node6 simulate_spot_instance_remove: 720000
+[720.000] simulate_rendezvous_start: 720000 False
+[720.000] simulate_rendezvous_restart: 720000
+[724.580] execute error reconfiguration during iteration 5
+[760.655] simulate_reconfigure: 760655.0
+[760.655] simulate_preparation: 760655.0 ['node7', 'node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[760.655] simulate_assign_coordinates ['node7', 'node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+760655.0 14 nodes completed rendezvous version 7, 14x1 configuration
+[836.925] simulate training iteration execution finish
+[840.000] node7 simulate_spot_instance_remove: 840000
+[840.000] simulate_rendezvous_start: 840000 False
+[840.000] simulate_rendezvous_restart: 840000
+[887.125] simulate_reconfigure: 887125.0
+[887.125] simulate_preparation: 887125.0 ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[887.125] simulate_assign_coordinates ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+887125.0 13 nodes completed rendezvous version 8, 13x1 configuration
+[960.000] node8 simulate_spot_instance_remove: 960000
+[960.000] simulate_rendezvous_start: 960000 False
+[960.000] simulate_rendezvous_restart: 960000
+[979.555] execute error reconfiguration during iteration 6
+[1006.210] simulate_reconfigure: 1006210.0
+[1006.210] simulate_preparation: 1006210.0 ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node17', 'node16']
+[1006.210] simulate_assign_coordinates ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node17', 'node16']
+1006210.0 12 nodes completed rendezvous version 9, 12x1 configuration
+[1080.000] node9 simulate_spot_instance_remove: 1080000
+[1080.000] simulate_rendezvous_start: 1080000 False
+[1080.000] simulate_rendezvous_restart: 1080000
+[1095.550] execute error reconfiguration during iteration 6
+[1130.775] simulate_reconfigure: 1130775.0
+[1130.775] simulate_preparation: 1130775.0 ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node19', 'node18', 'node17', 'node16']
+[1130.775] simulate_assign_coordinates ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node19', 'node18', 'node17', 'node16']
+1130775.0 11 nodes completed rendezvous version 10, 11x1 configuration
+[1200.000] node10 simulate_spot_instance_remove: 1200000
+[1200.000] simulate_rendezvous_start: 1200000 False
+[1200.000] simulate_rendezvous_restart: 1200000
+0.1864530225782957 19.051162790697674 7.857531093135531
 Model: GPT-3
-  Performance: D 0.3636476999549321 B 32.53985203959749
-6h_350M
-[216000.000] Ending after 59.99014585518879 hours
-Result(system_name='bamboo-20', removal_probability=None, preemption_mean=6.0, preemption_median=6.0, preemption_stdev=0.0, lifetime_mean=46.5, lifetime_median=60.0, lifetime_stdev=18.65898964941141, num_preemptions=10, num_fatal_failures=0, num_iterations_complete=6861, average_instances=15.502546072232303, average_performance=32.53985203959749, total_delta=216000000, delta_effective_time=43111729.0532026, delta_checkpointing=0, delta_redundant_computation=172446916.2128104, delta_reconfig=1669.679999999993, delta_fallback=168720.89633333337, delta_idle_waste=270964.1576536596)
-Namespace(duration=36000, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='350M', performace_log_interval=1, pipeline_parallel_size=2, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/1h-trace-20.csv', start_hour=None)
+  Performance: D 0.1864530225782957 B 7.857531093135531
+[1200.000] Ending after 0.23247916666666665 hours
+Result(system_name='oobleck-20', removal_probability=None, preemption_mean=0.03333333333333333, preemption_median=0.03333333333333333, preemption_stdev=0.0, lifetime_mean=0.25833333333333336, lifetime_median=0.3333333333333333, lifetime_stdev=0.10366105360784117, num_preemptions=10, num_fatal_failures=0, num_iterations_complete=6, average_instances=22.224213639214987, average_performance=7.857531093135531, total_delta=1200000, delta_effective_time=385520, delta_checkpointing=0, delta_redundant_computation=0, delta_reconfig=12498.0, delta_fallback=399395.0, delta_idle_waste=402587.0)
+start execute varu with args: ['--generate-graphs', '--spot-instance-trace', 'traces/2m-trace-20.csv', '--performace-log-interval', '1', '--spot-instance-desired-capacity', '20', '--duration', '1200', '--model-size', '2.7B']
+Namespace(ckpt_steps=10, duration=1200, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='2.7B', performace_log_interval=1, pipeline_parallel_size=2, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/2m-trace-20.csv', start_hour=None)
+[0.000] node1 simulate_spot_instance_add: 0
+[0.000] node3 simulate_spot_instance_add: 0
+[0.000] node7 simulate_spot_instance_add: 0
+[0.000] node15 simulate_spot_instance_add: 0
+[0.000] node14 simulate_spot_instance_add: 0
+[0.000] node6 simulate_spot_instance_add: 0
+[0.000] node13 simulate_spot_instance_add: 0
+[0.000] node12 simulate_spot_instance_add: 0
+[0.000] node2 simulate_spot_instance_add: 0
+[0.000] node5 simulate_spot_instance_add: 0
+[0.000] node11 simulate_spot_instance_add: 0
+[0.000] node10 simulate_spot_instance_add: 0
+[0.000] node20 simulate_spot_instance_add: 0
+[0.000] node4 simulate_spot_instance_add: 0
+[0.000] node9 simulate_spot_instance_add: 0
+[0.000] node19 simulate_spot_instance_add: 0
+[0.000] node18 simulate_spot_instance_add: 0
+[0.000] node8 simulate_spot_instance_add: 0
+[0.000] node17 simulate_spot_instance_add: 0
+[0.000] node16 simulate_spot_instance_add: 0
+[45.000] node1 simulate_spot_instance_ready: 45000
 [45.000] node1 starting global rendezvous
-nodes: 20, num_workers_wait: 0, total_workers: 20
-3611084.5579999937 should reconfigure 19 2 10 10
-nodes: 18, num_workers_wait: 1, total_workers: 19
-nodes: 18, num_workers_wait: 0, total_workers: 18
-10804459.26600003 should reconfigure 17 2 9 9
-nodes: 16, num_workers_wait: 1, total_workers: 17
-nodes: 16, num_workers_wait: 0, total_workers: 16
-18007057.19866684 should reconfigure 15 2 8 8
-nodes: 14, num_workers_wait: 1, total_workers: 15
-nodes: 14, num_workers_wait: 0, total_workers: 14
-25228700.78800046 should reconfigure 13 2 7 7
-nodes: 12, num_workers_wait: 1, total_workers: 13
-nodes: 12, num_workers_wait: 0, total_workers: 12
-32404938.454000242 should reconfigure 11 2 6 6
-nodes: 10, num_workers_wait: 1, total_workers: 11
-fig_directory: res/simutest-bamboo-1h-350M
-0.3636476999549321 44.635797177030604 32.41417939924884
+[45.000] simulate_rendezvous_start: 45000
+[45.000] simulate_rendezvous_restart: 45000
+[45.000] node3 simulate_spot_instance_ready: 45000
+[45.000] node6 simulate_spot_instance_ready: 45000
+[45.000] node17 simulate_spot_instance_ready: 45000
+[45.000] node16 simulate_spot_instance_ready: 45000
+[45.000] node7 simulate_spot_instance_ready: 45000
+[45.000] node14 simulate_spot_instance_ready: 45000
+[45.000] node15 simulate_spot_instance_ready: 45000
+[45.000] node13 simulate_spot_instance_ready: 45000
+[45.000] node5 simulate_spot_instance_ready: 45000
+[45.000] node8 simulate_spot_instance_ready: 45000
+[45.000] node12 simulate_spot_instance_ready: 45000
+[45.000] node2 simulate_spot_instance_ready: 45000
+[45.000] node11 simulate_spot_instance_ready: 45000
+[45.000] node20 simulate_spot_instance_ready: 45000
+[45.000] node18 simulate_spot_instance_ready: 45000
+[45.000] node10 simulate_spot_instance_ready: 45000
+[45.000] node4 simulate_spot_instance_ready: 45000
+[45.000] node9 simulate_spot_instance_ready: 45000
+[45.000] node19 simulate_spot_instance_ready: 45000
+[55.000] simulate_preparation: 55000
+[55.000] simulate_preparation: 55000 ['node1', 'node3', 'node6', 'node17', 'node16', 'node7', 'node14', 'node15', 'node13', 'node5', 'node8', 'node12', 'node2', 'node11', 'node20', 'node18', 'node10', 'node4', 'node9', 'node19']
+[55.000] simulate_assign_coordinates ['node1', 'node3', 'node6', 'node17', 'node16', 'node7', 'node14', 'node15', 'node13', 'node5', 'node8', 'node12', 'node2', 'node11', 'node20', 'node18', 'node10', 'node4', 'node9', 'node19']
+55000 20 nodes completed rendezvous version 1, 10x2 configuration
+[116.320] simulate training iteration execution finish
+[120.000] node1 simulate_spot_instance_remove: 120000
+[120.000] simulate_rendezvous_start: 120000
+[120.000] simulate_rendezvous_restart: 120000
+[177.640] reconfiguration during iteration 1
+[199.995] simulate_reconfigure: 199994.77508
+[240.000] node2 simulate_spot_instance_remove: 240000
+[240.000] simulate_rendezvous_start: 240000
+[240.000] simulate_rendezvous_restart: 240000
+[291.974] simulate_fallback: 291974.47508
+[291.974] simulate_preparation: 291974.47508 ['node3', 'node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node4', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[291.974] simulate_assign_coordinates ['node3', 'node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node4', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+291974.47508 18 nodes completed rendezvous version 2, 9x2 configuration
+[351.990] simulate training iteration execution finish
+[360.000] node3 simulate_spot_instance_remove: 360000
+[360.000] simulate_rendezvous_start: 360000
+[360.000] simulate_rendezvous_restart: 360000
+[412.005] reconfiguration during iteration 2
+[418.718] simulate_reconfigure: 418717.73295
+[480.000] node4 simulate_spot_instance_remove: 480000
+[480.000] simulate_rendezvous_start: 480000
+[480.000] simulate_rendezvous_restart: 480000
+[538.718] simulate_reconfigure: 538717.73295
+[568.755] simulate_fallback: 568755.48295
+[568.755] simulate_preparation: 568755.48295 ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[568.755] simulate_assign_coordinates ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node5', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+568755.48295 16 nodes completed rendezvous version 3, 8x2 configuration
+[600.000] node5 simulate_spot_instance_remove: 600000
+[600.000] simulate_rendezvous_start: 600000
+[600.000] simulate_rendezvous_restart: 600000
+[639.452] reconfiguration during iteration 2
+[640.572] simulate_reconfigure: 640571.54648
+[688.755] simulate_fallback: 688755.48295
+[688.755] simulate_preparation: 688755.48295 ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[688.755] simulate_assign_coordinates ['node7', 'node15', 'node14', 'node6', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+688755.48295 15 nodes completed rendezvous version 4, 7x2 configuration
+[720.000] node6 simulate_spot_instance_remove: 720000
+[720.000] simulate_rendezvous_start: 720000
+[720.000] simulate_rendezvous_restart: 720000
+[752.348] simulate_reconfigure: 752347.55192
+[761.857] simulate training iteration execution finish
+[817.313] simulate_fallback: 817312.54648
+[817.313] simulate_preparation: 817312.54648 ['node7', 'node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[817.313] simulate_assign_coordinates ['node7', 'node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+817312.54648 14 nodes completed rendezvous version 5, 7x2 configuration
+[840.000] node7 simulate_spot_instance_remove: 840000
+[840.000] simulate_rendezvous_start: 840000
+[840.000] simulate_rendezvous_restart: 840000
+[872.348] simulate_reconfigure: 872347.55192
+[890.414] reconfiguration during iteration 3
+[935.102] simulate_fallback: 935101.80192
+[935.102] simulate_preparation: 935101.80192 ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+[935.102] simulate_assign_coordinates ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node9', 'node19', 'node18', 'node8', 'node17', 'node16']
+935101.80192 13 nodes completed rendezvous version 6, 6x2 configuration
+[960.000] node8 simulate_spot_instance_remove: 960000
+[960.000] simulate_rendezvous_start: 960000
+[960.000] simulate_rendezvous_restart: 960000
+[992.595] simulate_reconfigure: 992595.1894
+[1022.849] simulate training iteration execution finish
+[1080.000] node9 simulate_spot_instance_remove: 1080000
+[1080.000] simulate_rendezvous_start: 1080000
+[1080.000] simulate_rendezvous_restart: 1080000
+[1110.595] reconfiguration during iteration 4
+[1112.595] simulate_reconfigure: 1112595.1894
+[1128.204] simulate_fallback: 1128203.50192
+[1128.204] simulate_preparation: 1128203.50192 ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node19', 'node18', 'node17', 'node16']
+[1128.204] simulate_assign_coordinates ['node15', 'node14', 'node13', 'node12', 'node11', 'node10', 'node20', 'node19', 'node18', 'node17', 'node16']
+1128203.50192 11 nodes completed rendezvous version 7, 5x2 configuration
+[1200.000] node10 simulate_spot_instance_remove: 1200000
+[1200.000] simulate_rendezvous_start: 1200000
+[1200.000] simulate_rendezvous_restart: 1200000
+0.1961103503748887 16.699336918907107 4.232067303792309
 Model: GPT-3
-  Performance: D 0.3636476999549321 B 32.41417939924884
-1h_350M
-[36000.000] Ending after 9.984028950185278 hours
-Result(system_name='bamboo-20', removal_probability=None, preemption_mean=1.0, preemption_median=1.0, preemption_stdev=0.0, lifetime_mean=7.75, lifetime_median=10.0, lifetime_stdev=3.109831608235235, num_preemptions=10, num_fatal_failures=0, num_iterations_complete=1136, average_instances=15.524794726994816, average_performance=32.41417939924884, total_delta=36000000, delta_effective_time=7107324.881600067, delta_checkpointing=0, delta_redundant_computation=28429299.526400268, delta_reconfig=1669.679999999993, delta_fallback=168720.89633333337, delta_idle_waste=292985.0156663321)
-Namespace(duration=6000, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='350M', performace_log_interval=1, pipeline_parallel_size=2, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/10m-trace-20.csv', start_hour=None)
-[45.000] node1 starting global rendezvous
-nodes: 20, num_workers_wait: 0, total_workers: 20
-605942.678 should reconfigure 19 2 10 10
-nodes: 18, num_workers_wait: 1, total_workers: 19
-nodes: 18, num_workers_wait: 0, total_workers: 18
-1811656.8779999963 should reconfigure 17 2 9 9
-nodes: 16, num_workers_wait: 1, total_workers: 17
-nodes: 16, num_workers_wait: 0, total_workers: 16
-3011801.714666667 should reconfigure 15 2 8 8
-nodes: 14, num_workers_wait: 1, total_workers: 15
-nodes: 14, num_workers_wait: 0, total_workers: 14
-4201761.341000006 should reconfigure 13 2 7 7
-nodes: 12, num_workers_wait: 1, total_workers: 13
-nodes: 12, num_workers_wait: 0, total_workers: 12
-5416911.490999998 should reconfigure 11 2 6 6
-nodes: 10, num_workers_wait: 1, total_workers: 11
-fig_directory: res/simutest-bamboo-10m-350M
-0.3636476999549321 44.635797177030156 31.56702071898798
-Model: GPT-3
-  Performance: D 0.3636476999549321 B 31.56702071898798
-10m_350M
-[6000.000] Ending after 1.6642561149074064 hours
-Result(system_name='bamboo-20', removal_probability=None, preemption_mean=0.16666666666666666, preemption_median=0.16666666666666666, preemption_stdev=0.0, lifetime_mean=1.2916666666666667, lifetime_median=1.6666666666666667, lifetime_stdev=0.5183052680392058, num_preemptions=10, num_fatal_failures=0, num_iterations_complete=183, average_instances=15.522450602364538, average_performance=31.56702071898798, total_delta=6000000, delta_effective_time=1117088.4401999996, delta_checkpointing=0, delta_redundant_computation=4468353.760799998, delta_reconfig=1669.679999999993, delta_fallback=168720.89633333337, delta_idle_waste=244167.22266666964)
-Namespace(duration=3000, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='350M', performace_log_interval=1, pipeline_parallel_size=2, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/5m-trace-20.csv', start_hour=None)
-[45.000] node1 starting global rendezvous
-nodes: 20, num_workers_wait: 0, total_workers: 20
-305428.48999999993 should reconfigure 19 2 10 10
-nodes: 18, num_workers_wait: 1, total_workers: 19
-nodes: 18, num_workers_wait: 0, total_workers: 18
-914670.762 should reconfigure 17 2 9 9
-nodes: 16, num_workers_wait: 1, total_workers: 17
-nodes: 16, num_workers_wait: 0, total_workers: 16
-1520232.9806666682 should reconfigure 15 2 8 8
-nodes: 14, num_workers_wait: 1, total_workers: 15
-nodes: 14, num_workers_wait: 0, total_workers: 14
-2118851.042000001 should reconfigure 13 2 7 7
-nodes: 12, num_workers_wait: 1, total_workers: 13
-nodes: 12, num_workers_wait: 0, total_workers: 12
-2730346.759999998 should reconfigure 11 2 6 6
-nodes: 10, num_workers_wait: 1, total_workers: 11
-fig_directory: res/simutest-bamboo-5m-350M
-0.3636476999549321 44.635797177030035 30.859164759498942
-Model: GPT-3
-  Performance: D 0.3636476999549321 B 30.859164759498942
-5m_350M
-[3000.000] Ending after 0.81720054074074 hours
-Result(system_name='bamboo-20', removal_probability=None, preemption_mean=0.08333333333333333, preemption_median=0.08333333333333333, preemption_stdev=0.0, lifetime_mean=0.6458333333333334, lifetime_median=0.8333333333333334, lifetime_stdev=0.2591526340196029, num_preemptions=10, num_fatal_failures=0, num_iterations_complete=87, average_instances=15.805993783311177, average_performance=30.859164759498942, total_delta=3000000, delta_effective_time=507208.4267999998, delta_checkpointing=0, delta_redundant_computation=2028833.7071999991, delta_reconfig=1669.679999999993, delta_fallback=168720.89633333337, delta_idle_waste=293567.2896666676)
+  Performance: D 0.1961103503748887 B 4.232067303792309
+[1200.000] Ending after 0.28412458386666667 hours
+Result(system_name='varu-20', removal_probability=None, preemption_mean=0.03333333333333333, preemption_median=0.03333333333333333, preemption_stdev=0.0, lifetime_mean=0.25833333333333336, lifetime_median=0.3333333333333333, lifetime_stdev=0.10366105360784117, num_preemptions=10, num_fatal_failures=0, num_iterations_complete=4, average_instances=18.184511161805233, average_performance=4.232067303792309, total_delta=1200000, delta_effective_time=282183.3, delta_checkpointing=0, delta_redundant_computation=0, delta_reconfig=478105.99627999996, delta_fallback=1709379.9999999998, delta_idle_waste=-1269669.29628)
 All done!

@@ -128,7 +128,9 @@ class MySimulator(Simulator):
                 32: {26: 0, 28: 0, 29: 0, 30: 0, 31: 0}},
         }
 
-        assert last_instances_num != new_instances_num, f'last_instances_num: {last_instances_num}, new_instances_num: {new_instances_num} should be different'
+        if last_instances_num == new_instances_num:
+            print('no need to reconfigure, {last_instances_num} == {new_instances_num}')
+            return 0
         if last_instances_num < new_instances_num:
             last_instances_num, new_instances_num = new_instances_num, last_instances_num
         assert reconfigure_map[self.model_size].get(last_instances_num) is not None, f'last_instances_num: {last_instances_num} is not supported'

@@ -42,7 +42,7 @@ def execute_all_prob(probabilities=[0.2], spot_instance_desired_capacity=20, per
             execute_main(system_funcs[system], args)
 
 def execute_all_freq(spot_instance_desired_capacity=20, performance_log_interval_map={'350M': {'6h': 1, '1h': 1, '10m': 1, '5m': 1, '2m': 1, '1m': 1}, '1.3B': {'6h': 1, '1h': 1, '10m': 1, '5m': 1, '2m': 1, '1m': 1}, '2.7B': {'6h': 1, '1h': 1, '10m': 1, '2m': 1, '5m': 1, '1m': 1}}):
-    # systems = ['oobleck']
+    # systems = ['oobleck', 'varu']
     systems = ['bamboo', 'livepipe_red1', 'livepipe_red2', 'oobleck', 'oobleck_opt', 'varu']
     system_funcs = {
         'bamboo': bamboo_main,
@@ -53,6 +53,8 @@ def execute_all_freq(spot_instance_desired_capacity=20, performance_log_interval
         'varu': varu_main
     }
     model_sizes = ['350M', '1.3B', '2.7B']
+    # model_sizes = ['2.7B']
+    # traces = ['2m']
     traces = ['1h', '10m', '5m', '2m', '1m']
     durations = {'6h': 6*60*60, '1h': 60*60, '10m': 10*60, '5m': 5*60, '2m': 2*60, '1m': 1*60}
     for trace in traces:

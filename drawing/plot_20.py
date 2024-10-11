@@ -207,6 +207,24 @@ def plot_performance_trace(files):
 
     plt.close()
 
+def plot_performance_trace_horizental(files):
+    fig, axs = plt.subplots(len(traces), len(model_sizes) + 1, figsize=((len(model_sizes) + 1) * 4, len(traces) * 3), dpi=1000)
+    
+    plot_instances(axs[0, 0], traces[0], 0)
+    plot_instances(axs[1, 0], traces[1], 1)
+    
+    for model_size_i, model_size in enumerate(model_sizes):
+        for trace_i, trace in enumerate(traces):
+            plot_performance_together(axs[trace_i, model_size_i + 1], trace, trace_i, model_size, with_label=(model_size_i == 0 and trace_i == 0), with_x_label=True, with_title=True, with_avg=True)
+    
+    fig.tight_layout(rect = [0, 0.04, 1, 1])
+    fig.legend(loc='lower center', ncol=len(systems), handlelength=1.1, handletextpad=0.5, columnspacing=0.5, handleheight=0, borderaxespad=0.001, prop={'size': label_size}, labelspacing=0.5,frameon=False)
+
+    for file in files:
+        plt.savefig(file, bbox_inches='tight')
+
+    plt.close()
+
 def plot_total_throughputs(files):
     global total_throughputs
     fig, axs = plt.subplots(len(model_sizes), 1, figsize=(3 * len(model_sizes), 6 * len(traces)), dpi=1000)
@@ -285,16 +303,37 @@ performace_log_interval_map = {
         'p3': 4,
     },
 }
+
+performace_log_interval_map_horizental = {
+    '350M': {
+        'g4dn': 20,
+        'p3': 20,
+    },
+    '1.3B': {
+        'g4dn': 10,
+        'p3': 10,
+    },
+    '2.7B': {
+        'g4dn': 8,
+        'p3': 8,
+    },
+}
+
 # execute_all_prob(probabilities, 24, performance_log_interval_map_prob)
 # execute_all_freq(spot_instance_desired_capacity=20)
-# execute_all(spot_instance_desired_capacity=20, performance_log_interval_map=performace_log_interval_map)
-get_data(use_which=USE_FREQUENCY)
-# get_data()
-calculate_total_throughputs(use_which=USE_FREQUENCY)
+execute_all(spot_instance_desired_capacity=20, performance_log_interval_map=performace_log_interval_map_horizental)
+# get_data(use_which=USE_FREQUENCY)
+get_data()
+# calculate_total_throughputs(use_which=USE_FREQUENCY)
+calculate_total_throughputs()
 
 # plot_performance_trace([f'res/performances_trace_20.png', f'res/performances_trace_20.pdf'])    
 # plot_total_throughputs([f'res/total_throughputs_trace_20.png'])
-plot_breakdown([f'res/breakdown_freq_20.png'])
+
+plot_performance_trace_horizental([f'res/performances_trace_20_horizental.png', f'res/performances_trace_20_horizental.pdf'])    
+# plot_total_throughputs([f'res/total_throughputs_trace_20.png'])
+
+# plot_breakdown([f'res/breakdown_freq_20.png'])
 
 # handle_performances()
 # plot_performance('res/performances_modified.png')
