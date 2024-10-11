@@ -119,6 +119,7 @@ class Simulator:
         self.generate_graphs = generate_graphs
         
         self.model_size = model_size
+        self.min_nodes = 8
 
         self.seed = seed
         if self.seed is not None:
@@ -245,6 +246,8 @@ class Simulator:
         self.delta_reconfig = 0
         self.delta_fallback = 0
         self.delta_idle_waste = 0
+        
+        self.last_reconfigure_delta = 0
 
     def generate_probabilities(self):
         probability = {}
@@ -489,7 +492,7 @@ class Simulator:
         self.status = SystemStatus.RENDEZVOUS
         self.simulate_rendezvous_restart(delta)
         if isGlobal:
-            self.create_preparation_event(delta)
+            self.simulate_preparation_common(delta)
         else:
             self.create_reconfigure_event(delta)
 
@@ -507,6 +510,9 @@ class Simulator:
             if self.active_spot_instances() < self.runnable_instances[self.model_size]:
                 self.create_preparation_event(delta + self.wait_delta)
                 return
+        if self.active_spot_instances() < self.min_nodes:
+            self.create_preparation_event(delta + self.wait_delta)
+            return
         for i, name in enumerate(self.rendezvous):
             if name not in self.spot_instances:
                 self.info(
@@ -615,7 +621,7 @@ class Simulator:
         return num_workers_overloaded
 
     def simulate_should_reconfigure(self):
-        if self.last_spot_instance_num != self.active_spot_instances():
+        if self.last_spot_instance_num > self.active_spot_instances():
             return True
 
         return False
@@ -674,7 +680,6 @@ class Simulator:
                 delta,
                 self.rendezvous_version
             )
-            self.delta_effective_time += self.iteration_delta
 
     def calculate_average(self, xs, ys, duration):
         previous_x = None

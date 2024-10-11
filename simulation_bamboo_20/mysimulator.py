@@ -14,7 +14,7 @@ class MySimulator(Simulator):
         self.global_batch_size = 1024
         
         # prepare for first time launch
-        self.preparation_delta = 10000
+        self.preparation_delta = 0
 
         # on demand instance config, no need to change
         def calculate_avg_nodes(file):
@@ -47,14 +47,16 @@ class MySimulator(Simulator):
             self.on_demand_num_instances = (int(calculate_avg_nodes(spot_instance_trace)) // self.pipeline_parallel_size) * self.pipeline_parallel_size
         
         self.on_demand_cost = self.on_demand_num_instances * self.on_demand_cost_per_hour
-        self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)
+        iter_time, _ = self.simulate_iteration_delta_calc(self.on_demand_num_instances)
+        self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / iter_time
         self.on_demand_value = self.on_demand_performance / self.on_demand_cost
 
     def reconfigure_delta(self, prev_pipeline_num, new_pipeline_num):
         # reconfigure time (ms)
         # layer time model: (layers / 12) * 150s
         # data: model_size: pipeline size: reconfigure time
-        fall_back_delta = self.simulate_iteration_delta_calc(new_pipeline_num * self.pipeline_parallel_size) / 3
+        fall_back_delta, _ = self.simulate_iteration_delta_calc(new_pipeline_num * self.pipeline_parallel_size)
+        fall_back_delta = fall_back_delta / 3
         if prev_pipeline_num > new_pipeline_num:
             self.delta_fallback += fall_back_delta
             return fall_back_delta
@@ -63,22 +65,39 @@ class MySimulator(Simulator):
                 2: 417.42
             },
         }
+        
         self.delta_fallback += fall_back_delta
         return data[self.model_size][self.pipeline_parallel_size] + fall_back_delta
 
     def simulate_iteration_delta(self):
         # iteration time
-        self.iteration_delta = self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
+        self.iteration_delta, self.no_redundancy_delta = self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
     
     def simulate_iteration_delta_calc(self, nodes_num):
         data = {
-            8: 56146.703,
-            10: 60472.556,
-            12: 37728.402,
-            14: 39422.771,
-            16: 28313.458,
-            18: 22941.228,
-            20: 25042.849,
+            8: 119752.163,
+            10: 112578.5429,
+            12: 72470.2445,
+            14: 109371.1205,
+            16: 61948.534,
+            18: 66960.605,
+            20: 50015.346,
+            
+            22: 42596.255,
+            24: 66666,
+            26: 55555,
+            28: 55555,
+            30: 44444,
+            32: 44444
+        }
+        no_redundancy_data = {
+            8: 94730.02791,
+            10: 89055.33099,
+            12: 63038.3595,
+            14: 77470.0865,
+            16: 47430.2605,
+            18: 54713.997,
+            20: 39728.7705,
             
             22: 42596.255,
             24: 66666,
@@ -88,4 +107,4 @@ class MySimulator(Simulator):
             32: 44444
         }
         nodes_num -= (nodes_num % self.pipeline_parallel_size)
-        return data[nodes_num]
+        return data[nodes_num], no_redundancy_data[nodes_num]

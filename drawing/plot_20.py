@@ -12,8 +12,8 @@ systems = ['bamboo', 'varu', 'oobleck', 'oobleck_opt', 'livepipe']
 dirs = {'bamboo': 'bamboo-20',  'varu': 'varu-20', 'oobleck': 'oobleck-20', 'oobleck_opt': 'oobleck-opt-20', 'livepipe-red1': 'livepipe-red1-20', 'livepipe-red2': 'livepipe-red2-20', 'livepipe': 'livepipe-red1-20'}
 traces = ['g4dn', 'p3']
 probabilities = [0.2]
-frequencies = ['1h', '10m', '5m', '2m', '1m']
-model_sizes = ['350M', '1.3B', '2.7B']
+frequencies = ['1h', '2m']
+model_sizes = ['350M', '2.7B']
 # colormap = {'bamboo': '#e79397', 'varu': '#e1c855', 'oobleck': '#e07b54', 'livepipe': '#51b1b7'}
 # colormap = {'bamboo': '#55b7e6', 'varu': '#193e8f', 'oobleck': '#f09739', 'livepipe': '#e53528'}
 colormap = {'bamboo': '#5fccb9', 'varu': '#ffbe7a', 'oobleck': '#fa7f6f', 'oobleck_opt': '#a797da', 'livepipe-red1': '#17b5e9', 'livepipe-red2': '#7391d5', 'livepipe': '#17b5e9'}
@@ -183,7 +183,7 @@ def plot_performance_together(axes, trace, trace_i, model_size, with_label, with
             axes.set_xlabel('Time (hours)', fontproperties=font)
         axes.set_ylabel(f'Thrpt (Samples/s)', fontproperties=font)
         if with_title:
-            axes.set_title(f'GPT-3 {model_size} Throuphput Changes (trace-{trace_i + 1})', fontproperties=font_bold)
+            axes.set_title(f'GPT-3 {model_size} Throuphput', fontproperties=font_bold)
     axes.set_yticks(range(0, max_y + 1, (max_y + 1) // 4))
     axes.set_xlim(-0.5, 12.5)
     axes.set_ylim(0, axes.get_ylim()[1])
@@ -254,7 +254,7 @@ def plot_total_throughputs(files):
     plt.close()
 
 def plot_breakdown(files):
-    fig, axs = plt.subplots(len(model_sizes), 1, figsize=(5 * len(frequencies), 3.5 * len(model_sizes)), dpi=1000)
+    fig, axs = plt.subplots(len(model_sizes), 1, figsize=(5 * len(frequencies), 4 * len(model_sizes)), dpi=1000)
     for model_size_i, model_size in enumerate(model_sizes):
         xticklables = []
         for freq_i, freq in enumerate(frequencies):
@@ -275,10 +275,10 @@ def plot_breakdown(files):
         axs[model_size_i].set_title(f'GPT-3 {model_size}', fontproperties=font_bold)
         axs[model_size_i].set_ylabel('Time occupation(ratio)', fontproperties=font)
         axs[model_size_i].set_xticks(range(len(xticklables)))
-        axs[model_size_i].set_xticklabels(xticklables, fontdict={'fontsize': 5})
+        axs[model_size_i].set_xticklabels(xticklables, fontdict={'fontsize': 4})
         axs[model_size_i].tick_params(labelsize=label_size)
-    fig.legend(loc="lower center", bbox_to_anchor=(0., 0.005, 1., .102), ncol=3, fancybox=True, shadow=True)
-    fig.subplots_adjust(hspace=0.4)
+    fig.legend(loc="lower center", bbox_to_anchor=(0., 0.005, 1., .102), ncol=len(breakdown_names), fancybox=True, shadow=True)
+    fig.subplots_adjust(hspace=0.3)
     for file in files:
         plt.savefig(file, bbox_inches='tight')
     plt.close()
@@ -295,45 +295,31 @@ performace_log_interval_map = {
         'p3': 10,
     },
     '1.3B': {
+        'g4dn': 6,
+        'p3': 6,
+    },
+    '2.7B': {
         'g4dn': 5,
         'p3': 5,
-    },
-    '2.7B': {
-        'g4dn': 4,
-        'p3': 4,
-    },
-}
-
-performace_log_interval_map_horizental = {
-    '350M': {
-        'g4dn': 20,
-        'p3': 20,
-    },
-    '1.3B': {
-        'g4dn': 10,
-        'p3': 10,
-    },
-    '2.7B': {
-        'g4dn': 8,
-        'p3': 8,
     },
 }
 
 # execute_all_prob(probabilities, 24, performance_log_interval_map_prob)
 # execute_all_freq(spot_instance_desired_capacity=20)
-execute_all(spot_instance_desired_capacity=20, performance_log_interval_map=performace_log_interval_map_horizental)
-# get_data(use_which=USE_FREQUENCY)
-get_data()
-# calculate_total_throughputs(use_which=USE_FREQUENCY)
-calculate_total_throughputs()
+# execute_all(spot_instance_desired_capacity=20, performance_log_interval_map=performace_log_interval_map)
+get_data(use_which=USE_FREQUENCY)
+# get_data()
+calculate_total_throughputs(use_which=USE_FREQUENCY)
+# calculate_total_throughputs()
 
 # plot_performance_trace([f'res/performances_trace_20.png', f'res/performances_trace_20.pdf'])    
 # plot_total_throughputs([f'res/total_throughputs_trace_20.png'])
 
-plot_performance_trace_horizental([f'res/performances_trace_20_horizental.png', f'res/performances_trace_20_horizental.pdf'])    
+# plot_performance_trace_horizental([f'res/performances_trace_20_horizental.png', f'res/performances_trace_20_horizental.pdf']) 
+   
 # plot_total_throughputs([f'res/total_throughputs_trace_20.png'])
 
-# plot_breakdown([f'res/breakdown_freq_20.png'])
+plot_breakdown([f'res/breakdown_freq_20.png'])
 
 # handle_performances()
 # plot_performance('res/performances_modified.png')

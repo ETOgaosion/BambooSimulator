@@ -123,6 +123,7 @@ class Simulator:
         self.generate_graphs = generate_graphs
         
         self.model_size = model_size
+        self.min_nodes = 8
 
         self.seed = seed
         if self.seed is not None:
@@ -249,6 +250,8 @@ class Simulator:
         self.delta_reconfig = 0
         self.delta_fallback = 0
         self.delta_idle_waste = 0
+        
+        self.last_reconfigure_delta = 0
 
     def generate_probabilities(self):
         probability = {}
@@ -510,6 +513,7 @@ class Simulator:
     def simulate_spot_instance_remove(self, delta, data):
         self.info(delta, f'{data["name"]} simulate_spot_instance_remove: {delta}')
         name = data['name']
+        
         instance = self.spot_instances[name]
 
         self.num_spot_instance_removals += 1
@@ -517,14 +521,18 @@ class Simulator:
         self.spot_instance_removal_times.append(delta)
         del self.spot_instances[name]
         
-        self.simulate_rendezvous_start(delta, False)
+        if self.last_reconfigure_delta != delta:
+            self.last_reconfigure_delta = delta
+            self.simulate_rendezvous_start(delta, False)
+        else:
+            self.info(delta, f'same delta as last reconfigure, skipping')
 
     def simulate_rendezvous_start(self, delta, isGlobal):
         self.info(delta, f'simulate_rendezvous_start: {delta}')
         self.status = SystemStatus.RENDEZVOUS
         self.simulate_rendezvous_restart(delta)
         if isGlobal:
-            self.create_preparation_event(delta)
+            self.simulate_preparation_common(delta)
         else:
             self.create_reconfigure_event(delta)
 
@@ -542,6 +550,9 @@ class Simulator:
             if self.active_spot_instances() < self.runnable_instances[self.model_size]:
                 self.create_preparation_event(delta + self.wait_delta)
                 return
+        if self.active_spot_instances() < self.min_nodes:
+            self.create_preparation_event(delta + self.wait_delta)
+            return
         for i, name in enumerate(self.rendezvous):
             if name not in self.spot_instances:
                 self.info(
@@ -656,19 +667,23 @@ class Simulator:
 
     def simulate_should_reconfigure(self):
         if self.last_spot_instance_num > self.active_spot_instances():
-            return True
+            return 1
         
         if self.last_spot_instance_num < self.active_spot_instances() and self.active_spot_instances() - self.last_spot_instance_num >= self.pipeline_parallel_size:
-            return True
+            return 2
 
-        return False
+        return 0
     
     def simulate_should_ckpt(self):
         return self.num_iterations_complete % self.ckpt_steps == 0
     
     def simulate_checkpoint(self, delta):
         self.info(delta, f'simulate_checkpoint: {delta}')
-        self.create_training_iteration_execute_event(delta, self.rendezvous_version)
+        if self.simulate_should_reconfigure() > 0:
+            self.info(delta, f'reconfiguration during checkpoint')
+            self.simulate_rendezvous_start(delta, False)
+        else:
+            self.create_training_iteration_execute_event(delta, self.rendezvous_version)
 
     def simulate_training_iteration_execute(self, delta, data):
         rendezvous_version = data['rendezvous_version']
@@ -676,11 +691,13 @@ class Simulator:
             return
 
         # Handle fallback events
-        if self.simulate_should_reconfigure():
+        if self.simulate_should_reconfigure() > 0:
             self.info(
                 delta,
                 f'reconfiguration during iteration {self.num_iterations_complete}'
             )
+            if self.simulate_should_reconfigure() == 2:
+                self.simulate_rendezvous_start(delta, False)
             return
 
         self.num_iterations_complete += 1
@@ -714,12 +731,13 @@ class Simulator:
             #    break
 
         #assert False
-        self.info(delta, f'simulate training iteration execution finish')
+        self.info(delta, f'simulate training iteration execution finish {self.num_iterations_complete}')
+        self.delta_effective_time += self.iteration_delta
 
 
-        if self.num_iterations_complete % 10000 == 0:
+        if self.num_iterations_complete % 10000 == 1:
             self.info(delta, f'{self.num_iterations_complete} iterations complete')
-        if self.simulate_should_reconfigure():
+        if self.simulate_should_reconfigure() > 0:
             self.info(
                 delta,
                 f'reconfiguration after iteration {self.num_iterations_complete}'

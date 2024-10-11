@@ -120,6 +120,7 @@ class Simulator:
         self.generate_graphs = generate_graphs
         
         self.model_size = model_size
+        self.min_nodes = 8
 
         self.seed = seed
         if self.seed is not None:
@@ -250,6 +251,8 @@ class Simulator:
         self.delta_reconfig = 0
         self.delta_fallback = 0
         self.delta_idle_waste = 0
+        
+        self.last_reconfigure_delta = 0
         
         self.output_delta = {}
 
@@ -528,6 +531,9 @@ class Simulator:
             if self.active_spot_instances() < self.runnable_instances[self.model_size]:
                 self.create_preparation_event(delta + self.wait_delta)
                 return
+        if self.active_spot_instances() < self.min_nodes:
+            self.create_preparation_event(delta + self.wait_delta)
+            return
         for i, name in enumerate(self.rendezvous):
             if name not in self.spot_instances:
                 self.info(
@@ -683,7 +689,7 @@ class Simulator:
         #assert False
 
 
-        if self.num_iterations_complete % 10000 == 0:
+        if self.num_iterations_complete % 10000 == 1:
             # self.info(delta, f'{self.num_iterations_complete} iterations complete')
             pass
         if self.simulate_should_reconfigure(delta):
@@ -697,7 +703,7 @@ class Simulator:
                 delta,
                 self.rendezvous_version
             )
-            self.delta_effective_time += self.iteration_delta
+            self.delta_redundant_computation += self.no_redundancy_delta
 
     def calculate_average(self, xs, ys, duration):
         previous_x = None
@@ -833,8 +839,6 @@ class Simulator:
 
         self.total_delta = delta
         self.delta_reconfig = self.delta_reconfig - self.delta_fallback
-        self.delta_redundant_computation = self.delta_effective_time * 0.8
-        self.delta_effective_time = self.delta_effective_time * 0.2
         self.delta_idle_waste = self.total_delta - self.delta_checkpointing - self.delta_effective_time - self.delta_fallback - self.delta_reconfig - self.delta_redundant_computation
         duration_hours_whole = math.ceil(delta / self.milliseconds_per_hour)
 

@@ -306,6 +306,8 @@ class Simulator:
         self.delta_reconfig = 0
         self.delta_fallback = 0
         self.delta_idle_waste = 0
+        
+        self.last_reconfigure_delta = 0
 
     def generate_probabilities(self):
         probability = {}
@@ -885,7 +887,6 @@ class Simulator:
                 delta,
                 self.rendezvous_version
             )
-            self.delta_effective_time += self.iteration_delta
 
     def calculate_average(self, xs, ys, duration):
         previous_x = None

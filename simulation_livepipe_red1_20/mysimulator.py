@@ -12,7 +12,7 @@ class MySimulator(Simulator):
         self.global_batch_size = 1024
         
         # prepare for first time launch
-        self.preparation_delta = 10000
+        self.preparation_delta = 0
 
         # on demand instance config, no need to change
         def calculate_avg_nodes(file):
@@ -150,7 +150,7 @@ class MySimulator(Simulator):
 
     def simulate_iteration_delta(self):
         # iteration time
-        self.iteration_delta = self.simulate_iteration_delta_calc(self.last_spot_instance_num)
+        self.iteration_delta = self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
 
 
     def simulate_iteration_delta_calc(self, nodes_num) -> int:
