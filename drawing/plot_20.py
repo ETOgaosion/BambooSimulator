@@ -19,6 +19,7 @@ model_sizes = ['350M', '1.3B', '2.7B']
 colormap = {'bamboo': '#5fccb9', 'varu': '#ffbe7a', 'oobleck': '#fa7f6f', 'oobleck_opt': '#a797da', 'livepipe-red1': '#17b5e9', 'livepipe-red2': '#7391d5', 'livepipe': '#17b5e9'}
 breakdown_names = ['delta_effective_time', 'delta_checkpointing', 'delta_redundant_computation', 'delta_reconfig', 'delta_fallback']
 breakdown_colormap = {'delta_effective_time': '#d0e7ed', 'delta_checkpointing': '#e58579', 'delta_redundant_computation': '#d5e48a', 'delta_reconfig': '#9dd0c7', 'delta_fallback': '#9180ac'}
+breakdown_namemap = {'delta_effective_time': 'Effective Time', 'delta_checkpointing': 'Save Checkpoint', 'delta_redundant_computation': 'Redundant Computation', 'delta_reconfig': 'Reconfigure', 'delta_fallback': 'Fall Back'}
 namemap = {'bamboo': 'Bamboo', 'varu': 'Varuna', 'oobleck': 'Oobleck', 'oobleck_opt': 'Oobleck Opt', 'livepipe-red1': 'LivePipe Red1', 'livepipe-red2': 'LivePipe Red2', 'livepipe': 'LivePipe'}
 linewidth = {'bamboo': 1, 'varu': 1, 'oobleck': 1, 'oobleck_opt': 1, 'livepipe-red1': 1.5, 'livepipe-red2': 1.5, 'livepipe': 1.5}
 label_size = 12
@@ -248,7 +249,7 @@ def plot_breakdown(files):
                     xticklables[-1] = 'Oobleck\nOpt ' + freq
                 for breakdown_name in list(reversed(breakdown_names)):
                     if system_i == 0 and freq_i == 0 and freq_i == 0:
-                        axs[model_size_i].bar(namemap[system] + '\n' + freq, breakdown_results[key][breakdown_name], color=breakdown_colormap[breakdown_name], label=breakdown_name)
+                        axs[model_size_i].bar(namemap[system] + '\n' + freq, breakdown_results[key][breakdown_name], color=breakdown_colormap[breakdown_name], label=breakdown_namemap[breakdown_name])
                     else:
                         axs[model_size_i].bar(namemap[system] + '\n' + freq, breakdown_results[key][breakdown_name], color=breakdown_colormap[breakdown_name])
             if freq_i < len(frequencies) - 1:
