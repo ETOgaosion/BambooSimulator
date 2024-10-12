@@ -687,6 +687,8 @@ class Simulator:
             #    break
 
         #assert False
+        self.delta_redundant_computation += self.iteration_delta - self.no_redundancy_delta
+        self.delta_effective_time += self.no_redundancy_delta
 
 
         if self.num_iterations_complete % 10000 == 1:
@@ -703,7 +705,6 @@ class Simulator:
                 delta,
                 self.rendezvous_version
             )
-            self.delta_redundant_computation += self.no_redundancy_delta
 
     def calculate_average(self, xs, ys, duration):
         previous_x = None

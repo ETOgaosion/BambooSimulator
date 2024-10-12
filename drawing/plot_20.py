@@ -13,6 +13,8 @@ dirs = {'bamboo': 'bamboo-20',  'varu': 'varu-20', 'oobleck': 'oobleck-20', 'oob
 traces = ['g4dn', 'p3']
 probabilities = [0.2]
 frequencies = ['1h', '2m']
+# frequencies = ['1h', '10m', '5m', '2m']
+# model_sizes = ['350M', '1.3B', '2.7B']
 model_sizes = ['350M', '2.7B']
 # colormap = {'bamboo': '#e79397', 'varu': '#e1c855', 'oobleck': '#e07b54', 'livepipe': '#51b1b7'}
 # colormap = {'bamboo': '#55b7e6', 'varu': '#193e8f', 'oobleck': '#f09739', 'livepipe': '#e53528'}
@@ -71,7 +73,7 @@ def get_data(use_which=USE_TRACE):
             if use_which == USE_TRACE:
                 for trace in traces:
                     if not os.path.exists(f'data/{sys_dir}/result_{trace}_{model_size}.pkl'):
-                        print(f'data/{sys_dir}/result_{trace}_{model_size}.pkl does not exist')
+                        # print(f'data/{sys_dir}/result_{trace}_{model_size}.pkl does not exist')
                         continue
                     key = system + '-' + trace + '-' + model_size
                     results[key] = pickle.load(open(f'data/{sys_dir}/result_{trace}_{model_size}.pkl', 'rb'))
@@ -83,7 +85,7 @@ def get_data(use_which=USE_TRACE):
             elif use_which == USE_FREQUENCY:
                 for freq in frequencies:
                     if not os.path.exists(f'data/{sys_dir}/result_{freq}_{model_size}.pkl'):
-                        print(f'data/{sys_dir}/result_{freq}_{model_size}.pkl does not exist')
+                        # print(f'data/{sys_dir}/result_{freq}_{model_size}.pkl does not exist')
                         continue
                     key = system + '-' + freq + '-' + model_size
                     results[key] = pickle.load(open(f'data/{sys_dir}/result_{freq}_{model_size}.pkl', 'rb'))
@@ -95,7 +97,7 @@ def get_data(use_which=USE_TRACE):
             else:
                 for prob in probabilities:
                     if not os.path.exists(f'data/{sys_dir}/result_prob_{prob}_{model_size}.pkl'):
-                        print(f'data/{sys_dir}/result_prob_{prob}_{model_size}.pkl')
+                        # print(f'data/{sys_dir}/result_prob_{prob}_{model_size}.pkl')
                         continue
                     key = system + '-' + str(prob) + '-' + model_size
                     results[key] = pickle.load(open(f'data/{sys_dir}/result_prob_{prob}_{model_size}.pkl', 'rb'))
@@ -109,7 +111,7 @@ def get_data(use_which=USE_TRACE):
                 breakdown_results[key]['delta_redundant_computation'] = result.delta_redundant_computation / total_time + breakdown_results[key]['delta_checkpointing']
                 breakdown_results[key]['delta_reconfig'] = result.delta_reconfig / total_time + breakdown_results[key]['delta_redundant_computation']
                 breakdown_results[key]['delta_fallback'] = result.delta_fallback / total_time + breakdown_results[key]['delta_reconfig']
-                pprint.pp(results)
+                # pprint.pp(results)
                 # pprint.pp(breakdown_results)
 
 def get_performance_freq(files):
@@ -181,7 +183,7 @@ def plot_performance_together(axes, trace, trace_i, model_size, with_label, with
             axes.hlines(results[key].average_performance, -0.5, 12.5, linestyles='dotted', color=colormap[system], linewidth=avg_linewidth)
         if with_x_label:
             axes.set_xlabel('Time (hours)', fontproperties=font)
-        axes.set_ylabel(f'Thrpt (Samples/s)', fontproperties=font)
+        axes.set_ylabel(f'Throughput (Samples/s)', fontproperties=font)
         if with_title:
             axes.set_title(f'GPT-3 {model_size} Throuphput', fontproperties=font_bold)
     axes.set_yticks(range(0, max_y + 1, (max_y + 1) // 4))
@@ -267,15 +269,18 @@ def plot_breakdown(files):
                     xticklables[-1] = 'Oobleck\nOpt ' + freq
                 for breakdown_name in list(reversed(breakdown_names)):
                     if system_i == 0 and freq_i == 0 and freq_i == 0:
-                        axs[model_size_i].bar(namemap[system] + '\n' + freq, breakdown_results[key][breakdown_name], color=breakdown_colormap[breakdown_name], label=breakdown_namemap[breakdown_name])
+                        p = axs[model_size_i].bar(namemap[system] + '\n' + freq, breakdown_results[key][breakdown_name], color=breakdown_colormap[breakdown_name], label=breakdown_namemap[breakdown_name])
                     else:
-                        axs[model_size_i].bar(namemap[system] + '\n' + freq, breakdown_results[key][breakdown_name], color=breakdown_colormap[breakdown_name])
+                        p = axs[model_size_i].bar(namemap[system] + '\n' + freq, breakdown_results[key][breakdown_name], color=breakdown_colormap[breakdown_name])
+                    if breakdown_name == 'delta_effective_time':
+                        # axs[model_size_i].bar_label(p, label_type='edge', fmt='%.2f', fontsize=14, padding=-20)
+                        print(f'{model_size} {system} {freq} {breakdown_name} {breakdown_results[key][breakdown_name]}')
             if freq_i < len(frequencies) - 1:
                 axs[model_size_i].vlines(len(xticklables) - 0.5, 0, 1, linestyles='dashed')
         axs[model_size_i].set_title(f'GPT-3 {model_size}', fontproperties=font_bold)
-        axs[model_size_i].set_ylabel('Time occupation(ratio)', fontproperties=font)
+        axs[model_size_i].set_ylabel('Time occupation (ratio)', fontproperties=font)
         axs[model_size_i].set_xticks(range(len(xticklables)))
-        axs[model_size_i].set_xticklabels(xticklables, fontdict={'fontsize': 4})
+        axs[model_size_i].set_xticklabels(xticklables, fontdict={'fontsize': 6})
         axs[model_size_i].tick_params(labelsize=label_size)
     fig.legend(loc="lower center", bbox_to_anchor=(0., 0.005, 1., .102), ncol=len(breakdown_names), fancybox=True, shadow=True)
     fig.subplots_adjust(hspace=0.3)
@@ -319,7 +324,7 @@ calculate_total_throughputs(use_which=USE_FREQUENCY)
    
 # plot_total_throughputs([f'res/total_throughputs_trace_20.png'])
 
-plot_breakdown([f'res/breakdown_freq_20.png'])
+plot_breakdown([f'res/breakdown_freq_20.png', f'res/breakdown_freq_20.pdf'])
 
 # handle_performances()
 # plot_performance('res/performances_modified.png')
