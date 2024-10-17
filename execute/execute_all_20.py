@@ -85,6 +85,7 @@ def execute_all_freq(spot_instance_desired_capacity=20, performance_log_interval
     
 
 def execute_all(spot_instance_desired_capacity=20, performance_log_interval_map={'350M': {'g4dn': 1, 'p3': 1}, '1.3B': {'g4dn': 1, 'p3': 1}, '2.7B': {'g4dn': 1, 'p3': 1}}):
+    # systems = ['livepipe_red1']
     systems = ['bamboo', 'livepipe_red1', 'livepipe_red2', 'oobleck', 'oobleck_opt', 'varu']
     system_funcs = {
         'bamboo': bamboo_main,

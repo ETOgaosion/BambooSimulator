@@ -631,9 +631,12 @@ class Simulator:
 
     def simulate_should_reconfigure(self):
         if self.last_spot_instance_num > self.active_spot_instances():
-            return True
+            return 1
+        
+        if self.active_spot_instances() > self.last_spot_instance_num:
+            return 2
 
-        return False
+        return 0
 
     def simulate_training_iteration_execute(self, delta, data):
         rendezvous_version = data['rendezvous_version']
@@ -641,11 +644,14 @@ class Simulator:
             return
 
         # Handle fallback events
-        if self.simulate_should_reconfigure():
+        if self.simulate_should_reconfigure() > 0:
             self.info(
                 delta,
                 f'reconfiguration during iteration {self.num_iterations_complete}'
             )
+            if self.simulate_should_reconfigure() == 2:
+                self.info(delta, f'scale out from {self.last_spot_instance_num} to {self.active_spot_instances()}')
+                self.simulate_rendezvous_start(delta, False)
             return
 
         self.num_iterations_complete += 1
@@ -679,13 +685,13 @@ class Simulator:
             #    break
 
         #assert False
-        self.info(delta, f'simulate training iteration execution finish {self.num_iterations_complete}')
+        self.info(delta, f'simulate training iteration execution finish {self.num_iterations_complete} {self.data_parallel_size * self.pipeline_parallel_size} {samples_per_second} {iteration_duration_hours}')
         self.delta_effective_time += self.iteration_delta
 
 
         if self.num_iterations_complete % 10000 == 1:
             self.info(delta, f'{self.num_iterations_complete} iterations complete')
-        if self.simulate_should_reconfigure():
+        if self.simulate_should_reconfigure() > 0:
             self.info(
                 delta,
                 f'reconfiguration after iteration {self.num_iterations_complete}'
