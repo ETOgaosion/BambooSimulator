@@ -17,6 +17,8 @@ def handle_csv(file):
 
 def squeeze_data(seconds, operations):
     seconds_norepeat = []
+    min_seconds = 0
+    seconds_gap = []
     operations_norepeat = []
     nodes_action = []
     for i in range(len(seconds)):
@@ -24,6 +26,12 @@ def squeeze_data(seconds, operations):
             nodes_action.append(1)
             seconds_norepeat.append(seconds[i] / 1000)
             operations_norepeat.append(operations[i])
+            if min_seconds == 0 and len(seconds_norepeat) > 1:
+                min_seconds = seconds_norepeat[-1] - seconds_norepeat[-2]
+            if len(seconds_norepeat) > 1 and min_seconds > seconds_norepeat[-1] - seconds_norepeat[-2]:
+                min_seconds = seconds_norepeat[-1] - seconds_norepeat[-2]
+            if len(seconds_norepeat) > 1:
+                seconds_gap.append(seconds_norepeat[-1] - seconds_norepeat[-2])
             continue
         if seconds_norepeat[-1] == seconds[i] / 1000:
             if operations[i] == operations_norepeat[-1]:
@@ -35,6 +43,9 @@ def squeeze_data(seconds, operations):
                     nodes_action.pop()
                     seconds_norepeat.pop()
                     operations_norepeat.pop()
+    print(f"min_seconds: {min_seconds}")
+    # pprint.pp(seconds_gap)
+    print(f'avg_seconds: {sum(seconds_gap) / len(seconds_norepeat)}')
     return seconds_norepeat, operations_norepeat, nodes_action
 
 
@@ -55,14 +66,14 @@ def calculate_nodes_varient(seconds, operations, nodes):
         last_seconds = seconds[i]
     time_data = collections.OrderedDict(sorted(time_data.items()))
 
-calculate_nodes_varient(*squeeze_data(*handle_csv("traces/p3-trace-8-20.csv")))
+calculate_nodes_varient(*squeeze_data(*handle_csv("traces/p3-trace.csv")))
 
 pprint.pp(time_data)
 pprint.pp(sum(time_data.values()))
 
 time_data = {}
 
-calculate_nodes_varient(*squeeze_data(*handle_csv("traces/g4dn-trace-8-20.csv")))
+calculate_nodes_varient(*squeeze_data(*handle_csv("traces/g4dn-trace.csv")))
 
 pprint.pp(time_data)
 pprint.pp(sum(time_data.values()))
