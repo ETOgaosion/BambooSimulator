@@ -103,8 +103,8 @@ def generate_trace_8_20(file_raw, file_target):
     regenerate_trace(after_rewrite_trace, file_target)
 
 
-generate_trace_8_20('traces/g4dn-trace.csv', 'traces/g4dn-trace-8-20.csv')
-generate_trace_8_20('traces/p3-trace.csv', 'traces/p3-trace-8-20.csv')
+# generate_trace_8_20('traces/g4dn-trace.csv', 'traces/g4dn-trace-8-20.csv')
+# generate_trace_8_20('traces/p3-trace.csv', 'traces/p3-trace-8-20.csv')
 
 
 '''
@@ -151,7 +151,7 @@ def calculate_stats_nodes(file):
     plot_nodes_samples(seconds_norepeat, nodes_samples, file.split('/')[-1].split('-')[0])
     return max(nodes_samples), min(nodes_samples), statistics.mean(nodes_samples)
 
-print(calculate_stats_nodes('traces/g4dn-trace-8-20.csv'))
-print(calculate_stats_nodes('traces/p3-trace-8-20.csv'))
+print(calculate_stats_nodes('traces/g4dn-trace.csv'))
+print(calculate_stats_nodes('traces/p3-trace.csv'))
 
     
