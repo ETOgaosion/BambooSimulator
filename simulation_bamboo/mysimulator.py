@@ -3,12 +3,14 @@ from simulation_bamboo.simulator import Simulator
 import math
 import csv
 import statistics
+from data_process.loader import load_raw_data
+from data.metadata.bamboo.raw_data import get_remap_layer_time
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=2, spot_instance_trace='traces/p3-trace.csv', 
-                 performance_log_interval=5, runnable_instances={'350M': 8}, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
-        super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, pipeline_parallel_size, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
+                 model='GPT-3', model_size='gpt3_1_3B', spot_instance_desired_capacity=24, pipeline_parallel_size=2, spot_instance_trace='traces/p3-trace.csv', 
+                 performance_log_interval=5, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
+        super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, pipeline_parallel_size, spot_instance_trace, performance_log_interval, generate_addition_probabilities, removal_probability, generate_graphs)
     
         # Amazon EC2 Tesla T4
         self.global_batch_size = 1024
@@ -16,6 +18,7 @@ class MySimulator(Simulator):
         # prepare for first time launch
         self.preparation_delta = 0
 
+        self.meta_data = load_raw_data('bamboo')
         # on demand instance config, no need to change
         def calculate_avg_nodes(file):
             seconds, operations, nodes, nodes_samples = [], [], [], []
@@ -58,33 +61,16 @@ class MySimulator(Simulator):
         if prev_pipeline_num > new_pipeline_num:
             self.delta_fallback += fall_back_delta
             return fall_back_delta
-        data = {
-            '350M': {
-                2: 417.42
-            },
-        }
         fall_back_delta = self.simulate_iteration_delta_calc(new_pipeline_num * self.pipeline_parallel_size) / 3
         self.delta_fallback += fall_back_delta
-        return data[self.model_size][self.pipeline_parallel_size] + fall_back_delta
+        layer_remap_time = get_remap_layer_time(self.model_size, prev_pipeline_num * self.pipeline_parallel_size, new_pipeline_num * self.pipeline_parallel_size)
+        return layer_remap_time + fall_back_delta
 
     def simulate_iteration_delta(self):
         # iteration time
         self.iteration_delta = self.simulate_iteration_delta_calc(self.active_spot_instances())
     
     def simulate_iteration_delta_calc(self, nodes_num):
-        data = {
-            8: 69515.708,
-            10: 50229.078,
-            12: 37633.883,
-            14: 49504.413,
-            16: 29771.795,
-            18: 29567.57,
-            20: 23009.683,
-            22: 42596.255,
-            24: 66666,
-            26: 55555,
-            28: 55555,
-            30: 44444,
-            32: 44444
-        }
-        return data[self.data_parallel_size * self.pipeline_parallel_size]
+        iter_time = self.meta_data.query(f'models == "{self.model_size}" and node_num == {nodes_num}')['iteration_time']
+        iter_time = iter_time.values[0] if len(iter_time) > 0 else 0
+        return iter_time

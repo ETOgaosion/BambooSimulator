@@ -101,7 +101,7 @@ class Simulator:
                  seed=None,
                  start_hour=None,
                  model='GPT-3',
-                 model_size='350M',
+                 model_size='gpt3_1_3B',
                  spot_instance_desired_capacity=24,
                  pipeline_parallel_size=2,
                  spot_instance_trace=None,
@@ -120,7 +120,6 @@ class Simulator:
         self.generate_graphs = generate_graphs
         
         self.model_size = model_size
-        self.min_nodes = 8
 
         self.seed = seed
         if self.seed is not None:
@@ -142,7 +141,6 @@ class Simulator:
         
         self.wait_delta = 1000
 
-        self.runnable_instances = runnable_instances
         self.spot_instance_name_format = 'node{id}'
         self.spot_instance_next_id = 1
         if not generate_addition_probabilities:
@@ -527,11 +525,7 @@ class Simulator:
 
     def simulate_preparation_common(self, delta):
         # self.info(delta, f'simulate_preparation: {delta}')
-        if self.runnable_instances is not None and self.runnable_instances.get(self.model_size) is not None:
-            if self.active_spot_instances() < self.runnable_instances[self.model_size]:
-                self.create_preparation_event(delta + self.wait_delta)
-                return
-        if self.active_spot_instances() < self.min_nodes:
+        if self.simulate_iteration_delta() == 0:
             self.create_preparation_event(delta + self.wait_delta)
             return
         for i, name in enumerate(self.rendezvous):

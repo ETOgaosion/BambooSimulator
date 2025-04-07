@@ -1,4 +1,4 @@
-Namespace(duration=43200, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='350M', performace_log_interval=1, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/g4dn-trace-8-20.csv', start_hour=None)
+Namespace(duration=43200, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='gpt3_1_3B', performace_log_interval=1, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/g4dn-trace-8-20.csv', start_hour=None)
 [0.000] node1 simulate_spot_instance_add: 0
 [0.000] node3 simulate_spot_instance_add: 0
 [0.000] node7 simulate_spot_instance_add: 0
@@ -5245,7 +5245,7 @@ Model: GPT-3
   Performance: D 1.6 B 102.25772071284578
 [43200.000] Ending after 11.996094618055556 hours
 Result(system_name='livepipe-red1-20', removal_probability=None, preemption_mean=0.1781609195402299, preemption_median=0.1781609195402299, preemption_stdev=0.21600679760962285, lifetime_mean=2.8492753623188407, lifetime_median=1.2666666666666666, lifetime_stdev=3.3151297488170655, num_preemptions=59, num_fatal_failures=0, num_iterations_complete=4308, average_instances=16.38866700034972, average_performance=102.25772071284578, total_delta=43200000, delta_effective_time=42421180, delta_checkpointing=0, delta_redundant_computation=0, delta_reconfig=18920.0, delta_fallback=55418.125, delta_idle_waste=704481.875)
-Namespace(duration=43200, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='350M', performace_log_interval=1, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/p3-trace-8-20.csv', start_hour=None)
+Namespace(duration=43200, fig_directory='res/simulator', generate_addition_probabilities=False, generate_graphs=True, generate_table=False, model='GPT-3', model_size='gpt3_1_3B', performace_log_interval=1, removal_probability=None, seed=None, spot_instance_desired_capacity=20, spot_instance_trace='traces/p3-trace-8-20.csv', start_hour=None)
 [0.000] node1 simulate_spot_instance_add: 0
 [0.000] node3 simulate_spot_instance_add: 0
 [0.000] node7 simulate_spot_instance_add: 0

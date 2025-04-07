@@ -101,11 +101,10 @@ class Simulator:
                  seed=None,
                  start_hour=None,
                  model='GPT-3',
-                 model_size='350M',
+                 model_size='gpt3_1_3B',
                  spot_instance_desired_capacity=24,
                  spot_instance_trace=None,
                  performance_log_interval=5,
-                 runnable_instances=None,
                  generate_addition_probabilities=False,
                  removal_probability=None,
                  generate_graphs=False):
@@ -141,7 +140,6 @@ class Simulator:
         
         self.wait_delta = 1000
 
-        self.runnable_instances = runnable_instances
         self.spot_instance_name_format = 'node{id}'
         self.spot_instance_next_id = 1
         if not generate_addition_probabilities:

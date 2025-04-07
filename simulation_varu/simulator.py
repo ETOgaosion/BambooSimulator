@@ -103,7 +103,7 @@ class Simulator:
                  seed=None,
                  start_hour=None,
                  model='GPT-3',
-                 model_size='350M',
+                 model_size='gpt3_1_3B',
                  spot_instance_desired_capacity=24,
                  pipeline_parallel_size=2,
                  ckpt_steps=100,
