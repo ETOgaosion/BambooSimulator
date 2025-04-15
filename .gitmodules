@@ -1,0 +1,3 @@
+[submodule "plot_scripts"]
+	path = plot_scripts
+	url = git@github.com:ZhuJiaqi9905/plot_scripts.git
