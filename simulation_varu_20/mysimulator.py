@@ -100,7 +100,7 @@ class MySimulator(Simulator):
                 32: 1,
             },
         }
-        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 10
+        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 2
 
     def checkpoint_save_delta(self):
         # checkpoint load time
@@ -154,7 +154,7 @@ class MySimulator(Simulator):
                 32: 1,
             },
         }
-        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 10
+        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 2
 
     def fallback_delta(self):
         return (self.num_iterations_complete % self.ckpt_steps + 1 / 2) * self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
@@ -247,4 +247,4 @@ class MySimulator(Simulator):
         if data[self.model_size].get(nodes_num) is not None:
             return data[self.model_size][nodes_num]
         else:
-            return data[self.model_size][int(math.pow(2, math.ceil(math.log2(nodes_num))))]
+            return data[self.model_size][nodes_num - nodes_num % 2]

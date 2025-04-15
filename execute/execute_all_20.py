@@ -6,7 +6,7 @@ from simulation_bamboo_20.api import main as bamboo_main
 from simulation_livepipe_red1_20.api import main as livepipe_red1_main
 from simulation_livepipe_red2_20.api import main as livepipe_red2_main
 from simulation_oobleck_20.api import main as oobleck_main
-from simulation_oobleck_opt_20.api import main as oobleck_opt_main
+from simulation_gemini_20.api import main as gemini_main
 from simulation_varu_20.api import main as varu_main
 
 from traces.handler.trace_freq_constructor import generate_trace, write_trace
@@ -15,13 +15,13 @@ def execute_main(main_func, args):
     main_func(args)
 
 def execute_all_prob(probabilities=[0.2], spot_instance_desired_capacity=20, performance_log_interval_map={'350M': {0.1: 1, 0.2: 1}, '1.3B': {0.1: 1, 0.2: 1}, '2.7B': {0.1: 1, 0.2: 1}}):
-    systems = ['bamboo', 'livepipe_red1', 'livepipe_red2', 'oobleck', 'oobleck_opt', 'varu']
+    systems = ['bamboo', 'livepipe_red1', 'livepipe_red2', 'oobleck', 'gemini', 'varu']
     system_funcs = {
         'bamboo': bamboo_main,
         'livepipe_red1': livepipe_red1_main,
         'livepipe_red2': livepipe_red2_main,
         'oobleck': oobleck_main,
-        'oobleck_opt': oobleck_opt_main,
+        'gemini': gemini_main,
         'varu': varu_main
     }
     model_sizes = ['350M', '1.3B', '2.7B']
@@ -43,19 +43,19 @@ def execute_all_prob(probabilities=[0.2], spot_instance_desired_capacity=20, per
 
 def execute_all_freq(spot_instance_desired_capacity=20, performance_log_interval_map={'350M': {'6h': 1, '1h': 1, '10m': 1, '5m': 1, '2m': 1, '1m': 1}, '1.3B': {'6h': 1, '1h': 1, '10m': 1, '5m': 1, '2m': 1, '1m': 1}, '2.7B': {'6h': 1, '1h': 1, '10m': 1, '2m': 1, '5m': 1, '1m': 1}}):
     # systems = ['oobleck', 'varu']
-    systems = ['bamboo', 'livepipe_red1', 'livepipe_red2', 'oobleck', 'oobleck_opt', 'varu']
+    systems = ['bamboo', 'livepipe_red1', 'livepipe_red2', 'oobleck', 'gemini', 'varu']
     system_funcs = {
         'bamboo': bamboo_main,
         'livepipe_red1': livepipe_red1_main,
         'livepipe_red2': livepipe_red2_main,
         'oobleck': oobleck_main,
-        'oobleck_opt': oobleck_opt_main,
+        'gemini': gemini_main,
         'varu': varu_main
     }
     model_sizes = ['350M', '1.3B', '2.7B']
     # model_sizes = ['2.7B']
     # traces = ['2m']
-    traces = ['1h', '10m', '5m', '2m', '1m']
+    traces = ['1h', '10m', '5m', '2m']
     durations = {'6h': 6*60*60, '1h': 60*60, '10m': 10*60, '5m': 5*60, '2m': 2*60, '1m': 1*60}
     for trace in traces:
         if os.path.exists(f'traces/{trace}-trace-{spot_instance_desired_capacity}.csv'):
@@ -86,13 +86,13 @@ def execute_all_freq(spot_instance_desired_capacity=20, performance_log_interval
 
 def execute_all(spot_instance_desired_capacity=20, performance_log_interval_map={'350M': {'g4dn': 1, 'p3': 1}, '1.3B': {'g4dn': 1, 'p3': 1}, '2.7B': {'g4dn': 1, 'p3': 1}}):
     # systems = ['livepipe_red1']
-    systems = ['bamboo', 'livepipe_red1', 'livepipe_red2', 'oobleck', 'oobleck_opt', 'varu']
+    systems = ['bamboo', 'livepipe_red1', 'livepipe_red2', 'oobleck', 'gemini', 'varu']
     system_funcs = {
         'bamboo': bamboo_main,
         'livepipe_red1': livepipe_red1_main,
         'livepipe_red2': livepipe_red2_main,
         'oobleck': oobleck_main,
-        'oobleck_opt': oobleck_opt_main,
+        'gemini': gemini_main,
         'varu': varu_main
     }
     model_sizes = ['350M', '1.3B', '2.7B']

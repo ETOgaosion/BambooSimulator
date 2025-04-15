@@ -24,9 +24,7 @@ class EventKind(enum.IntEnum):
     SPOT_INSTANCE_READY = 4
     PREPARATION = 5
     RECONFIGURE = 6
-    FALLBACK = 7
-    TRAINING_STEP_COMPLETE = 8
-    CHECKPOINT = 9
+    TRAINING_STEP_COMPLETE = 7
 
 @dataclasses.dataclass(order=True)
 class Event:
@@ -105,10 +103,8 @@ class Simulator:
                  model='GPT-3',
                  model_size='350M',
                  spot_instance_desired_capacity=24,
-                 pipeline_parallel_size=2,
-                 ckpt_steps=100,
                  spot_instance_trace=None,
-                 performance_log_interval=1,
+                 performance_log_interval=5,
                  runnable_instances=None,
                  generate_addition_probabilities=False,
                  removal_probability=None,
@@ -134,8 +130,8 @@ class Simulator:
         self.spot_instance_desired_capacity = spot_instance_desired_capacity
         self.generate_addition_probabilities = generate_addition_probabilities
         self.removal_probability = removal_probability
-        self.pipeline_parallel_size = pipeline_parallel_size
-        self.last_spot_instance_num = 0
+        
+        self.last_spot_instance_num = self.start_nodes_num
 
         self.hour = datetime.timedelta(hours=1)
         self.second = datetime.timedelta(seconds=1)
@@ -219,11 +215,11 @@ class Simulator:
         self.rendezvous = []
         self.num_workers_waiting = 0
         self.data_parallel_size = 0
+        self.pipeline_parallel_size = 1
 
         self.num_iterations_complete = 0
         self.num_fatal_failures = 0
         self.num_spot_instance_removals = 0
-        self.ckpt_steps = ckpt_steps
 
         self.spot_instance_removal_times = []
         self.spot_instance_lifetimes = []
@@ -258,24 +254,19 @@ class Simulator:
         for hour in range(24):
             probability[hour] = self.r.random()
         return probability
-    
-    def checkpoint_save_delta(self):
-        return 0
-    
-    def checkpoint_load_delta(self):
-        return 0
 
     # implement by child
-    def reconfigure_delta(self):
-        return self.checkpoint_load_delta()
+    
+    def reconfigure_delta(self, last_nodes_num, new_nodes_num):
+        return 0
+    
+    # implement by child
+    def fallback_slowdown(self):
+        return 0
 
     # implement by child
     def simulate_iteration_delta(self):
         pass
-    
-    # implement by child
-    def fallback_delta(self):
-        return 0
     
     def active_spot_instances(self):
         num_active_instances = 0
@@ -331,23 +322,6 @@ class Simulator:
             event = Event(delta, kind, data)
         heapq.heappush(self.events, event)
         return event
-    
-    def check_event(self, delta, kind, data):
-        if len(self.events) == 0:
-            return False
-        for event in self.events:
-            if event.delta == delta and event.kind == kind:
-                if data is not None:
-                    same = True
-                    for key, value in data.items():
-                        if event.data.get(key) != value:
-                            same = False
-                            break
-                    if same:
-                        return True
-                else:
-                    return True
-        return False
 
     def create_spot_instance_generate_event(self, delta):
         return self.create_event(delta, EventKind.SPOT_INSTANCE_GENERATE, {})
@@ -376,19 +350,11 @@ class Simulator:
         )
     
     def create_reconfigure_event(self, delta):
-        reconfig_delta = self.reconfigure_delta()
+        reconfig_delta = self.reconfigure_delta(self.last_spot_instance_num, self.active_spot_instances())
         self.delta_reconfig += reconfig_delta
         return self.create_event(
             delta + reconfig_delta,
             EventKind.RECONFIGURE,
-            {}
-        )
-        
-    def create_fallback_event(self, delta):
-        self.delta_fallback += self.fallback_delta()
-        return self.create_event(
-            delta + self.fallback_delta(),
-            EventKind.FALLBACK,
             {}
         )
 
@@ -399,20 +365,12 @@ class Simulator:
             {'rendezvous_version': rendezvous_version}
         )
 
-    def create_training_iteration_exeute_event_absolute(self, delta, rendezvous_version):
+    def create_training_iteration_execute_event_absolute(self, delta,
+                                                     rendezvous_version):
         return self.create_event(
             delta,
             EventKind.TRAINING_STEP_COMPLETE,
             {'rendezvous_version': rendezvous_version}
-        )
-    
-    def create_checkpoint_event(self, delta):
-        checkpoint_delta = self.checkpoint_save_delta()
-        self.delta_checkpointing += checkpoint_delta
-        return self.create_event(
-            delta + checkpoint_delta,
-            EventKind.CHECKPOINT,
-            {}
         )
 
     def generate_spot_instance_initial_events(self, start):
@@ -490,12 +448,23 @@ class Simulator:
                     continue
                 heapq.heappush(removed_instances, (delta, name))
 
+    # def append_value(self, delta):
+    #     if len(self.performance_ys) == 0 or len(self.cost_ys) == 0:
+    #         return
+    #     if self.cost_ys[-1] == 0.0:
+    #         self.value_xs.append(delta / self.milliseconds_per_hour)
+    #         self.value_ys.append(0)
+    #         return
+
+    #     self.value_xs.append(delta / self.milliseconds_per_hour)
+    #     self.value_ys.append(
+    #         self.performance_ys[-1] / self.cost_ys[-1]
+    #     )
+
     def simulate_spot_instance_add(self, delta, data):
         self.info(delta, f'{data["name"]} simulate_spot_instance_add: {delta}')
         name = data['name']
         self.spot_instances[name] = SpotInstance(name, delta)
-        if delta == 0:
-            self.last_spot_instance_num += 1
         self.create_spot_instance_ready_event(
             delta + self.spot_instance_creation_time,
             name,
@@ -513,7 +482,6 @@ class Simulator:
     def simulate_spot_instance_remove(self, delta, data):
         self.info(delta, f'{data["name"]} simulate_spot_instance_remove: {delta}')
         name = data['name']
-        
         instance = self.spot_instances[name]
 
         self.num_spot_instance_removals += 1
@@ -528,7 +496,7 @@ class Simulator:
             self.info(delta, f'same delta as last reconfigure, skipping')
 
     def simulate_rendezvous_start(self, delta, isGlobal):
-        self.info(delta, f'simulate_rendezvous_start: {delta}')
+        self.info(delta, f'simulate_rendezvous_start: {delta} {isGlobal}')
         self.status = SystemStatus.RENDEZVOUS
         self.simulate_rendezvous_restart(delta)
         if isGlobal:
@@ -576,6 +544,7 @@ class Simulator:
         if self.data_parallel_size != 0:
             self.status = SystemStatus.RUNNING
             self.last_spot_instance_num = self.data_parallel_size * self.pipeline_parallel_size
+            print(delta, f'starting training with {self.last_spot_instance_num} {self.active_spot_instances()} nodes')
             self.simulate_iteration_delta()
             self.create_training_iteration_execute_event(delta,
                                                      self.rendezvous_version)
@@ -613,11 +582,6 @@ class Simulator:
     def simulate_reconfigure(self, delta):
         if len(self.rendezvous) > 0:
             self.info(delta, f'simulate_reconfigure: {delta}')
-            self.create_fallback_event(delta)
-    
-    def simulate_fallback(self, delta):
-        if len(self.rendezvous) > 0:
-            self.info(delta, f'simulate_fallback: {delta}')
             self.simulate_preparation_common(delta)
 
     def simulate_assign_coordinates(self, delta):
@@ -669,21 +633,10 @@ class Simulator:
         if self.last_spot_instance_num > self.active_spot_instances():
             return 1
         
-        if self.last_spot_instance_num < self.active_spot_instances() and self.active_spot_instances() - self.last_spot_instance_num >= self.pipeline_parallel_size:
+        if self.active_spot_instances() > self.last_spot_instance_num:
             return 2
 
         return 0
-    
-    def simulate_should_ckpt(self):
-        return self.num_iterations_complete % self.ckpt_steps == 0
-    
-    def simulate_checkpoint(self, delta):
-        self.info(delta, f'simulate_checkpoint: {delta}')
-        if self.simulate_should_reconfigure() > 0:
-            self.info(delta, f'reconfiguration during checkpoint')
-            self.simulate_rendezvous_start(delta, False)
-        else:
-            self.create_training_iteration_execute_event(delta, self.rendezvous_version)
 
     def simulate_training_iteration_execute(self, delta, data):
         rendezvous_version = data['rendezvous_version']
@@ -697,6 +650,7 @@ class Simulator:
                 f'reconfiguration during iteration {self.num_iterations_complete}'
             )
             if self.simulate_should_reconfigure() == 2:
+                self.info(delta, f'scale out from {self.last_spot_instance_num} to {self.active_spot_instances()}')
                 self.simulate_rendezvous_start(delta, False)
             return
 
@@ -731,7 +685,7 @@ class Simulator:
             #    break
 
         #assert False
-        self.info(delta, f'simulate training iteration execution finish {self.num_iterations_complete}')
+        self.info(delta, f'simulate training iteration execution finish {self.num_iterations_complete} {self.data_parallel_size * self.pipeline_parallel_size} {samples_per_second} {iteration_duration_hours}')
         self.delta_effective_time += self.iteration_delta
 
 
@@ -744,18 +698,10 @@ class Simulator:
             )
             self.simulate_rendezvous_start(delta, False)
         else:
-            if self.simulate_should_ckpt():
-                self.info(
-                    delta,
-                    f'checkpoint after iteration {self.num_iterations_complete}'
-                )
-                self.create_checkpoint_event(delta)
-            else:
-                self.create_training_iteration_execute_event(
-                    delta,
-                    self.rendezvous_version
-                )
-                self.delta_effective_time += self.iteration_delta
+            self.create_training_iteration_execute_event(
+                delta,
+                self.rendezvous_version
+            )
 
     def calculate_average(self, xs, ys, duration):
         previous_x = None
@@ -783,7 +729,7 @@ class Simulator:
         total += (duration - previous_x) * previous_y
         return total / duration
         
-    def simulate(self, duration=None, system_name='varu', data_dir='data/varu', fig_directory="res/simulator"):
+    def simulate(self, duration=None, system_name="gemini", data_dir="data/gemini", fig_directory="res/simulator"):
         start = datetime.datetime.now(datetime.timezone.utc)
         start = start.replace(minute=0, second=0, microsecond=0)
         if self.start_hour is not None:
@@ -820,6 +766,7 @@ class Simulator:
         self.history_performance_ys = []
         
         logger.info(f'len(self.events): {len(self.events)}')
+
         last_event = None
 
         while len(self.events) > 0:
@@ -855,12 +802,8 @@ class Simulator:
                 self.simulate_preparation(delta)
             elif kind == EventKind.RECONFIGURE:
                 self.simulate_reconfigure(delta)
-            elif kind == EventKind.FALLBACK:
-                self.simulate_fallback(delta)
             elif kind == EventKind.TRAINING_STEP_COMPLETE:
                 self.simulate_training_iteration_execute(delta, data)
-            elif kind == EventKind.CHECKPOINT:
-                self.simulate_checkpoint(delta)
             else:
                 raise ValueError(f'Unknown kind: {kind}')
 
@@ -893,6 +836,7 @@ class Simulator:
         instances_ys.append(instances_ys[-1])
 
         self.total_delta = delta
+        self.delta_reconfig = self.delta_reconfig - self.delta_fallback
         self.delta_idle_waste = self.total_delta - self.delta_checkpointing - self.delta_effective_time - self.delta_fallback - self.delta_reconfig - self.delta_redundant_computation
         duration_hours_whole = math.ceil(delta / self.milliseconds_per_hour)
 
@@ -1030,6 +974,7 @@ class Simulator:
                 result.average_performance,
                 on_demand=self.on_demand_performance
             )
+            
             
             if self.spot_instance_trace is not None:
                 suffix = self.spot_instance_trace_file.split('/')[1].split('-')[0] + '_' + self.model_size

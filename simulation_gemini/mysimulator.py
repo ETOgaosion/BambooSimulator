@@ -1,13 +1,13 @@
 
-from simulation_varu.simulator import Simulator
+from simulation_gemini.simulator import Simulator
 import math
 import csv
 import statistics
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=2, ckpt_steps=100, spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=5, runnable_instances=None, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
-        super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, pipeline_parallel_size, ckpt_steps, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
+                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=5, runnable_instances=None, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
+        super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
     
         self.global_batch_size = 1024
         
@@ -47,150 +47,253 @@ class MySimulator(Simulator):
         self.on_demand_cost = self.on_demand_num_instances * self.on_demand_cost_per_hour
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)
         self.on_demand_value = self.on_demand_performance / self.on_demand_cost
-        
-    def checkpoint_delta(self):
-        data = {
-            '350M': {
-                8: 4296.147108,
-                10: 9277.608871,
-                12: 3121.950388,
-                14: 14656.55994,
-                16: 30005.0838,
-                18: 17675.45199,
-                20: 2982.938766,
-                22: 28579.37741,
-                24: 30014.53805,
-                26: 1,
-                28: 1,
-                30: 1,
-                32: 1,
-            },
-            '1.3B': {
-                8: 30004.92954,
-                10: 32925.54379,
-                12: 30006.79803,
-                14: 56444.9091,
-                16: 30004.97913,
-                18: 57500.74387,
-                20: 30005.11837,
-                22: 115967.1862,
-                24: 30006.22892,
-                26: 1,
-                28: 1,
-                30: 1,
-                32: 1,
-            },
-            '2.7B': {
-                8: 149084.1184,
-                10: 105098.3019,
-                12: 114498.944,
-                14: 150447,
-                16: 109499.6846,
-                18: 142304.4288,
-                20: 77322.00456,
-                22: 200233.2916,
-                24: 114042.3822,
-                26: 1,
-                28: 1,
-                30: 1,
-                32: 1,
-            },
+
+    def reconfigure_delta(self, last_instances_num, new_instances_num) -> int:
+        # reconfigure time (ms)
+        reconfigure_map = {
+            "350M": 
+                {9: {8: 0},
+                10: {8: 0, 9: 0},
+                11: {10: 0},
+                12: {10: 0, 11: 0},
+                13: {11: 0, 12: 0},
+                14: {12: 0, 13: 0},
+                15: {13: 0, 14: 0},
+                16: {13: 0, 14: 0, 15: 0},
+                17: {14: 0, 15: 0, 16: 0},
+                18: {12: 0, 14: 0, 15: 0, 16: 0, 17: 0},
+                19: {16: 0, 17: 0, 18: 0},
+                20: {15: 0, 16: 0, 17: 0, 18: 0, 19: 0},
+                21: {15: 0, 18: 0, 19: 0, 20: 0},
+                22: {18: 0, 19: 0, 20: 0, 21: 0},
+                23: {19: 0, 20: 0, 21: 0, 22: 0},
+                24: {18: 0, 19: 0, 20: 0, 21: 0, 22: 0, 23: 0},
+                25: {21: 0, 23: 0, 24: 0},
+                26: {23: 0, 25: 0},
+                27: {23: 0, 25: 0, 26: 0},
+                28: {22: 0, 25: 0, 26: 0, 27: 0},
+                29: {21: 0, 26: 0, 27: 0, 28: 0},
+                30: {23: 0, 29: 0},
+                31: {25: 0, 26: 0, 27: 0, 28: 0, 29: 0, 30: 0},
+                32: {26: 0, 28: 0, 29: 0, 30: 0, 31: 0}},
+            "1.3B": 
+                {9: {8: 0},
+                10: {8: 0, 9: 0},
+                11: {10: 0},
+                12: {10: 0, 11: 0},
+                13: {11: 0, 12: 0},
+                14: {12: 0, 13: 0},
+                15: {13: 0, 14: 0},
+                16: {13: 0, 14: 0, 15: 0},
+                17: {14: 0, 15: 0, 16: 0},
+                18: {12: 0, 14: 0, 15: 0, 16: 0, 17: 0},
+                19: {16: 0, 17: 0, 18: 0},
+                20: {15: 0, 16: 0, 17: 0, 18: 0, 19: 0},
+                21: {15: 0, 18: 0, 19: 0, 20: 0},
+                22: {18: 0, 19: 0, 20: 0, 21: 0},
+                23: {19: 0, 20: 0, 21: 0, 22: 0},
+                24: {18: 0, 19: 0, 20: 0, 21: 0, 22: 0, 23: 0},
+                25: {21: 0, 23: 0, 24: 0},
+                26: {23: 0, 25: 0},
+                27: {23: 0, 25: 0, 26: 0},
+                28: {22: 0, 25: 0, 26: 0, 27: 0},
+                29: {21: 0, 26: 0, 27: 0, 28: 0},
+                30: {23: 0, 29: 0},
+                31: {25: 0, 26: 0, 27: 0, 28: 0, 29: 0, 30: 0},
+                32: {26: 0, 28: 0, 29: 0, 30: 0, 31: 0}},
+            "2.7B": 
+                {9: {8: 0},
+                10: {8: 0, 9: 0},
+                11: {10: 0},
+                12: {10: 0, 11: 0},
+                13: {11: 0, 12: 0},
+                14: {12: 0, 13: 0},
+                15: {13: 0, 14: 0},
+                16: {13: 0, 14: 0, 15: 0},
+                17: {14: 0, 15: 0, 16: 0},
+                18: {12: 0, 14: 0, 15: 0, 16: 0, 17: 0},
+                19: {16: 0, 17: 0, 18: 0},
+                20: {15: 0, 16: 0, 17: 0, 18: 0, 19: 0},
+                21: {15: 0, 18: 0, 19: 0, 20: 0},
+                22: {18: 0, 19: 0, 20: 0, 21: 0},
+                23: {19: 0, 20: 0, 21: 0, 22: 0},
+                24: {18: 0, 19: 0, 20: 0, 21: 0, 22: 0, 23: 0},
+                25: {21: 0, 23: 0, 24: 0},
+                26: {23: 0, 25: 0},
+                27: {23: 0, 25: 0, 26: 0},
+                28: {22: 0, 25: 0, 26: 0, 27: 0},
+                29: {21: 0, 26: 0, 27: 0, 28: 0},
+                30: {23: 0, 29: 0},
+                31: {25: 0, 26: 0, 27: 0, 28: 0, 29: 0, 30: 0},
+                32: {26: 0, 28: 0, 29: 0, 30: 0, 31: 0}},
         }
-        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size]
 
-    def checkpoint_load_delta(self):
-        # checkpoint load time
-        fallback_delta = (self.num_iterations_complete % self.check_pt_steps + 1 / 2) * self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
+        if last_instances_num == new_instances_num:
+            print('no need to reconfigure, {last_instances_num} == {new_instances_num}')
+            return 0
+        if last_instances_num < new_instances_num:
+            last_instances_num, new_instances_num = new_instances_num, last_instances_num
+        assert reconfigure_map[self.model_size].get(last_instances_num) is not None, f'last_instances_num: {last_instances_num} is not supported'
+        if not self.generate_addition_probabilities:
+            assert reconfigure_map[self.model_size][last_instances_num].get(new_instances_num) is not None, f'last_instances_num: {last_instances_num}, new_instances_num: {new_instances_num} is not supported'
+            reconfigure_time = reconfigure_map[self.model_size][last_instances_num][new_instances_num]
+        else:
+            for _, v in enumerate(reconfigure_map[self.model_size][last_instances_num]):
+                reconfigure_time = v
+                break
+        
+        fallback_delta = self.simulate_iteration_delta_calc(new_instances_num) / 16
         self.delta_fallback += fallback_delta
-        return self.checkpoint_delta() + fallback_delta
-
-    def checkpoint_save_delta(self):
-        # checkpoint load time
-        return self.checkpoint_delta()
+        return reconfigure_time + fallback_delta
 
     def simulate_iteration_delta(self):
         # iteration time
         self.iteration_delta = self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
-    
-    def simulate_iteration_delta_calc(self, nodes_num):
-        data = {
-            '350M': {
-                8: 26687.8,
-                10: 22878.3,
-                12: 22220.3,
-                14: 19429.2,
-                16: 15269.1,
-                18: 15421.1,
-                20: 12574.5,
-                22: 17573.8,
-                24: 10325.2,
-                26: 44444,
-                28: 40000,
-                30: 33333,
-                32: 30000,
+
+
+    def simulate_iteration_delta_calc(self, nodes_num) -> int:
+        
+        '''
+        Returns:
+            the iteration time (ms)
+        '''
+        iteration_map = {
+            "350M": {
+                8: 27120,
+                9: 27120,
+                10: 25706,
+                11: 25706,
+                12: 24522,
+                13: 24522,
+                14: 23690,
+                15: 23690,
+                16: 14315,
+                17: 14315,
+                18: 12913,
+                19: 12913,
+                20: 14195,
+                21: 14195,
+                22: 16739,
+                23: 16739,
+                24: 13550,
+                25: 13550,
+                26: 12385,
+                27: 12385,
+                28: 11445,
+                29: 11445,
+                30: 10785,
+                31: 10785,
+                32: 10200,
             },
-            '1.3B': {
-                8: 79764.2,
-                10: 58399.3,
-                12: 54330.2,
-                14: 50659.9,
-                16: 40158.2,
-                18: 40333.5,
-                20: 32901.5,
-                22: 37698.7,
-                24: 27164.4,
-                26: 44444,
-                28: 40000,
-                30: 33333,
-                32: 30000,
+            "1.3B": {
+                8: 27120,
+                9: 27120,
+                10: 25706,
+                11: 25706,
+                12: 24522,
+                13: 24522,
+                14: 23690,
+                15: 23690,
+                16: 14315,
+                17: 14315,
+                18: 12913,
+                19: 12913,
+                20: 14195,
+                21: 14195,
+                22: 16739,
+                23: 16739,
+                24: 13550,
+                25: 13550,
+                26: 12385,
+                27: 12385,
+                28: 11445,
+                29: 11445,
+                30: 10785,
+                31: 10785,
+                32: 10200,
             },
-            '2.7B': {
-                8: 206968.6,
-                10: 119983.1,
-                12: 87746.7,
-                14: 73101.7,
-                16: 70696.4,
-                18: 60015.1,
-                20: 61319.8,
-                22: 52594.6,
-                24: 50000,
-                26: 44444,
-                28: 40000,
-                30: 33333,
-                32: 30000,
+            "2.7B": {
+                8: 27120,
+                9: 27120,
+                10: 25706,
+                11: 25706,
+                12: 24522,
+                13: 24522,
+                14: 23690,
+                15: 23690,
+                16: 14315,
+                17: 14315,
+                18: 12913,
+                19: 12913,
+                20: 14195,
+                21: 14195,
+                22: 16739,
+                23: 16739,
+                24: 13550,
+                25: 13550,
+                26: 12385,
+                27: 12385,
+                28: 11445,
+                29: 11445,
+                30: 10785,
+                31: 10785,
+                32: 10200,
             },
-            '6.7B': {
-                8: 99700,
-                10: 88888,
-                12: 84444,
-                14: 77777,
-                16: 70000,
-                18: 66666,
-                20: 60000,
-                22: 55555,
-                24: 50000,
-                26: 44444,
-                28: 40000,
-                30: 33333,
-                32: 30000,
+            "6.7B": {
+                8: 27120,
+                9: 27120,
+                10: 25706,
+                11: 25706,
+                12: 24522,
+                13: 24522,
+                14: 23690,
+                15: 23690,
+                16: 14315,
+                17: 14315,
+                18: 12913,
+                19: 12913,
+                20: 14195,
+                21: 14195,
+                22: 16739,
+                23: 16739,
+                24: 13550,
+                25: 13550,
+                26: 12385,
+                27: 12385,
+                28: 11445,
+                29: 11445,
+                30: 10785,
+                31: 10785,
+                32: 10200,
             },
-            '13B': {
-                8: 99700,
-                10: 88888,
-                12: 84444,
-                14: 77777,
-                16: 70000,
-                18: 66666,
-                20: 60000,
-                22: 55555,
-                24: 50000,
-                26: 44444,
-                28: 40000,
-                30: 33333,
-                32: 30000,
+            "13B": {
+                8: 27120,
+                9: 27120,
+                10: 25706,
+                11: 25706,
+                12: 24522,
+                13: 24522,
+                14: 23690,
+                15: 23690,
+                16: 14315,
+                17: 14315,
+                18: 12913,
+                19: 12913,
+                20: 14195,
+                21: 14195,
+                22: 16739,
+                23: 16739,
+                24: 13550,
+                25: 13550,
+                26: 12385,
+                27: 12385,
+                28: 11445,
+                29: 11445,
+                30: 10785,
+                31: 10785,
+                32: 10200,
             },
+
         }
-        if data[self.model_size].get(nodes_num) is not None:
-            return data[self.model_size][nodes_num]
-        else:
-            return data[self.model_size][int(math.pow(2, math.ceil(math.log2(nodes_num))))]
+        return iteration_map[self.model_size][nodes_num]
+        

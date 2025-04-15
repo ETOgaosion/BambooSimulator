@@ -6,32 +6,35 @@ import os
 from pathlib import Path
 import dataclasses
 import pprint
+import numpy as np
 
 from execute.execute_all_20 import execute_all, execute_all_freq, execute_all_prob
 
-systems = ['bamboo', 'varu', 'oobleck', 'livepipe', 'oobleck_opt']
-dirs = {'bamboo': 'bamboo-20',  'varu': 'varu-20', 'oobleck': 'oobleck-20', 'oobleck_opt': 'oobleck-opt-20', 'livepipe-red1': 'livepipe-red1-20', 'livepipe-red2': 'livepipe-red2-20', 'livepipe': 'livepipe-red1-20'}
+systems = ['bamboo', 'varu', 'oobleck', 'gemini', 'livepipe']
+dirs = {'bamboo': 'bamboo-20',  'varu': 'varu-20', 'oobleck': 'oobleck-20', 'gemini': 'gemini-20', 'livepipe-red1': 'livepipe-red1-20', 'livepipe-red2': 'livepipe-red2-20', 'livepipe': 'livepipe-red1-20'}
 traces = ['g4dn', 'p3']
 probabilities = [0.2]
-frequencies = ['1h', '2m']
-# frequencies = ['1h', '10m', '5m', '2m']
+# frequencies = ['1h', '2m']
+frequencies = ['1h', '10m', '5m', '2m']
 model_sizes = ['350M', '1.3B', '2.7B']
 # model_sizes = ['350M', '2.7B']
 # colormap = {'bamboo': '#e79397', 'varu': '#e1c855', 'oobleck': '#e07b54', 'livepipe': '#51b1b7'}
 # colormap = {'bamboo': '#55b7e6', 'varu': '#193e8f', 'oobleck': '#f09739', 'livepipe': '#e53528'}
 colors = ['#ffd093', '#ceaad7', '#ff897e', "#cee64b", '#85ccfd']
-colormap = {'bamboo': '#fcb20a', 'varu': '#c4a5d2', 'oobleck': '#ff897e', 'oobleck_opt': '#7bd331', 'livepipe-red1': '#85ccfd', 'livepipe-red2': '#7391d5', 'livepipe': '#7dc1f3'}
+# colormap = {'bamboo': '#fcb20a', 'varu': '#c4a5d2', 'oobleck': '#ff897e', 'gemini': '#7bd331', 'livepipe-red1': '#85ccfd', 'livepipe-red2': '#7391d5', 'livepipe': '#7dc1f3'}
 # colormap = {'bamboo': '#f7c97e', 'varu': '#cfafd4', 'oobleck': '#d3e2b7', 'oobleck_opt': '#74aed4', 'livepipe-red1': '#eca8a9', 'livepipe-red2': '#7391d5', 'livepipe': '#eca8a9'}
 # colormap = {'bamboo': '#00b19f', 'varu': '#ffbe7a', 'oobleck': '#fa7f6f', 'oobleck_opt': '#b28bd6', 'livepipe-red1': '#17b5e9', 'livepipe-red2': '#7391d5', 'livepipe': '#17b5e9'}
-# colormap = {'bamboo': '#00b19f', 'varu': '#ffbe7a', 'oobleck': '#fa7f6f', 'oobleck_opt': '#bf55eb', 'livepipe-red1': '#17b5e9', 'livepipe-red2': '#7391d5', 'livepipe': '#17b5e9'}
+colormap = {'bamboo': '#00b19f', 'varu': '#ffbe7a', 'oobleck': '#fa7f6f', 'gemini': '#bf55eb', 'livepipe-red1': '#17b5e9', 'livepipe-red2': '#7391d5', 'livepipe': '#17b5e9'}
 breakdown_names = ['delta_effective_time', 'delta_checkpointing', 'delta_redundant_computation', 'delta_reconfig', 'delta_fallback']
-breakdown_colormap = {'delta_effective_time': '#b99dc6', 'delta_checkpointing': '#7acdaf', 'delta_redundant_computation': '#e78a72', 'delta_reconfig': '#f3ca4d', 'delta_fallback': '#a6d0eb'}
+breakdown_colormap = {'delta_effective_time': '#c4a5d2', 'delta_checkpointing': '#7bd331', 'delta_redundant_computation': '#ff897d', 'delta_reconfig': '#fcb209', 'delta_fallback': '#7dc1f3'}
 # breakdown_colormap = {'delta_effective_time': '#99cccc', 'delta_checkpointing': '#80b1d3', 'delta_redundant_computation': '#f0988c', 'delta_reconfig': '#456990', 'delta_fallback': '#f7d998'}
 # breakdown_colormap = {'delta_effective_time': '#d0e7ed', 'delta_checkpointing': '#e58579', 'delta_redundant_computation': '#d5e48a', 'delta_reconfig': '#9dd0c7', 'delta_fallback': '#9180ac'}
-breakdown_namemap = {'delta_effective_time': 'Effective Time', 'delta_checkpointing': 'Save Checkpoint', 'delta_redundant_computation': 'Redundant Computation', 'delta_reconfig': 'Reconfigure', 'delta_fallback': 'Fall Back'}
-namemap = {'bamboo': 'Bamboo', 'varu': 'Varuna', 'oobleck': 'Oobleck', 'oobleck_opt': 'Oobleck-opt', 'livepipe-red1': 'LivePipe Red1', 'livepipe-red2': 'LivePipe Red2', 'livepipe': 'LivePipe'}
-shortnamemap = {'bamboo': 'Bam', 'varu': 'Varu', 'oobleck': 'Oob', 'oobleck_opt': 'Oob-o', 'livepipe-red1': 'LivePipe Red1', 'livepipe-red2': 'LivePipe Red2', 'livepipe': 'Live'}
-linewidth = {'bamboo': 1.5, 'varu': 1.5, 'oobleck': 1.5, 'oobleck_opt': 1.5, 'livepipe-red1': 2, 'livepipe-red2': 2, 'livepipe': 2}
+breakdown_namemap = {'delta_effective_time': 'Effective Time', 'delta_checkpointing': 'Save Checkpoint', 'delta_redundant_computation': 'Redundant Computation', 'delta_reconfig': 'States Transfer', 'delta_fallback': 'Fall Back'}
+namemap = {'bamboo': 'Bamboo', 'varu': 'Varuna', 'oobleck': 'Oobleck', 'gemini': 'Gemini', 'livepipe-red1': 'LivePipe Red1', 'livepipe-red2': 'LivePipe Red2', 'livepipe': 'LivePipe'}
+shortnamemap = {'bamboo': 'Bam', 'varu': 'Varu', 'oobleck': 'Oob', 'gemini': 'Gemi', 'livepipe-red1': 'LivePipe Red1', 'livepipe-red2': 'LivePipe Red2', 'livepipe': 'Live'}
+zordermap = {'bamboo': 1, 'varu': 2, 'oobleck': 2, 'gemini': 1, 'livepipe-red1': 1, 'livepipe-red2': 1, 'livepipe': 1}
+linewidth = {'bamboo': 1.5, 'varu': 1.5, 'oobleck': 1.5, 'gemini': 1.5, 'livepipe-red1': 2, 'livepipe-red2': 2, 'livepipe': 2}
+markermap = {'delta_redundant_computation': '-', 'delta_effective_time': '/', 'delta_fallback': '\\', 'delta_checkpointing': '.', 'delta_reconfig': ''}
 label_size = 14
 mid_label_size = 18
 small_label_size = 15
@@ -128,7 +131,7 @@ def get_data(use_which=USE_TRACE):
         breakdown_results[key]['delta_reconfig'] = result.delta_reconfig / total_time + breakdown_results[key]['delta_redundant_computation']
         breakdown_results[key]['delta_fallback'] = result.delta_fallback / total_time + breakdown_results[key]['delta_reconfig']
         print(f'{key.split("-")[-2]},{result.system_name},{key.split("-")[-1]},{result.delta_effective_time},{result.delta_checkpointing},{result.delta_redundant_computation},{result.delta_reconfig},{result.delta_fallback}')
-        pprint.pp(breakdown_results)
+        # pprint.pp(breakdown_results)
 
 def get_performance_freq(files):
     for freq_i, freq in enumerate(frequencies):
@@ -165,8 +168,8 @@ def calculate_total_throughputs(use_which=USE_TRACE):
         throughputs_ratios[trace_model] = {}
         for system, value in values.items():
             throughputs_ratios[trace_model][system] = max(values.values()) / value
-    # pprint.pp(total_throughputs)
-    # pprint.pp(throughputs_ratios)
+    pprint.pp(total_throughputs)
+    pprint.pp(throughputs_ratios)
 
 def plot_instances(file_preffix, index, key, with_title=True):
     fig, axes = plt.subplots(1, 1, figsize=(5, 3), dpi=1000)
@@ -193,19 +196,35 @@ def plot_performance_together(file_preffix, trace, trace_i, model_size, model_si
         key = system + '-' + trace + '-' + model_size
         if key not in performances_xs:
             continue
+        modes = ['full', 'same', 'valid'] #模式
+        # mode可能的三种取值情况：
+        # full’　默认值，返回每一个卷积值，长度是N+M-1,在卷积的边缘处，信号不重叠，存在边际效应。
+        # ‘same’　返回的数组长度为max(M, N),边际效应依旧存在。
+        # ‘valid’ 　返回的数组长度为max(M,N)-min(M,N)+1,此时返回的是完全重叠的点。边缘的点无效。
+
+        def moving_average(interval, windowsize):
+            window = np.ones(int(windowsize)) / float(windowsize)
+
+            for m in modes:
+                re = np.convolve(interval, window, 'valid')  
+            return re
+        
+        performances_ys[key] = moving_average(performances_ys[key], 3)
+        performances_xs[key] = performances_xs[key][:-2]
+        
         if max_y < max(performances_ys[key]):
             max_y = int(max(performances_ys[key]))
         # reorder lables
         if with_label:
             if system != 'livepipe':
-                axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system], label=namemap[system])
+                axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system], label=namemap[system], zorder=zordermap[system])
             else:
-                axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system])
+                axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system], zorder=zordermap[system])
         else:
             if system == 'livepipe' and trace_i == 1 and model_size == model_sizes[0]:
-                axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system], label=namemap[system])
+                axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system], label=namemap[system], zorder=zordermap[system])
             else:
-                axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system])
+                axes.plot(performances_xs[key], performances_ys[key], color=colormap[system], linewidth=linewidth[system], zorder=zordermap[system])
         if with_avg:
             axes.hlines(results[key].average_performance, -0.5, 12.5, linestyles='dotted', color=colormap[system], linewidth=avg_linewidth)
         if with_x_label:
@@ -287,9 +306,9 @@ def plot_breakdown(file_preffix):
     for model_size_i, model_size in enumerate(model_sizes):
         xticklables = []
         if model_size_i == 0:
-            fig, axs = plt.subplots(1, 1, figsize=(11.5, 2.5), dpi=1000)
+            fig, axs = plt.subplots(1, 1, figsize=(12, 2.5), dpi=1000)
         else:
-            fig, axs = plt.subplots(1, 1, figsize=(11.5, 2.5), dpi=1000)
+            fig, axs = plt.subplots(1, 1, figsize=(12, 2.5), dpi=1000)
         for freq_i, freq in enumerate(frequencies):
             for system_i, system in enumerate(systems):
                 if freq_i == 0 and model_size_i == 0:
@@ -300,15 +319,17 @@ def plot_breakdown(file_preffix):
                 xticklables.append(shortnamemap[system] + '\n' + freq)
                 for breakdown_name in list(reversed(breakdown_names)):
                     if system_i == 0 and freq_i == 0 and freq_i == 0:
-                        p = axs.bar(shortnamemap[system] + '\n' + freq, breakdown_results[key][breakdown_name] * 100, color=breakdown_colormap[breakdown_name], label=breakdown_namemap[breakdown_name], width=0.6)
+                        p = axs.bar(shortnamemap[system] + '\n' + freq, breakdown_results[key][breakdown_name] * 100, color=breakdown_colormap[breakdown_name], label=breakdown_namemap[breakdown_name], width=0.65, hatch=markermap[breakdown_name], edgecolor='white')
+                        axs.bar(shortnamemap[system] + '\n' + freq, breakdown_results[key][breakdown_name] * 100, width=0.65, edgecolor=breakdown_colormap[breakdown_name], color='none')
                         labels.append(p)
                     else:
-                        p = axs.bar(shortnamemap[system] + '\n' + freq, breakdown_results[key][breakdown_name] * 100, color=breakdown_colormap[breakdown_name], width=0.6)
+                        p = axs.bar(shortnamemap[system] + '\n' + freq, breakdown_results[key][breakdown_name] * 100, color=breakdown_colormap[breakdown_name], width=0.52, hatch=markermap[breakdown_name], edgecolor='white')
+                        axs.bar(shortnamemap[system] + '\n' + freq, breakdown_results[key][breakdown_name] * 100, edgecolor=breakdown_colormap[breakdown_name], width=0.52, color='none')
                     if breakdown_name == 'delta_effective_time':
                         # axs.bar_label(p, label_type='edge', fmt='%.2f', fontsize=14, padding=-20)
                         print(f'{model_size} {system} {freq} {breakdown_name} {breakdown_results[key][breakdown_name]}')
             if freq_i < len(frequencies) - 1:
-                axs.vlines(len(xticklables) - 0.5, 0, 1, linestyles='dashed')
+                axs.vlines(len(xticklables) - 0.5, 0, 105, linestyles='dashed')
         # axs.set_title(f'({chr(ord(fig_label) + model_size_i)})GPT-3 {model_size}', fontproperties=font_bold, fontfamily='Times New Roman', fontstyle='normal', fontweight='bold')
         axs.set_ylabel('Time\noccupation (%)', fontproperties=font_large)
         if model_size_i == 0:
@@ -359,9 +380,9 @@ performace_log_interval_map = {
 # execute_all_freq(spot_instance_desired_capacity=20)
 # execute_all(spot_instance_desired_capacity=20, performance_log_interval_map=performace_log_interval_map)
 
-get_data()
-calculate_total_throughputs()
-plot_performance_trace_horizental(f'res/exp-trace') 
+# get_data()
+# calculate_total_throughputs()
+# plot_performance_trace_horizental(f'res/exp-trace')
 
 # plot_performance_trace([f'res/performances_trace_20.png', f'res/performances_trace_20.pdf'])    
 # plot_total_throughputs([f'res/total_throughputs_trace_20.png'])
@@ -372,6 +393,6 @@ plot_performance_trace_horizental(f'res/exp-trace')
 # handle_performances()
 # plot_performance('res/performances_modified.png')
 
-# get_data(use_which=USE_FREQUENCY)
-# calculate_total_throughputs(use_which=USE_FREQUENCY)
+get_data(use_which=USE_FREQUENCY)
+calculate_total_throughputs(use_which=USE_FREQUENCY)
 # plot_breakdown(f'res/exp-breakdown')

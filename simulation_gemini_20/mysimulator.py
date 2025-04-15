@@ -1,13 +1,13 @@
 
-from simulation_varu.simulator import Simulator
+from simulation_gemini.simulator import Simulator
 import math
 import csv
 import statistics
 
 class MySimulator(Simulator):
     def __init__(self, seed=None, start_hour=None,
-                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, pipeline_parallel_size=2, ckpt_steps=100, spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=1, runnable_instances=None, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
-        super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, pipeline_parallel_size, ckpt_steps, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
+                 model='GPT-3', model_size='350M', spot_instance_desired_capacity=24, spot_instance_trace='traces/p3-trace-16.csv', performance_log_interval=5, runnable_instances=None, generate_addition_probabilities=False, removal_probability=None, generate_graphs=False):
+        super().__init__(seed, start_hour, model, model_size, spot_instance_desired_capacity, spot_instance_trace, performance_log_interval, runnable_instances, generate_addition_probabilities, removal_probability, generate_graphs)
     
         self.global_batch_size = 1024
         
@@ -48,121 +48,111 @@ class MySimulator(Simulator):
         self.on_demand_performance = (self.global_batch_size * self.on_demand_num_instances) / self.simulate_iteration_delta_calc(self.on_demand_num_instances)
         self.on_demand_value = self.on_demand_performance / self.on_demand_cost
 
-    def checkpoint_load_delta(self):
-        # checkpoint load time
-        data = {
-            '350M': {
-                8: 42475.43168,
-                10: 33975.31867,
-                12: 77950.89817,
-                14: 35362.89454,
-                16: 115614.7542,
-                18: 80279.53172,
-                20: 152853.5693,
+    def reconfigure_delta(self, last_instances_num, new_instances_num) -> int:
+        # reconfigure time (ms)
+        reconfigure_map = {
+            "350M": 
+                {9: {8: 0},
+                10: {8: 360, 9: 320},
+                11: {10: 300},
+                12: {10: 300, 11: 270},
+                13: {10: 270, 11: 270, 12: 270},
+                14: {12: 270, 13: 270},
+                15: {8: 270, 13: 270, 14: 240},
+                16: {12: 270, 13: 270, 14: 240, 15: 240},
+                17: {12: 240 ,13: 240, 14: 240, 15: 240, 16: 210},
+                18: {12: 280, 13: 250, 14: 240, 15: 240, 16: 210, 17: 220},
+                19: {12: 220, 13: 240, 14: 220, 15: 240, 16: 220, 17: 210, 18: 180},
+                20: {15: 240, 16: 210, 17: 210, 18: 180, 19: 230},
                 
-                22: 28579.37741,
-                24: 30014.53805,
-                26: 1,
-                28: 1,
-                30: 1,
-                32: 1,
-            },
-            '1.3B': {
-                8: 139524.0681,
-                10: 132032.9852,
-                12: 282174.2513,
-                14: 156121.9044,
-                16: 418040.9725,
-                18: 311971.0498,
-                20: 553184.2401,
+                21: {15: 0, 18: 0, 19: 0, 20: 0},
+                22: {18: 0, 19: 0, 20: 0, 21: 0},
+                23: {19: 0, 20: 0, 21: 0, 22: 0},
+                24: {18: 0, 19: 0, 20: 0, 21: 0, 22: 0, 23: 0},
+                25: {21: 0, 23: 0, 24: 0},
+                26: {23: 0, 25: 0},
+                27: {23: 0, 25: 0, 26: 0},
+                28: {22: 0, 25: 0, 26: 0, 27: 0},
+                29: {21: 0, 26: 0, 27: 0, 28: 0},
+                30: {23: 0, 29: 0},
+                31: {25: 0, 26: 0, 27: 0, 28: 0, 29: 0, 30: 0},
+                32: {26: 0, 28: 0, 29: 0, 30: 0, 31: 0}},
+            "1.3B": 
+                {9: {8: 0},
+                10: {8: 690, 9: 810},
+                11: {10: 590},
+                12: {10: 600, 11: 580},
+                13: {10: 580, 11: 580, 12: 590},
+                14: {12: 580, 13: 480},
+                15: {8: 540, 13: 540, 14: 590},
+                16: {12: 480, 13: 480, 14: 470, 15: 720},
+                17: {12: 380, 13: 400, 14: 470, 15: 710, 16: 810},
+                18: {12: 930, 13: 700, 14: 470, 15: 700, 16: 810, 17: 700},
+                19: {12: 1000, 13: 1000, 14: 1000, 15: 940, 16: 940, 17: 700, 18: 700},
+                20: {13: 240, 15: 240, 16: 210, 17: 210, 18: 180, 19: 230},
                 
-                22: 115967.1862,
-                24: 30006.22892,
-                26: 1,
-                28: 1,
-                30: 1,
-                32: 1,
-            },
-            '2.7B': {
-                8: 120466.6085,
-                10: 302239.511,
-                12: 325951.894,
-                14: 323475.5192,
-                16: 405715.4648,
-                18: 587177.3295,
-                20: 799947.7508,
+                21: {15: 0, 18: 0, 19: 0, 20: 0},
+                22: {18: 0, 19: 0, 20: 0, 21: 0},
+                23: {19: 0, 20: 0, 21: 0, 22: 0},
+                24: {18: 0, 19: 0, 20: 0, 21: 0, 22: 0, 23: 0},
+                25: {21: 0, 23: 0, 24: 0},
+                26: {23: 0, 25: 0},
+                27: {23: 0, 25: 0, 26: 0},
+                28: {22: 0, 25: 0, 26: 0, 27: 0},
+                29: {21: 0, 26: 0, 27: 0, 28: 0},
+                30: {23: 0, 29: 0},
+                31: {25: 0, 26: 0, 27: 0, 28: 0, 29: 0, 30: 0},
+                32: {26: 0, 28: 0, 29: 0, 30: 0, 31: 0}},
+            "2.7B": 
+                {9: {8: 0},
+                10: {8: 1430, 9: 980},
+                11: {10: 720},
+                12: {10: 720, 11: 540},
+                13: {10: 560, 11: 560, 12: 540},
+                14: {12: 1500, 13: 1410},
+                15: {8: 540, 13: 540, 14: 540},
+                16: {12: 550, 13: 550, 14: 540, 15: 900},
+                17: {12: 450, 13: 450, 14: 550, 15: 900, 16: 900},
+                18: {12: 2650, 13: 2650, 14: 550, 15: 900, 16: 2650, 17: 940},
+                19: {12: 1000, 13: 1000, 14: 1000, 15: 910, 16: 910, 17: 730, 18: 740},
+                20: {13: 2510, 15: 2510, 16: 2730, 17: 1150, 18: 1310, 19: 1180},
                 
-                22: 200233.2916,
-                24: 114042.3822,
-                26: 1,
-                28: 1,
-                30: 1,
-                32: 1,
-            },
+                21: {15: 0, 18: 0, 19: 0, 20: 0},
+                22: {18: 0, 19: 0, 20: 0, 21: 0},
+                23: {19: 0, 20: 0, 21: 0, 22: 0},
+                24: {18: 0, 19: 0, 20: 0, 21: 0, 22: 0, 23: 0},
+                25: {21: 0, 23: 0, 24: 0},
+                26: {23: 0, 25: 0},
+                27: {23: 0, 25: 0, 26: 0},
+                28: {22: 0, 25: 0, 26: 0, 27: 0},
+                29: {21: 0, 26: 0, 27: 0, 28: 0},
+                30: {23: 0, 29: 0},
+                31: {25: 0, 26: 0, 27: 0, 28: 0, 29: 0, 30: 0},
+                32: {26: 0, 28: 0, 29: 0, 30: 0, 31: 0}},
         }
-        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 10
 
-    def checkpoint_save_delta(self):
-        # checkpoint load time
-        data = {
-            '350M': {
-                8: 4603.884697,
-                10: 9091.940403,
-                12: 3110.169411,
-                14: 12759.67813,
-                16: 30012.20202,
-                18: 17680.86052,
-                20: 3026.195765,
-                
-                22: 28579.37741,
-                24: 30014.53805,
-                26: 1,
-                28: 1,
-                30: 1,
-                32: 1,
-            },
-            '1.3B': {
-                8: 30004.38666,
-                10: 32123.32082,
-                12: 10173.39659,
-                14: 58078.09949,
-                16: 30006.00767,
-                18: 61008.61573,
-                20: 30024.8394,
-                
-                22: 115967.1862,
-                24: 30006.22892,
-                26: 1,
-                28: 1,
-                30: 1,
-                32: 1,
-            },
-            '2.7B': {
-                8: 174420.1455,
-                10: 77729.68721,
-                12: 113812.7,
-                14: 131950.9952,
-                16: 174069.0582,
-                18: 112645.9255,
-                20: 77429.51131,
-                
-                22: 200233.2916,
-                24: 114042.3822,
-                26: 1,
-                28: 1,
-                30: 1,
-                32: 1,
-            },
-        }
-        return data[self.model_size][self.data_parallel_size * self.pipeline_parallel_size] / 10
-
-    def fallback_delta(self):
-        return (self.num_iterations_complete % self.ckpt_steps + 1 / 2) * self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
+        if last_instances_num == new_instances_num:
+            print('no need to reconfigure, {last_instances_num} == {new_instances_num}')
+            return 0
+        if last_instances_num < new_instances_num:
+            last_instances_num, new_instances_num = new_instances_num, last_instances_num
+        assert reconfigure_map[self.model_size].get(last_instances_num) is not None, f'last_instances_num: {last_instances_num} is not supported'
+        if not self.generate_addition_probabilities:
+            assert reconfigure_map[self.model_size][last_instances_num].get(new_instances_num) is not None, f'last_instances_num: {last_instances_num}, new_instances_num: {new_instances_num} is not supported'
+            reconfigure_time = reconfigure_map[self.model_size][last_instances_num][new_instances_num]
+        else:
+            for _, v in enumerate(reconfigure_map[self.model_size][last_instances_num]):
+                reconfigure_time = v
+                break
+        fallback_delta = self.simulate_iteration_delta_calc(new_instances_num) / 2
+        self.delta_fallback += fallback_delta
+        return reconfigure_time + fallback_delta
 
     def simulate_iteration_delta(self):
         # iteration time
         self.iteration_delta = self.simulate_iteration_delta_calc(self.data_parallel_size * self.pipeline_parallel_size)
-    
+
+
     def simulate_iteration_delta_calc(self, nodes_num):
         data = {
             '350M': {
@@ -244,7 +234,14 @@ class MySimulator(Simulator):
                 32: 30000,
             },
         }
+        gloo_decrease_time = {
+            '350M': 3000,
+            '1.3B': 11500,
+            '2.7B': 23884,
+            '6.7B': 59270,
+            '13B': 115000,
+        }
         if data[self.model_size].get(nodes_num) is not None:
-            return data[self.model_size][nodes_num]
+            return data[self.model_size][nodes_num] - gloo_decrease_time[self.model_size] / (nodes_num // 8)
         else:
-            return data[self.model_size][int(math.pow(2, math.ceil(math.log2(nodes_num))))]
+            return data[self.model_size][nodes_num - nodes_num % 2] - gloo_decrease_time[self.model_size] / (nodes_num // 8)

@@ -1,5 +1,5 @@
 import sys
 
-from simulation_varu import main
+from simulation_gemini import main
 
 main(sys.argv[1:])

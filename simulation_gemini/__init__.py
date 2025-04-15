@@ -1,1 +1,1 @@
-from simulation_varu.api import main
+from simulation_gemini.api import main
