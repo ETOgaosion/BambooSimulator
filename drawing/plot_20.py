@@ -7,16 +7,44 @@ from pathlib import Path
 import dataclasses
 import pprint
 import numpy as np
+import pickle
+import os
+
 
 from execute.execute_all_20 import execute_all, execute_all_freq, execute_all_prob
+
+import pickle
+import os
+
+def write_data(data, filename):
+    """将任意 Python 数据结构写入文件（二进制格式）"""
+    try:
+        with open(filename, 'wb') as f:
+            pickle.dump(data, f)
+        print(f"数据已成功写入 {filename}")
+    except Exception as e:
+        print(f"写入文件时出错: {e}")
+
+def read_data(filename):
+    """从文件读取 Python 数据结构"""
+    try:
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"文件 {filename} 不存在")
+        with open(filename, 'rb') as f:
+            return pickle.load(f)
+    except Exception as e:
+        print(f"读取文件时出错: {e}")
+        return None
+
 
 systems = ['bamboo', 'varu', 'oobleck', 'gemini', 'livepipe']
 dirs = {'bamboo': 'bamboo-20',  'varu': 'varu-20', 'oobleck': 'oobleck-20', 'gemini': 'gemini-20', 'livepipe-red1': 'livepipe-red1-20', 'livepipe-red2': 'livepipe-red2-20', 'livepipe': 'livepipe-red1-20'}
 traces = ['g4dn', 'p3']
 probabilities = [0.2]
-# frequencies = ['1h', '2m']
-frequencies = ['1h', '10m', '5m', '2m']
+frequencies = ['1h', '2m']
+# frequencies = ['1h', '10m', '5m', '2m']
 model_sizes = ['350M', '1.3B', '2.7B']
+# model_sizes = ['350M']
 # model_sizes = ['350M', '2.7B']
 # colormap = {'bamboo': '#e79397', 'varu': '#e1c855', 'oobleck': '#e07b54', 'livepipe': '#51b1b7'}
 # colormap = {'bamboo': '#55b7e6', 'varu': '#193e8f', 'oobleck': '#f09739', 'livepipe': '#e53528'}
@@ -377,7 +405,7 @@ performace_log_interval_map = {
 }
 
 # execute_all_prob(probabilities, 24, performance_log_interval_map_prob)
-execute_all_freq(spot_instance_desired_capacity=20)
+# execute_all_freq(spot_instance_desired_capacity=20)
 # execute_all(spot_instance_desired_capacity=20, performance_log_interval_map=performace_log_interval_map)
 
 # get_data()
@@ -393,6 +421,13 @@ execute_all_freq(spot_instance_desired_capacity=20)
 # handle_performances()
 # plot_performance('res/performances_modified.png')
 
-get_data(use_which=USE_FREQUENCY)
-calculate_total_throughputs(use_which=USE_FREQUENCY)
+# get_data(use_which=USE_FREQUENCY)
+# calculate_total_throughputs(use_which=USE_FREQUENCY)
+# write_data(breakdown_results, 'drawing/breakdown_results.pkl')
+# write_data(results, 'drawing/results.pkl')
+
+
+results = read_data('drawing/results.pkl')
+breakdown_results = read_data('drawing/breakdown_results.pkl')
+
 plot_breakdown(f'res/exp-breakdown')
