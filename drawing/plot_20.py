@@ -377,7 +377,7 @@ performace_log_interval_map = {
 }
 
 # execute_all_prob(probabilities, 24, performance_log_interval_map_prob)
-# execute_all_freq(spot_instance_desired_capacity=20)
+execute_all_freq(spot_instance_desired_capacity=20)
 # execute_all(spot_instance_desired_capacity=20, performance_log_interval_map=performace_log_interval_map)
 
 # get_data()
@@ -395,4 +395,4 @@ performace_log_interval_map = {
 
 get_data(use_which=USE_FREQUENCY)
 calculate_total_throughputs(use_which=USE_FREQUENCY)
-# plot_breakdown(f'res/exp-breakdown')
+plot_breakdown(f'res/exp-breakdown')
